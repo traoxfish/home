@@ -1,0 +1,27 @@
+body {
+  background-color: #23162e;
+}
+
+h1 {
+  font-size: 48px;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+  line-height: 36px;
+}
+
+h2 {
+  font-size: 32px;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+  line-height: 36px;
+}
+
+h3 {
+  font-size: 16px;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+  line-height: 36px;
+}
