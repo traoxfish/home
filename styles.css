@@ -45,6 +45,15 @@ p {
 	
 }
 
+.spigot {
+	position: absolute;
+    display: block;
+	width: 32px;
+	height: 32px;
+	margin-left: auto;
+	left: 1498px;
+}
+
 .discord {
 	position: absolute;
     display: block;
