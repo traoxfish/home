@@ -1,27 +1,77 @@
 body {
-  background-color: #23162e;
+  background-color: #29273e;
 }
 
 h1 {
   font-size: 48px;
   color: white;
   font-family: Arial;
-  text-align: center;
   line-height: 36px;
+  
 }
 
 h2 {
   font-size: 32px;
+  font-weight: 300;
   color: white;
   font-family: Arial;
-  text-align: center;
   line-height: 36px;
 }
 
 h3 {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 240;
   color: white;
   font-family: Arial;
-  text-align: center;
-  line-height: 36px;
+  line-height: 24px;
+}
+
+p {
+  font-size: 18px;
+  font-weight: 240;
+  color: white;
+  font-family: Arial;
+  line-height: 24px;
+  max-width: 1536px;
+  
+}
+
+.banner {
+    display: block;
+	width: 1536px;
+	height: 256px;
+	margin-left: auto;
+    margin-right: auto;
+	
+}
+
+.discord {
+	position: absolute;
+    display: block;
+	width: 32px;
+	height: 32px;
+	margin-left: auto;
+	left: 1562px;
+}
+
+.youtube {
+	position: absolute;
+    display: block;
+	width: 32px;
+	height: 32px;
+	margin-left: auto;
+	left: 1626px;
+}
+
+.github {
+	position: absolute;
+    display: block;
+	width: 32px;
+	height: 32px;
+	margin-left: auto;
+	left: 1690px;
+}
+
+.pad {
+	padding-left: 180px;
 }
