@@ -3,37 +3,36 @@ body {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 320%;
   color: white;
   font-family: Arial;
-  line-height: 36px;
-  
+  line-height: 120%;
+  max-width: 89%;
 }
 
 h2 {
-  font-size: 32px;
+  font-size: 200%;
   font-weight: 300;
   color: white;
   font-family: Arial;
-  line-height: 36px;
-}
-
-h3 {
-  font-size: 18px;
-  font-weight: 240;
-  color: white;
-  font-family: Arial;
-  line-height: 24px;
+  line-height: 120%;
+  max-width: 89%;
 }
 
 p {
-  font-size: 18px;
+  font-size: 120%;
   font-weight: 240;
   color: white;
   font-family: Arial;
-  line-height: 24px;
+  line-height: 120%;
   max-width: 89%;
   
+}
+
+.widgets {
+	position: absolute;
+	left: calc(89% - 32px);
+	line-height: 64px;
 }
 
 .banner {
@@ -53,7 +52,7 @@ p {
 	width: 32px;
 	height: 32px;
 	margin-left: auto;
-	left: calc(88% - 192px);
+	left: 88%;
 }
 
 .discord {
@@ -62,7 +61,7 @@ p {
 	width: 32px;
 	height: 32px;
 	margin-left: auto;
-	left: calc(88% - 128px);
+	left: 88%;
 }
 
 .youtube {
@@ -71,7 +70,7 @@ p {
 	width: 32px;
 	height: 32px;
 	margin-left: auto;
-	left: calc(88% - 64px);
+	left: 88%;
 }
 
 .github {
@@ -90,8 +89,8 @@ html,body{min-height:100%;}
   float: left;
   flex-flow: row wrap;
   padding-bottom: 50px;
-  margin: 0 -0.4%;
-  padding: 0 0.4%;
+  margin: 0 calc(-0.06% - 6px);
+  padding: 0 calc(0.06% + 6px);
   width: 100%;
   height: 80px;
   background-color: #1d1a2c;
