@@ -25,8 +25,47 @@ p {
   color: white;
   font-family: Arial;
   line-height: 120%;
-  max-width: 89%;
+  max-width: 85%;
   
+}
+
+.button1 {
+  max-width:160px;
+  min-width: 160px;
+  transition: background 0.2s ease;
+  background: #1d1a2c;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  min-height: 160px;
+  max-height: 160px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+.button1 > img{
+  filter: brightness(100%);
+  transition: filter 0.2s ease;
+}
+
+.button1 > p{
+  color: #d35040;
+  transition: color 0.2s ease;
+}
+
+.button1:hover * {
+  color: #ffffff;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.button1:hover > img {
+  filter: brightness(1000%);
+  transition: filter 0.2s ease;
+}
+
+.button1:hover {
+  background: #d35040;
+  transition: background 0.2s ease;
 }
 
 .widgets {
@@ -53,6 +92,14 @@ p {
 	height: 32px;
 	margin-left: auto;
 	left: 88%;
+}
+
+.spigotlink {
+    display: block;
+	width: 64px;
+	height: 64px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .discord {
@@ -111,6 +158,16 @@ html,body{min-height:100%;}
   font-size: 18px;
   font-weight: 240;
   color: #d35040;
+  font-family: Arial;
+  line-height: 24px;
+  max-width: 1536px;
+  text-decoration: none;
+}
+
+.textlink:hover {
+  font-size: 18px;
+  font-weight: 240;
+  color: #ffffff;
   font-family: Arial;
   line-height: 24px;
   max-width: 1536px;
