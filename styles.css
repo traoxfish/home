@@ -68,12 +68,6 @@ p {
   transition: background 0.2s ease;
 }
 
-.widgets {
-	position: absolute;
-	left: calc(89% - 32px);
-	line-height: 64px;
-}
-
 .banner {
     display: block;
 	width: 89%;
@@ -85,48 +79,94 @@ p {
 	height: 258px;
 }
 
+.widgets {
+  border-radius: 6px 6px 6px 6px;
+  background: #1d1a2c;
+  display: block;
+  min-width:64px;
+  min-height: 256px;
+  max-height: 256px;
+  position: absolute;
+  left: calc(85% - 32px);
+  line-height: 64px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 .spigot {
+	filter: brightness(100%);
+	transition: filter 0.2s ease;
 	position: absolute;
     display: block;
 	width: 32px;
 	height: 32px;
-	margin-left: auto;
-	left: 88%;
+	margin-left: 16px;
+	margin-right: 16px;
+	margin-bottom: 16px;
+	margin-top: 16px;
 }
 
-.spigotlink {
-    display: block;
-	width: 64px;
-	height: 64px;
-	margin-left: auto;
-	margin-right: auto;
+.spigot:hover {
+  filter: brightness(1000%);
+  transition: filter 0.2s ease;
 }
 
 .discord {
+	filter: brightness(100%);
+	transition: filter 0.2s ease;
+	position: absolute;
 	position: absolute;
     display: block;
 	width: 32px;
 	height: 32px;
-	margin-left: auto;
-	left: 88%;
+	margin-left: 16px;
+	margin-right: 16px;
+	margin-bottom: 16px;
+	margin-top: 16px;
+}
+
+.discord:hover {
+  filter: brightness(1000%);
+  transition: filter 0.2s ease;
 }
 
 .youtube {
+	filter: brightness(100%);
+	transition: filter 0.2s ease;
+	position: absolute;
 	position: absolute;
     display: block;
 	width: 32px;
 	height: 32px;
-	margin-left: auto;
-	left: 88%;
+	margin-left: 16px;
+	margin-right: 16px;
+	margin-bottom: 16px;
+	margin-top: 16px;
+}
+
+.youtube:hover {
+  filter: brightness(1000%);
+  transition: filter 0.2s ease;
 }
 
 .github {
+	filter: brightness(100%);
+	transition: filter 0.2s ease;
+	position: absolute;
 	position: absolute;
     display: block;
 	width: 32px;
 	height: 32px;
-	margin-left: auto;
-	left: 88%;
+	margin-left: 16px;
+	margin-right: 16px;
+	margin-bottom: 16px;
+	margin-top: 16px;
+}
+
+.github:hover {
+  filter: brightness(1000%);
+  transition: filter 0.2s ease;
 }
 
 html,body{min-height:100%;}
@@ -152,6 +192,14 @@ html,body{min-height:100%;}
 
 .pad {
 	padding-left: 9.4%;
+}
+
+.spigotlink {
+    display: block;
+	width: 64px;
+	height: 64px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .textlink {
