@@ -7,7 +7,7 @@ h1 {
   color: white;
   font-family: Arial;
   line-height: 120%;
-  max-width: 89%;
+  max-width: 75%;
 }
 
 h2 {
@@ -16,7 +16,7 @@ h2 {
   color: white;
   font-family: Arial;
   line-height: 120%;
-  max-width: 89%;
+  max-width: 75%;
 }
 
 p {
@@ -87,7 +87,7 @@ p {
   min-height: 256px;
   max-height: 256px;
   position: absolute;
-  left: calc(85% - 32px);
+  left: calc(90% - 68px);
   line-height: 64px;
   margin-left: auto;
   margin-right: auto;
