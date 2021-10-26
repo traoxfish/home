@@ -29,6 +29,10 @@ p {
   
 }
 
+.buttons > a{
+	margin-right: 16px;
+}
+
 .button1 {
   max-width:160px;
   min-width: 160px;
@@ -194,7 +198,7 @@ html,body{min-height:100%;}
 	padding-left: 9.4%;
 }
 
-.spigotlink {
+.buttonlink {
     display: block;
 	width: 64px;
 	height: 64px;
