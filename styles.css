@@ -165,10 +165,11 @@ p {
 
 .widgets {
   border-radius: 6px 6px 6px 6px;
-  background: #1d1a2c;
+  background: none;
   display: inline;
   overflow: hidden;
   border-width: 1px;
+  top: -1px;
   border-style: none;
   border-color: #ffffff;
   position: absolute;
@@ -183,6 +184,7 @@ p {
 }
 
 .widgets:hover {
+  background: #1d1a2c;
   border-style: solid;
   display: inline;
   min-height: 328px;
