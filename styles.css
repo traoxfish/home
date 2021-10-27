@@ -55,6 +55,21 @@ p {
 	margin-bottom: 4px;
 }
 
+.downbarnavseperator {
+	border-color: #cccccc;
+	border-left-width: 1px;
+	border-right-width: 0px;
+	width: 0%;
+	border-style: solid;
+	height: 83px;
+	margin-left: 1px;
+	left: 86.25%;
+	position: absolute;
+	display: inline;
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
 .topnav > a{
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -66,7 +81,6 @@ p {
   position: absolute;
   display: inline;
   right: calc(10% + 5px);
-  background: #1d1a2c;
   border: none;
   text-align: center;
   min-height: 96px;
@@ -81,7 +95,6 @@ p {
   min-height: 32px;
   margin-top: 33%;
 }
-
 .button1 {
   max-width:96px;
   min-width: 96px;
@@ -153,19 +166,27 @@ p {
   border-radius: 6px 6px 6px 6px;
   background: #1d1a2c;
   display: inline;
+  overflow: hidden;
   border-width: 1px;
-  border-style: solid;
+  border-style: none;
   border-color: #ffffff;
   position: absolute;
-  top: -1px;
   min-width:64px;
-  min-height: 328px;
-  max-height: 328px;
+  min-height: 68px;
+  max-height: 68px;
   left: calc(90% - 55px);
   line-height: 64px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+.widgets:hover {
+  border-style: solid;
+  display: inline;
+  min-height: 328px;
+  max-height: 328px;
+  transition: min-height 0.2s ease, max-height 0.2s ease;
 }
 
 .spigot {
