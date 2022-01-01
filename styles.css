@@ -155,7 +155,10 @@ p {
 
 .banner {
     display: block;
-	width: 89%;
+	width: calc(89% - 2px);
+	border-style: solid;
+	border-color: #ffffff;
+	border-width: 1px;
 	height: 100%;
 }
 
