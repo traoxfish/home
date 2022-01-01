@@ -84,7 +84,6 @@ p {
   display: inline;
   right: calc(10% + 5px);
   border: none;
-  text-align: center;
   min-height: 96px;
   max-height: 96px;
   border-radius: 6px 6px 6px 6px;
@@ -96,6 +95,7 @@ p {
   max-height:32px;
   min-height: 32px;
   margin-top: 33%;
+  display: inline;
 }
 .button1 {
   max-width:96px;
@@ -108,6 +108,7 @@ p {
   min-height: 96px;
   max-height: 96px;
   border-radius: 6px 6px 6px 6px;
+  display: inline;
 }
 
 .button1 > p{
