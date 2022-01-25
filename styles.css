@@ -48,7 +48,7 @@ p {
 	width: 0%;
 	border-style: solid;
 	height: 83px;
-	margin-left: 4px;
+	margin-left: 3px;
 	position: absolute;
 	display: inline-block;
 	margin-top: 4px;
@@ -63,7 +63,7 @@ p {
 	width: 0%;
 	border-style: solid;
 	height: 83px;
-	margin-left: -4px;
+	margin-left: -5px;
 	left: calc(90% - 71px);
 	overflow:hide;
 	position: absolute;
