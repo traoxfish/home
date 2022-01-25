@@ -98,7 +98,7 @@ p {
   display: inline;
 }
 .button1 {
-  text-size: 0px;
+  font-size: 0px;
   margin-left: 3px;
   max-width:96px;
   min-width: 96px;
