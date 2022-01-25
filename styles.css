@@ -63,7 +63,7 @@ p {
 	width: 0%;
 	border-style: solid;
 	height: 83px;
-	margin-left: 10px;
+	margin-left: -4px;
 	left: calc(90% - 71px);
 	overflow:hide;
 	position: absolute;
@@ -98,6 +98,8 @@ p {
   display: inline;
 }
 .button1 {
+  text-size: 0px;
+  margin-left: 3px;
   max-width:96px;
   min-width: 96px;
   transition: background 0.2s ease;
