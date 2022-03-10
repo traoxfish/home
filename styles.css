@@ -29,6 +29,25 @@ p {
   
 }
 
+label {
+  font-size: 120%;
+  font-weight: 200;
+  color: white;
+  font-family: Arial;
+  line-height: 200%;
+  max-width: 75%;
+}
+
+select {
+  color: white;
+  background-color: #29273f;
+  border-color: #ffffff;
+	border-width: 1px;
+	border-style: solid;
+  font-size: 100%;
+  font-family: Arial;
+}
+
 .topnav {
 	border-radius: 6px 6px 6px 6px;
 	border-color: #ffffff;
@@ -48,9 +67,10 @@ p {
 	width: 0%;
 	border-style: solid;
 	height: 83px;
-	margin-left: 1px;
+	margin-left: 3px;
 	position: absolute;
-	display: inline;
+	display: inline-block;
+  white-space: nowrap;
 	margin-top: 4px;
 	margin-bottom: 4px;
 }
@@ -63,11 +83,12 @@ p {
 	width: 0%;
 	border-style: solid;
 	height: 83px;
-	margin-left: 1px;
+	margin-left: -5px;
 	left: calc(90% - 71px);
 	overflow:hide;
 	position: absolute;
-	display: inline;
+	display: inline-block;
+  white-space: nowrap;
 	margin-top: 4px;
 	margin-bottom: 4px;
 }
@@ -95,9 +116,12 @@ p {
   max-height:32px;
   min-height: 32px;
   margin-top: 33%;
-  display: inline;
+  display: inline-block;
+  white-space: nowrap;
 }
 .button1 {
+  font-size: 0px;
+  margin-left: 3px;
   max-width:96px;
   min-width: 96px;
   transition: background 0.2s ease;
@@ -108,7 +132,8 @@ p {
   min-height: 96px;
   max-height: 96px;
   border-radius: 6px 6px 6px 6px;
-  display: inline;
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .button1 > p{
@@ -116,6 +141,7 @@ p {
   transition: color 0.2s ease;
   font-size:12px;
   line-height: 100%;
+  white-space: normal;
   position: absolute;
   max-width: 48px;
   min-width: 48px;
@@ -152,6 +178,7 @@ p {
   background: #d35040;
   transition: background 0.2s ease;
 }
+
 
 .banner {
     display: block;
