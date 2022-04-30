@@ -5,7 +5,8 @@ function test() {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
-        'Sec-Fetch-Mode': 'same-origin'
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin'
     },
     body: JSON.stringify(data),
     })
