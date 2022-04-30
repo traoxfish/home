@@ -13,6 +13,8 @@ function getCookie(cname) {
     return "";
 }
 
+getFish()
+
 function checkIfLoggedIn() {
     const data = {
         "username": getCookie("username"),
@@ -28,8 +30,8 @@ function checkIfLoggedIn() {
     }).then(response => {
         return response.json();
     }).then(json => {
-        if (json.status == "true") {
-            window.location.replace("fish.html");
+        if (json.status != "true") {
+            window.location.replace("https://www.traox.dev/fish");
         }
     });
 
@@ -37,19 +39,15 @@ function checkIfLoggedIn() {
 
 checkIfLoggedIn()
 
-function createAccount() {
+setInterval(function(){ 
+    checkIfLoggedIn()
+  }, 5000);
 
-    var username = document.getElementById("username").value
-    var password = document.getElementById("password").value
-
-    console.log(password)
-    console.log(username)
-
+function getFish() {
     const data = {
-        "username": username,
-        "password": password
+        "username": getCookie("username")
     };
-    fetch('http://traoxfish.us-3.evennode.com/newfisher', {
+    fetch('http://traoxfish.us-3.evennode.com/getfish', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -59,26 +57,20 @@ function createAccount() {
     }).then(response => {
         return response.json();
     }).then(json => {
-        if (json.status == "success") {
-            document.getElementById("accountstatus").textContent = "Account successfully created!"
+        if (json.fish != undefined) {
+            document.getElementById("fishcount").textContent = "You have " + json.fish + " fish! Wow!"
         } else {
-            document.getElementById("accountstatus").textContent = json.error;
+            document.getElementById("fishcount").textContent = "You have no fish! :("
         }
     });
 }
 
-function login() {
-    var username = document.getElementById("username").value
-    var password = document.getElementById("password").value
-
-    console.log(password)
-    console.log(username)
-
+function goFishing() {
     const data = {
-        "username": username,
-        "password": password
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginkey")
     };
-    fetch('http://traoxfish.us-3.evennode.com/login', {
+    fetch('http://traoxfish.us-3.evennode.com/fish', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -89,12 +81,10 @@ function login() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            document.getElementById("accountstatus").textContent = "Logged in!"
-            document.cookie = "loginkey=" + json.key;
-            document.cookie = "username=" + username;
-            window.location.replace("https://www.traox.dev/fish/fish");
+            console.log("fished! " + json.fish)
+            document.getElementById("fishcount").textContent = "You have " + json.fish + " fish! Wow!"
         } else {
-            document.getElementById("accountstatus").textContent = json.error;
+            console.log("can't fish yet.")
         }
     });
 }
