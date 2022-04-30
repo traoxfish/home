@@ -159,7 +159,7 @@ select {
   margin-top: -0.5%;
 }
 
-.button1 > img{
+.button1 > img {
   filter: brightness(100%);
   transition: filter 0.2s ease;
   max-width: 32px;
@@ -331,7 +331,7 @@ html,body{min-height:100%;}
 }
 
 .buttonlink {
-    display: block;
+  display: block;
 	width: 64px;
 	height: 64px;
 	margin-left: auto;
@@ -356,4 +356,32 @@ html,body{min-height:100%;}
   line-height: 24px;
   max-width: 1536px;
   text-decoration: none;
+}
+
+.fishbutton {
+  width: 100px;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 6px 6px 6px 6px;
+  background-color: #1d1a2c;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  display: inline-block;
+  white-space: nowrap;
+  color: white;
+}
+
+.fishbutton:hover {
+  background-color: #d35040;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.fishbutton:active:hover {
+  background-color: #1d1a2c;
+  transition: background 0.1s ease;
+  cursor: pointer;
 }
