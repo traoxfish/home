@@ -20,7 +20,7 @@ function checkIfLoggedIn() {
         "username": getCookie("username"),
         "loginkey": getCookie("loginkey")
     };
-    fetch('http://traoxfish.us-3.evennode.com/checkkey', {
+    fetch('https://traoxfish.us-3.evennode.com/checkkey', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -47,7 +47,7 @@ function getFish() {
     const data = {
         "username": getCookie("username")
     };
-    fetch('http://traoxfish.us-3.evennode.com/getfish', {
+    fetch('https://traoxfish.us-3.evennode.com/getfish', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -70,7 +70,7 @@ function goFishing() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginkey")
     };
-    fetch('http://traoxfish.us-3.evennode.com/fish', {
+    fetch('https://traoxfish.us-3.evennode.com/fish', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
