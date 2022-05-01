@@ -14,6 +14,7 @@ function getCookie(cname) {
 }
 
 getFish()
+getLeaderboards()
 
 function getLeaderboards() {
     fetch('https://traoxfish.us-3.evennode.com/leaderboards', {
