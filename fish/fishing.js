@@ -17,6 +17,7 @@ getFish()
 getLeaderboards()
 
 function getLeaderboards() {
+    
     fetch('https://traoxfish.us-3.evennode.com/leaderboards', {
         method: 'GET',
         credentials: "same-origin",
@@ -24,13 +25,13 @@ function getLeaderboards() {
             'Content-Type': 'application/json',
         },
     }).then(response => {
-        return response.json();
-    }).then(json => {
         var child = leaderboard.lastElementChild; 
         while (child) {
             leaderboard.removeChild(child);
             child = leaderboard.lastElementChild;
         }
+        return response.json();
+    }).then(json => {
         for (var fisher in json) {
             var leaderboard = document.getElementById("leaderboard");
             var item = document.createElement("li");
