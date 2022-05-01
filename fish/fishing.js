@@ -15,6 +15,26 @@ function getCookie(cname) {
 
 getFish()
 
+function getLeaderboards() {
+    fetch('https://traoxfish.us-3.evennode.com/leaderboards', {
+        method: 'GET',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        for (var fisher in json) {
+            leaderboard = document.getElementById("leaderboard");
+            leaderboard.innerHTML = "";
+            item = document.createElement("li");
+            item.textContent = json[fisher];
+            leaderboard.appendChild(item);
+        }
+    });
+}
+
 function checkIfLoggedIn() {
     const data = {
         "username": getCookie("username"),
@@ -41,7 +61,8 @@ checkIfLoggedIn()
 
 setInterval(function(){ 
     checkIfLoggedIn()
-  }, 5000);
+    getLeaderboards()
+}, 5000);
 
 function getFish() {
     const data = {

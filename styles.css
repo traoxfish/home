@@ -359,6 +359,7 @@ html,body{min-height:100%;}
 }
 
 .fishbutton {
+  font-family: Arial;
   width: 100px;
   height: 36px;
   border: none;
@@ -384,4 +385,43 @@ html,body{min-height:100%;}
   background-color: #1d1a2c;
   transition: background 0.1s ease;
   cursor: pointer;
+}
+
+.leaderboards {
+  min-width: 512px;
+  min-height: 512px;
+  max-width: 512px;
+  max-height: 512px;
+  background-color: #1d1a2c;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  display: inline-block;
+  position: absolute;
+  left: calc(89.5% - 512px);
+  margin-top: -10px;
+}
+
+
+.leaderboardtext {
+  display: inline-block;
+  position: absolute;
+  left: calc(89.5% - 512px);
+  margin-top: -65px;
+}
+
+.leaderboardlist {
+  font-family: Arial;
+  margin-top: 10px;
+  margin-left: -22px;
+}
+
+ol {
+  list-style-position: inside;
+}
+
+li {
+  font-family: Arial;
+  color: white;
+  font-size: 2rem;
 }
