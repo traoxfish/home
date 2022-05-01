@@ -26,14 +26,14 @@ function getLeaderboards() {
     }).then(response => {
         return response.json();
     }).then(json => {
+        var child = leaderboard.lastElementChild; 
+        while (child) {
+            leaderboard.removeChild(child);
+            child = leaderboard.lastElementChild;
+        }
         for (var fisher in json) {
             var leaderboard = document.getElementById("leaderboard");
-            var child = leaderboard.lastElementChild; 
-            while (child) {
-                leaderboard.removeChild(child);
-                child = leaderboard.lastElementChild;
-            }
-            item = document.createElement("li");
+            var item = document.createElement("li");
             item.textContent = json[fisher];
             leaderboard.appendChild(item);
         }
