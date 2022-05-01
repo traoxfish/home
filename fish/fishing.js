@@ -26,8 +26,12 @@ function getLeaderboards() {
         return response.json();
     }).then(json => {
         for (var fisher in json) {
-            leaderboard = document.getElementById("leaderboard");
-            leaderboard.innerHTML = "";
+            var leaderboard = document.getElementById("leaderboard");
+            var child = leaderboard.lastElementChild; 
+            while (child) {
+                e.removeChild(child);
+                child = leaderboard.lastElementChild;
+            }
             item = document.createElement("li");
             item.textContent = json[fisher];
             leaderboard.appendChild(item);
