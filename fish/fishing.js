@@ -29,7 +29,7 @@ function getLeaderboards() {
             var leaderboard = document.getElementById("leaderboard");
             var child = leaderboard.lastElementChild; 
             while (child) {
-                e.removeChild(child);
+                leaderboard.removeChild(child);
                 child = leaderboard.lastElementChild;
             }
             item = document.createElement("li");
@@ -66,7 +66,7 @@ checkIfLoggedIn()
 setInterval(function(){ 
     checkIfLoggedIn()
     getLeaderboards()
-}, 5000);
+}, 2000);
 
 function getFish() {
     const data = {
