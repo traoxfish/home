@@ -29,7 +29,7 @@ function checkIfLoggedIn() {
         return response.json();
     }).then(json => {
         if (json.status == "true") {
-            window.location.replace("fish.html");
+            window.location.replace("https://www.traox.dev/fish/fish");
         }
     });
 

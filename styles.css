@@ -427,6 +427,47 @@ li {
   font-size: 2rem;
 }
 
-.sendfish {
+.nicebutton {
+  font-family: Arial;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 4px 4px 4px 4px;
+  background-color: #1d1a2c;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
   display: inline-block;
+  white-space: nowrap;
+  color: white;
+  font-size: 16px;
+}
+
+.nicebutton:hover {
+  background-color: #d35040;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.nicebutton:active:hover {
+  background-color: #1d1a2c;
+  transition: background 0.1s ease;
+  cursor: pointer;
+}
+
+input {
+  font-family: Arial;
+  border: none;
+  cursor: text;
+  border-radius: 1px 1px 1px 1px;
+  background-color: #1d1a2c;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  display: inline-block;
+  white-space: nowrap;
+  color: white;
+  width: 200px;
+  height: 24px;
+  font-size: 16px;
 }

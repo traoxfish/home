@@ -31,6 +31,8 @@ function sendFish() {
 
     if (fish != undefined && reciever != undefined && fish > 0) {
         validInfo = true;
+    } else {
+        document.getElementById("sentstatus").textContent = "Couldn't send fish!";
     }
 
     if (validInfo) {
@@ -44,8 +46,12 @@ function sendFish() {
         }).then(response => {
             return response.json();
         }).then(json => {
-            if (json.status != "success") {
-                console.log("sent fish!");
+            if (json.status == "success") {
+                document.getElementById("sentstatus").textContent = "Fish successfully sent!";
+                document.getElementById("sendfishamount").value = "";
+                document.getElementById("sendfishto").value = "";
+            } else {
+                document.getElementById("sentstatus").textContent = json.error;
             }
             getFish()
         });
