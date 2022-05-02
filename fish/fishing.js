@@ -16,6 +16,48 @@ function getCookie(cname) {
 getFish()
 getLeaderboards()
 
+function sendFish() {
+    var fish = document.getElementById("sendfishamount").textContent;
+    var reciever = document.getElementById("sendfishto").textContent;
+
+    const data = {
+        "username": getCookie("username"),
+        "loginkey": getCookie("loginkey"),
+        "fish": fish,
+        "reciever": reciever
+    };
+
+    var validInfo = false;
+
+    if (fish != undefined && reciever != undefined && fish > 0) {
+        validInfo = true;
+    }
+
+    if (validInfo) {
+        fetch('https://traoxfish.us-3.evennode.com/sendfish', {
+            method: 'POST',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }).then(response => {
+            return response.json();
+        }).then(json => {
+            if (json.status != "success") {
+                console.log("sent fish!");
+            }
+            getFish()
+        });
+    }
+
+}
+
+
+document.getElementById("sendfishamount").oninput = function() {
+    this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+}
+
 function getLeaderboards() {
     
     fetch('https://traoxfish.us-3.evennode.com/leaderboards', {
@@ -68,6 +110,7 @@ checkIfLoggedIn()
 setInterval(function(){ 
     checkIfLoggedIn()
     getLeaderboards()
+    getFish()
 }, 2000);
 
 function getFish() {

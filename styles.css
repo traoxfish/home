@@ -404,6 +404,7 @@ html,body{min-height:100%;}
 
 
 .leaderboardtext {
+  font-family: Arial;
   display: inline-block;
   position: absolute;
   left: calc(89.5% - 512px);
@@ -424,4 +425,8 @@ li {
   font-family: Arial;
   color: white;
   font-size: 2rem;
+}
+
+.sendfish {
+  display: inline-block;
 }
