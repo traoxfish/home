@@ -13,6 +13,10 @@ function getCookie(cname) {
     return "";
 }
 
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
 getFish()
 getLeaderboards()
 
@@ -33,6 +37,10 @@ function sendFish() {
         validInfo = true;
     } else {
         document.getElementById("sentstatus").textContent = "Couldn't send fish!";
+        document.getElementById("sentstatus").color = "#ea7b7b";
+        delay(2000).then(() => {
+            document.getElementById("sentstatus").textContent = "";
+        })
     }
 
     if (validInfo) {
@@ -48,10 +56,18 @@ function sendFish() {
         }).then(json => {
             if (json.status == "success") {
                 document.getElementById("sentstatus").textContent = "Fish successfully sent!";
+                document.getElementById("sentstatus").color = "#84ea84";
                 document.getElementById("sendfishamount").value = "";
                 document.getElementById("sendfishto").value = "";
+                delay(2000).then(() => {
+                    document.getElementById("sentstatus").textContent = "";
+                })
             } else {
                 document.getElementById("sentstatus").textContent = json.error;
+                document.getElementById("sentstatus").color = "#ea7b7b";
+                delay(2000).then(() => {
+                    document.getElementById("sentstatus").textContent = "";
+                })
             }
             getFish()
         });
