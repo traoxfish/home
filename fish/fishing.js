@@ -37,7 +37,7 @@ function sendFish() {
         validInfo = true;
     } else {
         document.getElementById("sentstatus").textContent = "Couldn't send fish!";
-        document.getElementById("sentstatus").color = "#ea7b7b";
+        document.getElementById("sentstatus").style.color = "#ea7b7b";
         delay(2000).then(() => {
             document.getElementById("sentstatus").textContent = "";
         })
@@ -56,7 +56,7 @@ function sendFish() {
         }).then(json => {
             if (json.status == "success") {
                 document.getElementById("sentstatus").textContent = "Fish successfully sent!";
-                document.getElementById("sentstatus").color = "#84ea84";
+                document.getElementById("sentstatus").style.color = "#84ea84";
                 document.getElementById("sendfishamount").value = "";
                 document.getElementById("sendfishto").value = "";
                 delay(2000).then(() => {
@@ -64,7 +64,7 @@ function sendFish() {
                 })
             } else {
                 document.getElementById("sentstatus").textContent = json.error;
-                document.getElementById("sentstatus").color = "#ea7b7b";
+                document.getElementById("sentstatus").style.color = "#ea7b7b";
                 delay(2000).then(() => {
                     document.getElementById("sentstatus").textContent = "";
                 })
