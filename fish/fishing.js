@@ -17,8 +17,8 @@ getFish()
 getLeaderboards()
 
 function sendFish() {
-    var fish = document.getElementById("sendfishamount").textContent;
-    var reciever = document.getElementById("sendfishto").textContent;
+    var fish = document.getElementById("sendfishamount").value;
+    var reciever = document.getElementById("sendfishto").value;
 
     const data = {
         "username": getCookie("username"),
