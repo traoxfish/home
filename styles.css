@@ -389,17 +389,16 @@ html,body{min-height:100%;}
 }
 
 .leaderboards {
-  min-width: 512px;
+  min-width: 30%;
   min-height: 512px;
-  max-width: 512px;
+  max-width: 30%;
   max-height: 512px;
   background-color: #1d1a2c;
   outline-width: 1px;
   outline-color: white;
   outline-style: solid;
-  display: inline-block;
   position: absolute;
-  left: calc(89.5% - 512px);
+  left: 60%;
   margin-top: 92px;
 }
 
@@ -408,7 +407,6 @@ html,body{min-height:100%;}
   font-family: Arial;
   display: inline-block;
   position: absolute;
-  left: calc(99.5% - 512px);
   margin-top: -65px;
 }
 
@@ -425,7 +423,7 @@ ol {
 li {
   font-family: Arial;
   color: white;
-  font-size: 2rem;
+  font-size: 1.8vw;
 }
 
 .nicebutton {
