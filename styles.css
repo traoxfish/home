@@ -388,11 +388,41 @@ html,body{min-height:100%;}
   cursor: pointer;
 }
 
+.unclebutton {
+  font-family: Arial;
+  width: 200px;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 6px 6px 6px 6px;
+  background-color: #1d1a2c;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  display: inline-block;
+  white-space: nowrap;
+  color: white;
+  font-size: 16px;
+}
+
+.unclebutton:hover {
+  background-color: #d35040;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.unclebutton:active:hover {
+  background-color: #1d1a2c;
+  transition: background 0.1s ease;
+  cursor: pointer;
+}
+
 .leaderboards {
   min-width: 30%;
-  min-height: 512px;
+  min-height: 560px;
   max-width: 30%;
-  max-height: 512px;
+  max-height: 560px;
   background-color: #1d1a2c;
   outline-width: 1px;
   outline-color: white;

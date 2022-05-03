@@ -60,10 +60,8 @@ function createAccount() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            document.getElementById("username").textContent = "Account successfully created!"
-            document.getElementById("password").style.color = "#84ea84";
-            document.getElementById("sendfishamount").value = "";
-            document.getElementById("sendfishto").value = "";
+            document.getElementById("accountstatus").textContent = "Account successfully created!"
+            document.getElementById("accountstatus").style.color = "#84ea84";
             delay(2000).then(() => {
                 document.getElementById("accountstatus").textContent = "";
             });

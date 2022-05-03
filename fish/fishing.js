@@ -18,6 +18,7 @@ function delay(time) {
 }
 
 getFish()
+getUncles()
 getLeaderboards()
 
 function sendFish() {
@@ -75,6 +76,50 @@ function sendFish() {
 
 }
 
+function buyUncle() {
+    const data = {
+        "username": getCookie("username"),
+        "loginkey": getCookie("loginkey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/buyuncle', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            document.getElementById("unclecount").textContent = "You have " + json.uncles + " uncles! Wow!"
+        }
+    });
+}
+
+function getUncles() {
+    const data = {
+        "username": getCookie("username"),
+        "loginkey": getCookie("loginkey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getuncles', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.uncles != undefined && json.uncles > 0) {
+            document.getElementById("unclecount").textContent = "You have " + json.uncles + " uncles! Wow!";
+            document.getElementById("unclebutton").textContent = "Buy Uncle for " + json.nextuncle + " fish!";
+        } else {
+            document.getElementById("unclecount").textContent = "You have no uncles! :("
+        }
+    });
+}
 
 document.getElementById("sendfishamount").oninput = function() {
     this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
@@ -138,6 +183,7 @@ setInterval(function(){
     checkIfLoggedIn()
     getLeaderboards()
     getFish()
+    getUncles()
 }, 2000);
 
 function getFish() {
