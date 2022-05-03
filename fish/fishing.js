@@ -140,12 +140,14 @@ function updateLeaderboards() {
         var i = 0;
         var leaderboard = document.getElementById("leaderboard");
         for (var fisher in json) {
-            leaderboard.children.item(i).textContent = json[fisher].substring(0, json[fisher].length - 1);
-            if (json[fisher].substring(json[fisher].length - 1) == "y") {
-                leaderboard.children.item(i).style.color = "#84ea84";
-            } else {
-                leaderboard.children.item(i).style.color = "#eeeeee";
-            }
+            try {
+                leaderboard.children.item(i).textContent = json[fisher].substring(0, json[fisher].length - 1);
+                if (json[fisher].substring(json[fisher].length - 1) == "y") {
+                    leaderboard.children.item(i).style.color = "#84ea84";
+                } else {
+                    leaderboard.children.item(i).style.color = "#eeeeee";
+                }
+            } catch (e) {}
             i++
         }
     });
@@ -170,14 +172,15 @@ function getLeaderboards() {
         for (var fisher in json) {
             var leaderboard = document.getElementById("leaderboard");
             var item = document.createElement("li");
-            item.textContent = json[fisher].substring(0, json[fisher].length - 1);
-            if (json[fisher].substring(json[fisher].length - 1) == "y") {
-                item.style.color = "#84ea84";
-            } else {
-                item.style.color = "#eeeeee";
-            }
+            try {
+                item.textContent = json[fisher].substring(0, json[fisher].length - 1);
+                if (json[fisher].substring(json[fisher].length - 1) == "y") {
+                    item.style.color = "#84ea84";
+                } else {
+                    item.style.color = "#eeeeee";
+                }
+            } catch (e) {}
             username = item.textContent.split(" - ")[0];
-            console.log(username)
 
             leaderboard.appendChild(item);
         }
@@ -285,10 +288,7 @@ function goFishing() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            console.log("fished! " + json.fish)
             document.getElementById("fishcount").textContent = "You have " + json.fish + " fish! Wow!"
-        } else {
-            console.log("can't fish yet.")
         }
     });
 }
