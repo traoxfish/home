@@ -60,9 +60,20 @@ function createAccount() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            document.getElementById("accountstatus").textContent = "Account successfully created!"
+            document.getElementById("username").textContent = "Account successfully created!"
+            document.getElementById("password").style.color = "#84ea84";
+            document.getElementById("sendfishamount").value = "";
+            document.getElementById("sendfishto").value = "";
+            delay(2000).then(() => {
+                document.getElementById("accountstatus").textContent = "";
+            });
+            login();
         } else {
             document.getElementById("accountstatus").textContent = json.error;
+            document.getElementById("accountstatus").style.color = "#ea7b7b";
+            delay(2000).then(() => {
+                document.getElementById("accountstatus").textContent = "";
+            });
         }
     });
 }

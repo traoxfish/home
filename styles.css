@@ -373,6 +373,7 @@ html,body{min-height:100%;}
   display: inline-block;
   white-space: nowrap;
   color: white;
+  font-size: 16px;
 }
 
 .fishbutton:hover {
@@ -399,7 +400,7 @@ html,body{min-height:100%;}
   display: inline-block;
   position: absolute;
   left: calc(89.5% - 512px);
-  margin-top: -10px;
+  margin-top: 92px;
 }
 
 
@@ -407,7 +408,7 @@ html,body{min-height:100%;}
   font-family: Arial;
   display: inline-block;
   position: absolute;
-  left: calc(89.5% - 512px);
+  left: calc(99.5% - 512px);
   margin-top: -65px;
 }
 
@@ -441,6 +442,7 @@ li {
   white-space: nowrap;
   color: white;
   font-size: 16px;
+  min-height: 24px;
 }
 
 .nicebutton:hover {

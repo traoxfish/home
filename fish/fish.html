@@ -35,26 +35,34 @@
 	  
    <br><br>
 
-   <h2 id="fishcount">You have 0 fish! Wow!</h2>
-
-   <button onclick="goFishing()" class="fishbutton">Fish!</button>
-
-   <h2 class="leaderboardtext">Leaderboards:</h2>
    <div class="leaderboards">
+    <h2 class="leaderboardtext">Leaderboards:</h2>
     <ol id="leaderboard" class="leaderboardlist">
     </ol>
    </div>
+
+   <div>
+   <h2 id="fishcount">You have 0 fish! Wow!</h2>
+
+   <button onclick="goFishing()" class="fishbutton">Fish!</button>
 
    <br><br><br><br><br><br>
 
    <h2>Send fish:</h2>
 
-    <input type="text" id="sendfishto" name="reciever" maxlength="32" class="sendfish" placeholder="Reciever">
-    <input type="text" id="sendfishamount" name="amount" class="sendfish" placeholder="Amount">
-    <button onclick="sendFish()" class="nicebutton">Send Fish</button>
-    <p id="sentstatus"></p>
+   <input type="text" id="sendfishto" name="reciever" maxlength="32" class="sendfish" placeholder="Reciever">
+   <input type="text" id="sendfishamount" name="amount" class="sendfish" placeholder="Amount"><br><br>
+   <button onclick="sendFish()" class="nicebutton">Send Fish</button>
+   <p id="sentstatus"></p>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br>
+  <button onclick="logout()" class="nicebutton">Logout</button>
+   
+
+    
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
     </div>
 

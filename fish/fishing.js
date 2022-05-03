@@ -40,7 +40,7 @@ function sendFish() {
         document.getElementById("sentstatus").style.color = "#ea7b7b";
         delay(2000).then(() => {
             document.getElementById("sentstatus").textContent = "";
-        })
+        });
     }
 
     if (validInfo) {
@@ -61,7 +61,7 @@ function sendFish() {
                 document.getElementById("sendfishto").value = "";
                 delay(2000).then(() => {
                     document.getElementById("sentstatus").textContent = "";
-                })
+                });
             } else {
                 document.getElementById("sentstatus").textContent = json.error;
                 document.getElementById("sentstatus").style.color = "#ea7b7b";
@@ -103,6 +103,11 @@ function getLeaderboards() {
             leaderboard.appendChild(item);
         }
     });
+}
+
+function logout() {
+    document.cookie = "loginkey=";
+    document.cookie = "username=";
 }
 
 function checkIfLoggedIn() {
