@@ -93,6 +93,7 @@ function buyUncle() {
     }).then(json => {
         if (json.status == "success") {
             document.getElementById("unclecount").textContent = "You have " + json.uncles + " uncles! Wow!"
+            getFish();
         }
     });
 }
@@ -125,6 +126,26 @@ document.getElementById("sendfishamount").oninput = function() {
     this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
 }
 
+function updateLeaderboards() {
+    fetch('https://traoxfish.us-3.evennode.com/leaderboards', {
+        method: 'GET',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(response => {
+
+        return response.json();
+    }).then(json => {
+        var i = 0;
+        var leaderboard = document.getElementById("leaderboard");
+        for (var fisher in json) {
+            leaderboard.children.item(i).textContent = json[fisher]
+            i++
+        }
+    });
+}
+
 function getLeaderboards() {
     
     fetch('https://traoxfish.us-3.evennode.com/leaderboards', {
@@ -145,6 +166,10 @@ function getLeaderboards() {
             var leaderboard = document.getElementById("leaderboard");
             var item = document.createElement("li");
             item.textContent = json[fisher];
+            username = item.textContent.split(" - ")[0];
+            console.log(username)
+            checkIfOnline(username, item)
+
             leaderboard.appendChild(item);
         }
     });
@@ -177,14 +202,64 @@ function checkIfLoggedIn() {
 
 }
 
-checkIfLoggedIn()
+function keepOnline() {
+    const data = {
+        "username": getCookie("username"),
+        "loginkey": getCookie("loginkey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/online', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+
+    });
+}
+
+function checkIfOnline(username, item) {
+    const data = {
+        "username": username
+    };
+    fetch('https://traoxfish.us-3.evennode.com/lastonline', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.isOnline)  {
+            item.style.color = "#84ea84";
+        } else {
+            item.style.color = "#eeeeee";
+        }
+        
+    });
+}
+
+checkIfLoggedIn();
 
 setInterval(function(){ 
-    checkIfLoggedIn()
-    getLeaderboards()
-    getFish()
-    getUncles()
+    checkIfLoggedIn();
+    getFish();
+    getUncles();
+    keepOnline();
 }, 2000);
+
+setInterval(function(){ 
+    updateLeaderboards();
+}, 1000);
+
+setInterval(function(){ 
+    getLeaderboards();
+}, 10000);
 
 function getFish() {
     const data = {
