@@ -228,6 +228,7 @@ function updateLeaderboards() {
         credentials: "same-origin",
         headers: {
             'Content-Type': 'application/json',
+            'Cache-Control': 'No-Store'
         },
     }).then(response => {
 
@@ -270,6 +271,7 @@ function getLeaderboards() {
         credentials: "same-origin",
         headers: {
             'Content-Type': 'application/json',
+            'Cache-Control': 'No-Store'
         },
     }).then(response => {
         var child = leaderboard.lastElementChild; 
