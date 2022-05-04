@@ -13,6 +13,10 @@ function getCookie(cname) {
     return "";
 }
 
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
 function checkIfLoggedIn() {
     const data = {
         "username": getCookie("username"),
@@ -65,7 +69,9 @@ function createAccount() {
             delay(2000).then(() => {
                 document.getElementById("accountstatus").textContent = "";
             });
-            login();
+            delay(500).then(() => { 
+                login();
+            });
         } else {
             document.getElementById("accountstatus").textContent = json.error;
             document.getElementById("accountstatus").style.color = "#ea7b7b";
@@ -79,9 +85,6 @@ function createAccount() {
 function login() {
     var username = document.getElementById("username").value
     var password = document.getElementById("password").value
-
-    console.log(password)
-    console.log(username)
 
     const data = {
         "username": username,
@@ -99,6 +102,7 @@ function login() {
     }).then(json => {
         if (json.status == "success") {
             document.getElementById("accountstatus").textContent = "Logged in!"
+            document.getElementById("accountstatus").style.color = "#84ea84";
             document.cookie = "loginkey=" + json.key;
             document.cookie = "username=" + username;
             window.location.replace("https://www.traox.dev/fish/fish");
