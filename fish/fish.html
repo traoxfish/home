@@ -32,7 +32,21 @@
 	 </div>
 	 <div class="navseperator"></div>
    </div>
-	  
+
+   <div class="rarefishmenu" onclick="closeRareFish()" id="rarefishmenu">
+      <div class="rarefishinfo" id="rarefishinfo">
+          <h2 class="rarefishtitle"> Rare Fish:</h2>
+          <br>
+          <p class="rarefishtitle" id="rarefishcount2">You currently have no rare fish! :(</p>
+          <br>
+          <p class="rarefishtitle" id="rarefishcost">Current rare fish price: 0 fish</p>
+          <br><br><br><br>
+          <button class="nicebutton" style="margin-left: 80px; max-width: 132px; min-width: 132px;" onclick="buyRareFish()">Buy rare fish</button>
+          <button class="nicebutton" style="margin-left: 80px; max-width: 132px; min-width: 132px;" onclick="sellRareFish()">Sell rare fish</button>
+          <p class="rarefishtitle" id="rarefishstatus"><br></p>
+      </div>
+   </div>
+
    <br><br>
 
    <div class="leaderboards">
@@ -43,23 +57,29 @@
    </div>
 
    <div>
-   <h2 id="fishcount">You have 0 fish! :(</h2>
+   <h2 id="fishcount">You have no fish! :(</h2>
 
    <button onclick="goFishing()" class="fishbutton">Fish!</button>
 
-   <br><br><br>
+   <br><br><br><br>
 
-   <h2 id="unclecount">You have 0 uncles! :( </h2>
+   <h2 id="unclecount">You have no uncles! :( </h2>
    <button onclick="buyUncle()" class="unclebutton" id="unclebutton">Buy Uncle for 500 fish!</button> <p></p>
+   <p id="unclestatus"><br></p>
+
+   <br><br>
+
+   <h2 id="rarefishcount">You have no rare fish! :( </h2>
+   <button onclick="viewRareFish()" class="rarefishbutton" id="rarefishbutton">Click to view rare fish!</button> <p></p>
 
    <br><br><br><br><br>
 
    <h2>Send fish:</h2>
 
-   <input type="text" id="sendfishto" name="reciever" maxlength="32" class="sendfish" placeholder="Reciever">
+   <input type="text" id="sendfishto" name="reciever" class="sendfish" placeholder="Reciever">
    <input type="text" id="sendfishamount" name="amount" class="sendfish" placeholder="Amount"><br><br>
    <button onclick="sendFish()" class="nicebutton">Send Fish</button>
-   <p id="sentstatus"></p>
+   <p id="sentstatus"><br></p>
 
   </div>
   <br><br><br>

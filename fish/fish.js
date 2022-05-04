@@ -46,9 +46,6 @@ function createAccount() {
     var username = document.getElementById("username").value
     var password = document.getElementById("password").value
 
-    console.log(password)
-    console.log(username)
-
     const data = {
         "username": username,
         "password": password
@@ -67,7 +64,7 @@ function createAccount() {
             document.getElementById("accountstatus").textContent = "Account successfully created!"
             document.getElementById("accountstatus").style.color = "#84ea84";
             delay(2000).then(() => {
-                document.getElementById("accountstatus").textContent = "";
+                document.getElementById("accountstatus").innerHTML = "<br>";
             });
             delay(500).then(() => { 
                 login();
@@ -76,7 +73,7 @@ function createAccount() {
             document.getElementById("accountstatus").textContent = json.error;
             document.getElementById("accountstatus").style.color = "#ea7b7b";
             delay(2000).then(() => {
-                document.getElementById("accountstatus").textContent = "";
+                document.getElementById("accountstatus").innerHTML = "<br>";
             });
         }
     });

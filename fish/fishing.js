@@ -40,7 +40,7 @@ function sendFish() {
         document.getElementById("sentstatus").textContent = "Couldn't send fish!";
         document.getElementById("sentstatus").style.color = "#ea7b7b";
         delay(2000).then(() => {
-            document.getElementById("sentstatus").textContent = "";
+            document.getElementById("sentstatus").innerHTML = "<br>";
         });
     }
 
@@ -61,19 +61,31 @@ function sendFish() {
                 document.getElementById("sendfishamount").value = "";
                 document.getElementById("sendfishto").value = "";
                 delay(2000).then(() => {
-                    document.getElementById("sentstatus").textContent = "";
+                    document.getElementById("sentstatus").innerHTML = "<br>";
                 });
             } else {
                 document.getElementById("sentstatus").textContent = json.error;
                 document.getElementById("sentstatus").style.color = "#ea7b7b";
                 delay(2000).then(() => {
-                    document.getElementById("sentstatus").textContent = "";
+                    document.getElementById("sentstatus").innerHTML = "<br>";
                 })
             }
             getFish()
         });
     }
 
+}
+
+document.getElementById('rarefishinfo').addEventListener('click',function (event){
+    event.stopPropagation();
+ });
+
+function viewRareFish() {
+    document.getElementById("rarefishmenu").style.display = "initial";
+}
+
+function closeRareFish() {
+    document.getElementById("rarefishmenu").style.display = "none";
 }
 
 function buyUncle() {
@@ -94,6 +106,11 @@ function buyUncle() {
         if (json.status == "success") {
             document.getElementById("unclecount").textContent = "You have " + json.uncles + " uncles! Wow!"
             getFish();
+        } else {
+            document.getElementById("unclestatus").textContent = json.error;
+            delay(2000).then(() => {
+                document.getElementById("unclestatus").innerHTML = "<br>";
+            });
         }
     });
 }
@@ -123,7 +140,86 @@ function getUncles() {
 }
 
 document.getElementById("sendfishamount").oninput = function() {
-    this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+    this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+}
+
+function buyRareFish() {
+    const data = {
+        "username": getCookie("username"),
+        "loginkey": getCookie("loginkey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/buyrarefish', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            document.getElementById("rarefishcount").textContent = "You have " + json.rarefish + " rare fish! Wow!"
+            document.getElementById("rarefishcount2").textContent = "You have " + json.rarefish + " rare fish! Wow!"
+        } else {
+            document.getElementById("rarefishstatus").textContent = json.error;
+            delay(2000).then(() => {
+                document.getElementById("rarefistatus").innerHTML = "<br>";
+            });
+        }
+    });
+}
+
+function sellRareFish() {
+    const data = {
+        "username": getCookie("username"),
+        "loginkey": getCookie("loginkey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/sellrarefish', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            document.getElementById("fishcount").textContent = "You have " + json.fish + " fish! Wow!"
+            getRareFishAmount();
+        } else {
+            document.getElementById("rarefishstatus").textContent = json.error;
+            delay(2000).then(() => {
+                document.getElementById("rarefistatus").innerHTML = "<br>";
+            });
+        }
+    });
+}
+
+function getRareFishAmount() {
+    const data = {
+        "username": getCookie("username"),
+        "loginkey": getCookie("loginkey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getrarefish', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.rarefish != undefined) {
+            document.getElementById("rarefishcount").textContent = "You have " + json.rarefish + " rare fish! Wow!"
+            document.getElementById("rarefishcount2").textContent = "You have " + json.rarefish + " rare fish! Wow!"
+        } else {
+            document.getElementById("rarefishcount").textContent = "You have no rare fish! :("
+            document.getElementById("rarefishcount2").textContent = "You have no rare fish! :("
+        }
+    });
 }
 
 function updateLeaderboards() {
@@ -150,6 +246,20 @@ function updateLeaderboards() {
             } catch (e) {}
             i++
         }
+    });
+}
+
+function updateRareFishCost() {
+    fetch('https://traoxfish.us-3.evennode.com/getrarefishcost', {
+        method: 'GET',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        document.getElementById("rarefishcost").textContent = "Current rare fish cost: " + json.cost + " fish."
     });
 }
 
@@ -240,6 +350,8 @@ setInterval(function(){
     getFish();
     getUncles();
     keepOnline();
+    updateRareFishCost();
+    getRareFishAmount();
 }, 2000);
 
 setInterval(function(){ 

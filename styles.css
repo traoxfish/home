@@ -225,9 +225,10 @@ select {
   background: #1d1a2c;
   border-style: solid;
   display: inline;
-  min-height: 328px;
-  max-height: 328px;
+  min-height: 360px;
+  max-height: 360px;
   transition: min-height 0.2s ease, max-height 0.2s ease;
+  z-index: 2;
 }
 
 .spigot {
@@ -418,6 +419,36 @@ html,body{min-height:100%;}
   cursor: pointer;
 }
 
+.rarefishbutton {
+  font-family: Arial;
+  width: 200px;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 6px 6px 6px 6px;
+  background-color: #1d1a2c;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  display: inline-block;
+  white-space: nowrap;
+  color: white;
+  font-size: 16px;
+}
+
+.rarefishbutton:hover {
+  background-color: #d35040;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.rarefishbutton:active:hover {
+  background-color: #1d1a2c;
+  transition: background 0.1s ease;
+  cursor: pointer;
+}
+
 .leaderboards {
   min-width: 30%;
   min-height: 560px;
@@ -428,9 +459,8 @@ html,body{min-height:100%;}
   outline-color: white;
   outline-style: solid;
   position: absolute;
-  left: 60%;
+  left: 59.7%;
   margin-top: 92px;
-  overflow: scroll;
 }
 
 
@@ -445,6 +475,11 @@ html,body{min-height:100%;}
   font-family: Arial;
   margin-top: 10px;
   margin-left: -22px;
+  min-width: calc(100% - 18px);
+  min-height: 551px;
+  max-width: calc(100% - 18px);
+  max-height: 551px;
+  overflow-y: scroll;
 }
 
 ol {
@@ -491,7 +526,7 @@ input {
   border: none;
   cursor: text;
   border-radius: 1px 1px 1px 1px;
-  background-color: #1d1a2c;
+  background-color: rgb(29, 26, 44);
   outline-width: 1px;
   outline-color: white;
   outline-style: solid;
@@ -501,4 +536,38 @@ input {
   width: 200px;
   height: 24px;
   font-size: 16px;
+}
+
+.rarefishmenu {
+  background-color: #1d1a2c;
+  min-width: 502%;
+  margin-left: -200%;
+  min-height: 500%;
+  margin-top: -200.5%;
+  background:rgba(29, 26, 44,0.5);
+  position: fixed;
+  z-index: 3;
+  display: none;
+}
+
+.rarefishinfo {
+  background-color: #1d1a2c;
+  position: fixed;
+  display: block;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  left: calc(50% - 256px);
+  bottom: calc(50% - 256px);
+  min-width: 512px;
+  min-height: 512px;
+  max-width: 512px;
+  max-height: 512px;
+  z-index: 100;
+}
+
+.rarefishtitle {
+  text-align: center;
+  margin-left: 100px;
+  margin-right: 100px;
 }
