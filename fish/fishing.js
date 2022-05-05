@@ -104,7 +104,7 @@ function buyUncle() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            document.getElementById("unclecount").textContent = "You have " + json.uncles + " uncles! Wow!"
+            document.getElementById("unclecount").textContent = "You have " + json.uncles.toLocaleString("en-US") + " uncles! Wow!"
             getFish();
         } else {
             document.getElementById("unclestatus").textContent = json.error;
@@ -131,8 +131,8 @@ function getUncles() {
         return response.json();
     }).then(json => {
         if (json.uncles != undefined && json.uncles > 0) {
-            document.getElementById("unclecount").textContent = "You have " + json.uncles + " uncles! Wow!";
-            document.getElementById("unclebutton").textContent = "Buy Uncle for " + json.nextuncle + " fish!";
+            document.getElementById("unclecount").textContent = "You have " + json.uncles.toLocaleString("en-US") + " uncles! Wow!";
+            document.getElementById("unclebutton").textContent = "Buy Uncle for " + json.nextuncle.toLocaleString("en-US") + " fish!";
         } else {
             document.getElementById("unclecount").textContent = "You have no uncles! :("
         }
@@ -159,8 +159,8 @@ function buyRareFish() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            document.getElementById("rarefishcount").textContent = "You have " + json.rarefish + " rare fish! Wow!"
-            document.getElementById("rarefishcount2").textContent = "You have " + json.rarefish + " rare fish! Wow!"
+            document.getElementById("rarefishcount").textContent = "You have " + json.rarefish.toLocaleString("en-US") + " rare fish! Wow!"
+            document.getElementById("rarefishcount2").textContent = "You have " + json.rarefish.toLocaleString("en-US") + " rare fish! Wow!"
         } else {
             document.getElementById("rarefishstatus").textContent = json.error;
             delay(2000).then(() => {
@@ -186,7 +186,7 @@ function sellRareFish() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            document.getElementById("fishcount").textContent = "You have " + json.fish + " fish! Wow!"
+            document.getElementById("fishcount").textContent = "You have " + json.fish.toLocaleString("en-US") + " fish! Wow!"
             getRareFishAmount();
         } else {
             document.getElementById("rarefishstatus").textContent = json.error;
@@ -213,8 +213,8 @@ function getRareFishAmount() {
         return response.json();
     }).then(json => {
         if (json.rarefish != undefined) {
-            document.getElementById("rarefishcount").textContent = "You have " + json.rarefish + " rare fish! Wow!"
-            document.getElementById("rarefishcount2").textContent = "You have " + json.rarefish + " rare fish! Wow!"
+            document.getElementById("rarefishcount").textContent = "You have " + json.rarefish.toLocaleString("en-US") + " rare fish! Wow!"
+            document.getElementById("rarefishcount2").textContent = "You have " + json.rarefish.toLocaleString("en-US") + " rare fish! Wow!"
         } else {
             document.getElementById("rarefishcount").textContent = "You have no rare fish! :("
             document.getElementById("rarefishcount2").textContent = "You have no rare fish! :("
@@ -238,7 +238,7 @@ function updateLeaderboards() {
         var leaderboard = document.getElementById("leaderboard");
         for (var fisher in json) {
             try {
-                leaderboard.children.item(i).textContent = json[fisher].substring(0, json[fisher].length - 1);
+                leaderboard.children.item(i).textContent = json[fisher].substring(0, json[fisher].length - 1).split(" - ")[0] + " - " + Number(json[fisher].substring(0, json[fisher].length - 1).split(" - ")[1]).toLocaleString("en-US");
                 if (json[fisher].substring(json[fisher].length - 1) == "y") {
                     leaderboard.children.item(i).style.color = "#84ea84";
                 } else {
@@ -260,7 +260,7 @@ function updateRareFishCost() {
     }).then(response => {
         return response.json();
     }).then(json => {
-        document.getElementById("rarefishcost").textContent = "Current rare fish cost: " + json.cost + " fish."
+        document.getElementById("rarefishcost").textContent = "Current rare fish cost: " + json.cost.toLocaleString("en-US") + " fish."
     });
 }
 
@@ -285,7 +285,7 @@ function getLeaderboards() {
             var leaderboard = document.getElementById("leaderboard");
             var item = document.createElement("li");
             try {
-                item.textContent = json[fisher].substring(0, json[fisher].length - 1);
+                item.textContent = json[fisher].substring(0, json[fisher].length - 1).split(" - ")[0] + " - " + Number(json[fisher].substring(0, json[fisher].length - 1).split(" - ")[1]).toLocaleString("en-US");
                 if (json[fisher].substring(json[fisher].length - 1) == "y") {
                     item.style.color = "#84ea84";
                 } else {
@@ -379,7 +379,7 @@ function getFish() {
         return response.json();
     }).then(json => {
         if (json.fish != undefined) {
-            document.getElementById("fishcount").textContent = "You have " + json.fish + " fish! Wow!"
+            document.getElementById("fishcount").textContent = "You have " + json.fish.toLocaleString("en-US") + " fish! Wow!"
         } else {
             document.getElementById("fishcount").textContent = "You have no fish! :("
         }
@@ -402,7 +402,7 @@ function goFishing() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            document.getElementById("fishcount").textContent = "You have " + json.fish + " fish! Wow!"
+            document.getElementById("fishcount").textContent = "You have " + json.fish.toLocaleString("en-US") + " fish! Wow!"
         }
     });
 }
