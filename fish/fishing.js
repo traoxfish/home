@@ -222,8 +222,22 @@ function getRareFishAmount() {
     });
 }
 
+function getLeaderboardType() {
+    return document.getElementById("leaderboardtype").value;
+}
+
 function updateLeaderboards() {
-    fetch('https://traoxfish.us-3.evennode.com/leaderboards', {
+
+    var location = "";
+    if (getLeaderboardType() == "fish") {
+        location = 'https://traoxfish.us-3.evennode.com/leaderboards';
+    } else if (getLeaderboardType() == "uncles") {
+        location = 'https://traoxfish.us-3.evennode.com/leaderboards/uncles';
+    } else {
+        location = 'https://traoxfish.us-3.evennode.com/leaderboards/rarefish';
+    }
+
+    fetch(location, {
         method: 'GET',
         credentials: "same-origin",
         headers: {
@@ -266,7 +280,16 @@ function updateRareFishCost() {
 
 function getLeaderboards() {
     
-    fetch('https://traoxfish.us-3.evennode.com/leaderboards', {
+    var location = "";
+    if (getLeaderboardType() == "fish") {
+        location = 'https://traoxfish.us-3.evennode.com/leaderboards';
+    } else if (getLeaderboardType() == "uncles") {
+        location = 'https://traoxfish.us-3.evennode.com/leaderboards/uncles';
+    } else {
+        location = 'https://traoxfish.us-3.evennode.com/leaderboards/rarefish';
+    }
+
+    fetch(location, {
         method: 'GET',
         credentials: "same-origin",
         headers: {

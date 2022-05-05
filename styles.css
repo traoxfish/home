@@ -53,6 +53,7 @@ select {
 	border-style: solid;
   font-size: 100%;
   font-family: Arial;
+  display: inline-block;
 }
 
 .topnav {
@@ -454,32 +455,31 @@ html,body{min-height:100%;}
   min-height: 560px;
   max-width: 30%;
   max-height: 560px;
-  background-color: #1d1a2c;
-  outline-width: 1px;
-  outline-color: white;
-  outline-style: solid;
   position: absolute;
   left: 59.7%;
-  margin-top: 92px;
+  margin-top: 30px;
+  display: inline-block;
 }
 
 
 .leaderboardtext {
   font-family: Arial;
-  display: inline-block;
-  position: absolute;
-  margin-top: -65px;
+  display: inline;
+  font-size: 2vw;
 }
 
 .leaderboardlist {
   font-family: Arial;
   margin-top: 10px;
-  margin-left: -22px;
   min-width: calc(100% - 18px);
   min-height: 551px;
   max-width: calc(100% - 18px);
   max-height: 551px;
   overflow-y: scroll;
+  background-color: #1d1a2c;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
 }
 
 ol {
@@ -490,6 +490,7 @@ li {
   font-family: Arial;
   color: white;
   font-size: 1.8vw;
+  margin-left: -30px;
 }
 
 .nicebutton {
@@ -570,4 +571,11 @@ input {
   text-align: center;
   margin-left: 100px;
   margin-right: 100px;
+}
+
+.leaderboardselect {
+  margin-left: 4%;
+  display: inline-block;
+  min-width: 25%;
+  font-size: 1.5vw;
 }
