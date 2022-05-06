@@ -579,3 +579,30 @@ input {
   min-width: 25%;
   font-size: 1.5vw;
 }
+
+.info {
+  display: inline-block;
+}
+
+.inlineheader {
+  display: inline-block;
+}
+
+[title] {
+  display: block;
+  margin: 0 0 1em 0;
+}
+
+[title] + span.createdTooltip {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.25);
+  color: white;
+  padding: 0.2em 0.8em;
+  border-radius: 0.2em;
+  font-family: Arial;
+}
+
+[title]:hover + span.createdTooltip {
+  display: block;
+  position: absolute;
+}

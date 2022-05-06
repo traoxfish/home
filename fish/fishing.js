@@ -409,6 +409,51 @@ function getFish() {
     });
 }
 
+
+function instantTooltips(textFrom, delta) {
+
+    delta = parseFloat(delta) ? parseFloat(delta) : 5;
+
+    function reposition(e) {
+
+      var tooltip = this.nextSibling;
+
+      tooltip.style.top = (e.pageY + delta - 24) + 'px';
+      tooltip.style.left = (e.pageX + delta) + 'px';
+    }
+
+    var toTitle = document.querySelectorAll('[' + textFrom + ']'),
+
+      span = document.createElement('span'),
+
+      textProp = 'textContent' in document ? 'textContent' : 'innerText',
+
+      parent, spanClone;
+
+    span.classList.add('createdTooltip');
+
+    [].forEach.call(toTitle, function(elem) {
+
+      parent = elem.parentNode;
+
+      spanClone = span.cloneNode();
+
+      spanClone[textProp] = elem.getAttribute(textFrom);
+
+      parent.insertBefore(spanClone, elem.nextSibling);
+
+      elem.addEventListener('mousemove', reposition);
+
+      elem.setAttribute(textFrom, '');
+    });
+  }
+
+
+
+instantTooltips('title', 15);
+
+
+
 function goFishing() {
     const data = {
         "username": getCookie("username"),
