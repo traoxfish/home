@@ -17,10 +17,6 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-getFish()
-getUncles()
-getLeaderboards()
-
 function sendFish() {
     var fish = document.getElementById("sendfishamount").value;
     var reciever = document.getElementById("sendfishto").value;
@@ -161,10 +157,16 @@ function buyRareFish() {
         if (json.status == "success") {
             document.getElementById("rarefishcount").textContent = "You have " + json.rarefish.toLocaleString("en-US") + " rare fish! Wow!"
             document.getElementById("rarefishcount2").textContent = "You have " + json.rarefish.toLocaleString("en-US") + " rare fish! Wow!"
+            document.getElementById("rarefishstatus").textContent = "Rare fish bought!";
+            document.getElementById("rarefishstatus").style.color = "#84ea84";
+            delay(2000).then(() => {
+                document.getElementById("rarefishstatus").innerHTML = "<br>";
+            });
         } else {
             document.getElementById("rarefishstatus").textContent = json.error;
+            document.getElementById("rarefishstatus").style.color = "#ea7b7b";
             delay(2000).then(() => {
-                document.getElementById("rarefistatus").innerHTML = "<br>";
+                document.getElementById("rarefishstatus").innerHTML = "<br>";
             });
         }
     });
@@ -187,9 +189,15 @@ function sellRareFish() {
     }).then(json => {
         if (json.status == "success") {
             document.getElementById("fishcount").textContent = "You have " + json.fish.toLocaleString("en-US") + " fish! Wow!"
+            document.getElementById("rarefishstatus").textContent = "Rare fish sold!";
+            document.getElementById("rarefishstatus").style.color = "#84ea84";
+            delay(2000).then(() => {
+                document.getElementById("rarefishstatus").innerHTML = "<br>";
+            });
             getRareFishAmount();
         } else {
             document.getElementById("rarefishstatus").textContent = json.error;
+            document.getElementById("rarefishstatus").style.color = "#ea7b7b";
             delay(2000).then(() => {
                 document.getElementById("rarefistatus").innerHTML = "<br>";
             });
@@ -212,7 +220,7 @@ function getRareFishAmount() {
     }).then(response => {
         return response.json();
     }).then(json => {
-        if (json.rarefish != undefined) {
+        if (json.rarefish != undefined && json.rarefish != 0) {
             document.getElementById("rarefishcount").textContent = "You have " + json.rarefish.toLocaleString("en-US") + " rare fish! Wow!"
             document.getElementById("rarefishcount2").textContent = "You have " + json.rarefish.toLocaleString("en-US") + " rare fish! Wow!"
         } else {
@@ -369,6 +377,10 @@ function keepOnline() {
 }
 
 checkIfLoggedIn();
+getFish();
+getUncles();
+getLeaderboards();
+getRareFishAmount();
 
 setInterval(function(){ 
     checkIfLoggedIn();
