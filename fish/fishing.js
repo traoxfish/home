@@ -376,28 +376,30 @@ function keepOnline() {
     });
 }
 
-checkIfLoggedIn();
-getFish();
-getUncles();
-getLeaderboards();
-getRareFishAmount();
-
-setInterval(function(){ 
+delay(5).then(() => {
     checkIfLoggedIn();
     getFish();
     getUncles();
-    keepOnline();
-    updateRareFishCost();
-    getRareFishAmount();
-}, 2000);
-
-setInterval(function(){ 
-    updateLeaderboards();
-}, 1000);
-
-setInterval(function(){ 
     getLeaderboards();
-}, 10000);
+    getRareFishAmount();
+
+    setInterval(function(){ 
+        checkIfLoggedIn();
+        getFish();
+        getUncles();
+        keepOnline();
+        updateRareFishCost();
+        getRareFishAmount();
+    }, 2000);
+
+    setInterval(function(){ 
+        updateLeaderboards();
+    }, 1000);
+
+    setInterval(function(){ 
+        getLeaderboards();
+    }, 10000);
+});
 
 function getFish() {
     const data = {
