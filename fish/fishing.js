@@ -394,6 +394,7 @@ delay(5).then(() => {
 
     setInterval(function(){ 
         updateLeaderboards();
+        checkIfCaptchaed();
     }, 1000);
 
     setInterval(function(){ 
@@ -423,6 +424,51 @@ function getFish() {
     });
 }
 
+const form  = document.getElementById('g-captcha');
+
+form.addEventListener('submit', (event) => {
+    const formData = new FormData(document.querySelector('form'))
+    var cap = "";
+    for (var pair of formData.entries()) {
+        cap = (pair[1])
+    }
+    const data = {
+        "g-recaptcha-response": cap
+    };
+    event.preventDefault();
+    fetch('https://traoxfish.us-3.evennode.com/captcha', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            document.getElementById('captcha').style.display = "none";
+        }
+    });
+});
+
+function checkIfCaptchaed() {
+    fetch('https://traoxfish.us-3.evennode.com/checkcaptchaed', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            if (json.captchaed) {
+                document.getElementById('captcha').style.display = "initial";
+            }
+        }
+    });
+}
 
 function instantTooltips(textFrom, delta) {
 

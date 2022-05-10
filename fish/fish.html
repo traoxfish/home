@@ -4,8 +4,9 @@
   
     <link rel="icon" href="../images/favicon.png">
     <link rel="stylesheet" href="../styles.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4682164734668047"
-     crossorigin="anonymous"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
 	<title>TraoX</title>
 	
   </head>
@@ -88,6 +89,14 @@
    <input type="text" id="sendfishamount" name="amount" class="sendfish" placeholder="Amount"><br><br>
    <button onclick="sendFish()" class="nicebutton">Send Fish</button>
    <p id="sentstatus"><br></p>
+
+   <div class="captcha" id="captcha">
+   <form action="https://traoxfish.us-3.evennode.com/captcha" method="POST" id="g-captcha">
+    <div class="g-recaptcha" data-sitekey="6LfAxdgfAAAAANG3EYUlBjuoWSfaySveGbn2kCbg"></div>
+    <br/>
+    <input type="submit" value="Submit">
+  </form>
+  </div>
 
   </div>
   <br><br><br>
