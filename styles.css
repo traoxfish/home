@@ -624,11 +624,22 @@ input {
   right:0; 
   margin: 0 auto; /*horizontally centers div*/
   z-index: 30;
-  display:none;
+  display:initial;
 }
 
 .captcha > form {
   margin-top: 25%;
-  margin-left: calc(50% - 150px);
-  margin-right: calc(50% + 150px);
+  margin-left: calc(50% - 225px);
+  margin-right: calc(50% + 225px);
+}
+
+.g-recaptcha {
+  transform:scale(1.5);
+  transform-origin:0 0;
+}
+
+.submitcaptcha {
+  width: 450px;
+  margin-top: 40px;
+  min-height: 50px;
 }
