@@ -398,7 +398,7 @@ html,body{min-height:100%;}
 
 .unclebutton {
   font-family: Arial;
-  width: 200px;
+  min-width: 200px;
   height: 36px;
   border: none;
   cursor: pointer;
@@ -622,7 +622,7 @@ input {
   bottom:0;
   left:0;
   right:0; 
-  margin: 0 auto; /*horizontally centers div*/
+  margin: 0 auto;
   z-index: 30;
   display: none;
 }
