@@ -448,6 +448,8 @@ form.addEventListener('submit', (event) => {
     }).then(json => {
         if (json.status == "success") {
             document.getElementById('captcha').style.display = "none";
+            grecaptcha.reset()
+            delete formData.entries()[0][1];
         }
     });
 });

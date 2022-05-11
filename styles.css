@@ -642,4 +642,15 @@ input {
   width: 450px;
   margin-top: 40px;
   min-height: 50px;
+  cursor: pointer;
+}
+
+.submitcaptcha:hover {
+  background-color: #d35040;
+  transition: background 0.2s ease;
+}
+
+.submitcaptcha:hover:active:hover {
+  background-color: #1d1a2c;
+  transition: background 0.1s ease;
 }
