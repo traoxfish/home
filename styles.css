@@ -654,3 +654,7 @@ input {
   background-color: #1d1a2c;
   transition: background 0.1s ease;
 }
+
+.websiteurl {
+  width: 89%;
+}
