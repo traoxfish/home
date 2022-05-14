@@ -16,7 +16,7 @@ function search() {
 
         });
 
-        fetch('https://traoxfish.us-3.evennode.com/browse', {
+        fetch('https://traoxfish.us-3.evennode.com/traoxbrowse', {
             method: 'POST',
             credentials: "same-origin",
             headers: {
