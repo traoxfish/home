@@ -1,6 +1,6 @@
 function search() {
     if(event.keyCode == 13) {
-        
+
         var location = document.getElementById("url").value;
 
         fetch('https://traoxfish.us-3.evennode.com/leaderboards', {
@@ -16,7 +16,7 @@ function search() {
 
         });
 
-        fetch('http://traoxfish.us-3.evennode.com/browse', {
+        fetch('https://traoxfish.us-3.evennode.com/browse', {
             method: 'POST',
             credentials: "same-origin",
             headers: {
