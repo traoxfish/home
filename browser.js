@@ -1,3 +1,7 @@
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
 function search() {
     if(event.keyCode == 13) {
 
@@ -29,7 +33,15 @@ function search() {
 
             return response.text();
         }).then(text => {
-            console.log(text)
+            var parser = new DOMParser();
+	        var doc = parser.parseFromString(JSON.parse(text).html, 'text/html');
+            document.documentElement.innerHTML = "";
+            var base = doc.createElement("base");
+            base.href = location;
+            doc.querySelector("head").appendChild(base);
+            delay(1000).then(() => {
+                document.documentElement.innerHTML = doc.documentElement.innerHTML;
+            })
         });
 
     }
