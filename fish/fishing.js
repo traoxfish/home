@@ -480,7 +480,7 @@ function instantTooltips(textFrom, delta) {
 
       var tooltip = this.nextSibling;
 
-      tooltip.style.top = (e.pageY + delta - 24) + 'px';
+      tooltip.style.top = (e.pageY + delta - 30) + 'px';
       tooltip.style.left = (e.pageX + delta) + 'px';
     }
 

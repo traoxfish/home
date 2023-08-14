@@ -50,11 +50,13 @@ function createAccount() {
         "username": username,
         "password": password
     };
-    fetch('https://traoxfish.us-3.evennode.com/newfisher', {
+    fetch('https://traoxfish.us-3.evennode.com/register', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
             'Content-Type': 'application/json',
+            'Sec-Fetch-Site': 'same-site'
+	
         },
         body: JSON.stringify(data),
     }).then(response => {

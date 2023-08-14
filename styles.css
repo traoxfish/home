@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  background-color: #29273f;
+  background-color: #29273e;
   height:100%;
   position: relative;
 }
@@ -592,6 +592,7 @@ input {
 
 .inlineheader {
   display: inline-block;
+  font-size: 1vw;
 }
 
 [title] {
