@@ -55,8 +55,6 @@ function createAccount() {
         credentials: "same-origin",
         headers: {
             'Content-Type': 'application/json',
-            'Sec-Fetch-Site': 'same-site'
-	
         },
         body: JSON.stringify(data),
     }).then(response => {
