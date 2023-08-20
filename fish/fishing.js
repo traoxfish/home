@@ -331,7 +331,7 @@ function getLeaderboards() {
 }
 
 function logout() {
-    document.cookie = "loginkey=";
+    document.cookie = "loginKey=";
     document.cookie = "username=";
 }
 
