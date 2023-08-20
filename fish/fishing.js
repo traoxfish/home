@@ -351,7 +351,7 @@ function checkIfLoggedIn() {
         return response.json();
     }).then(json => {
         if (json.validKey) {
-            window.location.replace("https://www.traox.dev/fish");
+            //window.location.replace("https://www.traox.dev/fish");
         }
     });
 
