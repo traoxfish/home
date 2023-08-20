@@ -20,7 +20,7 @@ function delay(time) {
 function checkIfLoggedIn() {
     const data = {
         "username": getCookie("username"),
-        "loginkey": getCookie("loginkey")
+        "loginKey": getCookie("loginKey")
     };
     fetch('https://traoxfish.us-3.evennode.com/checkkey', {
         method: 'POST',
@@ -100,7 +100,7 @@ function login() {
         if (json.status == "success") {
             document.getElementById("accountstatus").textContent = "Logged in!"
             document.getElementById("accountstatus").style.color = "#84ea84";
-            document.cookie = "loginkey=" + json.key;
+            document.cookie = "loginKey=" + json.key;
             document.cookie = "username=" + username;
             window.location.replace("https://www.traox.dev/fish/fish");
         } else {
