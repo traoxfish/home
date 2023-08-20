@@ -23,7 +23,7 @@ function sendFish() {
 
     const data = {
         "username": getCookie("username"),
-        "loginkey": getCookie("loginkey"),
+        "loginKey": getCookie("loginKey"),
         "fish": fish,
         "reciever": reciever
     };
@@ -87,7 +87,7 @@ function closeRareFish() {
 function buyUncle() {
     const data = {
         "username": getCookie("username"),
-        "loginkey": getCookie("loginkey")
+        "loginKey": getCookie("loginKey")
     };
     fetch('https://traoxfish.us-3.evennode.com/buyuncle', {
         method: 'POST',
@@ -114,7 +114,7 @@ function buyUncle() {
 function getUncles() {
     const data = {
         "username": getCookie("username"),
-        "loginkey": getCookie("loginkey")
+        "loginKey": getCookie("loginKey")
     };
     fetch('https://traoxfish.us-3.evennode.com/getuncles', {
         method: 'POST',
@@ -142,7 +142,7 @@ document.getElementById("sendfishamount").oninput = function() {
 function buyRareFish() {
     const data = {
         "username": getCookie("username"),
-        "loginkey": getCookie("loginkey")
+        "loginKey": getCookie("loginKey")
     };
     fetch('https://traoxfish.us-3.evennode.com/buyrarefish', {
         method: 'POST',
@@ -175,7 +175,7 @@ function buyRareFish() {
 function sellRareFish() {
     const data = {
         "username": getCookie("username"),
-        "loginkey": getCookie("loginkey")
+        "loginKey": getCookie("loginKey")
     };
     fetch('https://traoxfish.us-3.evennode.com/sellrarefish', {
         method: 'POST',
@@ -208,7 +208,7 @@ function sellRareFish() {
 function getRareFishAmount() {
     const data = {
         "username": getCookie("username"),
-        "loginkey": getCookie("loginkey")
+        "loginKey": getCookie("loginKey")
     };
     fetch('https://traoxfish.us-3.evennode.com/getrarefish', {
         method: 'POST',
@@ -338,7 +338,7 @@ function logout() {
 function checkIfLoggedIn() {
     const data = {
         "username": getCookie("username"),
-        "loginkey": getCookie("loginkey")
+        "loginKey": getCookie("loginKey")
     };
     fetch('https://traoxfish.us-3.evennode.com/checkkey', {
         method: 'POST',
@@ -360,7 +360,7 @@ function checkIfLoggedIn() {
 function keepOnline() {
     const data = {
         "username": getCookie("username"),
-        "loginkey": getCookie("loginkey")
+        "loginKey": getCookie("loginKey")
     };
     fetch('https://traoxfish.us-3.evennode.com/online', {
         method: 'POST',
@@ -519,7 +519,7 @@ instantTooltips('title', 15);
 function goFishing() {
     const data = {
         "username": getCookie("username"),
-        "loginKey": getCookie("loginkey")
+        "loginKey": getCookie("loginKey")
     };
     fetch('https://traoxfish.us-3.evennode.com/fish', {
         method: 'POST',
