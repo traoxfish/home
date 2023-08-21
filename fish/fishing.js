@@ -142,7 +142,7 @@ function getItemCosts(type) {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
     };
-    fetch('https://traoxfish.us-3.evennode.com/makepurchase', {
+    fetch('https://traoxfish.us-3.evennode.com/getcosts', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -198,20 +198,6 @@ function updateLeaderboards() {
             } catch (e) {}
             i++
         }
-    });
-}
-
-function updateRareFishCost() {
-    fetch('https://traoxfish.us-3.evennode.com/getrarefishcost', {
-        method: 'GET',
-        credentials: "same-origin",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    }).then(response => {
-        return response.json();
-    }).then(json => {
-        document.getElementById("rarefishcost").textContent = "Current rare fish cost: " + json.cost.toLocaleString("en-US") + " fish."
     });
 }
 
@@ -279,7 +265,7 @@ function checkIfLoggedIn() {
     }).then(response => {
         return response.json();
     }).then(json => {
-        if (!json.validKey) {
+        if (json.validKey == false) {
             window.location.replace("https://www.traox.dev/fish");
         }
     });
@@ -308,25 +294,23 @@ function keepOnline() {
 delay(5).then(() => {
     checkIfLoggedIn();
     getFish();
-    getUncles();
     getLeaderboards();
     getItemCosts();
 
     setInterval(function(){ 
         checkIfLoggedIn();
         getFish();
-        getUncles();
         keepOnline();
         getItemCosts();
     }, 2000);
 
     setInterval(function(){ 
-        updateLeaderboards();
+        //updateLeaderboards();
         checkIfCaptchaed();
     }, 1000);
 
     setInterval(function(){ 
-        getLeaderboards();
+        //getLeaderboards();
     }, 10000);
 });
 
