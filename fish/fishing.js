@@ -133,7 +133,7 @@ function buyItem(type) {
     }).then(response => {
         return response.json();
     }).then(json => {
-        if (json.status = "success") {
+        if (json.newCost != undefined) {
             document.getElementById(type.toLowerCase()  + "cost").textContent = formatNumber(json.newCost)
         }
     });
