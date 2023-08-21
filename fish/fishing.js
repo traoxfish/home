@@ -205,6 +205,7 @@ function updateLeaderboards() {
                         item.style.color = "#eeeeee";
                     }
                 } catch (e) { console.log(e)}
+                leaderboard.appendChild(item);
             }
         }
     });
