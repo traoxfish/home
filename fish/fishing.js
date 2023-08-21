@@ -165,29 +165,25 @@ function getLeaderboardType() {
 
 function updateLeaderboards() {
 
-    var location = "";
-    if (getLeaderboardType() == "fish") {
-        location = 'https://traoxfish.us-3.evennode.com/leaderboards';
-    } else if (getLeaderboardType() == "uncles") {
-        location = 'https://traoxfish.us-3.evennode.com/leaderboards/uncles';
-    } else {
-        location = 'https://traoxfish.us-3.evennode.com/leaderboards/rarefish';
-    }
-
-    fetch(location, {
-        method: 'GET',
+    var type = getLeaderboardType()
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "leaderboardType": type
+    };
+    fetch("https://traoxfish.us-3.evennode.com/getleaderboards", {
+        method: 'POST',
         credentials: "same-origin",
         headers: {
             'Content-Type': 'application/json',
-            'Cache-Control': 'No-Store'
         },
+        body: JSON.stringify(data),
     }).then(response => {
-
         return response.json();
     }).then(json => {
         var i = 0;
         var leaderboard = document.getElementById("leaderboard");
-        for (var fisher in json) {
+        for (var fisher in json.leaderboards) {
             try {
                 leaderboard.children.item(i).textContent = json[fisher].substring(0, json[fisher].length - 1).split(" - ")[0] + " - " + Number(json[fisher].substring(0, json[fisher].length - 1).split(" - ")[1]).toLocaleString("en-US");
                 if (json[fisher].substring(json[fisher].length - 1) == "y") {
@@ -203,31 +199,23 @@ function updateLeaderboards() {
 
 function getLeaderboards() {
     
-    var location = "";
-    if (getLeaderboardType() == "fish") {
-        location = 'https://traoxfish.us-3.evennode.com/leaderboards';
-    } else if (getLeaderboardType() == "uncles") {
-        location = 'https://traoxfish.us-3.evennode.com/leaderboards/uncles';
-    } else {
-        location = 'https://traoxfish.us-3.evennode.com/leaderboards/rarefish';
-    }
-
-    fetch(location, {
-        method: 'GET',
+    var type = getLeaderboardType()
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "leaderboardType": type
+    };
+    fetch("https://traoxfish.us-3.evennode.com/getleaderboards", {
+        method: 'POST',
         credentials: "same-origin",
         headers: {
             'Content-Type': 'application/json',
-            'Cache-Control': 'No-Store'
         },
+        body: JSON.stringify(data),
     }).then(response => {
-        var child = leaderboard.lastElementChild; 
-        while (child) {
-            leaderboard.removeChild(child);
-            child = leaderboard.lastElementChild;
-        }
         return response.json();
     }).then(json => {
-        for (var fisher in json) {
+        for (var fisher in json.leaderboards) {
             var leaderboard = document.getElementById("leaderboard");
             var item = document.createElement("li");
             try {
@@ -305,12 +293,12 @@ delay(5).then(() => {
     }, 2000);
 
     setInterval(function(){ 
-        //updateLeaderboards();
+        updateLeaderboards();
         checkIfCaptchaed();
     }, 1000);
 
     setInterval(function(){ 
-        //getLeaderboards();
+        getLeaderboards();
     }, 10000);
 });
 
