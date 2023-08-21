@@ -133,7 +133,7 @@ function buyItem(type) {
     }).then(response => {
         return response.json();
     }).then(json => {
-            getFish()
+            document.getElementById(type.toLowerCase()  + "cost").textContent = formatNumber(json.newCost)
     });
 }
 
