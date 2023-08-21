@@ -195,7 +195,7 @@ function updateLeaderboards() {
             i++
         }
         if (json.leaderboards.length > leaderboard.children.length) {
-            for (var i = leaderboard.children.length; i <= json.leaderboard.length; i++) {
+            for (var i = leaderboard.children.length; i <= json.leaderboards.length; i++) {
                 var item = document.createElement("li");
                 try {
                     item.textContent = json.leaderboards[fisher].split(": ")[0] + ": " + formatNumber(Number(json.leaderboards[fisher].split(": ")[1]));
