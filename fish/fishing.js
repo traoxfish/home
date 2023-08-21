@@ -185,14 +185,27 @@ function updateLeaderboards() {
         var leaderboard = document.getElementById("leaderboard");
         for (var fisher in json.leaderboards) {
             try {
-                leaderboard.children.item(i).textContent = json[fisher].substring(0, json[fisher].length - 1).split(" - ")[0] + " - " + Number(json[fisher].substring(0, json[fisher].length - 1).split(" - ")[1]).toLocaleString("en-US");
-                if (json[fisher].substring(json[fisher].length - 1) == "y") {
+                leaderboard.children.item(i).textContent = json.leaderboards[fisher].split(": ")[0] + ": " + formatNumber(Number(json.leaderboards[fisher].split(": ")[1]));
+                if (json.onlineStatus[fisher]) {
                     leaderboard.children.item(i).style.color = "#84ea84";
                 } else {
                     leaderboard.children.item(i).style.color = "#eeeeee";
                 }
             } catch (e) {}
             i++
+        }
+        if (json.leaderboards.length > leaderboard.children.length) {
+            for (var i = leaderboard.children.length; i <= json.leaderboard.length; i++) {
+                var item = document.createElement("li");
+                try {
+                    item.textContent = json.leaderboards[fisher].split(": ")[0] + ": " + formatNumber(Number(json.leaderboards[fisher].split(": ")[1]));
+                    if (json.onlineStatus[fisher]) {
+                        item.style.color = "#84ea84";
+                    } else {
+                        item.style.color = "#eeeeee";
+                    }
+                } catch (e) { console.log(e)}
+            }
         }
     });
 }
@@ -219,15 +232,13 @@ function getLeaderboards() {
             var leaderboard = document.getElementById("leaderboard");
             var item = document.createElement("li");
             try {
-                item.textContent = json[fisher].substring(0, json[fisher].length - 1).split(" - ")[0] + " - " + Number(json[fisher].substring(0, json[fisher].length - 1).split(" - ")[1]).toLocaleString("en-US");
-                if (json[fisher].substring(json[fisher].length - 1) == "y") {
+                item.textContent = json.leaderboards[fisher].split(": ")[0] + ": " + formatNumber(Number(json.leaderboards[fisher].split(": ")[1]));
+                if (json.onlineStatus[fisher]) {
                     item.style.color = "#84ea84";
                 } else {
                     item.style.color = "#eeeeee";
                 }
-            } catch (e) {}
-            username = item.textContent.split(" - ")[0];
-
+            } catch (e) { console.log(e)}
             leaderboard.appendChild(item);
         }
     });
@@ -294,12 +305,8 @@ delay(5).then(() => {
 
     setInterval(function(){ 
         updateLeaderboards();
-        checkIfCaptchaed();
+        //checkIfCaptchaed();
     }, 1000);
-
-    setInterval(function(){ 
-        getLeaderboards();
-    }, 10000);
 });
 
 function getFish() {
