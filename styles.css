@@ -574,7 +574,7 @@ input {
   z-index: 100;
 }
 
-.rarefishtitle {
+.shoptitle {
   text-align: center;
   margin-left: 100px;
   margin-right: 100px;
@@ -691,7 +691,7 @@ input {
 	position: absolute;
 	display: absolute;
   white-space: nowrap;
-	margin-top: 2px;
+	margin-top: 3px;
 	margin-bottom: 1px;
 }
 
@@ -708,7 +708,7 @@ input {
   display: inline-block;
   min-width: 25%;
   line-height: 0px;
-  margin-top: 8px;
+  margin-top: 10px;
   margin-left: 8px;
   margin-right: 4px;
   font-size:20px;

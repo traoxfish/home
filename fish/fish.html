@@ -37,15 +37,36 @@
 
    <div class="shop" onclick="closeShop()" id="shop">
       <div class="rarefishinfo" id="rarefishinfo">
-          <h2 class="rarefishtitle"> Rare Fish:</h2>
+          <h2 class="shoptitle" style="margin-bottom: 0px;"> Shop</h2>
+          <div class="longbarseperator" style="margin-top: 72px;"> </div>
+          <p style="margin-left: 8px; margin-top: 26px; min-width: 66%; display: inline-block;"> Item</p>
+          <div class="navseperator" style="max-height: 16px; margin-top: 27px; display: inline-block;"></div>
+          <p style="margin-left: 8px; margin-top: 26px; display: inline-block;"> Cost</p>
+          <br style="line-height: 0px;">
+          <div class="navseperator" style="min-height: 74.5%; left: 68.35%; margin-top: -12px; display: absolute"></div>
+
+
+          <div class="longbarseperator" style="margin-top: 100px;"> </div>
+          <p style="margin-left: 8px; margin-top: -24px; min-width: 66%; display: inline-block;">Rare Fish</p>
+          <p style="margin-left: 8px; margin-top: -26px; display: inline;" id="rarefishcost"> Loading...</p>
+          <div class="longbarseperator" style="margin-top: 140px; max-width: 66.6%; min-width: 66.6%; margin-left: 7px;"> </div>
+          <p style="margin-left: 8px; margin-top: -26px; min-width: 66%; display: inline-block; color: #bbbbbb; font-size: 14px;"> Get 1 extra fish per click.</p>
+          <button class="nicebutton" style="display: inline; width: 25%; margin-left: 20px;" onclick="makePurchase('rareFish')"> Buy</button>
+          
+
+          <br><br>
+
+          <div class="longbarseperator" style="margin-top: 300px;"> </div>
+          <p style="margin-left: 8px; margin-top: 2px; min-width: 66%; display: inline-block;">Very Rare Fish</p>
+          <p style="margin-left: 8px; margin-top: -26px; display: inline;" id="veryrarefishcost"> Loading...</p>
+          <div class="longbarseperator" style="margin-top: 240px; max-width: 66.6%; min-width: 66.6%; margin-left: 7px;"> </div>
+          <p style="margin-left: 8px; margin-top: -26px; min-width: 66%; display: inline-block; color: #bbbbbb; font-size: 14px;"> Get 1% extra fish per click.</p>
+          <button class="nicebutton" style="display: inline; width: 25%; margin-left: 20px;" onclick="makePurchase('veryRareFish')"> Buy</button>
+
+
+          <div class="longbarseperator" style="margin-top: 200px;"> </div>
           <br>
-          <p class="rarefishtitle" id="rarefishcount2">You currently have no rare fish! :(</p>
-          <br>
-          <p class="rarefishtitle" id="rarefishcost">Current rare fish price: 0 fish</p>
-          <br><br><br><br>
-          <button class="nicebutton" style="margin-left: 80px; max-width: 132px; min-width: 132px;" onclick="buyRareFish()">Buy rare fish</button>
-          <button class="nicebutton" style="margin-left: 80px; max-width: 132px; min-width: 132px;" onclick="sellRareFish()">Sell rare fish</button>
-          <p class="rarefishtitle" id="rarefishstatus"><br></p>
+          <p class="shoptitle" id="rarefishstatus"><br></p>
       </div>
    </div>
 
@@ -57,7 +78,7 @@
     <select name="type" id="leaderboardtype" class="leaderboardselect">
         <option value="fish">Fish</option>
         <option value="rarefish">Rare Fish</option>
-        <option value="uncles">Uncles</option>
+        <option value="veryrarefish">Very Rare Fish</option>
     </select>
     <ol id="leaderboard" class="leaderboardlist">
       
@@ -74,9 +95,9 @@
     <div class="longbarseperator"></div>
     <br>
 
-    <p class="fishdata" id="fishcount">100</p>
-    <p class="fishdata" id="rarefishcount">7</p>
-    <p class="fishdata" id="veryrarefishcount">2</p>
+    <p class="fishdata" id="fishcount">Loading...</p>
+    <p class="fishdata" id="rarefishcount">Loading...</p>
+    <p class="fishdata" id="veryrarefishcount">loading...</p>
 
    </div>
 
