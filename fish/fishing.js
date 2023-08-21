@@ -76,12 +76,12 @@ document.getElementById('rarefishinfo').addEventListener('click',function (event
     event.stopPropagation();
  });
 
-function viewRareFish() {
-    document.getElementById("rarefishmenu").style.display = "initial";
+function openShop() {
+    document.getElementById("shop").style.display = "initial";
 }
 
-function closeRareFish() {
-    document.getElementById("rarefishmenu").style.display = "none";
+function closeShop() {
+    document.getElementById("shop").style.display = "none";
 }
 
 function buyUncle() {

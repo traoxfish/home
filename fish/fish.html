@@ -35,7 +35,7 @@
 	 <div class="navseperator"></div>
    </div>
 
-   <div class="rarefishmenu" onclick="closeRareFish()" id="rarefishmenu">
+   <div class="shop" onclick="closeShop()" id="shop">
       <div class="rarefishinfo" id="rarefishinfo">
           <h2 class="rarefishtitle"> Rare Fish:</h2>
           <br>
@@ -64,30 +64,44 @@
     </ol>
    </div>
 
-   <div>
-   <h2 id="fishcount" class="inlineheader">You have no fish! :(</h2><img src="../images/Info.png" class="info" style="margin-left:10px; margin-bottom:5px; width:16px; height:16px; display:inline-block;" title="They are fish!"><br>
+   <div class="fishbar"> 
+    <p class="fishtype">Fish</p>
+    <div class="navseperator" style="max-height: 33px; top:-1px"></div>
+    <p class="fishtype">Rare Fish</p>
+    <div class="navseperator" style="max-height: 33px; top:-1px"></div>
+    <p class="fishtype">Very Rare Fish</p>
+
+    <div class="longbarseperator"></div>
+    <br>
+
+    <p class="fishdata" id="fishcount">100</p>
+    <p class="fishdata" id="rarefishcount">7</p>
+    <p class="fishdata" id="veryrarefishcount">2</p>
+
+   </div>
+
+   <br><br><br>
 
    <button onclick="goFishing()" class="fishbutton" >Fish!</button>
 
-   <br><br><br><br>
+   <br><br><br>
 
-   <h2 id="unclecount" class="inlineheader">You have no uncles! :( </h2><img src="../images/Info.png" class="info" style="margin-left:10px; margin-bottom:5px; width:16px; height:16px; display:inline-block;" title="Gain 1 extra fish per click for every uncle."><br>
-   <button onclick="buyUncle()" class="unclebutton" id="unclebutton">Buy Uncle for 500 fish!</button> <p></p>
-   <p id="unclestatus"><br></p>
+   <button onclick="openShop()" class="shopbutton" id="shopbutton">Open Shop</button>
+   <div class="sendfishbackground">
+      <p class="fishtype" style="font-size: 16px; margin-top:14px;">Send fish:</p><br>
 
-   <br><br>
+      <input type="text" id="sendfishto" name="reciever" class="sendfish" placeholder="Reciever" style="margin-left: 4px; max-width: 43.5%;"><br>
+      <input type="text" id="sendfishamount" name="amount" class="sendfish" placeholder="Amount" style="margin-left: 4px; max-width: 43.5%; margin-top:7px;">
+      <button onclick="sendFish()" class="nicebutton" style="display: inline-block; min-height: 59px; max-width: calc(70% - 70px); width: 380px; position: absolute; top:30px; margin-left: 4px;">Send Fish</button>
+      <p id="sentstatus"><br></p>
+   </div>
 
-   <h2 id="rarefishcount" class="inlineheader">You have no rare fish! :( </h2><img src="../images/Info.png" class="info" style="margin-left:10px; margin-bottom:5px; width:16px; height:16px; display:inline-block;" title="Gain 0.1% extra fish per click for every rare fish."><br>
-   <button onclick="viewRareFish()" class="rarefishbutton" id="rarefishbutton">Click to view rare fish!</button> <p></p>
+   <br>
+
+   <button onclick="logout()" class="nicebutton" style="min-width: 20%; margin-top: 8px;">Logout</button>
 
    <br><br><br><br><br>
 
-   <h2>Send fish:</h2>
-
-   <input type="text" id="sendfishto" name="reciever" class="sendfish" placeholder="Reciever">
-   <input type="text" id="sendfishamount" name="amount" class="sendfish" placeholder="Amount"><br><br>
-   <button onclick="sendFish()" class="nicebutton">Send Fish</button>
-   <p id="sentstatus"><br></p>
 
    <div class="captcha" id="captcha">
    <form action="https://traoxfish.us-3.evennode.com/captcha" method="POST" id="g-captcha">
@@ -99,12 +113,11 @@
 
   </div>
   <br><br><br>
-  <button onclick="logout()" class="nicebutton">Logout</button>
    
 
     
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
     </div>
 

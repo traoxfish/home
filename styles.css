@@ -368,7 +368,8 @@ html,body{min-height:100%;}
 
 .fishbutton {
   font-family: Arial;
-  width: 100px;
+  max-width: 49.75%;
+  min-width: 49.75%;
   height: 36px;
   border: none;
   cursor: pointer;
@@ -426,10 +427,10 @@ html,body{min-height:100%;}
   cursor: pointer;
 }
 
-.rarefishbutton {
+.shopbutton {
   font-family: Arial;
-  width: 200px;
-  height: 36px;
+  width: 20%;
+  height: 64px;
   border: none;
   cursor: pointer;
   text-align: center;
@@ -444,13 +445,13 @@ html,body{min-height:100%;}
   font-size: 16px;
 }
 
-.rarefishbutton:hover {
+.shopbutton:hover {
   background-color: #d35040;
   transition: background 0.2s ease;
   cursor: pointer;
 }
 
-.rarefishbutton:active:hover {
+.shopbutton:active:hover {
   background-color: #1d1a2c;
   transition: background 0.1s ease;
   cursor: pointer;
@@ -462,8 +463,8 @@ html,body{min-height:100%;}
   max-width: 30%;
   max-height: 560px;
   position: absolute;
-  left: 59.7%;
-  margin-top: 30px;
+  left: calc(59.7% - 16px);
+  margin-top: -20px;
   display: inline-block;
 }
 
@@ -545,7 +546,7 @@ input {
   font-size: 16px;
 }
 
-.rarefishmenu {
+.shop {
   background-color: #1d1a2c;
   min-width: 502%;
   margin-left: -200%;
@@ -658,4 +659,72 @@ input {
 
 .websiteurl {
   width: 89%;
+}
+
+.fishbar {
+  min-width: 45%;
+  min-height: 44px;
+  max-width: 45%;
+  max-height: 44px;
+  position: absolute;
+  margin-top: -10px;
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: #ffffff;
+  background-color: #1d1a2c;
+  display: inline-block;
+}
+
+.longbarseperator {
+  border-color: #cccccc;
+	border-left-width: 0px;
+	border-right-width: 0px;
+  border-top-width: 1px;
+  border-bottom-width: 0px;
+  min-width: calc(100% - 4px);
+	max-width: 30%;
+  top: 16px;
+  max-height: 1px;
+	border-style: solid;
+	height: 1px;
+	margin-left: 2px;
+	position: absolute;
+	display: absolute;
+  white-space: nowrap;
+	margin-top: 2px;
+	margin-bottom: 1px;
+}
+
+.fishtype {
+  display: inline-block;
+  min-width: 25%;
+  line-height: 0px;
+  margin-top: 0px;
+  margin-left: 8px;
+  margin-right: 4px;
+  font-size:12px;
+}
+.fishdata {
+  display: inline-block;
+  min-width: 25%;
+  line-height: 0px;
+  margin-top: 8px;
+  margin-left: 8px;
+  margin-right: 4px;
+  font-size:20px;
+}
+
+.sendfishbackground {
+  min-width: 26.4%;
+  min-height: 96px;
+  max-width: 26.4%;
+  margin-left: 10px;
+  max-height: 96px;
+  position: absolute;
+  margin-top: 0px;
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: #ffffff;
+  background-color: #1d1a2c;
+  display: inline-block;
 }
