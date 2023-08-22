@@ -355,8 +355,9 @@ delay(5).then(() => {
     getLeaderboards();
     getItemCosts();
     getMessages();
-    delay(25).then(() => {
+    delay(66).then(() => {
         updateLeaderboards();
+        document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
     })
 
     setInterval(function(){ 
