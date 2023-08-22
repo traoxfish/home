@@ -354,7 +354,9 @@ delay(5).then(() => {
     getLeaderboards();
     getItemCosts();
     getMessages();
-    updateLeaderboards();
+    delay(25).then(() => {
+        updateLeaderboards();
+    })
 
     setInterval(function(){ 
         checkIfLoggedIn();
