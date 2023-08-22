@@ -141,6 +141,59 @@ function buyItem(type) {
     });
 }
 
+function sendMessage() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "message": document.getElementById("messageinput").value
+    };
+    fetch('https://traoxfish.us-3.evennode.com/sendchatmessage', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        getMessages()
+        document.getElementById("messageinput").value = ""
+        delay(200).then(() => {
+            document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
+        })
+    });
+}
+
+function getMessages() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getchat', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            var chat = "";
+            for (var message in json.messages.reverse()) {
+                chat += json.messages[message] + "<br>"
+            }
+            document.getElementById("chat").innerHTML = chat
+        }
+        var scrollAmount = document.getElementById("chat").scrollTop / (document.getElementById("chat").scrollHeight - document.getElementById("chat").clientHeight)
+        if (scrollAmount > 0.91) {
+            document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
+        }
+    });
+}
+
 function getItemCosts(type) {
     const data = {
         "username": getCookie("username"),
@@ -300,6 +353,8 @@ delay(5).then(() => {
     getFish();
     getLeaderboards();
     getItemCosts();
+    getMessages();
+    updateLeaderboards();
 
     setInterval(function(){ 
         checkIfLoggedIn();
@@ -311,6 +366,7 @@ delay(5).then(() => {
     setInterval(function(){ 
         updateLeaderboards();
         checkIfCaptchaed();
+        getMessages();
     }, 1000);
 });
 

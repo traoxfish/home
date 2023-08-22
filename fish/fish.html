@@ -123,7 +123,11 @@
 
    <button onclick="logout()" class="nicebutton" style="min-width: 20%; margin-top: 8px;">Logout</button>
 
-   <br><br><br><br><br>
+   <br><br>
+
+   <p class="chatbox" id="chat"></p><br>
+   <input placeholder="Message" style="display: inline-block; width: calc(49.75% - 100px);" id="messageinput">
+   <button class="nicebutton" style="width:92px; height: 26px;" onclick="sendMessage()">Send</button>
 
 
    <div class="captcha" id="captcha">

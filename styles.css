@@ -744,3 +744,17 @@ textarea {
   height: 24px;
   font-size: 16px;
 }
+
+.chatbox {
+  min-width: 49.75%;
+  min-height: 256px;
+  max-width: 49.75%;
+  max-height: 256px;
+  margin-top: 0px;
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: #ffffff;
+  background-color: #1d1a2c;
+  display: inline-block;
+  overflow-y: scroll;
+}
