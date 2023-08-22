@@ -397,6 +397,8 @@ function getFish() {
 
 const form  = document.getElementById('g-captcha');
 
+
+
 form.addEventListener('submit', (event) => {
     const formData = new FormData(document.querySelector('form'))
     var cap = "";
@@ -424,6 +426,13 @@ form.addEventListener('submit', (event) => {
         }
     });
 });
+
+document.getElementById("messageinput").addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        sendMessage()
+    }
+})
+
 
 function checkIfCaptchaed() {
     fetch('https://traoxfish.us-3.evennode.com/checkcaptchaed', {

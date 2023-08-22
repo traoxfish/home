@@ -757,4 +757,5 @@ textarea {
   background-color: #1d1a2c;
   display: inline-block;
   overflow-y: scroll;
+  overflow-wrap: break-word;
 }
