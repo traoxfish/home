@@ -697,7 +697,8 @@ input {
 
 .fishtype {
   display: inline-block;
-  min-width: 25%;
+  min-width: 15%;
+  max-width: 15%;
   line-height: 0px;
   margin-top: 0px;
   margin-left: 8px;
@@ -706,8 +707,8 @@ input {
 }
 .fishdata {
   display: inline-block;
-  min-width: 10%;
-  max-width: 10%;
+  min-width: 15%;
+  max-width: 15%;
   line-height: 0px;
   margin-top: 10px;
   margin-left: 8px;
