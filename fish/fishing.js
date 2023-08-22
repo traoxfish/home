@@ -394,6 +394,7 @@ function getFish() {
             document.getElementById("fishcount").textContent = formatNumber(json.fish)
             document.getElementById("rarefishcount").textContent = formatNumber(json.rareFish)
             document.getElementById("veryrarefishcount").textContent = formatNumber(json.veryRareFish)
+            document.getElementById("sharkcount").textContent = formatNumber(json.sharks)
         }
     });
 }
