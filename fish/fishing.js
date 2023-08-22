@@ -213,6 +213,7 @@ function getItemCosts(type) {
         if (json.status == "success") {
             document.getElementById("rarefishcost").textContent = formatNumber(json.rareFishCost) + " fish"
             document.getElementById("veryrarefishcost").textContent = formatNumber(json.veryRareFishCost) + " fish"
+            document.getElementById("sharkcost").textContent = formatNumber(json.sharkCost) + " fish"
         }
     });
 }
