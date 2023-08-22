@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+    <link rel="icon" href="../images/favicon.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
+	<title>TraoX</title>
+	
+  </head>
+  
+  <body>
+    <div class="pad">
+	
+	  <div>
+        <br><img src="../images/banner.png" class="banner">
+      </div>
+      <div class="topnav">
+        <a href="https://www.traox.dev/" class="button1"><button class="button1"><p>Home</p><img src="../images/home.png" class="buttonlink"></button></a><div class="navseperator"></div>
+        <a href="https://www.traox.dev/projects" class="button1"><button class="button1"><p>My Projects</p><img src="../images/projects.png" class="buttonlink"></button></a><div class="navseperator"></div>
+        <a href="https://www.traox.dev/sprites" class="button1"><button class="button1"><p>Pixel Art</p><img src="../images/aseprite.png" class="buttonlink"></button></a><div class="navseperator"></div>
+        <a href="https://www.traox.dev/fish/" class="button1"><button class="button1"><p>Fishing</p><img src="../images/fish.png" class="buttonlink"></button></a>
+     <div class="downbarnavseperator"></div>
+	 <div class="downbar">
+	   <div class="widgets">
+		 <img src="../images/downbar.png" class="downbarimg"><br>
+		 <a href="https://discord.gg/CK825TPpzk" target="_blank"><img src="../images/discord.png" class="discord"></a>
+		 <br><a href="https://www.youtube.com/channel/UCmO0_H19NVYQVTN3Ox78sTw" target="_blank"><img src="../images/youtube.png" class="youtube"></a>
+		 <br><a href="https://github.com/TraoX1" target="_blank"><img src="../images/github.png" class="github"></a>
+		 <br><a href="https://www.spigotmc.org/resources/authors/traox.932244/" target="_blank"><img src="../images/spigot.png" class="spigot"></a>
+	   </div>
+	 </div>
+	 <div class="navseperator"></div>
+   </div>
+
+   
+  </div>
+    <br><br><br>
+   
+    <textarea style="display: block; margin-right: auto; margin-left: auto; width: 80%; height: 512px;" id="data"></textarea>
+    <br>
+    <select name="type" id="command" style="margin-left: 10%; display: inline-block; height: 28px;">
+        <option value="changefish">Change Fish</option>
+        <option value="changerarefish">Change Rare Fish</option>
+        <option value="changeveryrarefish">Change Very Rare Fish</option>
+        <option value="setpassword">Set Password</option>
+        <option value="deleteaccount">Delete Account</option>
+        <option value="banaccount">Ban Account</option>
+    </select>
+
+    <input placeholder="User" id="user" style="width:25%"></input>
+    <input placeholder="Value" id="value" style="width:15%"></input>
+    <button class="nicebutton" style="height: 26px;" onclick="sendCommand()">Send</button>
+    <button class="nicebutton" style="height: 26px;" onclick="getData()">Refresh</button>
+
+    <br><br><br><br><br><br><br><br>
+
+    </div>
+
+    <script src="admin.js"></script>
+
+  </body>
+  
+  <footer>
+  
+    <div class="footer"><br><img src="../images/traox.png"></div>
+	
+  </footer>
+</html> 

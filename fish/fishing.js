@@ -20,12 +20,14 @@ function delay(time) {
 function sendFish() {
     var fish = document.getElementById("sendfishamount").value;
     var reciever = document.getElementById("sendfishto").value;
+    var password = document.getElementById("sendfishpassword").value;
 
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
-        "fish": fish,
-        "reciever": reciever
+        "amount": fish,
+        "reciever": reciever,
+        "password": password
     };
 
     var validInfo = false;
@@ -195,7 +197,7 @@ function updateLeaderboards() {
             i++
         }
         if (json.leaderboards.length > leaderboard.children.length) {
-            for (var i = leaderboard.children.length; i < json.leaderboards.length; i++) {
+            for (var i = leaderboard.children.length; i <= json.leaderboards.length; i++) {
                 var item = document.createElement("li");
                 try {
                     item.textContent = json.leaderboards[fisher].split(": ")[0] + ": " + formatNumber(Number(json.leaderboards[fisher].split(": ")[1]));
