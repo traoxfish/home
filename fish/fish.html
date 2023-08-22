@@ -51,7 +51,7 @@
           <p style="margin-left: 8px; margin-top: -26px; display: inline;" id="rarefishcost"> Loading...</p>
           <div class="longbarseperator" style="margin-top: 140px; max-width: 66.6%; min-width: 66.6%; margin-left: 7px;"> </div>
           <p style="margin-left: 8px; margin-top: -26px; min-width: 66%; display: inline-block; color: #bbbbbb; font-size: 14px;"> Get 1 extra fish per click.</p>
-          <button class="nicebutton" style="display: inline; width: 25%; margin-left: 20px;" onclick="buyItem('rareFish')"> Buy</button>
+          <button class="nicebutton" style="display: inline; width: 29%; margin-left: 9px; height: 46px; margin-top: -10px;" onclick="buyItem('rareFish')"> Buy</button>
           
 
           <br><br>
@@ -61,7 +61,7 @@
           <p style="margin-left: 8px; margin-top: -26px; display: inline;" id="veryrarefishcost"> Loading...</p>
           <div class="longbarseperator" style="margin-top: 240px; max-width: 66.6%; min-width: 66.6%; margin-left: 7px;"> </div>
           <p style="margin-left: 8px; margin-top: -26px; min-width: 66%; display: inline-block; color: #bbbbbb; font-size: 14px;"> Get 1% extra fish per click.</p>
-          <button class="nicebutton" style="display: inline; width: 25%; margin-left: 20px;" onclick="buyItem('veryRareFish')"> Buy</button>
+          <button class="nicebutton" style="display: inline; width: 29%; margin-left: 9px; height: 46px; margin-top: -10px;" onclick="buyItem('veryRareFish')"> Buy</button>
 
 
           <div class="longbarseperator" style="margin-top: 200px;"> </div>
@@ -114,16 +114,16 @@
       
       <input type="text" id="sendfishto" name="reciever" class="sendfish" placeholder="Reciever" style="margin-left: 4px; max-width: 43.5%;"><br>
       <input type="text" id="sendfishamount" name="amount" class="sendfish" placeholder="Amount" style="margin-left: 4px; max-width: 43.5%; margin-top:8px;"><br>
-      <input type="text" id="sendfishpassword" name="password" class="sendfish" placeholder="Password" style="margin-left: 4px; max-width: 43.5%; margin-top:8px;">
+      <input type="password" id="sendfishpassword" name="password" class="sendfish" placeholder="Password" style="margin-left: 4px; max-width: 43.5%; margin-top:8px;">
       <button onclick="sendFish()" class="nicebutton" style="display: inline-block; min-height: 94px; max-width: calc(70% - 70px); width: 380px; position: absolute; top:30px; margin-left: 4px;">Send Fish</button>
-      <p id="sentstatus" style="display: absolute;"></p>
+      <p id="sentstatus" style="display: absolute; position: absolute; top:114px"></p>
    </div>
 
    <br>
 
    <button onclick="logout()" class="nicebutton" style="min-width: 20%; margin-top: 8px;">Logout</button>
 
-   <br><br>
+   <br><br><br>
 
    <p class="chatbox" id="chat"></p><br>
    <input placeholder="Message" style="display: inline-block; width: calc(49.75% - 100px);" id="messageinput">

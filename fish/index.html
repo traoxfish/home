@@ -32,16 +32,19 @@
 	 <div class="navseperator"></div>
    </div>
 	  
-   <br><br><br><br>
+    <br><br>
+    <h2 class="center"> Login/Register</h2>
+    <br><br><br><br><br>
 
-    <label for="username">Username:<br></label>
-    <input type="text" id="username" name="username" maxlength="16" placeholder="Username"><br><br>
-    <label for="password">Password:<br></label>
-    <input type="password" id="password" name="password" maxlength="32" placeholder="Password"><br><br>
-    <button onclick="createAccount()" class="nicebutton">create account</button>
-    <button onclick="login()" class="nicebutton">login</button>
-    <p id="accountstatus"></p>
-
+    <div class="loginbox"> 
+      <label for="username" class="center" style="left:38.5%">Username:<br></label>
+      <input type="text" id="username" name="username" maxlength="16" placeholder="Username" class="center" style="margin-top: 48px;"><br><br>
+      <label for="password" class="center" style="left:38.5%; margin-top: 48px;">Password:<br></label>
+      <input type="password" id="password" name="password" maxlength="32" placeholder="Password"  class="center" style="margin-top: 78px;"><br><br>
+      <button onclick="createAccount()" class="nicebutton" style="position: absolute; display: inline-block; transform: translate(-50%, -50%); left:34%; margin-top: 78px;">create account</button>
+      <button onclick="login()" class="nicebutton" style="position: absolute; display: inline-block; transform: translate(-50%, -50%); left:73.5%; margin-top: 78px; min-width: 72px;">login</button>
+      <p id="accountstatus" style="margin-top: 96px; margin-left: 36px;"></p>
+    </div>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
     </div>

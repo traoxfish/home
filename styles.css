@@ -759,3 +759,27 @@ textarea {
   overflow-y: scroll;
   overflow-wrap: break-word;
 }
+
+.loginbox {
+  min-width: 256px;
+  min-height: 256px;
+  max-width: 256px;
+  left: 50%;
+  margin-top: 96px;
+  transform: translate(-50%, -50%);
+  max-height: 256px;
+  position: absolute;
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: #ffffff;
+  background-color: #1d1a2c;
+  display: inline-block;
+}
+
+.center {
+  left: 50%;
+  margin-top: 16px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  display: inline-block;
+}

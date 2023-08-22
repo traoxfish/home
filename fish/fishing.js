@@ -58,6 +58,7 @@ function sendFish() {
                 document.getElementById("sentstatus").style.color = "#84ea84";
                 document.getElementById("sendfishamount").value = "";
                 document.getElementById("sendfishto").value = "";
+                document.getElementById("sendfishpassword").value = "";
                 delay(2000).then(() => {
                     document.getElementById("sentstatus").innerHTML = "<br>";
                 });
@@ -210,8 +211,8 @@ function getItemCosts(type) {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            document.getElementById("rarefishcost").textContent = formatNumber(json.rareFishCost)
-            document.getElementById("veryrarefishcost").textContent = formatNumber(json.veryRareFishCost)
+            document.getElementById("rarefishcost").textContent = formatNumber(json.rareFishCost) + " fish"
+            document.getElementById("veryrarefishcost").textContent = formatNumber(json.veryRareFishCost) + " fish"
         }
     });
 }
