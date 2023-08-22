@@ -310,7 +310,7 @@ delay(5).then(() => {
 
     setInterval(function(){ 
         updateLeaderboards();
-        //checkIfCaptchaed();
+        checkIfCaptchaed();
     }, 1000);
 });
 
@@ -349,7 +349,7 @@ form.addEventListener('submit', (event) => {
         "g-recaptcha-response": cap
     };
     event.preventDefault();
-    fetch('https://traoxfish.us-3.evennode.com/captcha', {
+    fetch('https://traoxfish.us-3.evennode.com/submitcaptcha', {
         method: 'POST',
         credentials: "same-origin",
         headers: {

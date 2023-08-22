@@ -55,3 +55,26 @@ function sendCommand() {
 }
 
 getData()
+
+setInterval(function() {
+    keepOnline()
+}, 1000)
+
+function keepOnline() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/online', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+
+    });
+}
