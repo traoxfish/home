@@ -246,7 +246,7 @@ function updateLeaderboards() {
         var leaderboard = document.getElementById("leaderboard");
         for (var fisher in json.leaderboards) {
             try {
-                leaderboard.children.item(i).textContent = json.leaderboards[fisher].split(": ")[0] + ": " + formatNumber(Number(json.leaderboards[fisher].split(": ")[1]));
+                leaderboard.children.item(i).textContent = json.leaderboards[fisher].split(": ")[0] + ": " + formatNumber(!isNan(json.leaderboards[fisher].split(": ")[1]) ? Number(json.leaderboards[fisher].split(": ")[1]) : 0);
                 if (json.onlineStatus[fisher]) {
                     leaderboard.children.item(i).style.color = "#84ea84";
                 } else {
@@ -259,7 +259,7 @@ function updateLeaderboards() {
             for (var i = leaderboard.children.length; i <= json.leaderboards.length; i++) {
                 var item = document.createElement("li");
                 try {
-                    item.textContent = json.leaderboards[i].split(": ")[0] + ": " + formatNumber(Number(json.leaderboards[i].split(": ")[1]));
+                    item.textContent = json.leaderboards[i].split(": ")[0] + ": " + formatNumber(!isNan(json.leaderboards[i].split(": ")[1]) ? Number(json.leaderboards[i].split(": ")[1]) : 0);
                     if (json.onlineStatus[i]) {
                         item.style.color = "#84ea84";
                     } else {
