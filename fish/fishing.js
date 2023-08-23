@@ -17,6 +17,18 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
+var fishInterval
+function holdFish(down) {
+    if (down) {
+        goFishing()
+        fishInterval = setInterval(function(){ 
+            goFishing()
+        }, 400);
+    } else {
+        clearInterval(fishInterval)
+    }
+}
+
 function sendFish() {
     var fish = document.getElementById("sendfishamount").value;
     var reciever = document.getElementById("sendfishto").value;
@@ -193,7 +205,9 @@ function getMessages(first) {
         if (scrollAmount > 0.91) {
             document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
         }
-        if (first) document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight) 
+        if (first) {
+            delay(100).then(() => { document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight) } ) 
+        }
     });
 }
 
