@@ -137,7 +137,7 @@ function buyItem(type) {
         return response.json();
     }).then(json => {
         if (json.newCost != undefined) {
-            document.getElementById(type.toLowerCase()  + "cost").textContent = formatNumber(json.newCost)
+            document.getElementById(type.toLowerCase()  + "cost").textContent = formatNumber(json.newCost) + " fish"
         }
     });
 }
