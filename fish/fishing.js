@@ -166,7 +166,7 @@ function sendMessage() {
     });
 }
 
-function getMessages() {
+function getMessages(first) {
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
@@ -192,6 +192,7 @@ function getMessages() {
         if (scrollAmount > 0.91) {
             document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
         }
+        if (first) document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight) 
     });
 }
 
@@ -258,8 +259,8 @@ function updateLeaderboards() {
             for (var i = leaderboard.children.length; i <= json.leaderboards.length; i++) {
                 var item = document.createElement("li");
                 try {
-                    item.textContent = json.leaderboards[fisher].split(": ")[0] + ": " + formatNumber(Number(json.leaderboards[fisher].split(": ")[1]));
-                    if (json.onlineStatus[fisher]) {
+                    item.textContent = json.leaderboards[i].split(": ")[0] + ": " + formatNumber(Number(json.leaderboards[i].split(": ")[1]));
+                    if (json.onlineStatus[i]) {
                         item.style.color = "#84ea84";
                     } else {
                         item.style.color = "#eeeeee";
@@ -354,12 +355,10 @@ function keepOnline() {
 delay(5).then(() => {
     checkIfLoggedIn();
     getFish();
-    getLeaderboards();
     getItemCosts();
-    getMessages();
+    getMessages(true)
     delay(66).then(() => {
         updateLeaderboards();
-        document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
     })
 
     setInterval(function(){ 
@@ -372,7 +371,7 @@ delay(5).then(() => {
     setInterval(function(){ 
         updateLeaderboards();
         checkIfCaptchaed();
-        getMessages();
+        getMessages(false);
     }, 1000);
 });
 
