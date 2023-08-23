@@ -214,6 +214,7 @@ function getItemCosts(type) {
             document.getElementById("rarefishcost").textContent = formatNumber(json.rareFishCost) + " fish"
             document.getElementById("veryrarefishcost").textContent = formatNumber(json.veryRareFishCost) + " fish"
             document.getElementById("sharkcost").textContent = formatNumber(json.sharkCost) + " fish"
+            document.getElementById("raresharkcost").textContent = formatNumber(json.rareSharkCost) + " fish"
         }
     });
 }
@@ -395,6 +396,7 @@ function getFish() {
             document.getElementById("rarefishcount").textContent = formatNumber(json.rareFish)
             document.getElementById("veryrarefishcount").textContent = formatNumber(json.veryRareFish)
             document.getElementById("sharkcount").textContent = formatNumber(json.sharks)
+            document.getElementById("raresharkcount").textContent = formatNumber(json.rareSharks)
         }
     });
 }
