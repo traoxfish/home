@@ -138,6 +138,7 @@ function buyItem(type) {
     }).then(json => {
         if (json.newCost != undefined) {
             document.getElementById(type.toLowerCase()  + "cost").textContent = formatNumber(json.newCost) + " fish"
+            getFish();
         }
     });
 }
@@ -362,14 +363,17 @@ delay(5).then(() => {
     })
 
     setInterval(function(){ 
+        keepOnline();
+        updateLeaderboards();
+    }, 500);
+
+    setInterval(function(){ 
         checkIfLoggedIn();
         getFish();
-        keepOnline();
         getItemCosts();
     }, 2000);
 
     setInterval(function(){ 
-        updateLeaderboards();
         checkIfCaptchaed();
         getMessages(false);
     }, 1000);
