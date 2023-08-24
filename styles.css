@@ -674,6 +674,14 @@ input {
   background-color: #1d1a2c;
   display: inline-block;
   overflow-x: scroll;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+
+.fishbar::-webkit-scrollbar {
+  display: none;
 }
 
 .longbarseperator {
