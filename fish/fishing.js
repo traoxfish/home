@@ -246,7 +246,7 @@ function updateLeaderboards() {
         return response.json();
     }).then(json => {
 
-        if (json.status != "success") return
+        if (json.status != "success" || json.leaderboards == undefined) return
 
         var i = 0;
         var leaderboard = document.getElementById("leaderboard");
