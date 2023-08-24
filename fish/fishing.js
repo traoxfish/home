@@ -324,18 +324,18 @@ function spin() {
             int1 = setInterval(function(){
                 i += 8
                 document.getElementById("slot1").style.top = -((i % 226) + 54) + "px"
-            }, 1)
+            }, 10)
             delay(200).then(() => {
                 int2 = setInterval(function(){
                     i2 += 8
                     document.getElementById("slot2").style.top = -((i2 % 226) + 54) + "px"
-                }, 1)
+                }, 10)
             })
             delay(400).then(() => {
                 int3 = setInterval(function(){
                     i3 += 8
                     document.getElementById("slot3").style.top = -((i3 % 226) + 54) + "px"
-                }, 1)
+                }, 10)
             })
         
             delay(2005).then(() => {
