@@ -120,6 +120,10 @@ document.getElementById("sendfishamount").oninput = function() {
     this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
 }
 
+document.getElementById("betamount").oninput = function() {
+    this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+}
+
 function buyItem(type) {
     const data = {
         "username": getCookie("username"),
@@ -274,6 +278,120 @@ function updateLeaderboards() {
                 } catch (e) { console.log(e)}
                 leaderboard.appendChild(item);
             }
+        }
+    });
+}
+
+var spinning = false
+function spin() {
+
+    if (spinning) return
+
+    const data1 = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "bet": document.getElementById("betamount").value,
+        "check": true
+    };
+    fetch("https://traoxfish.us-3.evennode.com/gamble", {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data1),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.canAfford != true || json.status != "success") {
+            document.getElementById("spininfo").innerText = "Cannot afford to bet!"
+            document.getElementById("spininfo").style.color = "#ea7b7b";
+            delay(2000).then(() => {
+                document.getElementById("spininfo").innerHTML = "<br>"
+            })
+        } else {
+
+            spinning = true
+
+            var i = 0
+            var i2 = 0
+            var i3 = 0
+        
+            var int1
+            var int2
+            var int3
+        
+            int1 = setInterval(function(){
+                i += 8
+                document.getElementById("slot1").style.top = -((i % 226) + 54) + "px"
+            }, 1)
+            delay(200).then(() => {
+                int2 = setInterval(function(){
+                    i2 += 8
+                    document.getElementById("slot2").style.top = -((i2 % 226) + 54) + "px"
+                }, 1)
+            })
+            delay(400).then(() => {
+                int3 = setInterval(function(){
+                    i3 += 8
+                    document.getElementById("slot3").style.top = -((i3 % 226) + 54) + "px"
+                }, 1)
+            })
+        
+            delay(2005).then(() => {
+        
+                const data = {
+                    "username": getCookie("username"),
+                    "loginKey": getCookie("loginKey"),
+                    "bet": document.getElementById("betamount").value
+                };
+                fetch("https://traoxfish.us-3.evennode.com/gamble", {
+                    method: 'POST',
+                    credentials: "same-origin",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                }).then(response => {
+                    return response.json();
+                }).then(json => {
+            
+                    if (json.status != "success") return
+        
+                    var slot1value = json.slot1
+                    var slot2value = json.slot2
+                    var slot3value = json.slot3
+        
+                    var valueToPx = {
+                        2: "-54px",
+                        5: "-96px",
+                        25: "-224px",
+                        100: "-139px",
+                        1000: "-182px"
+                    }
+        
+                    clearInterval(int1)
+                    clearInterval(int2)
+                    clearInterval(int3)
+                    document.getElementById("slot1").style.top = valueToPx[slot1value];
+                    document.getElementById("slot2").style.top = valueToPx[slot2value];
+                    document.getElementById("slot3").style.top = valueToPx[slot3value];
+                    spinning = false
+        
+                    if (Number(json.winnings) > 0 ) {
+                        document.getElementById("spininfo").innerText = "You won " + formatNumber(Number(json.winnings)) + " fish!"
+                        document.getElementById("spininfo").style.color = "#84ea84";
+                    } else {
+                        document.getElementById("spininfo").innerText = "You lost!"
+                        document.getElementById("spininfo").style.color = "#ea7b7b";
+                    }
+                    delay(2000).then(() => {
+                        document.getElementById("spininfo").innerHTML = "<br>"
+                    })
+        
+                });
+            })
+
         }
     });
 }

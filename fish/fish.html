@@ -165,6 +165,18 @@
    <input placeholder="Message" style="display: inline-block; width: calc(49.75% - 100px);" id="messageinput">
    <button class="nicebutton" style="width:92px; height: 26px;" onclick="sendMessage()">Send</button>
 
+   <br><br>
+   <p style="display: inline-block; position: absolute; margin-left: 130px; margin-top: -10px;">Match 3 numbers to win!</p>
+   <div class="slotmachine" style="display: inline-block;">
+    <p id="slot1" style="display: inline-block; position: relative; margin-left: 24px; margin-right: 24px; text-align: center; font-size: 36px; top: -224px;">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px;"> </div> 
+    <p id="slot2" style="display: inline-block; position: relative; margin-left: 24px; margin-right: 24px; text-align: center; font-size: 36px; top: -54px;">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px;"> </div> 
+    <p id="slot3" style="display: inline-block; position: relative; margin-left: 24px; text-align: center; font-size: 36px; top: -54px;">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p>
+   </div><br>
+   
+
+   <button onclick="spin()" class="nicebutton" style="width: 450px; height: 48px; margin-top: 8px;"> SPIN!</button><br>
+   <input id="betamount" placeholder="Bet" style="margin-top: 8px; width: 446px;">
+   <p id="spininfo"><br></p>
 
    <div class="captcha" id="captcha">
    <form action="https://traoxfish.us-3.evennode.com/submitcaptcha" method="POST" id="g-captcha">
