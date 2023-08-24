@@ -132,7 +132,14 @@
 
    <br><br><br>
 
-   <div oncontextmenu="return false;" onclick="goFishing()" onmousedown="holdFish(true)" onmouseup="holdFish(false)" onmouseleave="holdFish(false)" class="fishbutton" ><p class="unselectable" style="margin-left: auto; margin-right: auto; margin-top: 6px; margin-bottom: auto;">Fish!</p></div>
+   <div oncontextmenu="return false;" onclick="goFishing(false)" class="fishbutton" id="fishbutton"><p class="unselectable" style="margin-left: auto; margin-right: auto; margin-top: 6px; margin-bottom: auto;">Fish!</p></div>
+
+   <label class="switch" style="display: inline-block; bottom: -2px; height: 36px;">
+    <input type="checkbox" id="autofish">
+    <span class="slider round"></span>
+    <p style="display:block; position:absolute; margin-top: -56px; font-size: 12px; margin-left: 6px;">Autofish</p>
+    <p style="display:block; position:absolute; margin-top: 6px; font-size: 10px; margin-left: -164px; min-width: 240px; color:#cccccc">(Note: Autofish is slower than manually clicking)</p>
+  </label>
 
    <br><br><br>
 

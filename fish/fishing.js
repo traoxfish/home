@@ -17,18 +17,6 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-var fishInterval
-function holdFish(down) {
-    if (down) {
-        goFishing()
-        fishInterval = setInterval(function(){ 
-            goFishing()
-        }, 400);
-    } else {
-        clearInterval(fishInterval)
-    }
-}
-
 function sendFish() {
     var fish = document.getElementById("sendfishamount").value;
     var reciever = document.getElementById("sendfishto").value;
@@ -257,6 +245,9 @@ function updateLeaderboards() {
     }).then(response => {
         return response.json();
     }).then(json => {
+
+        if (json.status != "success") return
+
         var i = 0;
         var leaderboard = document.getElementById("leaderboard");
         for (var fisher in json.leaderboards) {
@@ -393,6 +384,14 @@ delay(5).then(() => {
     }, 1000);
 });
 
+setInterval(function(){ 
+    if (document.getElementById("autofish").checked) {
+        goFishing(true)
+        document.getElementById("fishbutton").className = "innactivebutton"
+    } else {document.getElementById("fishbutton").className = "fishbutton"}
+
+}, 400);
+
 function getFish() {
     const data = {
         "username": getCookie("username"),
@@ -519,7 +518,9 @@ instantTooltips('title', 15);
 
 
 
-function goFishing() {
+function goFishing(force) {
+    if (!force && document.getElementById("autofish").checked) return;
+
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
