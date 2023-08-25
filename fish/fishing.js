@@ -713,22 +713,24 @@ function drawSpecialFishGraph() {
 
             var fishData = json.graph
 
-            canvas.strokeStyle = 'green';
+            canvas.strokeStyle = "#55ff55";
             canvas.lineWidth = 2;
 
             var highest = 0
+            var lowest = 99999999999999
 
             for (var i in fishData) {
                 if (fishData[i] > highest) highest = fishData[i]
+                if (fishData[i] < lowest) lowest = fishData[i]
             }
 
             for (var i = 0; i < fishData.length; i++) {
 
-                var point = fishData[i] / highest
+                var point = ((fishData[i] - lowest) / highest) * 1.65
 
                 canvas.beginPath();
-                canvas.moveTo((410 * ((i) / fishData.length) + 205 / fishData.length) + 20, 144 - (point * 124));
-                canvas.lineTo((410 * ((i) / fishData.length) + (410 / fishData.length * 1.5)) +20, 144 - ((fishData[i + 1] / highest) * 124));
+                canvas.moveTo((410 * ((i) / fishData.length) + 205 / fishData.length) + 20, 144 - (point * 124) - 2);
+                canvas.lineTo((410 * ((i) / fishData.length) + (410 / fishData.length * 1.5)) +20, 144 - ((((fishData[i + 1] - lowest) / highest) * 1.65) * 124) - 2);
                 canvas.stroke();
 
             }
