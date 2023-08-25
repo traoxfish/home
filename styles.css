@@ -806,7 +806,6 @@ textarea {
   user-select: none;
 }
 
- /* The switch - the box around the slider */
  .switch {
   position: relative;
   display: inline-block;
@@ -814,14 +813,12 @@ textarea {
   height: 34px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -904,4 +901,17 @@ input:checked + .slider:before {
   white-space: nowrap;
   overflow-y: hidden;
   overflow-x: hidden;
+}
+
+.specialfixbox {
+  min-width: 450px;
+  min-height: 256px;
+  max-width: 450px;
+  max-height: 256px;
+  margin-top: 16px;
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: #ffffff;
+  background-color: #1d1a2c;
+  display: inline-block;
 }

@@ -142,6 +142,11 @@ function buyItem(type) {
     }).then(json => {
         if (json.newCost != undefined) {
             document.getElementById(type.toLowerCase()  + "cost").textContent = formatNumber(json.newCost) + " fish"
+            if (type == "specialFish") {
+                document.getElementById(type.toLowerCase()  + "cost").textContent = "Buy Price: " + formatNumber(json.newCost) + " fish"
+            } else if (type == "sellSpecialFish") {
+                document.getElementById(type.toLowerCase()  + "cost").textContent = "Sell Price: " + formatNumber(json.newCost) + " fish"
+            }
             getFish();
         }
     });
@@ -223,7 +228,8 @@ function getItemCosts(type) {
             document.getElementById("veryrarefishcost").textContent = formatNumber(json.veryRareFishCost) + " fish"
             document.getElementById("sharkcost").textContent = formatNumber(json.sharkCost) + " fish"
             document.getElementById("raresharkcost").textContent = formatNumber(json.rareSharkCost) + " fish"
-            document.getElementById("specialfishcost").textContent = formatNumber(json.specialFishCost) + " fish"
+            document.getElementById("specialfishcost").textContent = "Buy Price: " + formatNumber(json.specialFishCost) + " fish"
+            document.getElementById("specialfishsellcost").textContent = "Sell Price: " + formatNumber(json.specialFishSellCost) + " fish"
         }
     });
 }
@@ -484,6 +490,7 @@ delay(5).then(() => {
     getMessages(true)
     delay(66).then(() => {
         updateLeaderboards();
+        drawSpecialFishGraph()
     })
 
     setInterval(function(){ 
@@ -495,6 +502,7 @@ delay(5).then(() => {
         checkIfLoggedIn();
         getFish();
         getItemCosts();
+        drawSpecialFishGraph()
     }, 2000);
 
     setInterval(function(){ 
@@ -532,6 +540,7 @@ function getFish() {
             document.getElementById("veryrarefishcount").textContent = formatNumber(json.veryRareFish)
             document.getElementById("sharkcount").textContent = formatNumber(json.sharks)
             document.getElementById("raresharkcount").textContent = formatNumber(json.rareSharks)
+            document.getElementById("specialfishcount").textContent = formatNumber(json.specialFish)
         }
     });
 }
@@ -656,6 +665,73 @@ function goFishing(force) {
     }).then(json => {
         if (json.status == "success") {
             document.getElementById("fishcount").textContent = formatNumber(json.fish)
+        }
+    });
+}
+
+function drawSpecialFishGraph() {
+
+
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getspecialfishgraph', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            
+            var canvas = document.getElementById("specialfishgraph").getContext("2d");
+
+            canvas.fillStyle = "black";
+            canvas.fillRect(0, 0, 450, 164);
+
+            canvas.strokeStyle = 'white';
+            canvas.lineWidth = 2;
+
+            canvas.beginPath();
+            canvas.moveTo(20, 20);
+            canvas.lineTo(20, 20);
+            canvas.stroke();
+
+            canvas.beginPath();
+            canvas.moveTo(20, 20);
+            canvas.lineTo(20, 144);
+            canvas.stroke();
+
+            canvas.beginPath();
+            canvas.moveTo(20, 144);
+            canvas.lineTo(430, 144);
+            canvas.stroke();
+
+            var fishData = json.graph
+
+            canvas.strokeStyle = 'green';
+            canvas.lineWidth = 2;
+
+            var highest = 0
+
+            for (var i in fishData) {
+                if (fishData[i] > highest) highest = fishData[i]
+            }
+
+            for (var i = 0; i < fishData.length; i++) {
+
+                var point = fishData[i] / highest
+
+                canvas.beginPath();
+                canvas.moveTo((410 * ((i) / fishData.length) + 205 / fishData.length) + 20, 144 - (point * 124));
+                canvas.lineTo((410 * ((i) / fishData.length) + (410 / fishData.length * 1.5)) +20, 144 - ((fishData[i + 1] / highest) * 124));
+                canvas.stroke();
+
+            }
         }
     });
 }

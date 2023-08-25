@@ -84,7 +84,6 @@
           <p style="margin-left: 8px; margin-top: -26px; min-width: 66%; display: inline-block; color: #bbbbbb; font-size: 14px;"> Get 10% extra fish from sharks.</p>
           <button class="nicebutton" style="display: inline; width: 29%; margin-left: 9px; height: 46px; margin-top: -10px;" onclick="buyItem('rareShark')"> Buy</button>
 
-
           
           <br>
           <p class="shoptitle" id="rarefishstatus"><br></p>
@@ -121,6 +120,8 @@
     <p class="fishtype" style="max-width: 10%; min-width: 70px;">Sharks</p>
     <div class="navseperator" style="max-height: 33px; top:-1px"></div>
     <p class="fishtype" style="max-width: 10%; min-width: 65px;">Rare Sharks </p>
+    <div class="navseperator" style="max-height: 33px; top:-1px"></div>
+    <p class="fishtype" style="max-width: 10%; min-width: 65px;">Special Fish</p>
 
 
     <div class="longbarseperator"></div>
@@ -131,6 +132,7 @@
     <p class="fishdata" id="veryrarefishcount">loading...</p>
     <p class="fishdata" id="sharkcount" style="max-width: 10%; min-width: 70px;">loading...</p>
     <p class="fishdata" id="raresharkcount" style="max-width: 10%; min-width: 65px;">loading...</p>
+    <p class="fishdata" id="specialfishcount" style="max-width: 10%; min-width: 60px;">loading...</p>
 
    </div>
 
@@ -181,10 +183,19 @@
    <button onclick="spin()" class="nicebutton" style="width: 450px; height: 48px; margin-top: 8px;"> SPIN!</button><br>
    <input id="betamount" placeholder="Bet" style="margin-top: 8px; width: 446px;">
    <p id="spininfo"><br></p>
-	    <p>Special Fish: </p>
-	    <p id="specialfishcost">Loading...</p>
-	    <button class="nicebutton" onclick="buyItem('specialFish')">Buy Special Fish</button>
-	    <button class="nicebutton" onclick="buyItem('sellSpecialFish')">Sell Special Fish</button>
+
+   <div class="specialfixbox" style="position: absolute; margin-left: 468px; margin-top: -251px;"> 
+    <p class="center" style="position: relative; margin-bottom: 0px;">Special Fish</p><br>
+    <div class="longbarseperator" style="position: relative; margin-top: -16px;"></div>
+    <p id="specialfishcost" style="display: inline-block; min-width: 220px; font-size: 16px; text-align: center;">Loading...</p>
+    <div class="navseperator" style="max-height: 14px; margin-top: 16px;"></div>
+    <p id="specialfishsellcost" style="display: inline-block; font-size: 16px; margin-left: 4px; min-width: 220px; text-align: center;">Loading...</p>
+    <div class="longbarseperator" style="position: relative; margin-top: -29px; margin-bottom: -18px;"></div><br><br>
+    <button class="nicebutton" onclick="buyItem('specialFish')" style="position: relative; width: 48.5%; margin-left: 4px; margin-right: 1px; margin-top: -100px;">Buy Special Fish</button>
+    <button class="nicebutton" onclick="buyItem('sellSpecialFish')" style="position: relative; width: 48.5%;">Sell Special Fish</button>
+    <canvas id="specialfishgraph" height="164" width="450"> </canvas>
+   </div>
+	    
 	    
 
    <div class="captcha" id="captcha">
