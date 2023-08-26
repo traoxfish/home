@@ -743,22 +743,22 @@ function drawGraph() {
 
             for (var i = 0; i < fishData.length; i++) {
 
-                var point = ((fishData[i] - lowest) / highest) * 2.6
+                var point = ((fishData[i] - lowest) / highest) * 2.3
 
                 canvas.beginPath();
                 canvas.moveTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / 2) / fishData.length) + 20, (height - 20) - (point * (height - 40)) - 2);
-                canvas.lineTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / fishData.length * 1.5)) + 20, (height - 20) - ((((fishData[i + 1] - lowest) / highest) * 2.6) * (height - 40)) - 2);
+                canvas.lineTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / fishData.length * 1.5)) + 20, (height - 20) - ((((fishData[i + 1] - lowest) / highest) * 2.3) * (height - 40)) - 2);
                 canvas.stroke();
 
             }
 
             if (hoverIndex != -1) {
                 canvas.beginPath();
-                canvas.arc(((width - 40) * (hoverIndex / graphPoints.length)) + 20, (height - 20) - ((((graphPoints[hoverIndex] - lowest) / highest) * 2.6) * (height - 40)) - 2, 8, 0, 2 * Math.PI, false);
+                canvas.arc(((width - 40) * (hoverIndex / graphPoints.length)) + 20, (height - 20) - ((((graphPoints[hoverIndex] - lowest) / highest) * 2.3) * (height - 40)) - 2, 8, 0, 2 * Math.PI, false);
                 canvas.stroke();
 
                 canvas.beginPath();
-                canvas.moveTo(((width - 40) * (hoverIndex / graphPoints.length)) + 20, (height - 20) - ((((graphPoints[hoverIndex] - lowest) / highest) * 2.6) * (height - 40)) - 2);
+                canvas.moveTo(((width - 40) * (hoverIndex / graphPoints.length)) + 20, (height - 20) - ((((graphPoints[hoverIndex] - lowest) / highest) * 2.3) * (height - 40)) - 2);
                 canvas.lineTo(((width - 40) * (hoverIndex / graphPoints.length)) + 20, 40);
                 canvas.stroke();
 
