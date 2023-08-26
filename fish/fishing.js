@@ -294,6 +294,7 @@ var spinning = false
 function spin() {
 
     if (spinning) return
+    spinning = true
 
     const data1 = {
         "username": getCookie("username"),
@@ -312,6 +313,7 @@ function spin() {
         return response.json();
     }).then(json => {
         if (json.canAfford != true || json.status != "success") {
+            spinning = false
             document.getElementById("spininfo").innerText = "Cannot afford to bet!"
             document.getElementById("spininfo").style.color = "#ea7b7b";
             delay(2000).then(() => {
@@ -319,7 +321,7 @@ function spin() {
             })
         } else {
 
-            spinning = true
+            document.getElementById("betamount").disabled = true
 
             var i = 0
             var i2 = 0
@@ -363,8 +365,27 @@ function spin() {
                 }).then(response => {
                     return response.json();
                 }).then(json => {
-            
-                    if (json.status != "success") return
+                    document.getElementById("betamount").disabled = false
+                    if (json.status != "success") {
+                        clearInterval(int1)
+                        clearInterval(int2)
+                        clearInterval(int3)
+
+                        delay(25).then(() => {
+                            document.getElementById("slot1").style.top = "calc(-2.25vw - 8px)";
+                            document.getElementById("slot2").style.top = "calc(-2.25vw - 8px)";
+                            document.getElementById("slot3").style.top = "calc(-2.25vw - 8px)";
+                            spinning = false
+
+                            document.getElementById("spininfo").innerText = "Gamble failed!"
+                            document.getElementById("spininfo").style.color = "#ea7b7b";
+
+                            delay(2000).then(() => {
+                                document.getElementById("spininfo").innerHTML = "<br>"
+                            })
+                        })
+                        return
+                    }
         
                     var slot1value = json.slot1
                     var slot2value = json.slot2
