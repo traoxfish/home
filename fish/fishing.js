@@ -793,12 +793,12 @@ function drawGraph() {
 setInterval(() => {
     drawGraph()
 }, 10)
-
 document.getElementById("specialfishhoverprice").style.display = "none"
 function specialFishHover(event) {
     var rect = event.target.getBoundingClientRect();
     document.getElementById("specialfishhoverprice").style.display = "initial"
-    document.getElementById("specialfishhoverprice").style.left = "calc(" + ((event.clientX - rect.left) / document.getElementById("specialfishgraph").clientWidth * 96) + "% - 16px)"
+    var percent = Math.min(Math.max((event.clientX - rect.left) / document.getElementById("specialfishgraph").clientWidth * 96, 5.5), 91.5)
+    document.getElementById("specialfishhoverprice").style.left = "calc(" + percent + "% - 16px)"
     hoverIndex = Math.floor((event.clientX - 10 - (rect.left)) / (document.getElementById("specialfishgraph").clientWidth - 20) * graphPoints.length)
     document.getElementById("specialfishhoverprice").innerHTML = formatNumber(graphPoints[hoverIndex] || "<br>")
     if (graphPoints[hoverIndex] == undefined) hoverIndex = -1
