@@ -186,15 +186,16 @@
    <p id="spininfo"><br></p>
 
    <div class="specialfixbox" style="position: absolute; left: calc(59.7% - 16px); margin-top: calc(-235px - 2vw);"> 
+    <p id="specialfishhoverprice" style="position: absolute; margin-top: calc(4vw + 36px); font-size: calc(0.45vw + 8px); text-align: center; left: 0%;">256k</p>
     <p class="center" style="position: relative; margin-bottom: 0px;">Special Fish</p><br>
     <div class="longbarseperator" style="position: relative; margin-top: -16px;"></div>
-    <p id="specialfishcost" style="display: inline-block; min-height: 24px; font-size: 1svw; text-align: center; margin-right: 7.25%; margin-left: 7.25%; min-width: 1%; margin-top: auto; margin-bottom: auto;">Loading...</p>
+    <p id="specialfishcost" style="display: inline-block; min-height: 24px; font-size: 1vw; text-align: center; margin-right: 7.25%; margin-left: 7.25%; min-width: 1%; margin-top: auto; margin-bottom: auto;">Loading...</p>
     <div class="navseperator" style="max-height: calc(3vw - 7% - 16px); margin-top: 16px;"></div>
-    <p id="specialfishsellcost" style="display: inline-block;  font-size: 1svw; margin-left: 7.25%; text-align: center;  min-width: 1%;">Loading...</p>
+    <p id="specialfishsellcost" style="display: inline-block;  font-size: 1vw; margin-left: 7.25%; text-align: center;  min-width: 1%;">Loading...</p>
     <div class="longbarseperator" style="position: relative; margin-top: -29px; margin-bottom: -18px;"></div><br><br>
     <button class="nicebutton" onclick="buyItem('specialFish')" style="position: relative; width: 48%; min-width: 45%; margin-left: 1%; margin-right: 1%; margin-top: -100px; font-size: calc(0.45vw + 8px);">Buy Special Fish</button>
     <button class="nicebutton" onclick="buyItem('sellSpecialFish')" style="position: relative; width: 48%; min-width: 45%; font-size: calc(0.45vw + 8px);">Sell Special Fish</button>
-    <canvas id="specialfishgraph" height="328"  width="1000" style=" width: 100%; margin-top: 3px; margin-bottom: -4px;"> </canvas>
+    <canvas onmousemove="specialFishHover(event)"  onmouseleave="stopSpecialFishHover()" id="specialfishgraph" height="328"  width="1000" style=" width: 100%; margin-top: 3px; margin-bottom: -4px;"> </canvas>
    </div>
 	    
 	    

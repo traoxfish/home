@@ -495,7 +495,7 @@ delay(5).then(() => {
     getItemCosts();
     delay(66).then(() => {
         updateLeaderboards();
-        drawSpecialFishGraph()
+        getSpecialFishGraph()
         getMessages(true)
     })
 
@@ -509,7 +509,7 @@ delay(5).then(() => {
         checkIfLoggedIn();
         getFish();
         getItemCosts();
-        drawSpecialFishGraph()
+        getSpecialFishGraph()
     }, 2000);
 
     setInterval(function(){ 
@@ -675,8 +675,9 @@ function goFishing(force) {
     });
 }
 
-function drawSpecialFishGraph() {
-
+var graphPoints
+var hoverIndex = -1
+function getSpecialFishGraph() {
 
     const data = {
         "username": getCookie("username"),
@@ -693,8 +694,16 @@ function drawSpecialFishGraph() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            
-            var canvas = document.getElementById("specialfishgraph").getContext("2d");
+            graphPoints = json.graph
+        }
+    });
+}
+
+function drawGraph() {
+    var canvas = document.getElementById("specialfishgraph").getContext("2d");
+
+            if (graphPoints == undefined) return
+
             var width = document.getElementById("specialfishgraph").width
             var height = document.getElementById("specialfishgraph").height
 
@@ -719,7 +728,7 @@ function drawSpecialFishGraph() {
             canvas.lineTo((width - 20), (height - 20));
             canvas.stroke();
 
-            var fishData = json.graph
+            var fishData = graphPoints
 
             canvas.strokeStyle = "#55ff55";
             canvas.lineWidth = 3;
@@ -734,14 +743,43 @@ function drawSpecialFishGraph() {
 
             for (var i = 0; i < fishData.length; i++) {
 
-                var point = ((fishData[i] - lowest) / highest) * 2.75
+                var point = ((fishData[i] - lowest) / highest) * 2.6
 
                 canvas.beginPath();
                 canvas.moveTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / 2) / fishData.length) + 20, (height - 20) - (point * (height - 40)) - 2);
-                canvas.lineTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / fishData.length * 1.5)) + 20, (height - 20) - ((((fishData[i + 1] - lowest) / highest) * 2.75) * (height - 40)) - 2);
+                canvas.lineTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / fishData.length * 1.5)) + 20, (height - 20) - ((((fishData[i + 1] - lowest) / highest) * 2.6) * (height - 40)) - 2);
                 canvas.stroke();
 
             }
-        }
-    });
+
+            if (hoverIndex != -1) {
+                canvas.beginPath();
+                canvas.arc(((width - 40) * (hoverIndex / graphPoints.length)) + 20, (height - 20) - ((((graphPoints[hoverIndex] - lowest) / highest) * 2.6) * (height - 40)) - 2, 8, 0, 2 * Math.PI, false);
+                canvas.stroke();
+
+                canvas.beginPath();
+                canvas.moveTo(((width - 40) * (hoverIndex / graphPoints.length)) + 20, (height - 20) - ((((graphPoints[hoverIndex] - lowest) / highest) * 2.6) * (height - 40)) - 2);
+                canvas.lineTo(((width - 40) * (hoverIndex / graphPoints.length)) + 20, 40);
+                canvas.stroke();
+
+            }
+}
+
+setInterval(() => {
+    drawGraph()
+}, 10)
+
+document.getElementById("specialfishhoverprice").style.display = "none"
+function specialFishHover(event) {
+    var rect = event.target.getBoundingClientRect();
+    document.getElementById("specialfishhoverprice").style.display = "initial"
+    document.getElementById("specialfishhoverprice").style.left = "calc(" + ((event.clientX - rect.left) / document.getElementById("specialfishgraph").clientWidth * 96) + "% - 16px)"
+    hoverIndex = Math.floor((event.clientX - 10 - (rect.left)) / (document.getElementById("specialfishgraph").clientWidth - 20) * graphPoints.length)
+    document.getElementById("specialfishhoverprice").innerHTML = formatNumber(graphPoints[hoverIndex] || "<br>")
+    if (graphPoints[hoverIndex] == undefined) hoverIndex = -1
+}
+
+function stopSpecialFishHover() {
+    hoverIndex = -1
+    document.getElementById("specialfishhoverprice").style.display = "none"
 }
