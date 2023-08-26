@@ -191,15 +191,16 @@ function getMessages(first) {
     }).then(response => {
         return response.json();
     }).then(json => {
+        var same = false
         if (json.status == "success") {
             var chat = "";
             for (var message in json.messages.reverse()) {
                 chat += json.messages[message] + "<br>"
             }
+            if (chat == document.getElementById("chat").innerHTML) same = true
             document.getElementById("chat").innerHTML = chat
         }
-        var scrollAmount = document.getElementById("chat").scrollTop / (document.getElementById("chat").scrollHeight - document.getElementById("chat").clientHeight)
-        if (scrollAmount > 0.91) {
+        if (!same) {
             document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
         }
         if (first) {
@@ -492,15 +493,16 @@ delay(5).then(() => {
     checkIfLoggedIn();
     getFish();
     getItemCosts();
-    getMessages(true)
     delay(66).then(() => {
         updateLeaderboards();
         drawSpecialFishGraph()
+        getMessages(true)
     })
 
     setInterval(function(){ 
         keepOnline();
         updateLeaderboards();
+        getMessages(false);
     }, 300);
 
     setInterval(function(){ 
@@ -512,7 +514,6 @@ delay(5).then(() => {
 
     setInterval(function(){ 
         checkIfCaptchaed();
-        getMessages(false);
     }, 1000);
 });
 
