@@ -329,19 +329,19 @@ function spin() {
             var int3
         
             int1 = setInterval(function(){
-                i += 8
-                document.getElementById("slot1").style.top = -((i % 226) + 54) + "px"
+                i += 0.5
+                document.getElementById("slot1").style.top = "calc(" + -(i % 11.25) + "vw - 8px)"
             }, 10)
             delay(200).then(() => {
                 int2 = setInterval(function(){
-                    i2 += 8
-                    document.getElementById("slot2").style.top = -((i2 % 226) + 54) + "px"
+                    i2 += 0.5
+                    document.getElementById("slot2").style.top = "calc(" + -(i2 % 11.25) + "vw - 8px)"
                 }, 10)
             })
             delay(400).then(() => {
                 int3 = setInterval(function(){
-                    i3 += 8
-                    document.getElementById("slot3").style.top = -((i3 % 226) + 54) + "px"
+                    i3 += 0.5
+                    document.getElementById("slot3").style.top = "calc(" + -(i3 % 11.25) + "vw - 8px)"
                 }, 10)
             })
         
@@ -370,31 +370,36 @@ function spin() {
                     var slot3value = json.slot3
         
                     var valueToPx = {
-                        2: "-54px",
-                        5: "-96px",
-                        25: "-224px",
-                        100: "-139px",
-                        1000: "-182px"
+                        2: "calc(-2.25vw - 8px)",
+                        5: "calc(-4.5vw - 8px)",
+                        25: "calc(-11.05vw - 8px)",
+                        100: "calc(-6.7vw - 8px)",
+                        1000: "calc(-8.9vw - 8px)"
                     }
         
                     clearInterval(int1)
                     clearInterval(int2)
                     clearInterval(int3)
-                    document.getElementById("slot1").style.top = valueToPx[slot1value];
-                    document.getElementById("slot2").style.top = valueToPx[slot2value];
-                    document.getElementById("slot3").style.top = valueToPx[slot3value];
-                    spinning = false
-        
-                    if (Number(json.winnings) > 0 ) {
-                        document.getElementById("spininfo").innerText = "You won " + formatNumber(Number(json.winnings)) + " fish!"
-                        document.getElementById("spininfo").style.color = "#84ea84";
-                    } else {
-                        document.getElementById("spininfo").innerText = "You lost!"
-                        document.getElementById("spininfo").style.color = "#ea7b7b";
-                    }
-                    delay(2000).then(() => {
-                        document.getElementById("spininfo").innerHTML = "<br>"
+
+                    delay(25).then(() => {
+                        document.getElementById("slot1").style.top = valueToPx[slot1value];
+                        document.getElementById("slot2").style.top = valueToPx[slot2value];
+                        document.getElementById("slot3").style.top = valueToPx[slot3value];
+                        spinning = false
+            
+                        if (Number(json.winnings) > 0 ) {
+                            document.getElementById("spininfo").innerText = "You won " + formatNumber(Number(json.winnings)) + " fish!"
+                            document.getElementById("spininfo").style.color = "#84ea84";
+                        } else {
+                            document.getElementById("spininfo").innerText = "You lost!"
+                            document.getElementById("spininfo").style.color = "#ea7b7b";
+                        }
+                        delay(2000).then(() => {
+                            document.getElementById("spininfo").innerHTML = "<br>"
+                        })
                     })
+
+                    
         
                 });
             })
@@ -689,9 +694,11 @@ function drawSpecialFishGraph() {
         if (json.status == "success") {
             
             var canvas = document.getElementById("specialfishgraph").getContext("2d");
+            var width = document.getElementById("specialfishgraph").width
+            var height = document.getElementById("specialfishgraph").height
 
             canvas.fillStyle = "black";
-            canvas.fillRect(0, 0, 450, 164);
+            canvas.fillRect(0, 0, width, height);
 
             canvas.strokeStyle = 'white';
             canvas.lineWidth = 2;
@@ -703,18 +710,18 @@ function drawSpecialFishGraph() {
 
             canvas.beginPath();
             canvas.moveTo(20, 20);
-            canvas.lineTo(20, 144);
+            canvas.lineTo(20, (height - 20));
             canvas.stroke();
 
             canvas.beginPath();
-            canvas.moveTo(20, 144);
-            canvas.lineTo(430, 144);
+            canvas.moveTo(20, (height - 20));
+            canvas.lineTo((width - 20), (height - 20));
             canvas.stroke();
 
             var fishData = json.graph
 
             canvas.strokeStyle = "#55ff55";
-            canvas.lineWidth = 2;
+            canvas.lineWidth = 3;
 
             var highest = 0
             var lowest = 99999999999999
@@ -726,11 +733,11 @@ function drawSpecialFishGraph() {
 
             for (var i = 0; i < fishData.length; i++) {
 
-                var point = ((fishData[i] - lowest) / highest) * 1.65
+                var point = ((fishData[i] - lowest) / highest) * 2
 
                 canvas.beginPath();
-                canvas.moveTo((410 * ((i) / fishData.length) + 205 / fishData.length) + 20, 144 - (point * 124) - 2);
-                canvas.lineTo((410 * ((i) / fishData.length) + (410 / fishData.length * 1.5)) +20, 144 - ((((fishData[i + 1] - lowest) / highest) * 1.65) * 124) - 2);
+                canvas.moveTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / 2) / fishData.length) + 20, (height - 20) - (point * (height - 40)) - 2);
+                canvas.lineTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / fishData.length * 1.5)) + 20, (height - 20) - ((((fishData[i + 1] - lowest) / highest) * 2) * (height - 40)) - 2);
                 canvas.stroke();
 
             }

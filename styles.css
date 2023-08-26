@@ -888,10 +888,10 @@ input:checked + .slider:before {
 }
 
 .slotmachine {
-  min-width: 450px;
-  min-height: 96px;
-  max-width: 256px;
-  max-height: 96px;
+  min-width: 24%;
+  min-height: 5vw;
+  max-width: 24%;
+  max-height: 5vw;
   margin-top: 16px;
   outline-width: 1px;
   outline-style: solid;
@@ -904,11 +904,10 @@ input:checked + .slider:before {
 }
 
 .specialfixbox {
-  min-width: 450px;
-  min-height: 256px;
-  max-width: 450px;
-  max-height: 256px;
-  margin-top: 16px;
+  min-width: calc(30% + 22px);
+  min-height: 160px;
+  max-width: calc(30% + 22px);
+  max-height: 512px;
   outline-width: 1px;
   outline-style: solid;
   outline-color: #ffffff;

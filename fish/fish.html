@@ -172,28 +172,28 @@
    <button class="nicebutton" style="width:92px; height: 26px;" onclick="sendMessage()">Send</button>
 
    <br><br>
-   <p style="display: inline-block; position: absolute; margin-left: 130px; margin-top: -10px;">Match 3 numbers to win!</p>
+   <p style="display: inline-block; position: absolute; margin-left: calc(5vw - 12px); margin-top: calc(-8px - 0.25vw); text-align: center; font-size: calc(1vw + 2px);">Match 3 numbers to win!</p>
    <div class="slotmachine" style="display: inline-block;">
-    <p id="slot1" style="display: inline-block; position: relative; margin-left: 24px; margin-right: 24px; text-align: center; font-size: 36px; top: -224px;">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px;"> </div> 
-    <p id="slot2" style="display: inline-block; position: relative; margin-left: 24px; margin-right: 24px; text-align: center; font-size: 36px; top: -54px;">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px;"> </div> 
-    <p id="slot3" style="display: inline-block; position: relative; margin-left: 24px; text-align: center; font-size: 36px; top: -54px;">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p>
+    <p id="slot1" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
+    <p id="slot2" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
+    <p id="slot3" style="display: inline-block; position: relative; margin-left: 5%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p>
    </div><br>
    
 
-   <button onclick="spin()" class="nicebutton" style="width: 450px; height: 48px; margin-top: 8px;"> SPIN!</button><br>
-   <input id="betamount" placeholder="Bet" style="margin-top: 8px; width: 446px;">
+   <button onclick="spin()" class="nicebutton" style="width: 24%; height: 48px; margin-top: 8px;"> SPIN!</button><br>
+   <input id="betamount" placeholder="Bet" style="margin-top: 8px; width: calc(24% - 4px);">
    <p id="spininfo"><br></p>
 
-   <div class="specialfixbox" style="position: absolute; margin-left: 468px; margin-top: -251px;"> 
+   <div class="specialfixbox" style="position: absolute; left: calc(59.7% - 16px); margin-top: calc(-235px - 2vw);"> 
     <p class="center" style="position: relative; margin-bottom: 0px;">Special Fish</p><br>
     <div class="longbarseperator" style="position: relative; margin-top: -16px;"></div>
-    <p id="specialfishcost" style="display: inline-block; min-width: 220px; font-size: 16px; text-align: center;">Loading...</p>
-    <div class="navseperator" style="max-height: 14px; margin-top: 16px;"></div>
-    <p id="specialfishsellcost" style="display: inline-block; font-size: 16px; margin-left: 4px; min-width: 220px; text-align: center;">Loading...</p>
+    <p id="specialfishcost" style="display: inline-block; min-height: 24px; font-size: 1svw; text-align: center; margin-right: 7.25%; margin-left: 7.25%; min-width: 1%; margin-top: auto; margin-bottom: auto;">Loading...</p>
+    <div class="navseperator" style="max-height: calc(3vw - 7% - 16px); margin-top: 16px;"></div>
+    <p id="specialfishsellcost" style="display: inline-block;  font-size: 1svw; margin-left: 7.25%; text-align: center;  min-width: 1%;">Loading...</p>
     <div class="longbarseperator" style="position: relative; margin-top: -29px; margin-bottom: -18px;"></div><br><br>
-    <button class="nicebutton" onclick="buyItem('specialFish')" style="position: relative; width: 48.5%; margin-left: 4px; margin-right: 1px; margin-top: -100px;">Buy Special Fish</button>
-    <button class="nicebutton" onclick="buyItem('sellSpecialFish')" style="position: relative; width: 48.5%;">Sell Special Fish</button>
-    <canvas id="specialfishgraph" height="164" width="450"> </canvas>
+    <button class="nicebutton" onclick="buyItem('specialFish')" style="position: relative; width: 48%; min-width: 45%; margin-left: 1%; margin-right: 1%; margin-top: -100px; font-size: calc(0.45vw + 8px);">Buy Special Fish</button>
+    <button class="nicebutton" onclick="buyItem('sellSpecialFish')" style="position: relative; width: 48%; min-width: 45%; font-size: calc(0.45vw + 8px);">Sell Special Fish</button>
+    <canvas id="specialfishgraph" height="328"  width="1000" style=" width: 100%; margin-top: 3px; margin-bottom: -4px;"> </canvas>
    </div>
 	    
 	    
