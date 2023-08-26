@@ -204,7 +204,7 @@ function getMessages(first) {
             document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
         }
         if (first) {
-            delay(100).then(() => { document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight) } ) 
+            delay(250).then(() => { document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight) } ) 
         }
     });
 }
@@ -734,11 +734,11 @@ function drawSpecialFishGraph() {
 
             for (var i = 0; i < fishData.length; i++) {
 
-                var point = ((fishData[i] - lowest) / highest) * 2
+                var point = ((fishData[i] - lowest) / highest) * 2.75
 
                 canvas.beginPath();
                 canvas.moveTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / 2) / fishData.length) + 20, (height - 20) - (point * (height - 40)) - 2);
-                canvas.lineTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / fishData.length * 1.5)) + 20, (height - 20) - ((((fishData[i + 1] - lowest) / highest) * 2) * (height - 40)) - 2);
+                canvas.lineTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / fishData.length * 1.5)) + 20, (height - 20) - ((((fishData[i + 1] - lowest) / highest) * 2.75) * (height - 40)) - 2);
                 canvas.stroke();
 
             }
