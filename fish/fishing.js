@@ -496,7 +496,7 @@ delay(5).then(() => {
     setInterval(function(){ 
         keepOnline();
         updateLeaderboards();
-    }, 500);
+    }, 300);
 
     setInterval(function(){ 
         checkIfLoggedIn();
