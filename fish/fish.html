@@ -84,6 +84,14 @@
           <div class="longbarseperator" style="margin-top: 440px; max-width: 66.6%; min-width: 66.6%; margin-left: 7px;"> </div>
           <p style="margin-left: 8px; margin-top: -26px; min-width: 66%; display: inline-block; color: #bbbbbb; font-size: 14px;"> Get 10% extra fish from sharks.</p>
           <button class="nicebutton" style="display: inline; width: 29%; margin-left: 9px; height: 46px; margin-top: -10px;" onclick="buyItem('rareShark')"> Buy</button>
+	      
+          <br><br>
+
+          <p style="margin-left: 8px; margin-top: 2px; min-width: 66%; display: inline-block;">Whale</p>
+          <p style="margin-left: 8px; margin-top: -26px; display: inline;" id="whalecost"> Loading...</p>
+          <div class="longbarseperator" style="margin-top: 440px; max-width: 66.6%; min-width: 66.6%; margin-left: 7px;"> </div>
+          <p style="margin-left: 8px; margin-top: -26px; min-width: 66%; display: inline-block; color: #bbbbbb; font-size: 14px;"> Get 2x extra fish from sharks.</p>
+          <button class="nicebutton" style="display: inline; width: 29%; margin-left: 9px; height: 46px; margin-top: -10px;" onclick="buyItem('whale')"> Buy</button>
 
           
           <br>
@@ -98,10 +106,10 @@
     <h2 class="leaderboardtext">Leaderboards:</h2>
     <select name="type" id="leaderboardtype" class="leaderboardselect">
         <option value="fish">Fish</option>
-	      <option value="alltimefish">All Time Fish</option>
+	<option value="alltimefish">All Time Fish</option>
         <option value="rarefish">Rare Fish</option>
         <option value="veryrarefish">Very Rare Fish</option> 
-	      <option value="sharks">Sharks</option>
+	<option value="sharks">Sharks</option>
         <option value="raresharks">Rare Sharks</option>
         <option value="amountgambled">Fish Gambled</option>
 	<option value="specialfish">Special Fish</option>
@@ -123,6 +131,8 @@
     <p class="fishtype" style="max-width: 10%; min-width: 65px;">Rare Sharks </p>
     <div class="navseperator" style="max-height: 33px; top:-1px"></div>
     <p class="fishtype" style="max-width: 10%; min-width: 65px;">Special Fish</p>
+    <div class="navseperator" style="max-height: 33px; top:-1px"></div>
+    <p class="fishtype" style="max-width: 10%; min-width: 65px;">Whales</p>
 
 
     <div class="longbarseperator"></div>
@@ -134,6 +144,7 @@
     <p class="fishdata" id="sharkcount" style="max-width: 10%; min-width: 70px;">loading...</p>
     <p class="fishdata" id="raresharkcount" style="max-width: 10%; min-width: 65px;">loading...</p>
     <p class="fishdata" id="specialfishcount" style="max-width: 10%; min-width: 60px;">loading...</p>
+    <p class="fishdata" id="whalecount" style="max-width: 10%; min-width: 60px;">loading...</p>
 
    </div>
 
