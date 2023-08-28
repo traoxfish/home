@@ -229,6 +229,7 @@ function getItemCosts(type) {
             document.getElementById("veryrarefishcost").textContent = formatNumber(json.veryRareFishCost) + " fish"
             document.getElementById("sharkcost").textContent = formatNumber(json.sharkCost) + " fish"
             document.getElementById("raresharkcost").textContent = formatNumber(json.rareSharkCost) + " fish"
+            document.getElementById("whalecost").textContent = formatNumber(json.whaleCost) + " fish"
             document.getElementById("specialfishcost").textContent = "Buy Price: " + formatNumber(json.specialFishCost) + " fish"
             document.getElementById("specialfishsellcost").textContent = "Sell Price: " + formatNumber(json.specialFishSellCost) + " fish"
         }
