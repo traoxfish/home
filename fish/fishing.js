@@ -77,21 +77,21 @@ function sendFish() {
 
 function formatNumber(value) {
     if (value >= 1010000000000000000)
-        return (value / 1000000000000000).toFixed(2) + 'QQ'
+        return (value / 1000000000000000000).toFixed(2) + 'QQ'
     if (value >= 1000000000000000000)
-        return (value / 1000000000000000).toFixed(0) + 'QQ'
+        return (value / 1000000000000000000).toFixed(0) + 'QQ'
     if (value >= 1010000000000000)
-        return (value / 1000000000000).toFixed(2) + 'Q'
+        return (value / 1000000000000000).toFixed(2) + 'Q'
     if (value >= 1000000000000000)
-        return (value / 1000000000000).toFixed(0) + 'Q'
+        return (value / 1000000000000000).toFixed(0) + 'Q'
     if (value >= 1010000000000)
-        return (value / 1000000000).toFixed(2) + 'T'
+        return (value / 1000000000000).toFixed(2) + 'T'
     if (value >= 1000000000000)
-        return (value / 1000000000).toFixed(0) + 'T'
+        return (value / 1000000000000).toFixed(0) + 'T'
     if (value >= 1010000000)
-        return (value / 1000000).toFixed(2) + 'B'
+        return (value / 1000000000).toFixed(2) + 'B'
     if (value >= 1000000000)
-        return (value / 1000000).toFixed(0) + 'B'
+        return (value / 1000000000).toFixed(0) + 'B'
     if (value >= 1010000)
         return (value / 1000000).toFixed(2) + 'M'
     if (value >= 1000000)
