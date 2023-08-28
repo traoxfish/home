@@ -545,7 +545,7 @@ setInterval(function(){
         document.getElementById("fishbutton").className = "innactivebutton"
     } else {document.getElementById("fishbutton").className = "fishbutton"}
 
-}, 400);
+}, 500);
 
 function getFish() {
     const data = {
