@@ -568,6 +568,7 @@ function getFish() {
             document.getElementById("sharkcount").textContent = formatNumber(json.sharks)
             document.getElementById("raresharkcount").textContent = formatNumber(json.rareSharks)
             document.getElementById("specialfishcount").textContent = formatNumber(json.specialFish)
+            document.getElementById("whalecount").textContent = formatNumber(json.whales)
         }
     });
 }
