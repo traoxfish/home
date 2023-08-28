@@ -556,6 +556,7 @@ input {
   position: fixed;
   z-index: 3;
   display: none;
+  overflow-y: hide;
 }
 
 .rarefishinfo {
@@ -572,6 +573,7 @@ input {
   max-width: 512px;
   max-height: 512px;
   z-index: 100;
+  overflow-y: scroll;
 }
 
 .shoptitle {
