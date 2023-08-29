@@ -529,16 +529,16 @@ delay(5).then(() => {
     }, 300);
 
     setInterval(function(){ 
-        checkIfLoggedIn();
         getFish();
-        getItemCosts();
         getSpecialFishGraph()
     }, 2000);
 
     setInterval(function(){ 
-        checkIfCaptchaed();
+        getItemCosts()
+        checkIfCaptchaed()
         getSendLogs()
         getFishPixels()
+        checkIfLoggedIn()
     }, 1000);
 });
 
