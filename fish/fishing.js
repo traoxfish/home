@@ -804,7 +804,7 @@ function drawGraph() {
 
 setInterval(() => {
     drawGraph()
-}, 10)
+}, 40)
 document.getElementById("specialfishhoverprice").style.display = "none"
 function specialFishHover(event) {
     var rect = event.target.getBoundingClientRect();
@@ -926,7 +926,7 @@ function drawPixelFish() {
 setInterval(function() {
     document.getElementById("colorselectorcolor").style.backgroundColor = document.getElementById("colorinput").value
     drawPixelFish()
-}, 50)
+}, 60)
 
 function getPixelPlacePos(event) {
     var rect = event.target.getBoundingClientRect();
