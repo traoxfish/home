@@ -916,3 +916,40 @@ input:checked + .slider:before {
   background-color: #1d1a2c;
   display: inline-block;
 }
+
+.sendlogs {
+  background-color: #1d1a2c;
+  position: fixed;
+  display: block;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  left: calc(50% - 256px);
+  bottom: calc(50% - 256px);
+  min-width: 512px;
+  min-height: 512px;
+  max-width: 512px;
+  max-height: 512px;
+  z-index: 100;
+  overflow-y: scroll;
+}
+
+.sendlog {
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  position: relative;
+  margin-left: 2%;
+  margin-top: 2%;
+  width: 96%;
+  height: 128px;
+}
+
+.sendlogtext {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 2%;
+  transform: translate(0, 15%);
+  font-size: 26px;
+  line-height: 32px;
+}

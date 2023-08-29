@@ -515,6 +515,7 @@ delay(5).then(() => {
     checkIfLoggedIn();
     getFish();
     getItemCosts();
+    getSendLogs()
     delay(66).then(() => {
         updateLeaderboards();
         getSpecialFishGraph()
@@ -536,6 +537,7 @@ delay(5).then(() => {
 
     setInterval(function(){ 
         checkIfCaptchaed();
+        getSendLogs()
     }, 1000);
 });
 
@@ -809,4 +811,45 @@ function specialFishHover(event) {
 function stopSpecialFishHover() {
     hoverIndex = -1
     document.getElementById("specialfishhoverprice").style.display = "none"
+}
+
+function closeLogsBg() {
+    document.getElementById("logsbg").style.display = "none";
+}
+
+function openSendLogs() {
+    document.getElementById("logsbg").style.display = "initial";
+}
+
+function getSendLogs() {
+
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getsendlogs', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            var sendlogs = document.getElementById("sendlogs")
+            for (var i = sendlogs.children.length; i < json.logs.length - sendlogs.children.length; i++) {
+                var log = json.logs[i]
+                var logDiv = document.createElement('div')
+                var logMsg = document.createElement('p')
+                logMsg.innerHTML = log.origin.charAt(0).toUpperCase() + log.origin.slice(1) + ": " + log.user + "<br>Amount: " + formatNumber(Number(log.amount)) + " fish<br>Date: " + log.timestamp
+                logMsg.className = "sendlogtext"
+                logDiv.appendChild(logMsg)
+                logDiv.className = "sendlog"
+                sendlogs.appendChild(logDiv)
+            }
+        }
+    });
+
 }
