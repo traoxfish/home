@@ -146,6 +146,12 @@ function buyItem(type) {
                 document.getElementById(type.toLowerCase()  + "cost").textContent = "Buy Price: " + formatNumber(json.newCost) + " fish"
             } else if (type == "sellSpecialFish") {
                 document.getElementById(type.toLowerCase()  + "cost").textContent = "Sell Price: " + formatNumber(json.newCost) + " fish"
+                if (json.success != "success") {
+                    document.getElementById("specialfishstatus").textText = json.error;
+                    delay(2000).then(() => {
+                        document.getElementById("specialfishstatus").innerHTML = "<br>";
+                    })
+                }
             }
             getFish();
         }
