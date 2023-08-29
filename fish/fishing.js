@@ -926,7 +926,7 @@ function drawPixelFish() {
 setInterval(function() {
     document.getElementById("colorselectorcolor").style.backgroundColor = document.getElementById("colorinput").value
     drawPixelFish()
-}, 20)
+}, 50)
 
 function getPixelPlacePos(event) {
     var rect = event.target.getBoundingClientRect();
