@@ -150,8 +150,8 @@ function buyItem(type) {
             }
             getFish();
         }
-        if (json.success != "success" && type == "specialFish") {
-            document.getElementById("specialfishstatus").innerText = json.error;
+        if (json.success != "success" && type == "specialFish" && json.error != undefined) {
+            document.getElementById("specialfishstatus").innerText = "Error: " + json.error;
             delay(2000).then(() => {
                 document.getElementById("specialfishstatus").innerHTML = "<br>";
             })
