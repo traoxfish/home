@@ -108,7 +108,6 @@
     </div>
   </div>
  
-
    <br><br>
 
    <div class="leaderboards">
@@ -195,19 +194,8 @@
    <button class="nicebutton" style="width:92px; height: 26px;" onclick="sendMessage()">Send</button>
 
    <br><br>
-   <p style="display: inline-block; position: absolute; margin-left: calc(5vw - 12px); margin-top: calc(-8px - 0.25vw); text-align: center; font-size: calc(1vw + 2px);">Match 3 numbers to win!</p>
-   <div class="slotmachine" style="display: inline-block;">
-    <p id="slot1" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
-    <p id="slot2" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
-    <p id="slot3" style="display: inline-block; position: relative; margin-left: 5%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p>
-   </div><br>
    
-
-   <button onclick="spin()" class="nicebutton" style="width: 24%; height: 48px; margin-top: 8px;"> SPIN!</button><br>
-   <input id="betamount" placeholder="Bet" style="margin-top: 8px; width: calc(24% - 4px);">
-   <p id="spininfo"><br></p>
-
-   <div class="specialfixbox" style="position: absolute; left: calc(59.7% - 16px); margin-top: calc(-235px - 2vw);"> 
+   <div class="specialfixbox" style="position: absolute; left: calc(59.7% - 16px); margin-top: calc(5vw - 98px);"> 
     <p class="unselectable" id="specialfishhoverprice" style="position: absolute; margin-top: calc(3.9vw + 42px); font-size: calc(0.45vw + 8px); text-align: center; left: 0%;">256k</p>
     <p class="center" style="position: relative; margin-bottom: 0px;">Special Fish</p><br>
     <div class="longbarseperator" style="position: relative; margin-top: -16px;"></div>
@@ -219,8 +207,33 @@
     <button class="nicebutton" onclick="buyItem('sellSpecialFish')" style="position: relative; width: 48%; min-width: 45%; font-size: calc(0.45vw + 8px);">Sell Special Fish</button>
     <canvas onmousemove="specialFishHover(event)"  onmouseleave="stopSpecialFishHover()" id="specialfishgraph" height="328"  width="1000" style=" width: 100%; margin-top: 3px; margin-bottom: -4px;"> </canvas>
    </div>
-	    
-	    
+   
+   <div>
+
+      <div style="display: block;">
+        <p style="display: inline-block; position: absolute; margin-left: calc(5vw - 12px); margin-top: calc(-8px - 0.25vw); text-align: center; font-size: calc(1vw + 2px);">Match 3 numbers to win!</p>
+        <div class="slotmachine" style="display: inline-block;">
+        <p id="slot1" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
+        <p id="slot2" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
+        <p id="slot3" style="display: inline-block; position: relative; margin-left: 5%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p>
+        </div><br>
+
+        <button onclick="spin()" class="nicebutton" style="width: 24%; height: 48px; margin-top: 8px; display:inline-block"> SPIN!</button><br>
+        <input id="betamount" placeholder="Bet" style="margin-top: 8px; width: calc(24% - 4px); display:inline-block">
+        <p id="spininfo" style="display:inline-block"><br></p>
+      </div>
+      <div onmouseleave="exitPixelCanvas()" onmousedown="placePixel(event)" onmousemove="getPixelPlacePos(event)" class="pixelfish" style="margin-top: calc(-5.6% - 121px);">
+          <canvas id="pixelfishcanvas" height="1000" width="1000" style="position: absolute; width: 22.25%; margin-left: 0.2%; margin-top: 0.2%;">
+      </div>
+      <br>
+      <input id="colorinput" style="display: inline-block; position: relative; margin-left: 25%; width: 10%; margin-top: 2px;" placeholder="Color (ex: #658fba)">
+      <div id="colorselectorcolor" style="min-width:26px; min-height:26px; background-color: white; display: inline-block; position: absolute; margin-left: 4px; margin-top: 2px; outline-style: solid; outline-width: 1px; outline-color: white;"></div>
+      <p style="display: inline-block; position: absolute; margin-left: 36px; margin-top: 4px;">Cost: 1 special fish</p>
+      <p style="display: inline-block; position: absolute; margin-left: 36px; margin-top: 32px; font-size: 10px; color: #bbbbbb; margin-left: -9.3%;">Info: This canvas is shared by everyone. Placing 1 pixel costs 1 special fish.</p>
+   </div>
+
+   
+   
 
    <div class="captcha" id="captcha">
    <form action="https://traoxfish.us-3.evennode.com/submitcaptcha" method="POST" id="g-captcha">

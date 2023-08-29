@@ -953,3 +953,16 @@ input:checked + .slider:before {
   font-size: 26px;
   line-height: 32px;
 }
+
+.pixelfish {
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  min-width: 25%;
+  min-height: calc(22.75vw - 8px);
+  max-width: 25%;
+  max-height: calc(22.75vw - 8px);
+  display: inline-block;
+  margin-left: 25%;
+  background-color: #1d1a2c;
+}

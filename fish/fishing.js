@@ -538,6 +538,7 @@ delay(5).then(() => {
     setInterval(function(){ 
         checkIfCaptchaed();
         getSendLogs()
+        getFishPixels()
     }, 1000);
 });
 
@@ -727,71 +728,71 @@ function getSpecialFishGraph() {
 function drawGraph() {
     var canvas = document.getElementById("specialfishgraph").getContext("2d");
 
-            if (graphPoints == undefined) return
+    if (graphPoints == undefined) return
 
-            var width = document.getElementById("specialfishgraph").width
-            var height = document.getElementById("specialfishgraph").height
+    var width = document.getElementById("specialfishgraph").width
+    var height = document.getElementById("specialfishgraph").height
 
-            canvas.fillStyle = "black";
-            canvas.fillRect(0, 0, width, height);
+    canvas.fillStyle = "black";
+    canvas.fillRect(0, 0, width, height);
 
-            canvas.strokeStyle = 'white';
-            canvas.lineWidth = 2;
+    canvas.strokeStyle = 'white';
+    canvas.lineWidth = 2;
 
-            canvas.beginPath();
-            canvas.moveTo(20, 20);
-            canvas.lineTo(20, 20);
-            canvas.stroke();
+    canvas.beginPath();
+    canvas.moveTo(20, 20);
+    canvas.lineTo(20, 20);
+    canvas.stroke();
 
-            canvas.beginPath();
-            canvas.moveTo(20, 20);
-            canvas.lineTo(20, (height - 20));
-            canvas.stroke();
+    canvas.beginPath();
+    canvas.moveTo(20, 20);
+    canvas.lineTo(20, (height - 20));
+    canvas.stroke();
 
-            canvas.beginPath();
-            canvas.moveTo(20, (height - 20));
-            canvas.lineTo((width - 20), (height - 20));
-            canvas.stroke();
+    canvas.beginPath();
+    canvas.moveTo(20, (height - 20));
+    canvas.lineTo((width - 20), (height - 20));
+    canvas.stroke();
 
-            var fishData = graphPoints
+    var fishData = graphPoints
 
-            canvas.strokeStyle = "#55ff55";
-            canvas.lineWidth = 3;
+    canvas.strokeStyle = "#55ff55";
+    canvas.lineWidth = 3;
 
-            var highest = 0
-            var lowest = 99999999999999
+    var highest = 0
+    var lowest = 99999999999999
 
-            for (var i in fishData) {
-                if (fishData[i] > highest) highest = fishData[i]
-                if (fishData[i] < lowest) lowest = fishData[i]
-            }
+    for (var i in fishData) {
+        if (fishData[i] > highest) highest = fishData[i]
+        if (fishData[i] < lowest) lowest = fishData[i]
+    }
 
-            for (var i = 0; i < fishData.length; i++) {
+    for (var i = 0; i < fishData.length; i++) {
 
-                var point = ((fishData[i] - lowest) / (highest - lowest)) * 0.9
+        var point = ((fishData[i] - lowest) / (highest - lowest)) * 0.9
 
-                canvas.beginPath();
-                canvas.moveTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / 2) / fishData.length) + 20, (height - 20) - (point * (height - 40)) - 2);
-                canvas.lineTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / fishData.length * 1.5)) + 20, (height - 20) - ((((fishData[i + 1] - lowest) / (highest - lowest)) * 0.9) * (height - 40)) - 2);
-                canvas.stroke();
+        canvas.beginPath();
+        canvas.moveTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / 2) / fishData.length) + 20, (height - 20) - (point * (height - 40)) - 2);
+        canvas.lineTo(((width - 40) * ((i) / fishData.length) + ((width - 40) / fishData.length * 1.5)) + 20, (height - 20) - ((((fishData[i + 1] - lowest) / (highest - lowest)) * 0.9) * (height - 40)) - 2);
+        canvas.stroke();
 
-            }
+    }
 
-            if (hoverIndex != -1) {
+    if (hoverIndex != -1) {
 
-                canvas.strokeStyle = 'white';
-                canvas.lineWidth = 1;
+        canvas.strokeStyle = 'white';
+        canvas.lineWidth = 1;
 
-                canvas.beginPath();
-                canvas.arc(((width - 40) * (hoverIndex / graphPoints.length)) + 20, (height - 20) - ((((graphPoints[hoverIndex] - lowest) / (highest - lowest)) * 0.9) * (height - 40)) - 2, 8, 0, 2 * Math.PI, false);
-                canvas.stroke();
+        canvas.beginPath();
+        canvas.arc(((width - 40) * (hoverIndex / graphPoints.length)) + 20, (height - 20) - ((((graphPoints[hoverIndex] - lowest) / (highest - lowest)) * 0.9) * (height - 40)) - 2, 8, 0, 2 * Math.PI, false);
+        canvas.stroke();
 
-                canvas.beginPath();
-                canvas.moveTo(((width - 40) * (hoverIndex / graphPoints.length)) + 20, (height - 20) - ((((graphPoints[hoverIndex] - lowest) / (highest - lowest)) * 0.9) * (height - 40)) - 2);
-                canvas.lineTo(((width - 40) * (hoverIndex / graphPoints.length)) + 20, 40);
-                canvas.stroke();
+        canvas.beginPath();
+        canvas.moveTo(((width - 40) * (hoverIndex / graphPoints.length)) + 20, (height - 20) - ((((graphPoints[hoverIndex] - lowest) / (highest - lowest)) * 0.9) * (height - 40)) - 2);
+        canvas.lineTo(((width - 40) * (hoverIndex / graphPoints.length)) + 20, 40);
+        canvas.stroke();
 
-            }
+    }
 }
 
 setInterval(() => {
@@ -853,3 +854,131 @@ function getSendLogs() {
     });
 
 }
+
+var cursorx = -1
+var cursory = -1
+
+var fishPixeldata = [] 
+
+for (var i = 0; i < 100; i ++) { 
+    for (var j = 0; j < 100; j++) { 
+        fishPixeldata[i * 100 + j] = "#FFFFFF"
+    }
+}
+
+function drawPixelFish() {
+    var canvas = document.getElementById("pixelfishcanvas").getContext("2d");
+    var width = document.getElementById("pixelfishcanvas").width
+    var height = document.getElementById("pixelfishcanvas").height
+
+    canvas.fillStyle = "white";
+    canvas.fillRect(0, 0, width, height);
+
+    canvas.strokeStyle = 'white';
+
+    for (var i = 0; i < 100; i ++) { 
+        for (var j = 0; j < 100; j++) { 
+            canvas.fillStyle = fishPixeldata[i * 100 + j]
+            canvas.fillRect(i * 10, j * 10, 10, 10);
+        }
+    }
+
+    if (cursorx != -1 && cursory != -1) {
+
+        var x = cursorx
+        var y = cursory
+
+        canvas.lineWidth = 2;
+        canvas.strokeStyle = 'black';
+    
+        canvas.beginPath();
+        canvas.moveTo(x * 10, y * 10);
+        canvas.lineTo(x * 10, (y - 1) * 10);
+        canvas.stroke();
+    
+        canvas.beginPath();
+        canvas.moveTo(x * 10, (y - 1) * 10);
+        canvas.lineTo((x - 1) * 10, (y - 1) * 10);
+        canvas.stroke();
+    
+        canvas.beginPath();
+        canvas.moveTo((x - 1) * 10, (y - 1) * 10);
+        canvas.lineTo((x - 1) * 10, y * 10);
+        canvas.stroke();
+    
+        canvas.beginPath();
+        canvas.moveTo((x - 1) * 10, y * 10);
+        canvas.lineTo(x * 10, y * 10);
+        canvas.stroke();
+
+    }
+}
+
+
+
+setInterval(function() {
+    document.getElementById("colorselectorcolor").style.backgroundColor = document.getElementById("colorinput").value
+    drawPixelFish()
+}, 20)
+
+function getPixelPlacePos(event) {
+    var rect = event.target.getBoundingClientRect();
+    var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 100)
+    var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 100) + 100
+
+    cursorx = x
+    cursory = y
+}
+
+function exitPixelCanvas() {
+    cursorx = -1
+    cursory = -1
+}
+
+function getFishPixels() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getpixelart', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            fishPixeldata = json.art
+        }
+    });
+}
+
+function placePixel(event) {
+    var rect = event.target.getBoundingClientRect();
+    var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 100)
+    var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 100) + 100
+
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "index": ((x - 1) * 100) + (y - 1),
+        "color": document.getElementById("colorinput").value
+    };
+    fetch('https://traoxfish.us-3.evennode.com/placepixel', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+
+    });
+}
+
+drawPixelFish()
