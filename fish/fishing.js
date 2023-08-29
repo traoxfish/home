@@ -839,7 +839,7 @@ function getSendLogs() {
     }).then(json => {
         if (json.status == "success") {
             var sendlogs = document.getElementById("sendlogs")
-            for (var i = sendlogs.children.length; i < json.logs.length - sendlogs.children.length; i++) {
+            for (var i = sendlogs.children.length; i < json.logs.length; i++) {
                 var log = json.logs[i]
                 var logDiv = document.createElement('div')
                 var logMsg = document.createElement('p')
