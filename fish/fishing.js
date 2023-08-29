@@ -1,3 +1,4 @@
+
 function getCookie(cname) {
     let name = cname + "=";
     let ca = document.cookie.split(';');
@@ -144,16 +145,16 @@ function buyItem(type) {
             document.getElementById(type.toLowerCase()  + "cost").textContent = formatNumber(json.newCost) + " fish"
             if (type == "specialFish") {
                 document.getElementById(type.toLowerCase()  + "cost").textContent = "Buy Price: " + formatNumber(json.newCost) + " fish"
-                if (json.success != "success") {
-                    document.getElementById("specialfishstatus").textText = json.error;
-                    delay(2000).then(() => {
-                        document.getElementById("specialfishstatus").innerHTML = "<br>";
-                    })
-                }
             } else if (type == "sellSpecialFish") {
                 document.getElementById(type.toLowerCase()  + "cost").textContent = "Sell Price: " + formatNumber(json.newCost) + " fish"
             }
             getFish();
+        }
+        if (json.success != "success" && type == "specialFish") {
+            document.getElementById("specialfishstatus").innerText = json.error;
+            delay(2000).then(() => {
+                document.getElementById("specialfishstatus").innerHTML = "<br>";
+            })
         }
     });
 }
