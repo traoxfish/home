@@ -1028,6 +1028,7 @@ function getPixelPlacePos(event) {
 }
 
 function exitPixelCanvas() {
+    down = false
     cursorx = -1
     cursory = -1
 }
@@ -1055,8 +1056,11 @@ function getFishPixels() {
 }
 
 var holdInterval
+var down = false
 
-function placePixel(event, down) {
+function placePixel(event, down1) {
+
+    down = down1
 
     if (down == false) {
         clearInterval(holdInterval)
