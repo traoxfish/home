@@ -495,6 +495,9 @@ function getLeaderboards() {
 function logout() {
     document.cookie = "loginKey=";
     document.cookie = "username=";
+    delay(5).then(() => {
+        window.location.replace("https://www.traox.dev/fish");
+    })
 }
 
 var firstMsg = false
