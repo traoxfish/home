@@ -900,8 +900,6 @@ function drawPixelFish() {
                 var lum = getLuminance(HEXToVBColor(fishPixeldata[i * 200 + j] || "#ffffff"))
         
                 canvas.lineWidth = 2;
-        
-                console.log(lum)
 
                 canvas.strokeStyle = lum < 20 ? 'white' : 'black';
         
@@ -1056,31 +1054,53 @@ function getFishPixels() {
     });
 }
 
-function placePixel(event) {
-    var rect = event.target.getBoundingClientRect();
-    var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 200)
-    var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 200) + 200
+var holdInterval
 
-    
+function placePixel(event, down) {
 
-    const data = {
-        "username": getCookie("username"),
-        "loginKey": getCookie("loginKey"),
-        "index": ((x - 1) * 200) + (y - 1),
-        "color": color
-    };
-    fetch('https://traoxfish.us-3.evennode.com/placepixel', {
-        method: 'POST',
-        credentials: "same-origin",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    }).then(response => {
-        return response.json();
-    }).then(json => {
-        drawPixelFish()
-    });
+    if (down == false) {
+        clearInterval(holdInterval)
+        return
+    } else {
+        const data = {
+            "username": getCookie("username"),
+            "loginKey": getCookie("loginKey"),
+            "index": lastIndex,
+            "color": color
+        };
+        fetch('https://traoxfish.us-3.evennode.com/placepixel', {
+            method: 'POST',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }).then(response => {
+            return response.json();
+        }).then(json => {
+        });
+    }
+
+    holdInterval = setInterval(function() {
+        const data = {
+            "username": getCookie("username"),
+            "loginKey": getCookie("loginKey"),
+            "index": lastIndex,
+            "color": color
+        };
+        fetch('https://traoxfish.us-3.evennode.com/placepixel', {
+            method: 'POST',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }).then(response => {
+            return response.json();
+        }).then(json => {
+            
+        });
+    }, 20)
 }
 
 drawPixelFish()
