@@ -869,7 +869,7 @@ var fishPixeldata = []
 
 for (var i = 0; i < 100; i ++) { 
     for (var j = 0; j < 100; j++) { 
-        fishPixeldata[i * 100 + j] = "#FFFFFF"
+        fishPixeldata[i * 100 + j] = "#FFF"
     }
 }
 
@@ -885,39 +885,47 @@ function drawPixelFish() {
 
     for (var i = 0; i < 100; i ++) { 
         for (var j = 0; j < 100; j++) { 
+
             canvas.fillStyle = fishPixeldata[i * 100 + j]
             canvas.fillRect(i * 10, j * 10, 10, 10);
+            
+            if (i * 100 + j == lastIndex) {
+                var x = i + 1
+                var y = j + 1
+        
+                if (fishPixeldata[i * 100 + j] == undefined) return
+        
+                var rgb = hexToRgb(fishPixeldata[i * 100 + j])
+        
+                var lum = getLuminance(HEXToVBColor(fishPixeldata[i * 100 + j]))
+        
+                canvas.lineWidth = 2;
+        
+                canvas.strokeStyle = lum < 20 ? 'white' : 'black';
+        
+                canvas.beginPath();
+                canvas.moveTo((x * 10) - 1, (y * 10) - 1);
+                canvas.lineTo(x * 10 - 1, (y - 1) * 10  + 1);
+                canvas.stroke();
+        
+                canvas.beginPath();
+                canvas.moveTo(x * 10 - 1, (y - 1) * 10 + 1);
+                canvas.lineTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
+                canvas.stroke();
+        
+                canvas.beginPath();
+                canvas.moveTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
+                canvas.lineTo((x - 1) * 10 + 1, y * 10 -1);
+                canvas.stroke();
+        
+                canvas.beginPath();
+                canvas.moveTo((x - 1) * 10 + 1, y * 10 - 1);
+                canvas.lineTo(x * 10 - 1, y * 10 - 1);
+                canvas.stroke();
+
+            }
+            
         }
-    }
-
-    if (cursorx != -1 && cursory != -1) {
-
-        var x = cursorx
-        var y = cursory
-
-        canvas.lineWidth = 2;
-        canvas.strokeStyle = 'black';
-    
-        canvas.beginPath();
-        canvas.moveTo(x * 10, y * 10);
-        canvas.lineTo(x * 10, (y - 1) * 10);
-        canvas.stroke();
-    
-        canvas.beginPath();
-        canvas.moveTo(x * 10, (y - 1) * 10);
-        canvas.lineTo((x - 1) * 10, (y - 1) * 10);
-        canvas.stroke();
-    
-        canvas.beginPath();
-        canvas.moveTo((x - 1) * 10, (y - 1) * 10);
-        canvas.lineTo((x - 1) * 10, y * 10);
-        canvas.stroke();
-    
-        canvas.beginPath();
-        canvas.moveTo((x - 1) * 10, y * 10);
-        canvas.lineTo(x * 10, y * 10);
-        canvas.stroke();
-
     }
 }
 
@@ -929,16 +937,92 @@ setInterval(function() {
     document.getElementById("fullscreencolorselectorcolor").style.backgroundColor = document.getElementById("colorinputfullscreen").value
     if (fullscreen) color = document.getElementById("colorinputfullscreen").value
     else color = document.getElementById("colorinput").value
-    drawPixelFish()
-}, 60)
+}, 10)
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+}  
+
+function HEXToVBColor(rrggbb) {
+    var bbggrr = rrggbb.substr(4, 2) + rrggbb.substr(2, 2) + rrggbb.substr(0, 2);
+    return parseInt(bbggrr, 16);
+}
+
+function getLuminance(argb) {
+    lum= (   77  * ((argb>>16)&255) 
+               + 150 * ((argb>>8)&255) 
+               + 29  * ((argb)&255))>>8;
+    return lum;
+}
+
+var lastIndex = -1
 
 function getPixelPlacePos(event) {
     var rect = event.target.getBoundingClientRect();
+
+    var lastx = event.clientX
+    var lasty = event.clientY
+
     var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 100)
     var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 100) + 100
 
     cursorx = x
     cursory = y
+
+    var canvas = document.getElementById("pixelfishcanvas").getContext("2d");
+
+    var index = ((cursorx - 1) * 100) + cursory - 1
+
+    if (lastIndex != index) {
+        canvas.fillStyle = fishPixeldata[lastIndex]
+        var i1 = Math.floor(lastIndex / 100)
+        var j1 = lastIndex % 100
+        canvas.fillRect(i1 * 10, j1 * 10, 10, 10);
+    }
+
+    if (cursorx != -1 && cursory != -1) {
+
+        var x = cursorx
+        var y = cursory
+
+        if (fishPixeldata[index] == undefined) return
+
+        var rgb = hexToRgb(fishPixeldata[index])
+
+        var lum = getLuminance(HEXToVBColor(fishPixeldata[index]))
+
+        canvas.lineWidth = 2;
+
+        canvas.strokeStyle = lum < 20 ? 'white' : 'black';
+
+        canvas.beginPath();
+        canvas.moveTo((x * 10) - 1, (y * 10) - 1);
+        canvas.lineTo(x * 10 - 1, (y - 1) * 10  + 1);
+        canvas.stroke();
+
+        canvas.beginPath();
+        canvas.moveTo(x * 10 - 1, (y - 1) * 10 + 1);
+        canvas.lineTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
+        canvas.stroke();
+
+        canvas.beginPath();
+        canvas.moveTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
+        canvas.lineTo((x - 1) * 10 + 1, y * 10 -1);
+        canvas.stroke();
+
+        canvas.beginPath();
+        canvas.moveTo((x - 1) * 10 + 1, y * 10 - 1);
+        canvas.lineTo(x * 10 - 1, y * 10 - 1);
+        canvas.stroke();
+
+    }
+
+    lastIndex = index
 }
 
 function exitPixelCanvas() {
@@ -963,6 +1047,7 @@ function getFishPixels() {
     }).then(json => {
         if (json.status == "success") {
             fishPixeldata = json.art
+            drawPixelFish()
         }
     });
 }
