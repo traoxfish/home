@@ -517,9 +517,11 @@ function checkIfLoggedIn() {
         return response.json();
     }).then(json => {
         if (getCookie("loginKey") == "") {
-            if (!firstMsg) alert("You are not logged in! Visit https://www.traox.dev/fish to log in. You wont be able to see any data untill you are logged in.")
-            firstMsg = true
-            return
+            delay(1000).then(() => {
+                if (!firstMsg) alert("You are not logged in! Visit https://www.traox.dev/fish to log in. You wont be able to see any data untill you are logged in.")
+                firstMsg = true
+                return  
+            })
         }
         if (json.validKey == false) {
             window.location.replace("https://www.traox.dev/fish");
