@@ -867,9 +867,9 @@ var cursory = -1
 
 var fishPixeldata = [] 
 
-for (var i = 0; i < 100; i ++) { 
-    for (var j = 0; j < 100; j++) { 
-        fishPixeldata[i * 100 + j] = "#FFF"
+for (var i = 0; i < 200; i ++) { 
+    for (var j = 0; j < 200; j++) { 
+        fishPixeldata[i * 200 + j] = "#FFF"
     }
 }
 
@@ -883,21 +883,21 @@ function drawPixelFish() {
 
     canvas.strokeStyle = 'white';
 
-    for (var i = 0; i < 100; i ++) { 
-        for (var j = 0; j < 100; j++) { 
+    for (var i = 0; i < 200; i ++) { 
+        for (var j = 0; j < 200; j++) { 
 
-            canvas.fillStyle = fishPixeldata[i * 100 + j]
+            canvas.fillStyle = fishPixeldata[i * 200 + j]
             canvas.fillRect(i * 10, j * 10, 10, 10);
-            
-            if (i * 100 + j == lastIndex) {
+
+            if (i * 200 + j == lastIndex) {
                 var x = i + 1
                 var y = j + 1
         
-                if (fishPixeldata[i * 100 + j] == undefined) return
+                if (fishPixeldata[i * 200 + j] == undefined) return
         
-                var rgb = hexToRgb(fishPixeldata[i * 100 + j])
+                var rgb = hexToRgb(fishPixeldata[i * 200 + j])
         
-                var lum = getLuminance(HEXToVBColor(fishPixeldata[i * 100 + j]))
+                var lum = getLuminance(HEXToVBColor(fishPixeldata[i * 200 + j]))
         
                 canvas.lineWidth = 2;
         
@@ -968,20 +968,20 @@ function getPixelPlacePos(event) {
     var lastx = event.clientX
     var lasty = event.clientY
 
-    var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 100)
-    var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 100) + 100
+    var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 200)
+    var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 200) + 200
 
     cursorx = x
     cursory = y
 
     var canvas = document.getElementById("pixelfishcanvas").getContext("2d");
 
-    var index = ((cursorx - 1) * 100) + cursory - 1
+    var index = ((cursorx - 1) * 200) + cursory - 1
 
     if (lastIndex != index) {
         canvas.fillStyle = fishPixeldata[lastIndex]
-        var i1 = Math.floor(lastIndex / 100)
-        var j1 = lastIndex % 100
+        var i1 = Math.floor(lastIndex / 200)
+        var j1 = lastIndex % 200
         canvas.fillRect(i1 * 10, j1 * 10, 10, 10);
     }
 
@@ -1046,7 +1046,13 @@ function getFishPixels() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            fishPixeldata = json.art
+            var newart = []
+            for (var i = 0; i < 100; i++) {
+                for (var j = 0; j < 100; j++) {
+                    newart[i * 200 + j] = json.art[i * 100 + j]
+                }
+            }
+            fishPixeldata = newart
             drawPixelFish()
         }
     });
@@ -1073,7 +1079,7 @@ function placePixel(event) {
     }).then(response => {
         return response.json();
     }).then(json => {
-
+        drawPixelFish()
     });
 }
 
