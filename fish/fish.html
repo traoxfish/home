@@ -207,7 +207,7 @@
     <button class="nicebutton" onclick="buyItem('sellSpecialFish')" style="position: relative; width: 48%; min-width: 45%; font-size: calc(0.45vw + 8px);">Sell Special Fish</button>
     <canvas onmousemove="specialFishHover(event)"  onmouseleave="stopSpecialFishHover()" id="specialfishgraph" height="328"  width="1000" style=" width: 100%; margin-top: 3px; margin-bottom: -4px;"> </canvas>
    </div>
-   <p id="specialfishstatus" style="position: absolute; margin-left: calc(50.4% - 17px); margin-top: calc(18.4vw - 42px); color: #84ea84;"><br></p>
+   <p id="specialfishstatus" style="position: absolute; margin-left: calc(50.4% - 17px); margin-top: calc(18.4vw - 42px); color: #ea7b7b;"><br></p>
 
 
    <div>
@@ -225,11 +225,15 @@
         <p id="spininfo" style="display: inline-block; position: absolute; margin-left: calc(-22% + 4px); margin-top: 42px;"><br></p>
       </div>
       <br>
-      <div onmouseleave="exitPixelCanvas()" onmousedown="placePixel(event)" onmousemove="getPixelPlacePos(event)" class="pixelfish" style="margin-top: calc(-5.6% - 112px);">
-          <canvas id="pixelfishcanvas" height="1000" width="1000" style="position: absolute; width: 22.25%; margin-left: 0.2%; margin-top: 0.2%;">
+      <div id="pixelcanvasdiv" onmouseleave="exitPixelCanvas()" onmousedown="placePixel(event)" onmousemove="getPixelPlacePos(event)" class="pixelfish" style="margin-top: calc(-5.6% - 112px);">
+          <canvas class="pixelfishcanvas" id="pixelfishcanvas" height="1000" width="1000"></canvas>
+          <img id="canvasfullscreenx" onclick="exitFullscreenCanvas()" src="../images/x.png" style="display: none; position: fixed; max-width: 48px; max-height: 48px; z-index: 100000; left: 80%; margin-top: 16px; cursor: pointer;">
+          <input id="colorinputfullscreen" style="display: none; position: fixed; margin-left: 26%; width: calc(10% + 32px); margin-top: calc(44% + 3vw);" placeholder="Color (ex: #658fba)">
+          <div id="fullscreencolorselectorcolor" style="display: none; position: fixed; margin-left: 26%; min-width: calc(10% + 36px); margin-top: calc(44% + 3vw - 36px); background-color: #bbbbbb; height: 32px; outline-style: solid; outline-width: 1px; outline-color: white;"></div>
       </div>
       <br>
       <input id="colorinput" style="display: inline-block; position: relative; margin-left: 25%; width: 10%; margin-top: 2px;" placeholder="Color (ex: #658fba)">
+      <img src="../images/fullscreen.png" onclick="fullscreenCanvas()" style="display: inline-block; position: absolute; margin-left: 14%; width: 32px; margin-top: -36px; cursor: pointer;">
       <div id="colorselectorcolor" style="min-width:26px; min-height:26px; background-color: white; display: inline-block; position: absolute; margin-left: 4px; margin-top: 2px; outline-style: solid; outline-width: 1px; outline-color: white;"></div>
       <p style="display: inline-block; position: absolute; margin-left: 36px; margin-top: 4px;">Cost: 1 special fish</p>
       <p style="display: inline-block; position: absolute; margin-left: 36px; margin-top: 32px; font-size: 10px; color: #bbbbbb; margin-left: -9.3%;">Info: This canvas is shared by everyone. Placing 1 pixel costs 1 special fish.</p>

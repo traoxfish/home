@@ -966,3 +966,35 @@ input:checked + .slider:before {
   margin-left: 25%;
   background-color: #1d1a2c;
 }
+
+.pixelfishfullsecreen {
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  min-width: 100%;
+  min-height: 100%;
+  bottom: 0%;
+  right: 0%;
+  max-width: 100%;
+  max-height: 100%;
+  z-index: 1000;
+  display: inline-block;
+  position: fixed;
+  background-color: #1d1a2c;
+}
+
+.pixelfishcanvas {
+  position: absolute;
+  width: 22.25%;
+  margin-left: 0.2%;
+  margin-top: 0.2%;
+}
+
+.pixelcanvasfullscreen {
+  position: relative;
+  width: calc(100vh - 32px);
+  max-width: 50vw;
+  height: calc(100% - 32px);
+  margin: auto;
+  transform: translate(50%, 16px);
+}

@@ -144,16 +144,16 @@ function buyItem(type) {
             document.getElementById(type.toLowerCase()  + "cost").textContent = formatNumber(json.newCost) + " fish"
             if (type == "specialFish") {
                 document.getElementById(type.toLowerCase()  + "cost").textContent = "Buy Price: " + formatNumber(json.newCost) + " fish"
-                if (json.success != "success") {
-                    document.getElementById("specialfishstatus").textText = json.error;
-                    delay(2000).then(() => {
-                        document.getElementById("specialfishstatus").innerHTML = "<br>";
-                    })
-                }
             } else if (type == "sellSpecialFish") {
                 document.getElementById(type.toLowerCase()  + "cost").textContent = "Sell Price: " + formatNumber(json.newCost) + " fish"
             }
             getFish();
+        }
+        if (json.status != "success" && type == "specialFish") {
+            document.getElementById("specialfishstatus").innerText = "Error: " + json.error;
+            delay(2000).then(() => {
+                document.getElementById("specialfishstatus").innerHTML = "<br>";
+            })
         }
     });
 }
@@ -922,10 +922,14 @@ function drawPixelFish() {
 
 
 
+var color = "";
 setInterval(function() {
     document.getElementById("colorselectorcolor").style.backgroundColor = document.getElementById("colorinput").value
+    document.getElementById("fullscreencolorselectorcolor").style.backgroundColor = document.getElementById("colorinputfullscreen").value
+    if (fullscreen) color = document.getElementById("colorinputfullscreen").value
+    else color = document.getElementById("colorinput").value
     drawPixelFish()
-}, 20)
+}, 25)
 
 function getPixelPlacePos(event) {
     var rect = event.target.getBoundingClientRect();
@@ -971,7 +975,7 @@ function placePixel(event) {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
         "index": ((x - 1) * 100) + (y - 1),
-        "color": document.getElementById("colorinput").value
+        "color": color
     };
     fetch('https://traoxfish.us-3.evennode.com/placepixel', {
         method: 'POST',
@@ -988,3 +992,24 @@ function placePixel(event) {
 }
 
 drawPixelFish()
+
+var fullscreen = false
+function fullscreenCanvas() {
+    document.getElementById("colorinputfullscreen").value = document.getElementById("colorinput").value
+    fullscreen = true
+    document.getElementById("pixelfishcanvas").className = "pixelcanvasfullscreen"
+    document.getElementById("pixelcanvasdiv").className = "pixelfishfullsecreen"
+    document.getElementById("canvasfullscreenx").style.display = "inline-block"
+    document.getElementById("colorinputfullscreen").style.display = "inline-block"
+    document.getElementById("fullscreencolorselectorcolor").style.display = "inline-block"
+}
+
+function exitFullscreenCanvas() {
+    document.getElementById("colorinput").value = document.getElementById("colorinputfullscreen").value
+    fullscreen = false
+    document.getElementById("pixelfishcanvas").className = "pixelfishcanvas"
+    document.getElementById("pixelcanvasdiv").className = "pixelfish"
+    document.getElementById("canvasfullscreenx").style.display = "none"
+    document.getElementById("colorinputfullscreen").style.display = "none"
+    document.getElementById("fullscreencolorselectorcolor").style.display = "none"
+}
