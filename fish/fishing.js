@@ -1,3 +1,4 @@
+
 function getCookie(cname) {
     let name = cname + "=";
     let ca = document.cookie.split(';');
@@ -149,7 +150,7 @@ function buyItem(type) {
             }
             getFish();
         }
-        if (json.status != "success" && type == "specialFish") {
+        if (json.success != "success" && type == "specialFish" && json.error != undefined) {
             document.getElementById("specialfishstatus").innerText = "Error: " + json.error;
             delay(2000).then(() => {
                 document.getElementById("specialfishstatus").innerHTML = "<br>";
@@ -803,7 +804,7 @@ function drawGraph() {
 
 setInterval(() => {
     drawGraph()
-}, 10)
+}, 40)
 document.getElementById("specialfishhoverprice").style.display = "none"
 function specialFishHover(event) {
     var rect = event.target.getBoundingClientRect();
@@ -929,7 +930,7 @@ setInterval(function() {
     if (fullscreen) color = document.getElementById("colorinputfullscreen").value
     else color = document.getElementById("colorinput").value
     drawPixelFish()
-}, 25)
+}, 60)
 
 function getPixelPlacePos(event) {
     var rect = event.target.getBoundingClientRect();
