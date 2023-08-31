@@ -1046,13 +1046,7 @@ function getFishPixels() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
-            var newart = []
-            for (var i = 0; i < 100; i++) {
-                for (var j = 0; j < 100; j++) {
-                    newart[i * 200 + j] = json.art[i * 100 + j]
-                }
-            }
-            fishPixeldata = newart
+            fishPixeldata = json.art
             drawPixelFish()
         }
     });
@@ -1060,8 +1054,8 @@ function getFishPixels() {
 
 function placePixel(event) {
     var rect = event.target.getBoundingClientRect();
-    var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 100)
-    var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 100) + 100
+    var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 200)
+    var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 200) + 200
 
     const data = {
         "username": getCookie("username"),
