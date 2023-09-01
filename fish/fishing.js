@@ -149,7 +149,8 @@ function buyItem(type) {
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
-        "purchaseType": type
+        "purchaseType": type,
+        "quantity": document.getElementById(type.toLowerCase() + "buyquantity").value || 1
     };
     fetch('https://traoxfish.us-3.evennode.com/makepurchase', {
         method: 'POST',
