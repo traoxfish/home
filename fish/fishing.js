@@ -146,11 +146,13 @@ document.getElementById("betamount").oninput = function() {
 }
 
 function buyItem(type) {
+    var quantity = 1
+    if (document.getElementById(type.toLowerCase() + "buyquantity") != undefined) quantity = Number(document.getElementById(type.toLowerCase() + "buyquantity").value)
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
         "purchaseType": type,
-        "quantity": document.getElementById(type.toLowerCase() + "buyquantity").value || 1
+        "quantity": quantity
     };
     fetch('https://traoxfish.us-3.evennode.com/makepurchase', {
         method: 'POST',
