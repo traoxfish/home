@@ -124,7 +124,7 @@ function formatNumber(value) {
     return value
 }
 
-function formatedNumberToNumber(value) {
+/*function formatedNumberToNumber(value) {
     if (value.endsWith("D"))
         return Number(value.slice(0, -1)) * 1000000000000000000000000000000000
     if (value.endsWith("N"))
@@ -148,7 +148,7 @@ function formatedNumberToNumber(value) {
     if (value.endsWith("K"))
         return Number(value.slice(0, -1)) * 1000
     return Number(value)
-}
+}*/
 
 
 document.getElementById('rarefishinfo').addEventListener('click',function (event){
