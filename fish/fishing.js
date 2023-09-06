@@ -566,6 +566,7 @@ delay(5).then(() => {
     setInterval(function(){ 
         keepOnline();
         updateLeaderboards();
+        getLevel();
         getMessages(false);
     }, 300);
 
@@ -1162,4 +1163,27 @@ function exitFullscreenCanvas() {
     document.getElementById("canvasfullscreenx").style.display = "none"
     document.getElementById("colorinputfullscreen").style.display = "none"
     document.getElementById("fullscreencolorselectorcolor").style.display = "none"
+}
+
+function getLevel() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getlevel', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            document.getElementById("level").innerText = "Level: " + json.level
+            document.getElementById("xpcolor").style.width = (json.currentLevelXp / (json.xpRequired + json.currentLevelXp)) * 100 + "%"
+            document.getElementById("xpcount").innerText = "XP:" + json.currentLevelXp + " / " + (json.xpRequired + json.currentLevelXp)
+        }
+    });
 }
