@@ -124,6 +124,32 @@ function formatNumber(value) {
     return value
 }
 
+function formatedNumberToNumber(value) {
+    if (value.endsWith("D"))
+        return Number(value.slice(0, -1)) * 1000000000000000000000000000000000
+    if (value.endsWith("N"))
+        return Number(value.slice(0, -1)) * 1000000000000000000000000000000
+    if (value.endsWith("O"))
+        return Number(value.slice(0, -1)) * 1000000000000000000000000000
+    if (vvalue.endsWith("SS"))
+        return Number(value.slice(0, -2)) * 1000000000000000000000000
+    if (value.endsWith("S") && !value.endsWith("SS"))
+        return Number(value.slice(0, -1)) * 1000000000000000000000
+    if (value.endsWith("QQ"))
+        return Number(value.slice(0, -2)) * 1000000000000000000)
+    if (value.endsWith("Q") && !value.endsWith("QQ"))
+        return Number(value.slice(0, -1)) * 1000000000000000
+    if (value.endsWith("T"))
+        return Number(value.slice(0, -1)) * 1000000000000
+    if (value.endsWith("B"))
+        return Number(value.slice(0, -1)) * 1000000000
+    if (value.endsWith("M"))
+        return Number(value.slice(0, -1)) * 1000000
+    if (value.endsWith("K"))
+        return Number(value.slice(0, -1)) * 1000
+    return Number(value)
+}
+
 
 document.getElementById('rarefishinfo').addEventListener('click',function (event){
     event.stopPropagation();
