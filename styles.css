@@ -1012,9 +1012,4 @@ input:checked + .slider:before {
   outline-color: #ffffff;
   background-color: #1d1a2c;
   display: inline-block;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  white-space: nowrap;
 }

@@ -1183,7 +1183,7 @@ function getLevel() {
         if (json.status == "success") {
             document.getElementById("level").innerText = "Level: " + json.level
             document.getElementById("xpcolor").style.width = (json.currentLevelXp / (json.xpRequired + json.currentLevelXp)) * 100 + "%"
-            document.getElementById("xpcount").innerText = "XP:" + json.currentLevelXp + " / " + (json.xpRequired + json.currentLevelXp)
+            document.getElementById("xpcount").innerText = "XP: " + json.currentLevelXp + " / " + (json.xpRequired + json.currentLevelXp)
         }
     });
 }
