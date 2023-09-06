@@ -608,6 +608,8 @@ function getFish() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
+
+            //fish
             document.getElementById("fishcount").textContent = formatNumber(json.fish)
             document.getElementById("rarefishcount").textContent = formatNumber(json.rareFish)
             document.getElementById("veryrarefishcount").textContent = formatNumber(json.veryRareFish)
@@ -615,6 +617,22 @@ function getFish() {
             document.getElementById("raresharkcount").textContent = formatNumber(json.rareSharks)
             document.getElementById("specialfishcount").textContent = formatNumber(json.specialFish)
             document.getElementById("whalecount").textContent = formatNumber(json.whales)
+
+            //level
+            document.getElementById("level").innerText = "Level: " + json.level
+            document.getElementById("xpcolor").style.width = (json.currentLevelXp / (json.xpRequired + json.currentLevelXp)) * 100 + "%"
+            document.getElementById("xpcount").innerText = "XP: " + json.currentLevelXp + " / " + (json.xpRequired + json.currentLevelXp)
+            
+            //costs
+            document.getElementById("rarefishcost").textContent = formatNumber(json.costs.rareFishCost) + " fish"
+            document.getElementById("veryrarefishcost").textContent = formatNumber(json.costs.veryRareFishCost) + " fish"
+            document.getElementById("sharkcost").textContent = formatNumber(json.costs.sharkCost) + " fish"
+            document.getElementById("raresharkcost").textContent = formatNumber(json.costs.rareSharkCost) + " fish"
+            document.getElementById("whalecost").textContent = formatNumber(json.costs.whaleCost) + " fish"
+            document.getElementById("specialfishcost").textContent = "Buy Price: " + formatNumber(json.costs.specialFishCost) + " fish"
+            document.getElementById("specialfishsellcost").textContent = "Sell Price: " + formatNumber(json.costs.specialFishSellCost) + " fish"
+
+            
         }
     });
 }
