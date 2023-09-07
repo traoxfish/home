@@ -19,21 +19,20 @@ function delay(time) {
 }
 
 function sendFish() {
-    var fish = document.getElementById("sendfishamount").value;
     var reciever = document.getElementById("sendfishto").value;
     var password = document.getElementById("sendfishpassword").value;
 
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
-        "amount": fish,
+        "amount": formatedNumberToNumber(document.getElementById("sendfishamount").value),
         "reciever": reciever,
         "password": password
     };
 
     var validInfo = false;
 
-    if (fish != undefined && reciever != undefined && fish > 0) {
+    if (formatedNumberToNumber(document.getElementById("sendfishamount").value) != undefined && reciever != undefined && formatedNumberToNumber(document.getElementById("sendfishamount").value) > 0) {
         validInfo = true;
     } else {
         document.getElementById("sentstatus").textContent = "Couldn't send fish!";
@@ -124,31 +123,31 @@ function formatNumber(value) {
     return value
 }
 
-/*function formatedNumberToNumber(value) {
-    if (value.endsWith("D"))
+function formatedNumberToNumber(value) {
+    if (value.toUpperCase().endsWith("D"))
         return Number(value.slice(0, -1)) * 1000000000000000000000000000000000
-    if (value.endsWith("N"))
+    if (value.toUpperCase().endsWith("N"))
         return Number(value.slice(0, -1)) * 1000000000000000000000000000000
-    if (value.endsWith("O"))
+    if (value.toUpperCase().endsWith("O"))
         return Number(value.slice(0, -1)) * 1000000000000000000000000000
-    if (vvalue.endsWith("SS"))
+    if (value.toUpperCase().endsWith("SS"))
         return Number(value.slice(0, -2)) * 1000000000000000000000000
-    if (value.endsWith("S") && !value.endsWith("SS"))
+    if (value.toUpperCase().endsWith("S") && !value.endsWith("SS"))
         return Number(value.slice(0, -1)) * 1000000000000000000000
-    if (value.endsWith("QQ"))
-        return Number(value.slice(0, -2)) * 1000000000000000000)
-    if (value.endsWith("Q") && !value.endsWith("QQ"))
+    if (value.toUpperCase().endsWith("QQ"))
+        return Number(value.slice(0, -2)) * 1000000000000000000
+    if (value.toUpperCase().endsWith("Q") && !value.endsWith("QQ"))
         return Number(value.slice(0, -1)) * 1000000000000000
-    if (value.endsWith("T"))
+    if (value.toUpperCase().endsWith("T"))
         return Number(value.slice(0, -1)) * 1000000000000
-    if (value.endsWith("B"))
+    if (value.toUpperCase().endsWith("B"))
         return Number(value.slice(0, -1)) * 1000000000
-    if (value.endsWith("M"))
+    if (value.toUpperCase().endsWith("M"))
         return Number(value.slice(0, -1)) * 1000000
-    if (value.endsWith("K"))
+    if (value.toUpperCase().endsWith("K"))
         return Number(value.slice(0, -1)) * 1000
     return Number(value)
-}*/
+}
 
 
 document.getElementById('rarefishinfo').addEventListener('click',function (event){
@@ -164,11 +163,23 @@ function closeShop() {
 }
 
 document.getElementById("sendfishamount").oninput = function() {
-    this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+    this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnNdD]/g, '').replace(/(\..*)\./g, '$1');
+    if (isNaN(this.value.charAt(this.value.length-2)) && this.value.charAt(this.value.length-2) != '.' && this.value.charAt(this.value.length-2).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() != 's') this.value = this.value.substr(0, this.value.length - 1)
+    else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'q' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() == 'q')) this.value = this.value.substr(0, this.value.length - 1)
+    else if ((this.value.charAt(this.value.length-3).toLowerCase() == 's' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 's' && this.value.charAt(this.value.length-2).toLowerCase() == 's')) this.value = this.value.substr(0, this.value.length - 1)
+
+    if (isNaN(this.value.charAt(this.value.length-1)) && this.value.charAt(this.value.length-2) == '.') this.value = this.value.substr(0, this.value.length - 1)
+    if (isNaN(this.value.charAt(this.value.length-1)) && this.value.length == 1) this.value = ""
 }
 
 document.getElementById("betamount").oninput = function() {
-    this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+    this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnNdD]/g, '').replace(/(\..*)\./g, '$1');
+    if (isNaN(this.value.charAt(this.value.length-2)) && this.value.charAt(this.value.length-2) != '.' && this.value.charAt(this.value.length-2).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() != 's') this.value = this.value.substr(0, this.value.length - 1)
+    else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'q' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() == 'q')) this.value = this.value.substr(0, this.value.length - 1)
+    else if ((this.value.charAt(this.value.length-3).toLowerCase() == 's' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 's' && this.value.charAt(this.value.length-2).toLowerCase() == 's')) this.value = this.value.substr(0, this.value.length - 1)
+
+    if (isNaN(this.value.charAt(this.value.length-1)) && this.value.charAt(this.value.length-2) == '.') this.value = this.value.substr(0, this.value.length - 1)
+    if (isNaN(this.value.charAt(this.value.length-1)) && this.value.length == 1) this.value = ""
 }
 
 function buyItem(type) {
@@ -356,7 +367,7 @@ function spin() {
     const data1 = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
-        "bet": document.getElementById("betamount").value,
+        "bet": formatedNumberToNumber(document.getElementById("betamount").value),
         "check": true
     };
     fetch("https://traoxfish.us-3.evennode.com/gamble", {
@@ -410,7 +421,7 @@ function spin() {
                 const data = {
                     "username": getCookie("username"),
                     "loginKey": getCookie("loginKey"),
-                    "bet": document.getElementById("betamount").value
+                    "bet": formatedNumberToNumber(document.getElementById("betamount").value)
                 };
                 fetch("https://traoxfish.us-3.evennode.com/gamble", {
                     method: 'POST',
