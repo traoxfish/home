@@ -664,9 +664,9 @@ input {
 }
 
 .fishbar {
-  min-width: 45%;
+  min-width: calc(45% - 84px);
   min-height: 44px;
-  max-width: 45%;
+  max-width: calc(45% - 84px);
   max-height: 44px;
   position: absolute;
   margin-top: -10px;
@@ -1000,9 +1000,9 @@ input:checked + .slider:before {
 }
 
 .xpbar {
-  min-width: calc(45% - 76px);
+  min-width: calc(45% - 76px - 84px);
   min-height: 24px;
-  max-width: calc(45% - 76px);
+  max-width: calc(45% - 76px - 84px);
   max-height: 24px;
   position: absolute;
   margin-left: 76px;
@@ -1012,4 +1012,42 @@ input:checked + .slider:before {
   outline-color: #ffffff;
   background-color: #1d1a2c;
   display: inline-block;
+}
+
+.nicebutton > img {
+  filter: brightness(100%);
+  transition: filter 0.2s ease;
+}
+
+.nicebutton:hover > img {
+  filter: brightness(1000%);
+  transition: filter 0.2s ease;
+}
+
+.viewprofile {
+  background-color: #1d1a2c;
+  min-width: 502%;
+  margin-left: -200%;
+  min-height: 500%;
+  margin-top: -200.5%;
+  background:rgba(29, 26, 44,0.5);
+  position: fixed;
+  z-index: 3;
+  display: none;
+}
+
+.profilebackground {
+  background-color: #1d1a2c;
+  position: fixed;
+  display: block;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  left: calc(50% - 384px);
+  bottom: calc(50% - 256px);
+  width: 768px;
+  min-height: 512px;
+  max-width: 768px;
+  max-height: 512px;
+  z-index: 1000;
 }

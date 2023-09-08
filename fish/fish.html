@@ -38,6 +38,30 @@
 
    <img src="../images/Info.png" class="info" style="margin-left:79%; margin-top: 20px; width:24px; height:24px; display:inline; position: absolute;" title="#1 All time fish caught on January 1st 2024 gets a 100$ visa gift card!">
 
+   <div onclick="closeProfile()" id="viewprofile" class="viewprofile">
+      <div onclick="event.stopPropagation()" class="profilebackground">
+        <img src="../images/profile.png" style="width: 128px; height: 128px; margin-left: 32px; margin-top: 32px; outline-style: solid; outline-width: 1px; outline-color: #ffffff; border-radius: 64px;">
+        <h1 id="profile-username" style="display: inline-block; transform: translate(0, -42px); margin-left: 12px;">Loading...</h1>
+        <div class="longbarseperator" style="display: inline-block; transform: translate(0, -24px); position: initial;"></div>
+        <div style="margin-left: 32px; transform: translate(0, -12px); position: relative; max-width: 46%; width: 46%; display: inline-block;">
+          <p id="profile-fish" style="line-height: 6px;">Fish: Loading...</p>
+          <p id="profile-rarefish" style="line-height: 6px;">Rare Fish: Loading...</p>
+          <p id="profile-veryrarefish" style="line-height: 6px;">Very Rare Fish: Loading...</p>
+          <p id="profile-sharks" style="line-height: 6px;">Sharks: Loading...</p>
+          <p id="profile-raresharks" style="line-height: 6px;">Rare Sharks: Loading...</p>
+          <p id="profile-whales" style="line-height: 6px;">Whales: Loading...</p>
+          <p id="profile-specialfish" style="line-height: 6px;">Special Fish: Loading...</p>
+          <p id="profile-alltimefish" style="line-height: 6px;">All Time Fish: Loading...</p>
+          <p id="profile-fishgambled" style="line-height: 6px;">Fish Gambled: Loading...</p>
+        </div>
+        <div class="navseperator" style="height: 59.75%; margin-top: -27px; margin-left: 0px;"></div>
+        <div style="margin-left: 32px; transform: translate(0, -192px); position: relative; max-width: 42%; width: 42%; display: inline-block; align-items:start;">
+          <p id="profile-joindate" style="line-height: 6px;">Join Date: Loading...</p>
+          <p id="profile-lastonline" style="line-height: 6px;">Last Online: Loading...</p>
+        </div>
+      </div>
+   </div>
+
    <div class="shop" onclick="closeShop()" id="shop">
     <div class="rarefishinfo" id="rarefishinfo">
         <h2 class="shoptitle" style="margin-bottom: 0px;"> Shop</h2>
@@ -108,7 +132,7 @@
  </div>
 
   <div class="shop" onclick="closeLogsBg()" id="logsbg">
-    <div class="sendlogs" id="sendlogs">
+    <div onclick="event.stopPropagation()" class="sendlogs" id="sendlogs">
       
     </div>
   </div>
@@ -139,7 +163,7 @@
     <p id="level" style="display: inline-block; position: absolute; margin-top: -7px; max-width: 76px; min-width: 76px; font-size: 16px;">Level: 1</p>
     <div class="xpbar">
         <div id="xpcolor" style="display: inline-flex; position: relative; width: 0%; max-width: 100%; min-height: 24px; background-color: #d35040;"></div>
-        <p id="xpcount" class="center" style="margin-top: 12px; font-size: 1vw;">XP: 0 / 0</p>
+        <p id="xpcount" class="center" style="margin-top: 12px; font-size: calc(0.4vw + 8px); max-width: 100%;">XP: 0 / 0</p>
     </div>
     <br><br>
    </div>
@@ -171,6 +195,11 @@
     <p class="fishdata" id="specialfishcount" style="max-width: 10%; min-width: 65px;">loading...</p>
     <p class="fishdata" id="whalecount" style="max-width: 10%; min-width: 65px;">loading...</p>
 
+   </div>
+
+   <div style="display: inline-block; position: absolute; width: 80px; height: 80px; background-color: #1d1a2c; outline-style: solid; outline-width: 1px; outline-color: #ffffff; margin-left: calc(45% - 80px); margin-top: -46px;">
+      <button onclick="viewProfile()" class="nicebutton" style="position: relative; width: 66%; height: 66%; margin: auto; transform: translate(25%, 10%);"><img src="../../images/profile.png" style="position: relative; width: 100%; height: 100%;"></button>
+      <p style="font-size: 12px; margin-left: 20px; margin-top: 6px;">Profile</p>
    </div>
 
    <br><br><br>

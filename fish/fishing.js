@@ -333,6 +333,8 @@ function updateLeaderboards() {
         for (var fisher in json.leaderboards) {
             try {
                 leaderboard.children.item(i).textContent = json.leaderboards[fisher].split(": ")[0] + ": " + formatNumber(Number(json.leaderboards[fisher].split(": ")[1]));
+                var name = json.leaderboards[fisher].split(": ")[0]
+                leaderboard.children.item(i).id = name
                 if (json.onlineStatus[fisher]) {
                     leaderboard.children.item(i).style.color = "#84ea84";
                 } else {
@@ -343,9 +345,15 @@ function updateLeaderboards() {
         }
         if (json.leaderboards.length > leaderboard.children.length) {
             for (var i = leaderboard.children.length; i < json.leaderboards.length; i++) {
+
                 var item = document.createElement("li");
+                var name = json.leaderboards[i].split(": ")[0]
+                item.id = name
+                item.addEventListener('click', function() { viewProfile(this.id) })
+                item.style.cursor = "pointer"
                 try {
                     item.textContent = json.leaderboards[i].split(": ")[0] + ": " + formatNumber(Number(json.leaderboards[i].split(": ")[1]));
+                    
                     if (json.onlineStatus[i]) {
                         item.style.color = "#84ea84";
                     } else {
@@ -353,6 +361,7 @@ function updateLeaderboards() {
                     }
                 } catch (e) { console.log(e)}
                 leaderboard.appendChild(item);
+                
             }
         }
     });
@@ -1241,4 +1250,80 @@ function getLevel() {
             document.getElementById("xpcount").innerText = "XP: " + json.currentLevelXp + " / " + (json.xpRequired + json.currentLevelXp)
         }
     });
+}
+
+function closeProfile() {
+    document.getElementById("viewprofile").style.display = "none";
+
+    document.getElementById("profile-username").innerText = "Loading..."
+    document.getElementById("profile-fish").innerText = "Fish: Loading..."
+    document.getElementById("profile-rarefish").innerText = "Rare Fish: Loading..."
+    document.getElementById("profile-veryrarefish").innerText = "Very Rare Fish: Loading..."
+    document.getElementById("profile-sharks").innerText = "Sharks: Loading..."
+    document.getElementById("profile-raresharks").innerText = "Rare Sharks: Loading..."
+    document.getElementById("profile-whales").innerText = "Whales: Loading..."
+    document.getElementById("profile-specialfish").innerText = "Special Fish: Loading..."
+    document.getElementById("profile-alltimefish").innerText = "All Time Fish: Loading..."
+    document.getElementById("profile-fishgambled").innerText = "Fish Gambled: Loading..."
+    document.getElementById("profile-joindate").innerText = "Join Date: Loading..."
+    document.getElementById("profile-lastonline").innerText = "Last Online: Loading..."
+
+}
+
+function viewProfile(profile) {
+    if (profile == undefined) {
+        viewProfile(getCookie("username"))
+        return
+    }
+
+    document.getElementById("viewprofile").style.display = "initial";
+
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "profile": profile
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getprofile', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            var displayName = json.displayName
+            var level = json.level
+            var fish = json.fish
+            var rareFish = json.rareFish
+            var veryRareFish = json.veryRareFish
+            var sharks = json.sharks
+            var rareSharks = json.rareSharks
+            var whales = json.whales
+            var specialFish = json.specialFish
+            var allTimeFish = json.allTimeFish
+            var fishGambled = json.fishGambled
+            var joinDate = json.joinDate
+            var lastOnlineDate = json.lastOnlineDate
+
+            document.getElementById("profile-username").innerText = displayName + " (Lvl. " + level + ")"
+            document.getElementById("profile-fish").innerText = "Fish: " + formatNumber(fish)
+            document.getElementById("profile-rarefish").innerText = "Rare Fish: " + formatNumber(rareFish)
+            document.getElementById("profile-veryrarefish").innerText = "Very Rare Fish: " + formatNumber(veryRareFish)
+            document.getElementById("profile-sharks").innerText = "Sharks: " + formatNumber(sharks)
+            document.getElementById("profile-raresharks").innerText = "Rare Sharks: " + formatNumber(rareSharks)
+            document.getElementById("profile-whales").innerText = "Whales: " + formatNumber(whales)
+            document.getElementById("profile-specialfish").innerText = "Special Fish: " + formatNumber(specialFish)
+            document.getElementById("profile-alltimefish").innerText = "All Time Fish: " + formatNumber(allTimeFish)
+            document.getElementById("profile-fishgambled").innerText = "Fish Gambled: " + formatNumber(fishGambled)
+            document.getElementById("profile-joindate").innerText = "Join Date: " + joinDate
+            document.getElementById("profile-lastonline").innerText = "Last Online: " + lastOnlineDate
+
+        }
+    });
+
+    
+
 }
