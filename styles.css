@@ -664,9 +664,9 @@ input {
 }
 
 .fishbar {
-  min-width: calc(45% - 84px);
+  min-width: calc(45% - 88px);
   min-height: 44px;
-  max-width: calc(45% - 84px);
+  max-width: calc(45% - 88px);
   max-height: 44px;
   position: absolute;
   margin-top: -10px;
@@ -1000,9 +1000,9 @@ input:checked + .slider:before {
 }
 
 .xpbar {
-  min-width: calc(45% - 76px - 84px);
+  min-width: calc(45% - 76px - 88px);
   min-height: 24px;
-  max-width: calc(45% - 76px - 84px);
+  max-width: calc(45% - 76px - 88px);
   max-height: 24px;
   position: absolute;
   margin-left: 76px;
