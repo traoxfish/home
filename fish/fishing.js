@@ -972,7 +972,7 @@ for (var i = 0; i < 512; i ++) {
     }
 }
 
-async function drawPixelFish() {
+function drawPixelFish() {
     var canvas = document.getElementById("pixelfishcanvas").getContext("2d");
     var width = document.getElementById("pixelfishcanvas").width
     var height = document.getElementById("pixelfishcanvas").height
@@ -1150,7 +1150,7 @@ function getFishPixels() {
     }).then(json => {
         if (json.status == "success") {
             fishPixeldata = json.art
-            await drawPixelFish()
+            drawPixelFish()
         }
     });
 }
@@ -1207,7 +1207,7 @@ function placePixel(event, down1) {
     }, 20)
 }
 
-await drawPixelFish()
+drawPixelFish()
 
 var fullscreen = false
 function fullscreenCanvas() {
