@@ -163,7 +163,7 @@ function closeShop() {
 }
 
 document.getElementById("sendfishamount").oninput = function() {
-    this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnNdD]/g, '').replace(/(\..*)\./g, '$1');
+    this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnOoNdD]/g, '').replace(/(\..*)\./g, '$1');
     if (isNaN(this.value.charAt(this.value.length-2)) && this.value.charAt(this.value.length-2) != '.' && this.value.charAt(this.value.length-2).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() != 's') this.value = this.value.substr(0, this.value.length - 1)
     else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'q' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() == 'q')) this.value = this.value.substr(0, this.value.length - 1)
     else if ((this.value.charAt(this.value.length-3).toLowerCase() == 's' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 's' && this.value.charAt(this.value.length-2).toLowerCase() == 's')) this.value = this.value.substr(0, this.value.length - 1)
@@ -173,7 +173,7 @@ document.getElementById("sendfishamount").oninput = function() {
 }
 
 document.getElementById("betamount").oninput = function() {
-    this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnNdD]/g, '').replace(/(\..*)\./g, '$1');
+    this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnOoNdD]/g, '').replace(/(\..*)\./g, '$1');
     if (isNaN(this.value.charAt(this.value.length-2)) && this.value.charAt(this.value.length-2) != '.' && this.value.charAt(this.value.length-2).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() != 's') this.value = this.value.substr(0, this.value.length - 1)
     else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'q' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() == 'q')) this.value = this.value.substr(0, this.value.length - 1)
     else if ((this.value.charAt(this.value.length-3).toLowerCase() == 's' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 's' && this.value.charAt(this.value.length-2).toLowerCase() == 's')) this.value = this.value.substr(0, this.value.length - 1)
