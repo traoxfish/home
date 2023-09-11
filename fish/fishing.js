@@ -966,9 +966,9 @@ var cursory = -1
 
 var fishPixeldata = [] 
 
-for (var i = 0; i < 200; i ++) { 
-    for (var j = 0; j < 200; j++) { 
-        fishPixeldata[i * 200 + j] = "#FFF"
+for (var i = 0; i < 512; i ++) { 
+    for (var j = 0; j < 512; j++) { 
+        fishPixeldata[i * 512 + j] = "#ffffff"
     }
 }
 
@@ -982,21 +982,21 @@ function drawPixelFish() {
 
     canvas.strokeStyle = 'white';
 
-    for (var i = 0; i < 200; i ++) { 
-        for (var j = 0; j < 200; j++) { 
+    for (var i = 0; i < 512; i ++) { 
+        for (var j = 0; j < 512; j++) { 
 
-            canvas.fillStyle = fishPixeldata[i * 200 + j] || "#ffffff"
+            canvas.fillStyle = fishPixeldata[i * 512 + j] || "#ffffff"
             canvas.fillRect(i * 10, j * 10, 10, 10);
 
-            if (i * 200 + j == lastIndex) {
+            if (i * 512 + j == lastIndex) {
                 var x = i + 1
                 var y = j + 1
         
-                if (fishPixeldata[i * 200 + j] == undefined) return
+                if (fishPixeldata[i * 512 + j] == undefined) return
         
-                var rgb = hexToRgb(fishPixeldata[i * 200 + j] || "#ffffff")
+                var rgb = hexToRgb(fishPixeldata[i * 512 + j] || "#ffffff")
         
-                var lum = getLuminance(HEXToVBColor(fishPixeldata[i * 200 + j] || "#ffffff"))
+                var lum = getLuminance(HEXToVBColor(fishPixeldata[i * 512 + j] || "#ffffff"))
         
                 canvas.lineWidth = 2;
 
@@ -1069,20 +1069,20 @@ function getPixelPlacePos(event) {
     var lastx = event.clientX
     var lasty = event.clientY
 
-    var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 200)
-    var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 200) + 200
+    var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 512)
+    var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 512) + 512
 
     cursorx = x
     cursory = y
 
     var canvas = document.getElementById("pixelfishcanvas").getContext("2d");
 
-    var index = ((cursorx - 1) * 200) + cursory - 1
+    var index = ((cursorx - 1) * 512) + cursory - 1
 
     if (lastIndex != index) {
         canvas.fillStyle = fishPixeldata[lastIndex]
-        var i1 = Math.floor(lastIndex / 200)
-        var j1 = lastIndex % 200
+        var i1 = Math.floor(lastIndex / 512)
+        var j1 = lastIndex % 512
         canvas.fillRect(i1 * 10, j1 * 10, 10, 10);
     }
 
