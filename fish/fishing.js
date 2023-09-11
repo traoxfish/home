@@ -972,7 +972,7 @@ for (var i = 0; i < 512; i ++) {
     }
 }
 
-function drawPixelFish() {
+async function drawPixelFish() {
     var canvas = document.getElementById("pixelfishcanvas").getContext("2d");
     var width = document.getElementById("pixelfishcanvas").width
     var height = document.getElementById("pixelfishcanvas").height
@@ -983,47 +983,48 @@ function drawPixelFish() {
     canvas.strokeStyle = 'white';
 
     for (var i = 0; i < 512; i ++) { 
-        for (var j = 0; j < 512; j++) { 
+        delay(2).then(() => {
+            for (var j = 0; j < 512; j++) { 
 
-            canvas.fillStyle = fishPixeldata[i * 512 + j] || "#ffffff"
-            canvas.fillRect(i * 10, j * 10, 10, 10);
-
-            if (i * 512 + j == lastIndex) {
-                var x = i + 1
-                var y = j + 1
-        
-                if (fishPixeldata[i * 512 + j] == undefined) return
-        
-                var rgb = hexToRgb(fishPixeldata[i * 512 + j] || "#ffffff")
-        
-                var lum = getLuminance(HEXToVBColor(fishPixeldata[i * 512 + j] || "#ffffff"))
-        
-                canvas.lineWidth = 2;
-
-                canvas.strokeStyle = lum < 20 ? 'white' : 'black';
-        
-                canvas.beginPath();
-                canvas.moveTo((x * 10) - 1, (y * 10) - 1);
-                canvas.lineTo(x * 10 - 1, (y - 1) * 10  + 1);
-                canvas.stroke();
-        
-                canvas.beginPath();
-                canvas.moveTo(x * 10 - 1, (y - 1) * 10 + 1);
-                canvas.lineTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
-                canvas.stroke();
-        
-                canvas.beginPath();
-                canvas.moveTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
-                canvas.lineTo((x - 1) * 10 + 1, y * 10 -1);
-                canvas.stroke();
-        
-                canvas.beginPath();
-                canvas.moveTo((x - 1) * 10 + 1, y * 10 - 1);
-                canvas.lineTo(x * 10 - 1, y * 10 - 1);
-                canvas.stroke();
-
-            }
+                canvas.fillStyle = fishPixeldata[i * 512 + j] || "#ffffff"
+                canvas.fillRect(i * 10, j * 10, 10, 10);
+    
+                if (i * 512 + j == lastIndex) {
+                    var x = i + 1
+                    var y = j + 1
             
+                    if (fishPixeldata[i * 512 + j] == undefined) return
+            
+                    var rgb = hexToRgb(fishPixeldata[i * 512 + j] || "#ffffff")
+            
+                    var lum = getLuminance(HEXToVBColor(fishPixeldata[i * 512 + j] || "#ffffff"))
+            
+                    canvas.lineWidth = 2;
+    
+                    canvas.strokeStyle = lum < 20 ? 'white' : 'black';
+            
+                    canvas.beginPath();
+                    canvas.moveTo((x * 10) - 1, (y * 10) - 1);
+                    canvas.lineTo(x * 10 - 1, (y - 1) * 10  + 1);
+                    canvas.stroke();
+            
+                    canvas.beginPath();
+                    canvas.moveTo(x * 10 - 1, (y - 1) * 10 + 1);
+                    canvas.lineTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
+                    canvas.stroke();
+            
+                    canvas.beginPath();
+                    canvas.moveTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
+                    canvas.lineTo((x - 1) * 10 + 1, y * 10 -1);
+                    canvas.stroke();
+            
+                    canvas.beginPath();
+                    canvas.moveTo((x - 1) * 10 + 1, y * 10 - 1);
+                    canvas.lineTo(x * 10 - 1, y * 10 - 1);
+                    canvas.stroke();
+    
+                }
+            })   
         }
     }
 }
@@ -1149,7 +1150,7 @@ function getFishPixels() {
     }).then(json => {
         if (json.status == "success") {
             fishPixeldata = json.art
-            drawPixelFish()
+            await drawPixelFish()
         }
     });
 }
@@ -1206,7 +1207,7 @@ function placePixel(event, down1) {
     }, 20)
 }
 
-drawPixelFish()
+await drawPixelFish()
 
 var fullscreen = false
 function fullscreenCanvas() {
