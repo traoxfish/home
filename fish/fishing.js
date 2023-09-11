@@ -984,7 +984,7 @@ async function drawPixelFish() {
 
     for (var i = 0; i < 512; i ++) { 
         delay(2).then(() => {
-            for (var j = 0; j < 512; j++) { 
+            for (var j = 0; j < 512; j++) {
 
                 canvas.fillStyle = fishPixeldata[i * 512 + j] || "#ffffff"
                 canvas.fillRect(i * 10, j * 10, 10, 10);
@@ -1024,8 +1024,8 @@ async function drawPixelFish() {
                     canvas.stroke();
     
                 }
-            })   
-        }
+            }
+        })
     }
 }
 
