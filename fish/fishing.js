@@ -966,66 +966,62 @@ var cursory = -1
 
 var fishPixeldata = [] 
 
-for (var i = 0; i < 512; i ++) { 
-    for (var j = 0; j < 512; j++) { 
-        fishPixeldata[i * 512 + j] = "#ffffff"
+for (var i = 0; i < 256; i ++) { 
+    for (var j = 0; j < 256; j++) { 
+        fishPixeldata[i * 256 + j] = "#ffffff"
     }
 }
 
-function drawPixelFish() {
+async function drawPixelFish() {
     var canvas = document.getElementById("pixelfishcanvas").getContext("2d");
     var width = document.getElementById("pixelfishcanvas").width
     var height = document.getElementById("pixelfishcanvas").height
 
-    canvas.fillStyle = "white";
-    canvas.fillRect(0, 0, width, height);
-
     canvas.strokeStyle = 'white';
 
-    for (var i = 0; i < 512; i ++) { 
-        delay(2).then(() => {
-            for (var j = 0; j < 512; j++) {
+    for (var i = 0; i < 256; i ++) { 
+        if (Math.random() < 0.05) await delay(1).then(() => {})
+        for (var j = 0; j < 256; j++) {
 
-                canvas.fillStyle = fishPixeldata[i * 512 + j] || "#ffffff"
-                canvas.fillRect(i * 10, j * 10, 10, 10);
-    
-                if (i * 512 + j == lastIndex) {
-                    var x = i + 1
-                    var y = j + 1
-            
-                    if (fishPixeldata[i * 512 + j] == undefined) return
-            
-                    var rgb = hexToRgb(fishPixeldata[i * 512 + j] || "#ffffff")
-            
-                    var lum = getLuminance(HEXToVBColor(fishPixeldata[i * 512 + j] || "#ffffff"))
-            
-                    canvas.lineWidth = 2;
-    
-                    canvas.strokeStyle = lum < 20 ? 'white' : 'black';
-            
-                    canvas.beginPath();
-                    canvas.moveTo((x * 10) - 1, (y * 10) - 1);
-                    canvas.lineTo(x * 10 - 1, (y - 1) * 10  + 1);
-                    canvas.stroke();
-            
-                    canvas.beginPath();
-                    canvas.moveTo(x * 10 - 1, (y - 1) * 10 + 1);
-                    canvas.lineTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
-                    canvas.stroke();
-            
-                    canvas.beginPath();
-                    canvas.moveTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
-                    canvas.lineTo((x - 1) * 10 + 1, y * 10 -1);
-                    canvas.stroke();
-            
-                    canvas.beginPath();
-                    canvas.moveTo((x - 1) * 10 + 1, y * 10 - 1);
-                    canvas.lineTo(x * 10 - 1, y * 10 - 1);
-                    canvas.stroke();
-    
-                }
+            canvas.fillStyle = fishPixeldata[i * 256 + j] || "#ffffff"
+            canvas.fillRect(i * 10, j * 10, 10, 10);
+
+            if (i * 256 + j == lastIndex) {
+                var x = i + 1
+                var y = j + 1
+        
+                if (fishPixeldata[i * 256 + j] == undefined) return
+        
+                var rgb = hexToRgb(fishPixeldata[i * 256 + j] || "#ffffff")
+        
+                var lum = getLuminance(HEXToVBColor(fishPixeldata[i * 256 + j] || "#ffffff"))
+        
+                canvas.lineWidth = 2;
+
+                canvas.strokeStyle = lum < 20 ? 'white' : 'black';
+        
+                canvas.beginPath();
+                canvas.moveTo((x * 10) - 1, (y * 10) - 1);
+                canvas.lineTo(x * 10 - 1, (y - 1) * 10  + 1);
+                canvas.stroke();
+        
+                canvas.beginPath();
+                canvas.moveTo(x * 10 - 1, (y - 1) * 10 + 1);
+                canvas.lineTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
+                canvas.stroke();
+        
+                canvas.beginPath();
+                canvas.moveTo((x - 1) * 10 + 1, (y - 1) * 10 + 1);
+                canvas.lineTo((x - 1) * 10 + 1, y * 10 -1);
+                canvas.stroke();
+        
+                canvas.beginPath();
+                canvas.moveTo((x - 1) * 10 + 1, y * 10 - 1);
+                canvas.lineTo(x * 10 - 1, y * 10 - 1);
+                canvas.stroke();
+
             }
-        })
+        }
     }
 }
 
@@ -1070,20 +1066,20 @@ function getPixelPlacePos(event) {
     var lastx = event.clientX
     var lasty = event.clientY
 
-    var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 512)
-    var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 512) + 512
+    var x = Math.round((event.clientX - 2 - (rect.left - 4)) / document.getElementById("pixelfishcanvas").clientWidth * 256)
+    var y = Math.round((event.clientY - 2 - (rect.bottom - 4)) / document.getElementById("pixelfishcanvas").clientHeight * 256) + 256
 
     cursorx = x
     cursory = y
 
     var canvas = document.getElementById("pixelfishcanvas").getContext("2d");
 
-    var index = ((cursorx - 1) * 512) + cursory - 1
+    var index = ((cursorx - 1) * 256) + cursory - 1
 
     if (lastIndex != index) {
         canvas.fillStyle = fishPixeldata[lastIndex]
-        var i1 = Math.floor(lastIndex / 512)
-        var j1 = lastIndex % 512
+        var i1 = Math.floor(lastIndex / 256)
+        var j1 = lastIndex % 256
         canvas.fillRect(i1 * 10, j1 * 10, 10, 10);
     }
 
@@ -1162,14 +1158,17 @@ function placePixel(event, down1) {
 
     down = down1
 
+    
+
     if (down == false) {
         clearInterval(holdInterval)
         return
     } else {
+        var index1 = lastIndex
         const data = {
             "username": getCookie("username"),
             "loginKey": getCookie("loginKey"),
-            "index": lastIndex,
+            "index": index1,
             "color": color
         };
         fetch('https://traoxfish.us-3.evennode.com/placepixel', {
@@ -1182,14 +1181,23 @@ function placePixel(event, down1) {
         }).then(response => {
             return response.json();
         }).then(json => {
+            if (json.status == "success") {
+                var canvas = document.getElementById("pixelfishcanvas").getContext("2d");
+                fishPixeldata[index1] = color
+                canvas.fillStyle = color
+                var i1 = Math.floor(index1 / 256)
+                var j1 = index1 % 256
+                canvas.fillRect(i1 * 10, j1 * 10, 10, 10);
+            }
         });
     }
 
     holdInterval = setInterval(function() {
+        var index1 = lastIndex
         const data = {
             "username": getCookie("username"),
             "loginKey": getCookie("loginKey"),
-            "index": lastIndex,
+            "index": index1,
             "color": color
         };
         fetch('https://traoxfish.us-3.evennode.com/placepixel', {
@@ -1202,9 +1210,16 @@ function placePixel(event, down1) {
         }).then(response => {
             return response.json();
         }).then(json => {
-            
+            if (json.status == "success") {
+                var canvas = document.getElementById("pixelfishcanvas").getContext("2d");
+                fishPixeldata[index1] = color
+                canvas.fillStyle = color
+                var i1 = Math.floor(index1 / 256)
+                var j1 = index1 % 256
+                canvas.fillRect(i1 * 10, j1 * 10, 10, 10);
+            }
         });
-    }, 20)
+    }, 5)
 }
 
 drawPixelFish()
