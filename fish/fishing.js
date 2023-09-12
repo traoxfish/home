@@ -1366,7 +1366,7 @@ function closeSetPFP() {
 
 function setProfilePicture(id) {
     document.getElementById("selectpfpbackground").style.display = "none"
-    delay(200).then(() => viewProfile(getCookie("username")))
+    delay(200).then(() => viewProfile(getCookie("username"), true))
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
