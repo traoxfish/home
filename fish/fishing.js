@@ -1283,6 +1283,9 @@ function closeProfile() {
     document.getElementById("profile-fishgambled").innerText = "Fish Gambled: Loading..."
     document.getElementById("profile-joindate").innerText = "Join Date: Loading..."
     document.getElementById("profile-lastonline").innerText = "Last Online: Loading..."
+    document.getElementById("profile-picture").src = "../images/profiles/default.png"
+
+    document.getElementById("selectpfpbackground").style.display = "none"
 
 }
 
@@ -1323,6 +1326,9 @@ function viewProfile(profile) {
             var fishGambled = json.fishGambled
             var joinDate = json.joinDate
             var lastOnlineDate = json.lastOnlineDate
+            var picture = json.profilePicture
+
+            document.getElementById("selectpfpbackground").style.display = "none"
 
             document.getElementById("profile-username").innerText = displayName + " (Lvl. " + level + ")"
             document.getElementById("profile-fish").innerText = "Fish: " + formatNumber(fish)
@@ -1336,10 +1342,38 @@ function viewProfile(profile) {
             document.getElementById("profile-fishgambled").innerText = "Fish Gambled: " + formatNumber(fishGambled)
             document.getElementById("profile-joindate").innerText = "Join Date: " + joinDate
             document.getElementById("profile-lastonline").innerText = "Last Online: " + lastOnlineDate
+            document.getElementById("profile-picture").src = "../images/profiles/" + picture + ".png"
 
         }
     });
+}
 
-    
+function openSetPFP() {
+    document.getElementById("selectpfpbackground").style.display = "block"
+}
 
+function closeSetPFP() {
+    document.getElementById("selectpfpbackground").style.display = "none"
+}
+
+function setProfilePicture(id) {
+    document.getElementById("selectpfpbackground").style.display = "none"
+    delay(200).then(() => viewProfile(getCookie("username")))
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "profilePicture": id
+    };
+    fetch('https://traoxfish.us-3.evennode.com/setprofilepicture', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        
+    });
 }
