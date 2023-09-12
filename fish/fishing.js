@@ -1289,9 +1289,9 @@ function closeProfile() {
 
 }
 
-function viewProfile(profile) {
+function viewProfile(profile, self) {
     if (profile == undefined) {
-        viewProfile(getCookie("username"))
+        viewProfile(getCookie("username"), true)
         return
     }
 
@@ -1327,6 +1327,14 @@ function viewProfile(profile) {
             var joinDate = json.joinDate
             var lastOnlineDate = json.lastOnlineDate
             var picture = json.profilePicture
+
+            if (self == true) {
+                document.getElementById("profile-picture").onclick = function () { openSetPFP() }
+                document.getElementById("profile-picture").style.cursor = "pointer"
+            } else {
+                document.getElementById("profile-picture").onclick = ""
+                document.getElementById("profile-picture").style.cursor = "default"
+            }
 
             document.getElementById("selectpfpbackground").style.display = "none"
 
