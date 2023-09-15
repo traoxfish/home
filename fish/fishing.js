@@ -1270,6 +1270,11 @@ function getLevel() {
 
 function closeProfile() {
     document.getElementById("viewprofile").style.display = "none";
+    closeFriends()
+    document.getElementById("openfriends").style.display = "none"
+    document.getElementById("addfriend").style.display = "none"
+
+    document.getElementById("profile-picture").style.pointer = "default"
 
     document.getElementById("profile-username").innerText = "Loading..."
     document.getElementById("profile-fish").innerText = "Fish: Loading..."
@@ -1286,6 +1291,7 @@ function closeProfile() {
     document.getElementById("profile-picture").src = "../images/profiles/default.png"
 
     document.getElementById("selectpfpbackground").style.display = "none"
+    document.getElementById("profile-picture").onclick = function () { }
 
 }
 
@@ -1331,9 +1337,15 @@ function viewProfile(profile, self) {
             if (self == true) {
                 document.getElementById("profile-picture").onclick = function () { openSetPFP() }
                 document.getElementById("profile-picture").style.cursor = "pointer"
+                document.getElementById("openfriends").style.display = "block"
+                document.getElementById("addfriend").style.display = "none"
             } else {
                 document.getElementById("profile-picture").onclick = ""
                 document.getElementById("profile-picture").style.cursor = "default"
+                document.getElementById("openfriends").style.display = "none"
+                document.getElementById("addfriend").style.display = "block"
+                document.getElementById("addfriend").parentNode.replaceChild(document.getElementById("addfriend").cloneNode(true), document.getElementById("addfriend"))
+                document.getElementById("addfriend").addEventListener('click', function() { sendFriendRequest(profile) }, { once: true })
             }
 
             document.getElementById("selectpfpbackground").style.display = "none"
@@ -1383,5 +1395,146 @@ function setProfilePicture(id) {
         return response.json();
     }).then(json => {
         
+    });
+}
+
+function openFriends() {
+    document.getElementById("friendsbackground").style.display = "block"
+    getFriends()
+}
+
+function closeFriends() {
+    document.getElementById("friendsbackground").style.display = "none"
+}
+
+function cancelFriend(friend) {
+
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "cancel": true,
+        "profile": friend
+    };
+    fetch('https://traoxfish.us-3.evennode.com/sendfriendrequest', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        getFriends()
+    })
+}
+
+function sendFriendRequest(friend) {
+
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "cancel": false,
+        "profile": friend
+    };
+    fetch('https://traoxfish.us-3.evennode.com/sendfriendrequest', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        getFriends()
+    })
+}
+
+function getFriends() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getfriends', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+
+            document.getElementById("friends-friends").innerHTML = ""
+            document.getElementById("friends-incoming").innerHTML = ""
+            document.getElementById("friends-outgoing").innerHTML = ""
+
+            for (var i = 0; i < json.friends.length; i++) {
+                var friend = json.friends[i]
+
+                var item = document.createElement("p");
+                item.id = "friend-" + friend
+                item.className = "frienditem"
+                item.addEventListener('click', function() { viewProfile(this.id.split("friend-")[1]); closeFriends(); })
+                item.style.cursor = "pointer"
+                item.textContent = friend
+
+                var button = document.createElement("button");
+                button.innerText = "x"
+                button.className = "friendcancelbutton nicebutton"
+                button.addEventListener('click', function() { event.stopPropagation(); cancelFriend(this.parentElement.id.split("friend-")[1]); })
+
+                document.getElementById("friends-friends").appendChild(item);
+
+                document.getElementById("friend-" + friend).appendChild(button);
+
+            }
+
+            for (var i = 0; i < json.incomingRequests.length; i++) {
+                var friend = json.incomingRequests[i]
+
+                var item = document.createElement("p");
+                item.id = "friend-incoming-" + friend
+                item.className = "frienditem"
+                item.addEventListener('click', function() { viewProfile(this.id.split("friend-incoming-")[1]); closeFriends(); })
+                item.style.cursor = "pointer"
+                item.textContent = friend
+
+                var button = document.createElement("button");
+                button.innerText = "x"
+                button.className = "friendcancelbutton nicebutton"
+                button.addEventListener('click', function() { event.stopPropagation(); cancelFriend(this.parentElement.id.split("friend-incoming-")[1]); })
+
+                document.getElementById("friends-incoming").appendChild(item);
+
+                document.getElementById("friend-incoming-" + friend).appendChild(button);
+
+            }
+
+            for (var i = 0; i < json.outgoingRequests.length; i++) {
+                var friend = json.outgoingRequests[i]
+
+                var item = document.createElement("p");
+                item.id = "friend-outgoing-" + friend
+                item.className = "frienditem"
+                item.addEventListener('click', function() { viewProfile(this.id.split("friend-outgoing-")[1]); closeFriends(); })
+                item.style.cursor = "pointer"
+                item.textContent = friend
+
+                var button = document.createElement("button");
+                button.innerText = "x"
+                button.className = "friendcancelbutton nicebutton"
+                button.addEventListener('click', function() { event.stopPropagation(); cancelFriend(this.parentElement.id.split("friend-outgoing-")[1]); })
+
+                document.getElementById("friends-outgoing").appendChild(item);
+
+                document.getElementById("friend-outgoing-" + friend).appendChild(button);
+
+            }
+
+        }
     });
 }

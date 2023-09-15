@@ -760,6 +760,23 @@ textarea {
   font-size: 16px;
 }
 
+.datalog {
+  font-family: Arial;
+  border: none;
+  cursor: text;
+  border-radius: 1px 1px 1px 1px;
+  background-color: rgb(29, 26, 44);
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  display: inline-block;
+  color: white;
+  width: 200px;
+  height: 24px;
+  font-size: 16px;
+  overflow-y: scroll;
+}
+
 .chatbox {
   min-width: 49.75%;
   min-height: 256px;
@@ -1050,4 +1067,23 @@ input:checked + .slider:before {
   max-width: 768px;
   max-height: 512px;
   z-index: 1000;
+}
+
+.frienditem {
+  margin-top: 4px; 
+  line-height: 6px; 
+  font-size: 12px;
+  min-width: calc(100% - 12px);
+  max-height: 12px;
+}
+
+.friendcancelbutton {
+  transform: translate(12px, 0);
+  float: right;
+  max-height: 12px; 
+  min-height: 12px; 
+  font-size: 10px; 
+  width: 12px; 
+  line-height: 0px;
+  margin-top: -4px;
 }

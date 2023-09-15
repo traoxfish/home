@@ -40,8 +40,10 @@
 
    <div onclick="closeProfile()" id="viewprofile" class="viewprofile">
       <div onclick="event.stopPropagation()" class="profilebackground">
-        <img onclick="openSetPFP()" id="profile-picture" src="../images/profile.png" style="width: 128px; height: 128px; margin-left: 32px; margin-top: 32px; outline-style: solid; outline-width: 1px; outline-color: #ffffff; border-radius: 64px; cursor: pointer;">
+        <img id="profile-picture" src="../images/profile.png" style="width: 128px; height: 128px; margin-left: 32px; margin-top: 32px; outline-style: solid; outline-width: 1px; outline-color: #ffffff; border-radius: 64px;">
         <h1 id="profile-username" style="display: inline-block; transform: translate(0, -48px); margin-left: 12px; font-size: 250%;">Loading...</h1>
+        <button id="openfriends" onclick="openFriends()" class="nicebutton" style="position: absolute; display: none; margin-left: 180px; margin-top: -64px;">Friends</button>
+        <button id="addfriend" class="nicebutton" style="position: absolute; display: none; margin-left: 180px; margin-top: -64px;">Send Friend Request</button>
         <div class="longbarseperator" style="display: inline-block; transform: translate(0, -24px); position: initial;"></div>
         <div style="margin-left: 32px; transform: translate(0, -12px); position: relative; max-width: 46%; width: 46%; display: inline-block;">
           <p id="profile-fish" style="line-height: 6px;">Fish: Loading...</p>
@@ -59,29 +61,55 @@
           <p id="profile-joindate" style="line-height: 6px;">Join Date: Loading...</p>
           <p id="profile-lastonline" style="line-height: 6px;">Last Online: Loading...</p>
         </div>
-        <div id="selectpfpbackground" style="display: none; background-color: #1d1a2c; max-width: 75%; max-height: 75%; position: absolute; transform: translate(20%, -400px); outline-style: solid; outline-width: 1px; outline-color: #ffffff; margin-left: auto; margin-right: auto; overflow-y: scroll;">
-
-          <img onclick="closeSetPFP()" src="../images/x.png" style="display: flexbox; position: fixed; width: 24px; margin-left: calc(100% - 24px); cursor: pointer;">
-
-          <img onclick="setProfilePicture('burger_king')" src="../images/profiles/burger_king.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('epic_green_car')" src="../images/profiles/epic_green_car.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('epic_red_car')" src="../images/profiles/epic_red_car.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('fornite_balenciaga')" src="../images/profiles/fornite_balenciaga.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('funny_fish_guy')" src="../images/profiles/funny_fish_guy.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('gambler')" src="../images/profiles/gambler.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('gangster_daffy_duck')" src="../images/profiles/gangster_daffy_duck.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('gangster_fish')" src="../images/profiles/gangster_fish.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('gangster_skeleton')" src="../images/profiles/gangster_skeleton.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('gangster_skull')" src="../images/profiles/gangster_skull.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('gangster_snail')" src="../images/profiles/gangster_snail.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('gangster_spongebob')" src="../images/profiles/gangster_spongebob.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('jesse_pinkman')" src="../images/profiles/jesse_pinkman.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('john_f_kenedy')" src="../images/profiles/john_f_kenedy.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('keep_gambling')" src="../images/profiles/keep_gambling.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('slots')" src="../images/profiles/slots.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('swat_rat')" src="../images/profiles/swat_rat.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
-          <img onclick="setProfilePicture('trump_mug_shot')" src="../images/profiles/trump_mug_shot.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+        <div onclick="closeFriends()" id="friendsbackground" style="display: none; min-width: 100%; min-height: 100%; position: absolute; transform: translate(0, -460px);">
+          <div onclick="event.stopPropagation()" style="display: block; background-color: #1d1a2c; width: 75%; height: 75%; max-width: 75%; max-height: 75%; position: absolute; outline-style: solid; outline-width: 1px; outline-color: #ffffff; margin-left: auto; margin-right: auto; transform: translate(16.6%, 16.6%); ">
+            <div class="center" style="position: relative; width: 100%;">
+              <p style="max-width: 25%; font-size: 16px; display: inline-block; margin-left: 12%; position: relative; text-align: center;">Friends</p>
+              <div class="navseperator" style="height: 372px; margin-top: 13px; margin-left: 11.4%;"></div>
+              <p style="max-width: 25%; font-size: 16px; display: inline-block; margin-left: 16.5%; position: relative; text-align: center;">Incoming Requests</p>
+              <div class="navseperator" style="height: 372px; margin-top: 13px; margin-left: 3.6%;"></div>
+              <p style="max-width: 25%; font-size: 16px; display: inline-block; margin-left: 9%; position: relative; text-align: center;">Outgoing Requests</p>
+              <div class="longbarseperator" style="margin-top: 24px;"></div>
+              <div id="friends-friends" style="width:32%; height: 344px; display: inline-block; position: absolute; margin-top: 46px; margin-left: -95%;">
+                <p class="frienditem">Loading...</p>
+              </div>
+              <div id="friends-incoming" style="width:32%; height: 344px;display: inline-block; position: absolute; margin-top: 46px; margin-left: -61.75%;">
+                <p class="frienditem">Loading...</p>
+              </div>
+              <div id=friends-outgoing style="width:32%; height: 344px; display: inline-block; position: absolute; margin-top: 46px; margin-left: -28.5%;">
+                <p class="frienditem">Loading...</p>
+              </div>
+            </div>
         </div>
+        
+          
+        </div>
+        <div onclick="closeSetPFP()" id="selectpfpbackground" style="display: none; position: absolute; min-width: 100%; min-height: 100%; transform: translate(0, -460px); ">
+
+          <img onclick="closeSetPFP()" src="../images/x.png" style="display: block; position: absolute; width: 24px; cursor: pointer; margin-left: 81.5%; margin-top: 9%; z-index: 4;">
+
+          <div onclick="event.stopPropagation()" style="display: block; background-color: #1d1a2c; max-width: 75%; max-height: 75%; position: absolute; outline-style: solid; outline-width: 1px; outline-color: #ffffff; margin-left: auto; margin-right: auto; transform: translate(16.6%, 16.6%); overflow-y: scroll;">
+            <img onclick="setProfilePicture('burger_king')" src="../images/profiles/burger_king.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('epic_green_car')" src="../images/profiles/epic_green_car.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('epic_red_car')" src="../images/profiles/epic_red_car.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('fornite_balenciaga')" src="../images/profiles/fornite_balenciaga.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('funny_fish_guy')" src="../images/profiles/funny_fish_guy.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('gambler')" src="../images/profiles/gambler.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('gangster_daffy_duck')" src="../images/profiles/gangster_daffy_duck.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('gangster_fish')" src="../images/profiles/gangster_fish.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('gangster_skeleton')" src="../images/profiles/gangster_skeleton.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('gangster_skull')" src="../images/profiles/gangster_skull.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('gangster_snail')" src="../images/profiles/gangster_snail.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('gangster_spongebob')" src="../images/profiles/gangster_spongebob.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('jesse_pinkman')" src="../images/profiles/jesse_pinkman.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('john_f_kenedy')" src="../images/profiles/john_f_kenedy.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('keep_gambling')" src="../images/profiles/keep_gambling.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('slots')" src="../images/profiles/slots.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('swat_rat')" src="../images/profiles/swat_rat.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+            <img onclick="setProfilePicture('trump_mug_shot')" src="../images/profiles/trump_mug_shot.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+          </div>
+        </div>
+        
       </div>
       
    </div>
