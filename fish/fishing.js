@@ -1508,9 +1508,16 @@ function getFriends() {
                 button.className = "friendcancelbutton nicebutton"
                 button.addEventListener('click', function() { event.stopPropagation(); cancelFriend(this.parentElement.id.split("friend-incoming-")[1]); })
 
+                var button2 = document.createElement("button");
+                button2.innerText = "✓"
+                button2.className = "friendcancelbutton nicebutton"
+                button2.addEventListener('click', function() { event.stopPropagation(); sendFriendRequest(this.parentElement.id.split("friend-incoming-")[1]); })
+                button2.style.marginRight = "4px"
+
                 document.getElementById("friends-incoming").appendChild(item);
 
                 document.getElementById("friend-incoming-" + friend).appendChild(button);
+                document.getElementById("friend-incoming-" + friend).appendChild(button2);
 
             }
 
