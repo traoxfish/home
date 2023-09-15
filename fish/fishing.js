@@ -1192,6 +1192,8 @@ function placePixel(event, down1) {
         });
     }
 
+    var last2 = -1
+
     holdInterval = setInterval(function() {
         var index1 = lastIndex
         const data = {
@@ -1333,6 +1335,7 @@ function viewProfile(profile, self) {
             var joinDate = json.joinDate
             var lastOnlineDate = json.lastOnlineDate
             var picture = json.profilePicture
+            var friendStatus = json.friendStatus
 
             if (self == true) {
                 document.getElementById("profile-picture").onclick = function () { openSetPFP() }
@@ -1345,7 +1348,21 @@ function viewProfile(profile, self) {
                 document.getElementById("openfriends").style.display = "none"
                 document.getElementById("addfriend").style.display = "block"
                 document.getElementById("addfriend").parentNode.replaceChild(document.getElementById("addfriend").cloneNode(true), document.getElementById("addfriend"))
-                document.getElementById("addfriend").addEventListener('click', function() { sendFriendRequest(profile) }, { once: true })
+                if (friendStatus == "not friends") {
+                    document.getElementById("addfriend").innerText = "Send Friend Request"
+                    document.getElementById("addfriend").addEventListener('click', function() { sendFriendRequest(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
+                } else if (friendStatus == "friends") {
+                    document.getElementById("addfriend").innerText = "Remove Friend"
+                    document.getElementById("addfriend").addEventListener('click', function() { cancelFriend(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
+                } else if (friendStatus == "incoming") {
+                    document.getElementById("addfriend").innerText = "Accept Friend Request"
+                    document.getElementById("addfriend").addEventListener('click', function() { sendFriendRequest(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
+                } else if (friendStatus == "outgoing") {
+                    document.getElementById("addfriend").innerText = "Cancel Friend Request"
+                    document.getElementById("addfriend").addEventListener('click', function() { cancelFriend(profile); delay(250).then(() => viewProfile(profile))  }, { once: true })
+                }
+                
+                
             }
 
             document.getElementById("selectpfpbackground").style.display = "none"
