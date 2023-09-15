@@ -1296,7 +1296,7 @@ function closeProfile() {
 }
 
 function viewProfile(profile, self) {
-    if (profile == undefined) {
+    if ((profile == undefined || profile.toLowerCase() == getCookie("username").toLowerCase()) && !self) {
         viewProfile(getCookie("username"), true)
         return
     }
