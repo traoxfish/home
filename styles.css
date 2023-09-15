@@ -1070,7 +1070,7 @@ input:checked + .slider:before {
 }
 
 .frienditem {
-  margin-top: 4px; 
+  margin-top: 5px; 
   line-height: 6px; 
   font-size: 12px;
   min-width: calc(100% - 12px);
@@ -1086,4 +1086,17 @@ input:checked + .slider:before {
   width: 12px; 
   line-height: 0px;
   margin-top: -4px;
+  margin-right: 2px;
+}
+
+.friendlist {
+  width:32%;
+  height: 344px; 
+  display: inline-block; 
+  position: absolute; 
+  margin-top: 46px;
+}
+
+.friendlist::-webkit-scrollbar {
+  display: none;
 }
