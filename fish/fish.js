@@ -105,6 +105,10 @@ function login() {
             window.location.replace("https://www.traox.dev/fish/fish");
         } else {
             document.getElementById("accountstatus").textContent = json.error;
+            document.getElementById("accountstatus").style.color = "#ea7b7b";
+            delay(2000).then(() => {
+                document.getElementById("accountstatus").innerHTML = "<br>";
+            });
         }
     });
 }
