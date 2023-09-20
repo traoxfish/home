@@ -219,7 +219,7 @@ for (var i = 0; i < quantityInputs.length; i++) {
 
 function buyItem(type) {
     var quantity = 1
-    if (document.getElementById(type.toLowerCase() + "buyquantity") != undefined) quantity = Number(document.getElementById(type.toLowerCase() + "buyquantity").value)
+    if (document.getElementById(type.toLowerCase() + "buyquantity") != undefined) quantity = document.getElementById(type.toLowerCase() + "buyquantity").value
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
