@@ -76,6 +76,14 @@ function sendFish() {
 }
 
 function formatNumber(value) {
+    if (value >= 1010000000000000000000000000000000000000000000)
+        return (value / 1000000000000000000000000000000000000000000000).toFixed(2) + 'QD'
+    if (value >= 1000000000000000000000000000000000000000000000)
+        return (value / 1000000000000000000000000000000000000000000000).toFixed(0) + 'QD'
+    if (value >= 1010000000000000000000000000000000000000000)
+        return (value / 1000000000000000000000000000000000000000000).toFixed(2) + 'TD'
+    if (value >= 1000000000000000000000000000000000000000000)
+        return (value / 1000000000000000000000000000000000000000000).toFixed(0) + 'TD'
     if (value >= 1010000000000000000000000000000000000000)
         return (value / 1000000000000000000000000000000000000000).toFixed(2) + 'DD'
     if (value >= 1000000000000000000000000000000000000000)
@@ -190,6 +198,25 @@ document.getElementById("betamount").oninput = function() {
     if (isNaN(this.value.charAt(this.value.length-1)) && this.value.length == 1) this.value = ""
 }
 
+quantityInputs = [ "rarefishbuyquantity", "veryrarefishbuyquantity", "sharkbuyquantity", "raresharkbuyquantity",  ]
+
+for (var i = 0; i < quantityInputs.length; i++) {
+    document.getElementById(quantityInputs[i]).oninput = function() {
+        this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnOoNdD]/g, '').replace(/(\..*)\./g, '$1');
+        if (isNaN(this.value.charAt(this.value.length-2)) && this.value.charAt(this.value.length-2) != '.' && this.value.charAt(this.value.length-2).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() != 's') this.value = this.value.substr(0, this.value.length - 1)
+        else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'q' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() == 'q')) this.value = this.value.substr(0, this.value.length - 1)
+        else if ((this.value.charAt(this.value.length-3).toLowerCase() == 's' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 's' && this.value.charAt(this.value.length-2).toLowerCase() == 's')) this.value = this.value.substr(0, this.value.length - 1)
+    
+        if (isNaN(this.value.charAt(this.value.length-1)) && this.value.charAt(this.value.length-2) == '.') this.value = this.value.substr(0, this.value.length - 1)
+        if (isNaN(this.value.charAt(this.value.length-1)) && this.value.length == 1) this.value = ""
+    
+        if (formatedNumberToNumber(this.value) > 1000000000000) this.value = "1T"
+    
+    }
+}
+
+
+
 function buyItem(type) {
     var quantity = 1
     if (document.getElementById(type.toLowerCase() + "buyquantity") != undefined) quantity = Number(document.getElementById(type.toLowerCase() + "buyquantity").value)
@@ -197,7 +224,7 @@ function buyItem(type) {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
         "purchaseType": type,
-        "quantity": quantity
+        "quantity": formatedNumberToNumber(quantity)
     };
     fetch('https://traoxfish.us-3.evennode.com/makepurchase', {
         method: 'POST',
@@ -288,10 +315,10 @@ function getItemCosts(type) {
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
-        "rareFishAmount": document.getElementById("rarefishbuyquantity").value,
-        "veryRareFishAmount": document.getElementById("veryrarefishbuyquantity").value,
-        "sharkAmount": document.getElementById("sharkbuyquantity").value,
-        "rareSharkAmount": document.getElementById("raresharkbuyquantity").value,
+        "rareFishAmount": formatedNumberToNumber(document.getElementById("rarefishbuyquantity").value),
+        "veryRareFishAmount": formatedNumberToNumber(document.getElementById("veryrarefishbuyquantity").value),
+        "sharkAmount": formatedNumberToNumber(document.getElementById("sharkbuyquantity").value),
+        "rareSharkAmount": formatedNumberToNumber(document.getElementById("raresharkbuyquantity").value),
     };
     fetch('https://traoxfish.us-3.evennode.com/getcosts', {
         method: 'POST',
