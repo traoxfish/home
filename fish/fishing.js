@@ -219,13 +219,13 @@ for (var i = 0; i < quantityInputs.length; i++) {
 
 function buyItem(type) {
     var quantity = 1
-    if (document.getElementById(type.toLowerCase() + "buyquantity") != undefined) quantity = document.getElementById(type.toLowerCase() + "buyquantity").value
-    if (type == "whale") quantity = 1
+    if (document.getElementById(type.toLowerCase() + "buyquantity")) quantity = formatedNumberToNumber(document.getElementById(type.toLowerCase() + "buyquantity").value)
+    if (isNan(Number(quantity))) quantity = 1
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
         "purchaseType": type,
-        "quantity": formatedNumberToNumber(quantity)
+        "quantity": quantity
     };
     fetch('https://traoxfish.us-3.evennode.com/makepurchase', {
         method: 'POST',
