@@ -76,6 +76,14 @@ function sendFish() {
 }
 
 function formatNumber(value) {
+    if (value >= 1010000000000000000000000000000000000000)
+        return (value / 1000000000000000000000000000000000000000).toFixed(2) + 'DD'
+    if (value >= 1000000000000000000000000000000000000000)
+        return (value / 1000000000000000000000000000000000000000).toFixed(0) + 'DD'
+    if (value >= 1010000000000000000000000000000000000000)
+        return (value / 1000000000000000000000000000000000000).toFixed(2) + 'UD'
+    if (value >= 1000000000000000000000000000000000000)
+        return (value / 1000000000000000000000000000000000000).toFixed(0) + 'UD'
     if (value >= 1010000000000000000000000000000000)
         return (value / 1000000000000000000000000000000000).toFixed(2) + 'D'
     if (value >= 1000000000000000000000000000000000)
@@ -280,6 +288,10 @@ function getItemCosts(type) {
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
+        "rareFishAmount": document.getElementById("rarefishbuyquantity").value,
+        "veryRareFishAmount": document.getElementById("veryrarefishbuyquantity").value,
+        "sharkAmount": document.getElementById("sharkbuyquantity").value,
+        "rareSharkAmount": document.getElementById("raresharkbuyquantity").value,
     };
     fetch('https://traoxfish.us-3.evennode.com/getcosts', {
         method: 'POST',
@@ -670,13 +682,13 @@ function getFish() {
             document.getElementById("xpcount").innerText = "XP: " + json.currentLevelXp + " / " + (json.xpRequired + json.currentLevelXp)
             
             //costs
-            document.getElementById("rarefishcost").textContent = formatNumber(json.costs.rareFishCost) + " fish"
+            /*document.getElementById("rarefishcost").textContent = formatNumber(json.costs.rareFishCost) + " fish"
             document.getElementById("veryrarefishcost").textContent = formatNumber(json.costs.veryRareFishCost) + " fish"
             document.getElementById("sharkcost").textContent = formatNumber(json.costs.sharkCost) + " fish"
             document.getElementById("raresharkcost").textContent = formatNumber(json.costs.rareSharkCost) + " fish"
             document.getElementById("whalecost").textContent = formatNumber(json.costs.whaleCost) + " fish"
             document.getElementById("specialfishcost").textContent = "Buy Price: " + formatNumber(json.costs.specialFishCost) + " fish"
-            document.getElementById("specialfishsellcost").textContent = "Sell Price: " + formatNumber(json.costs.specialFishSellCost) + " fish"
+            document.getElementById("specialfishsellcost").textContent = "Sell Price: " + formatNumber(json.costs.specialFishSellCost) + " fish"*/
 
             
         }
