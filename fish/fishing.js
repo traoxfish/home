@@ -218,9 +218,11 @@ for (var i = 0; i < quantityInputs.length; i++) {
 
 
 function buyItem(type) {
-    try {
+    
     var quantity = 1
-    if (document.getElementById(type.toLowerCase() + "buyquantity") != undefined) quantity = formatedNumberToNumber(document.getElementById(type.toLowerCase() + "buyquantity").value)
+    try {
+        if (document.getElementById(type.toLowerCase() + "buyquantity") != undefined) quantity = formatedNumberToNumber(document.getElementById(type.toLowerCase() + "buyquantity").value)
+    } catch (error) { alert(error) }
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
@@ -253,7 +255,6 @@ function buyItem(type) {
             })
         }
     });
-    } catch (error) { alert(error) }
 }
 
 function sendMessage() {
