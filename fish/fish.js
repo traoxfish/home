@@ -13,6 +13,18 @@ function getCookie(cname) {
     return "";
 }
 
+function randomUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+}
+
+
+if (getCookie("browserKey").length < 1) {
+    document.cookie = "browserKey=" + randomUUID();
+}
+
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
@@ -48,7 +60,8 @@ function createAccount() {
 
     const data = {
         "username": username,
-        "password": password
+        "password": password,
+        "browserKey": getCookie("browserKey")
     };
     fetch('https://traoxfish.us-3.evennode.com/register', {
         method: 'POST',
