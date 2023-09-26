@@ -1315,6 +1315,7 @@ function closeProfile() {
 
 
     document.getElementById("profile-username").innerText = "Loading..."
+    document.getElementById("profile-rank").innerText = "Loading..."
     document.getElementById("profile-fish").innerText = "Fish: Loading..."
     document.getElementById("profile-rarefish").innerText = "Rare Fish: Loading..."
     document.getElementById("profile-veryrarefish").innerText = "Very Rare Fish: Loading..."
@@ -1372,6 +1373,7 @@ function viewProfile(profile, self) {
             var lastOnlineDate = json.lastOnlineDate
             var picture = json.profilePicture
             var friendStatus = json.friendStatus
+            var rank = json.rank
 
             if (self == true) {
                 document.getElementById("profile-picture").onclick = function () { openSetPFP() }
@@ -1406,6 +1408,7 @@ function viewProfile(profile, self) {
             document.getElementById("selectpfpbackground").style.display = "none"
 
             document.getElementById("profile-username").innerText = displayName + " (Lvl. " + level + ")"
+            document.getElementById("profile-rank").innerText = rank
             document.getElementById("profile-fish").innerText = "Fish: " + formatNumber(fish)
             document.getElementById("profile-rarefish").innerText = "Rare Fish: " + formatNumber(rareFish)
             document.getElementById("profile-veryrarefish").innerText = "Very Rare Fish: " + formatNumber(veryRareFish)
