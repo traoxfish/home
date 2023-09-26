@@ -1310,6 +1310,7 @@ function closeProfile() {
     document.getElementById("addfriend").style.display = "none"
 
     document.getElementById("profile-picture").style.pointer = "default"
+    document.getElementById("profile-settings").style.display = "none"
 
     document.getElementById("profile-username").innerText = "Loading..."
     document.getElementById("profile-fish").innerText = "Fish: Loading..."
@@ -1375,11 +1376,13 @@ function viewProfile(profile, self) {
                 document.getElementById("profile-picture").style.cursor = "pointer"
                 document.getElementById("openfriends").style.display = "block"
                 document.getElementById("addfriend").style.display = "none"
+                document.getElementById("profile-settings").style.display = "inline-block"
             } else {
                 document.getElementById("profile-picture").onclick = ""
                 document.getElementById("profile-picture").style.cursor = "default"
                 document.getElementById("openfriends").style.display = "none"
                 document.getElementById("addfriend").style.display = "block"
+                document.getElementById("profile-settings").style.display = "none"
                 document.getElementById("addfriend").parentNode.replaceChild(document.getElementById("addfriend").cloneNode(true), document.getElementById("addfriend"))
                 if (friendStatus == "not friends") {
                     document.getElementById("addfriend").innerText = "Send Friend Request"
@@ -1455,6 +1458,14 @@ function openFriends() {
 
 function closeFriends() {
     document.getElementById("friendsbackground").style.display = "none"
+}
+
+function openSettings() {
+    document.getElementById("profilesettingsbackground").style.display = "block"
+}
+
+function closeSettings() {
+    document.getElementById("profilesettingsbackground").style.display = "none"
 }
 
 function cancelFriend(friend) {
@@ -1594,4 +1605,49 @@ function getFriends() {
 
         }
     });
+}
+
+function changePassword() {
+    var oldPassword = document.getElementById("changepasswordold").value
+    var newPassword = document.getElementById("changepasswordnew").value
+    var newPasswordConfirm = document.getElementById("changepasswordnewconfirm").value
+
+    if (newPassword != newPasswordConfirm) {
+        document.getElementById("changepasswordstatus").innerText = "New passwords do not match."
+        document.getElementById("changepasswordstatus").style.color = "#ea7b7b";
+        delay(2000).then(() => {
+            document.getElementById("changepasswordstatus").innerHTML = ""
+        })
+    }
+
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "oldPassword": oldPassword,
+        "newPassword": newPassword,
+    };
+    fetch('https://traoxfish.us-3.evennode.com/changepassword', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            document.getElementById("changepasswordstatus").innerText = "Successfully changed password."
+            document.getElementById("changepasswordstatus").style.color = "#84ea84";
+            delay(2000).then(() => {
+                document.getElementById("changepasswordstatus").innerHTML = ""
+            })
+        } else {
+            document.getElementById("changepasswordstatus").innerText = json.error
+            document.getElementById("changepasswordstatus").style.color = "#ea7b7b";
+            delay(2000).then(() => {
+                document.getElementById("changepasswordstatus").innerHTML = ""
+            })
+        }
+    })
 }

@@ -40,6 +40,7 @@
 
    <div onclick="closeProfile()" id="viewprofile" class="viewprofile">
       <div onclick="event.stopPropagation()" class="profilebackground">
+        <button onclick="openSettings()" id="profile-settings" class="nicebutton" style="width: 32px; height: 32px; display: inline-block; position: absolute; transform: translate(720px, 16px);"><img src="../images/settings.png" style="width: 100%; height: 80%; margin-top: 3px;"></button>
         <img id="profile-picture" src="../images/profile.png" style="width: 128px; height: 128px; margin-left: 32px; margin-top: 32px; outline-style: solid; outline-width: 1px; outline-color: #ffffff; border-radius: 64px;">
         <h1 id="profile-username" style="display: inline-block; transform: translate(0, -48px); margin-left: 12px; font-size: 250%;">Loading...</h1>
         <button id="openfriends" onclick="openFriends()" class="nicebutton" style="position: absolute; display: none; margin-left: 180px; margin-top: -64px;">Friends</button>
@@ -107,6 +108,18 @@
             <img onclick="setProfilePicture('slots')" src="../images/profiles/slots.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
             <img onclick="setProfilePicture('swat_rat')" src="../images/profiles/swat_rat.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
             <img onclick="setProfilePicture('trump_mug_shot')" src="../images/profiles/trump_mug_shot.png" style="width: 18%; height: 18%; margin-left: 5%; margin-top: 5%; line-height: 0px; display: inline-block; position: relative; cursor: pointer;">
+          </div>
+        </div>
+
+        <div onclick="closeSettings()" id="profilesettingsbackground" style="display: none; position: absolute; min-width: 100%; min-height: 100%; transform: translate(0, -460px);">
+          <div onclick="event.stopPropagation()" style="display: block; background-color: #1d1a2c; min-width: 75%; min-height: 75%; position: absolute; outline-style: solid; outline-width: 1px; outline-color: #ffffff; margin-left: auto; margin-right: auto; transform: translate(16.6%, 16.6%);">
+            <p style="position: absolute; display: inline-block; margin-left: 24.5%; margin-top: 86px;">Change Password:</p>
+            <input type="password" id="changepasswordold" class="center" placeholder="Old Password" style="display: inline-block; position: inital; min-width: 50%; margin-top:128px;">
+            <input type="password" id="changepasswordnew" class="center" placeholder="New Password" style="display: inline-block; position: inital;  min-width: 50%; margin-top:168px;">
+            <input type="password" id="changepasswordnewconfirm" class="center" placeholder="Confirm New Password" style="display: inline-block; position: inital; min-width: 50%; margin-top:208px;">
+            <button onclick="changePassword()" class="nicebutton center" style="min-width: 50%; margin-top: 248px;">Change Password</button>
+            <p id="changepasswordstatus" style="position: absolute; display: inline-block; margin-left: 24.5%; margin-top: 268px; font-size: 16px; max-width: 50%;"> </p>
+            <button onclick="logout()" class="nicebutton center" style="min-width: 50%; margin-top: 328px;">Logout</button>
           </div>
         </div>
         
