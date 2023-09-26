@@ -278,6 +278,7 @@ function sendMessage() {
     });
 }
 
+var chat = []
 function getMessages(first) {
     const data = {
         "username": getCookie("username"),
@@ -293,14 +294,26 @@ function getMessages(first) {
     }).then(response => {
         return response.json();
     }).then(json => {
-        var same = false
+        var same = true
         if (json.status == "success") {
-            var chat = "";
-            for (var message in json.messages.reverse()) {
-                chat += json.messages[message] + "<br>"
+            if (chat[chat.length-1] != json.messages[0]) same = false
+            chat = json.messages
+            if (first) {
+                for (var message in chat.reverse()) {
+                    var messageElement = document.createElement("p")
+                    messageElement.style.marginBottom = "0px"
+                    messageElement.style.marginTop = "0px"
+                    messageElement.textContent = chat[message]
+                    document.getElementById("chat").appendChild(messageElement)
+                }
+            } else {
+                for (var message in chat.reverse()) {
+                    var messageElement = document.getElementById("chat").children[message]
+                    if (messageElement.textContent != chat[message]) {
+                        messageElement.textContent = chat[message]
+                    }
+                }
             }
-            if (chat == document.getElementById("chat").innerHTML) same = true
-            document.getElementById("chat").innerHTML = chat
         }
         if (!same) {
             document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
