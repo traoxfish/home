@@ -1374,6 +1374,7 @@ function viewProfile(profile, self) {
             var picture = json.profilePicture
             var friendStatus = json.friendStatus
             var rank = json.rank
+            if (rank == "none") rank = ""
 
             if (self == true) {
                 document.getElementById("profile-picture").onclick = function () { openSetPFP() }
