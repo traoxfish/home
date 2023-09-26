@@ -211,6 +211,8 @@ for (var i = 0; i < quantityInputs.length; i++) {
         if (isNaN(this.value.charAt(this.value.length-1)) && this.value.length == 1) this.value = ""
     
         if (formatedNumberToNumber(this.value) > 1000000000000) this.value = "1T"
+
+        getItemCosts()
     
     }
 }
@@ -667,14 +669,13 @@ delay(5).then(() => {
     setInterval(function(){ 
         keepOnline();
         updateLeaderboards();
-        getLevel();
         getMessages(false);
-    }, 300);
+    }, 333);
 
     setInterval(function(){ 
         getFish();
         getSpecialFishGraph()
-    }, 2000);
+    }, 1000);
 
     setInterval(function(){ 
         getItemCosts()
@@ -682,7 +683,7 @@ delay(5).then(() => {
         getSendLogs()
         getFishPixels()
         checkIfLoggedIn()
-    }, 1000);
+    }, 2000);
 });
 
 setInterval(function(){ 
@@ -1300,29 +1301,6 @@ function exitFullscreenCanvas() {
     document.getElementById("canvasfullscreenx").style.display = "none"
     document.getElementById("colorinputfullscreen").style.display = "none"
     document.getElementById("fullscreencolorselectorcolor").style.display = "none"
-}
-
-function getLevel() {
-    const data = {
-        "username": getCookie("username"),
-        "loginKey": getCookie("loginKey")
-    };
-    fetch('https://traoxfish.us-3.evennode.com/getlevel', {
-        method: 'POST',
-        credentials: "same-origin",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    }).then(response => {
-        return response.json();
-    }).then(json => {
-        if (json.status == "success") {
-            document.getElementById("level").innerText = "Level: " + json.level
-            document.getElementById("xpcolor").style.width = (json.currentLevelXp / (json.xpRequired + json.currentLevelXp)) * 100 + "%"
-            document.getElementById("xpcount").innerText = "XP: " + json.currentLevelXp + " / " + (json.xpRequired + json.currentLevelXp)
-        }
-    });
 }
 
 function closeProfile() {
