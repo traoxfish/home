@@ -303,7 +303,7 @@ function getMessages(first) {
         if (json.status == "success") {
             if (chat[chat.length-1] != json.messages[0]) same = false
             chat = json.messages
-            if (first) {
+            if (first || document.getElementById("chat").children.length < 1) {
                 for (var message in chat.reverse()) {
                     var messageElement = document.createElement("p")
                     messageElement.style.marginBottom = "0px"
