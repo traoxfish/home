@@ -1306,11 +1306,13 @@ function exitFullscreenCanvas() {
 function closeProfile() {
     document.getElementById("viewprofile").style.display = "none";
     closeFriends()
+    closeSettings()
     document.getElementById("openfriends").style.display = "none"
     document.getElementById("addfriend").style.display = "none"
 
     document.getElementById("profile-picture").style.pointer = "default"
     document.getElementById("profile-settings").style.display = "none"
+
 
     document.getElementById("profile-username").innerText = "Loading..."
     document.getElementById("profile-fish").innerText = "Fish: Loading..."
