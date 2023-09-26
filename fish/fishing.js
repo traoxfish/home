@@ -669,12 +669,11 @@ delay(5).then(() => {
     setInterval(function(){ 
         keepOnline();
         updateLeaderboards();
-        getMessages(false);
     }, 333);
 
     setInterval(function(){ 
         getFish();
-        getSpecialFishGraph()
+        getMessages(false);
     }, 1000);
 
     setInterval(function(){ 
@@ -683,7 +682,8 @@ delay(5).then(() => {
         getSendLogs()
         getFishPixels()
         checkIfLoggedIn()
-    }, 2000);
+        getSpecialFishGraph()
+    }, 2500);
 });
 
 setInterval(function(){ 
