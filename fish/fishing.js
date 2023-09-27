@@ -309,7 +309,7 @@ function getMessages(first) {
                     messageElement.style.marginBottom = "0px"
                     messageElement.style.marginTop = "0px"
                     messageElement.style.maxWidth = "99%"
-                    messageElement.style.fontSize = "calc(0.8vw + 6px)"
+                    messageElement.style.fontSize = "calc(0.66vw + 6px)"
                     messageElement.textContent = chat[message]
                     document.getElementById("chat").appendChild(messageElement)
                 }
