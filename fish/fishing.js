@@ -308,6 +308,8 @@ function getMessages(first) {
                     var messageElement = document.createElement("p")
                     messageElement.style.marginBottom = "0px"
                     messageElement.style.marginTop = "0px"
+                    messageElement.style.maxWidth = "99%"
+                    messageElement.style.fontSize = "calc(0.8vw + 6px)"
                     messageElement.textContent = chat[message]
                     document.getElementById("chat").appendChild(messageElement)
                 }
@@ -1315,7 +1317,7 @@ function closeProfile() {
 
 
     document.getElementById("profile-username").innerText = "Loading..."
-    document.getElementById("profile-rank").innerText = "Loading..."
+    document.getElementById("profile-rank").innerText = ""
     document.getElementById("profile-fish").innerText = "Fish: Loading..."
     document.getElementById("profile-rarefish").innerText = "Rare Fish: Loading..."
     document.getElementById("profile-veryrarefish").innerText = "Very Rare Fish: Loading..."
