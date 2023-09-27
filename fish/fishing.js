@@ -546,6 +546,12 @@ function spin() {
                         slot2value = slot3value
                         slot3value = temp
                     }
+
+                    if (slot2value == slot3value && slot2value != slot1value) {
+                        var temp = slot1value
+                        slot1value = slot3value
+                        slot3value = temp
+                    }
         
                     var valueToPx = {
                         2: "calc(-2.25vw - 8px)",
@@ -554,10 +560,6 @@ function spin() {
                         100: "calc(-6.7vw - 8px)",
                         1000: "calc(-8.9vw - 8px)"
                     }
-        
-                    
-                    
-                    
 
                     delay(25).then(() => {
                         delay(250).then(() => {
@@ -565,14 +567,16 @@ function spin() {
                             document.getElementById("slot1").style.top = valueToPx[slot1value];
                             var extraWait1 = 0
                             if (slot1value == slot2value) extraWait1 += 250
+                            if (slot1value == slot2value && slot2value >= 25) extraWait1 += 250
+                            if (slot1value == slot2value && slot2value == 1000) extraWait1 += 750
                             delay(250 + extraWait1).then(() => {
                                 clearInterval(int2)
                                 document.getElementById("slot2").style.top = valueToPx[slot2value];
                                 var extraWait2 = 0
                                 if (Number(json.winnings) > 0) extraWait2 += 750
-                                if (slot1value == 25) extraWait2 += 250
-                                if (slot1value == 100) extraWait2 += 500
-                                if (slot1value == 1000) extraWait2 += 1000
+                                if (slot1value == 25 && Number(json.winnings) > 0) extraWait2 += 250
+                                if (slot1value == 100 && Number(json.winnings) > 0) extraWait2 += 500
+                                if (slot1value == 1000 && Number(json.winnings) > 0) extraWait2 += 1000
                                 if (slot1value == slot2value && slot2value != slot3value && slot1value >= 25) extraWait2 += 250
                                 delay(250 + extraWait2 + extraWait1).then(() => {
                                     clearInterval(int3)
