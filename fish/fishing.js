@@ -18,17 +18,7 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-var slotI = 0
-var greenWin = false
-setInterval(function() {
-    var color = "white"
-    if (greenWin) {
-        slotI += 2
-        if (slotI % 10 <= 5) color = "%2384EA84FF"
-    }
-    slotI += 1
-    document.getElementById("slotmachine").style.backgroundImage = "url(\"data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='" + color + "' stroke-width='5' stroke-dasharray='6%2c 14' stroke-dashoffset='" + slotI % 20 + "' stroke-linecap='round'/%3e%3c/svg%3e\")"
-}, 66)
+
 
 function sendFish() {
     var reciever = document.getElementById("sendfishto").value;
@@ -438,6 +428,18 @@ function updateLeaderboards() {
     });
 }
 
+var slotI = 0
+var greenWin = false
+setInterval(function() {
+    var color = "white"
+    if (greenWin) {
+        slotI += 2
+        if (slotI % 10 <= 5) color = "%2384EA84FF"
+    }
+    slotI += 1
+    document.getElementById("slotmachine").style.backgroundImage = "url(\"data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='" + color + "' stroke-width='5' stroke-dasharray='6%2c 14' stroke-dashoffset='" + slotI % 20 + "' stroke-linecap='round'/%3e%3c/svg%3e\")"
+}, 66)
+
 var spinning = false
 function spin() {
 
@@ -496,7 +498,7 @@ function spin() {
                 }, 10)
             })
         
-            delay(2005).then(() => {
+            delay(1005).then(() => {
         
                 const data = {
                     "username": getCookie("username"),
@@ -538,6 +540,12 @@ function spin() {
                     var slot1value = json.slot1
                     var slot2value = json.slot2
                     var slot3value = json.slot3
+
+                    if (slot1value == slot3value && slot1value != slot2value) {
+                        var temp = slot2value
+                        slot2value = slot3value
+                        slot3value = temp
+                    }
         
                     var valueToPx = {
                         2: "calc(-2.25vw - 8px)",
@@ -547,36 +555,51 @@ function spin() {
                         1000: "calc(-8.9vw - 8px)"
                     }
         
-                    clearInterval(int1)
-                    clearInterval(int2)
-                    clearInterval(int3)
+                    
+                    
+                    
 
                     delay(25).then(() => {
-                        document.getElementById("slot1").style.top = valueToPx[slot1value];
-                        document.getElementById("slot2").style.top = valueToPx[slot2value];
-                        document.getElementById("slot3").style.top = valueToPx[slot3value];
-                        spinning = false
-            
-                        if (Number(json.winnings) > 0 ) {
-                            greenWin = true
-                            document.getElementById("spininfo").innerText = "You won " + formatNumber(Number(json.winnings)) + " fish!"
-                            document.getElementById("spininfo").style.color = "#84ea84";
-                        } else {
-                            document.getElementById("spininfo").innerText = "You lost!"
-                            document.getElementById("spininfo").style.color = "#ea7b7b";
-                            greenWin = false
-                        }
-                        delay(2000).then(() => {
-                            document.getElementById("spininfo").innerHTML = "<br>"
-                            greenWin = false
+                        delay(250).then(() => {
+                            clearInterval(int1)
+                            document.getElementById("slot1").style.top = valueToPx[slot1value];
+                            var extraWait1 = 0
+                            if (slot1value == slot2value) extraWait1 += 250
+                            delay(250 + extraWait1).then(() => {
+                                clearInterval(int2)
+                                document.getElementById("slot2").style.top = valueToPx[slot2value];
+                                var extraWait2 = 0
+                                if (Number(json.winnings) > 0) extraWait2 += 750
+                                if (slot1value == 25) extraWait2 += 250
+                                if (slot1value == 100) extraWait2 += 500
+                                if (slot1value == 1000) extraWait2 += 1000
+                                if (slot1value == slot2value && slot2value != slot3value && slot1value >= 25) extraWait2 += 250
+                                delay(250 + extraWait2 + extraWait1).then(() => {
+                                    clearInterval(int3)
+                                    document.getElementById("slot3").style.top = valueToPx[slot3value];
+    
+                                    spinning = false
+                
+                                    if (Number(json.winnings) > 0 ) {
+                                        greenWin = true
+                                        document.getElementById("spininfo").innerText = "You won " + formatNumber(Number(json.winnings)) + " fish!"
+                                        document.getElementById("spininfo").style.color = "#84ea84";
+                                    } else {
+                                        document.getElementById("spininfo").innerText = "You lost!"
+                                        document.getElementById("spininfo").style.color = "#ea7b7b";
+                                        greenWin = false
+                                    }
+                                    delay(2000).then(() => {
+                                        document.getElementById("spininfo").innerHTML = "<br>"
+                                        greenWin = false
+                                    })
+    
+                                })
+                            })
                         })
                     })
-
-                    
-        
                 });
             })
-
         }
     });
 }
