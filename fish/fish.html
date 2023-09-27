@@ -326,10 +326,13 @@
 
       <div style="display: block;">
         <p style="display: inline-block; position: absolute; margin-left: calc(5vw - 12px); margin-top: calc(-8px - 0.25vw); text-align: center; font-size: calc(1vw + 2px);">Match 3 numbers to win!</p>
-        <div class="slotmachine" style="display: inline-block;">
-        <p id="slot1" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
-        <p id="slot2" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
-        <p id="slot3" style="display: inline-block; position: relative; margin-left: 5%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p>
+        <div class="slotmachine" style="display: inline-block;" id="slotmachine">
+          <div style="display: block; position: relative; max-height: calc(5vw - 8px); margin-top: 4px; overflow:hidden">
+            <img src="../images/fade.png" style="display: block; position: absolute; z-index: 5; height: 100%; width: calc(100% - 8px); margin-left: 4px;">
+            <p id="slot1" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
+            <p id="slot2" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
+            <p id="slot3" style="display: inline-block; position: relative; margin-left: 5%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p>
+          </div>
         </div><br>
 
         <button onclick="spin()" class="nicebutton" style="width: 24%; height: 48px; margin-top: 8px; display:inline-block"> SPIN!</button><br>

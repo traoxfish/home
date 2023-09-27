@@ -18,6 +18,18 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
+var slotI = 0
+var greenWin = false
+setInterval(function() {
+    var color = "white"
+    if (greenWin) {
+        slotI += 2
+        if (slotI % 10 <= 5) color = "%2384EA84FF"
+    }
+    slotI += 1
+    document.getElementById("slotmachine").style.backgroundImage = "url(\"data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='" + color + "' stroke-width='5' stroke-dasharray='6%2c 14' stroke-dashoffset='" + slotI % 20 + "' stroke-linecap='round'/%3e%3c/svg%3e\")"
+}, 66)
+
 function sendFish() {
     var reciever = document.getElementById("sendfishto").value;
     var password = document.getElementById("sendfishpassword").value;
@@ -546,14 +558,17 @@ function spin() {
                         spinning = false
             
                         if (Number(json.winnings) > 0 ) {
+                            greenWin = true
                             document.getElementById("spininfo").innerText = "You won " + formatNumber(Number(json.winnings)) + " fish!"
                             document.getElementById("spininfo").style.color = "#84ea84";
                         } else {
                             document.getElementById("spininfo").innerText = "You lost!"
                             document.getElementById("spininfo").style.color = "#ea7b7b";
+                            greenWin = false
                         }
                         delay(2000).then(() => {
                             document.getElementById("spininfo").innerHTML = "<br>"
+                            greenWin = false
                         })
                     })
 
