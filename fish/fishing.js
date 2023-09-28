@@ -568,14 +568,15 @@ function spin() {
                             var extraWait1 = 0
                             if (slot1value == slot2value) extraWait1 += 250
                             if (slot1value == slot2value && slot2value >= 25) extraWait1 += 250
-                            if (slot1value == slot2value && slot2value == 1000) extraWait1 += 750
+                            if (slot1value == slot2value && slot2value >= 100) extraWait1 += 500
+                            if (slot1value == slot2value && slot2value == 1000) extraWait1 += 500
                             delay(250 + extraWait1).then(() => {
                                 clearInterval(int2)
                                 document.getElementById("slot2").style.top = valueToPx[slot2value];
                                 var extraWait2 = 0
                                 if (Number(json.winnings) > 0) extraWait2 += 750
                                 if (slot1value == 25 && Number(json.winnings) > 0) extraWait2 += 250
-                                if (slot1value == 100 && Number(json.winnings) > 0) extraWait2 += 500
+                                if (slot1value == 100 && Number(json.winnings) > 0) extraWait2 += 750
                                 if (slot1value == 1000 && Number(json.winnings) > 0) extraWait2 += 1000
                                 if (slot1value == slot2value && slot2value != slot3value && slot1value >= 25) extraWait2 += 250
                                 delay(250 + extraWait2 + extraWait1).then(() => {
