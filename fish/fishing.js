@@ -1437,6 +1437,10 @@ function viewProfile(profile, self) {
             var picture = json.profilePicture
             var friendStatus = json.friendStatus
             var rank = json.rank
+            var fishermen = json.fishermen
+            var chum = json.chum
+            var fishBuckets = json.fishBuckets
+
             if (rank == "none") rank = ""
 
             if (self == true) {
@@ -1482,6 +1486,9 @@ function viewProfile(profile, self) {
             document.getElementById("profile-specialfish").innerText = "Special Fish: " + formatNumber(specialFish)
             document.getElementById("profile-alltimefish").innerText = "All Time Fish: " + formatNumber(allTimeFish)
             document.getElementById("profile-fishgambled").innerText = "Fish Gambled: " + formatNumber(fishGambled)
+            document.getElementById("profile-fishermen").innerText = "Fishermen: " + formatNumber(fishermen)
+            document.getElementById("profile-chum").innerText = "Chum: " + formatNumber(chum)
+            document.getElementById("profile-fishboxes").innerText = "Fish Buckets: " + formatNumber(fishBuckets)
             document.getElementById("profile-joindate").innerText = "Join Date: " + joinDate
             document.getElementById("profile-lastonline").innerText = "Last Online: " + lastOnlineDate
             document.getElementById("profile-picture").src = "../images/profiles/" + picture + ".png"
