@@ -1734,7 +1734,7 @@ function closeFishingBoat() {
 }
 
 function openFishingBoat() {
-    if (level < 25) {
+    if (level < 35) {
         document.getElementById("fishingboatstatus").style.display = "initial";
         delay(2000).then(() => {
             document.getElementById("fishingboatstatus").style.display = "none";
