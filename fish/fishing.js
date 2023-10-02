@@ -200,7 +200,7 @@ document.getElementById("betamount").oninput = function() {
     if (isNaN(this.value.charAt(this.value.length-1)) && this.value.length == 1) this.value = ""
 }
 
-quantityInputs = [ "rarefishbuyquantity", "veryrarefishbuyquantity", "sharkbuyquantity", "raresharkbuyquantity",  ]
+quantityInputs = [ "rarefishbuyquantity", "veryrarefishbuyquantity", "sharkbuyquantity", "raresharkbuyquantity", "fishermanbuyquantity", "chumbuyquantity", "fishbucketbuyquantity"]
 
 for (var i = 0; i < quantityInputs.length; i++) {
     document.getElementById(quantityInputs[i]).oninput = function() {
@@ -341,6 +341,9 @@ function getItemCosts(type) {
         "veryRareFishAmount": formatedNumberToNumber(document.getElementById("veryrarefishbuyquantity").value),
         "sharkAmount": formatedNumberToNumber(document.getElementById("sharkbuyquantity").value),
         "rareSharkAmount": formatedNumberToNumber(document.getElementById("raresharkbuyquantity").value),
+        "fishermanAmount": formatedNumberToNumber(document.getElementById("fishermanbuyquantity").value),
+        "chumAmount": formatedNumberToNumber(document.getElementById("chumbuyquantity").value),
+        "fishBucketAmount": formatedNumberToNumber(document.getElementById("fishbucketbuyquantity").value),
     };
     fetch('https://traoxfish.us-3.evennode.com/getcosts', {
         method: 'POST',
@@ -360,6 +363,9 @@ function getItemCosts(type) {
             document.getElementById("whalecost").textContent = formatNumber(json.whaleCost) + " fish"
             document.getElementById("specialfishcost").textContent = "Buy Price: " + formatNumber(json.specialFishCost) + " fish"
             document.getElementById("specialfishsellcost").textContent = "Sell Price: " + formatNumber(json.specialFishSellCost) + " fish"
+            document.getElementById("fishermancost").textContent = formatNumber(json.fishermanCost) + " fish"
+            document.getElementById("chumcost").textContent = formatNumber(json.chumCost) + " fish"
+            document.getElementById("fishbucketcost").textContent = formatNumber(json.fishBucketCost) + " fish"
         }
     });
 }
@@ -739,6 +745,7 @@ setInterval(function(){
 
 }, 500);
 
+var level = 0
 function getFish() {
     const data = {
         "username": getCookie("username"),
@@ -764,8 +771,15 @@ function getFish() {
             document.getElementById("raresharkcount").textContent = formatNumber(json.rareSharks)
             document.getElementById("specialfishcount").textContent = formatNumber(json.specialFish)
             document.getElementById("whalecount").textContent = formatNumber(json.whales)
+            document.getElementById("fishermancount").textContent = formatNumber(json.fishermen)
+            document.getElementById("chumcount").textContent = formatNumber(json.chum)
+            document.getElementById("fishbucketcount").textContent = formatNumber(json.fishBuckets)
+
+            if (json.fishingBoatFish < json.fishingBoatCapacity) document.getElementById("fishingboatamount").textContent = formatNumber(json.fishingBoatFish) + " / " + formatNumber(json.fishingBoatCapacity) + " fish"
+            else document.getElementById("fishingboatamount").textContent = formatNumber(json.fishingBoatFish) + " / " + formatNumber(json.fishingBoatCapacity) + " fish (MAX)"
 
             //level
+            level = json.level
             document.getElementById("level").innerText = "Level: " + json.level
             document.getElementById("xpcolor").style.width = (json.currentLevelXp / (json.xpRequired + json.currentLevelXp)) * 100 + "%"
             document.getElementById("xpcount").innerText = "XP: " + json.currentLevelXp + " / " + (json.xpRequired + json.currentLevelXp)
@@ -1177,7 +1191,7 @@ function getPixelPlacePos(event) {
 
     var index = ((cursorx - 1) * 256) + cursory - 1
 
-    if (lastIndex != index) {
+    if (lastIndex != index || (cursorx == -1 || cursory == -1)) {
         canvas.fillStyle = fishPixeldata[lastIndex]
         var i1 = Math.floor(lastIndex / 256)
         var j1 = lastIndex % 256
@@ -1225,9 +1239,13 @@ function getPixelPlacePos(event) {
 }
 
 function exitPixelCanvas() {
+    var canvas = document.getElementById("pixelfishcanvas").getContext("2d");
+    canvas.fillStyle = fishPixeldata[lastIndex]
+    canvas.fillRect((Math.floor(lastIndex / 256)) * 10, (lastIndex % 256) * 10, 10, 10);
     down = false
     cursorx = -1
     cursory = -1
+    clearInterval(holdInterval)
 }
 
 function getFishPixels() {
@@ -1701,4 +1719,49 @@ function changePassword() {
             })
         }
     })
+}
+
+function closeFishingBoat() {
+    document.getElementById("fishingboat").style.display = "none";
+    closeFishingBoatShop()
+}
+
+function openFishingBoat() {
+    if (level < 25) {
+        document.getElementById("fishingboatstatus").style.display = "initial";
+        delay(2000).then(() => {
+            document.getElementById("fishingboatstatus").style.display = "none";
+        }) 
+        return
+    }
+    document.getElementById("fishingboat").style.display = "initial";
+}
+
+function collectFishingBoatFish() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/collectfishingboat', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            document.getElementById("fishingboatamount").innerText = "0 /" + document.getElementById("fishingboatamount").innerText.split("/")[1]
+        }
+    })
+}
+
+function openFishingBoatShop() {
+    document.getElementById("fishingboatshop").style.display = "initial";
+}
+
+function closeFishingBoatShop() {
+    document.getElementById("fishingboatshop").style.display = "none";
 }

@@ -138,7 +138,6 @@
         <br style="line-height: 0px;">
         <div class="navseperator" style="min-height: calc(100% + 22px); left: 68.35%; margin-top: -12px; display: absolute"></div>
 
-
         <div class="longbarseperator" style="margin-top: 100px;"> </div>
         <p style="margin-left: 8px; margin-top: -24px; min-width: 66%; display: inline-block;">Rare Fish</p>
         <p style="margin-left: 8px; margin-top: -26px; display: inline;" id="rarefishcost"> Loading...</p>
@@ -169,7 +168,6 @@
 
         <div class="longbarseperator" style="margin-top: 400px;"> </div>
 
-
         <br><br>
 
         <p style="margin-left: 8px; margin-top: 2px; min-width: 66%; display: inline-block;">Rare Shark</p>
@@ -179,8 +177,7 @@
         <button class="nicebutton" style="display: inline; width: calc(29% - 64px); margin-left: 9px; height: 46px; margin-top: -10px;" onclick="buyItem('rareShark')"> Buy</button>
         <input id="raresharkbuyquantity" value="1" style="display: inline-block; position: absolute; width: 48px; height: 44px; margin-top: -10px; margin-left: 8px; text-align: center;">
 
-  <div class="longbarseperator" style="margin-top: 500px;"> </div>
-
+        <div class="longbarseperator" style="margin-top: 500px;"> </div>
       
         <br><br>
 
@@ -189,16 +186,80 @@
         <div class="longbarseperator" style="margin-top: 540px; max-width: 66.6%; min-width: 66.6%; margin-left: 7px;"> </div>
         <p style="margin-left: 8px; margin-top: -26px; min-width: 66%; display: inline-block; color: #bbbbbb; font-size: 14px;"> Doubles your fish per click and from sharks.</p>
         <button class="nicebutton" style="display: inline; width: calc(29% - 64px); margin-left: 9px; height: 46px; margin-top: -10px;" onclick="buyItem('whale')"> Buy</button>
-        
-        <br>
-        <p class="shoptitle" id="rarefishstatus"><br></p>
+
+    </div>
+ </div>
+
+ <div class="fishingboatshop" onclick="closeFishingBoatShop()" id="fishingboatshop">
+  <div onclick="event.stopPropagation()" class="fishingboatshopbackground">
+      <h2 class="shoptitle" style="margin-bottom: 0px;">Fishing Boat Shop</h2>
+      <div class="longbarseperator" style="margin-top: 72px;"> </div>
+      <p style="margin-left: 8px; margin-top: 26px; min-width: 66%; display: inline-block;"> Item</p>
+      <div class="navseperator" style="max-height: 16px; margin-top: 27px; display: inline-block;"></div>
+      <p style="margin-left: 8px; margin-top: 26px; display: inline-block;"> Cost</p>
+      <br style="line-height: 0px;">
+      <div class="navseperator" style="min-height: calc(100% + 22px); left: 68.35%; margin-top: -12px; display: absolute"></div>
+
+      <div class="longbarseperator" style="margin-top: 100px;"> </div>
+      <p style="margin-left: 8px; margin-top: -24px; min-width: 66%; display: inline-block;">Fisherman</p>
+      <p style="margin-left: 8px; margin-top: -26px; display: inline;" id="fishermancost"> Loading...</p>
+      <div class="longbarseperator" style="margin-top: 140px; max-width: 66.6%; min-width: 66.6%; margin-left: 7px;"> </div>
+      <p style="margin-left: 8px; margin-top: -26px; min-width: 66%; display: inline-block; color: #bbbbbb; font-size: 14px;">Your fishing boat will gain 2 fish per second</p>
+      <button class="nicebutton" style="display: inline; width: calc(29% - 64px); margin-left: 9px; height: 46px; margin-top: -10px;" onclick="buyItem('fisherman')"> Buy</button>
+      <input id="fishermanbuyquantity" value="1" style="display: inline-block; position: absolute; width: 48px; height: 44px; margin-top: -10px; margin-left: 8px; text-align: center;">
+      <div class="longbarseperator" style="margin-top: 200px;"> </div>
+
+      <br><br>
+
+      <div class="longbarseperator" style="margin-top: 300px;"> </div>
+      <p style="margin-left: 8px; margin-top: 2px; min-width: 66%; display: inline-block;">Chum</p>
+      <p style="margin-left: 8px; margin-top: -26px; display: inline;" id="chumcost"> Loading...</p>
+      <div class="longbarseperator" style="margin-top: 240px; max-width: 66.6%; min-width: 66.6%; margin-left: 7px;"> </div>
+      <p style="margin-left: 8px; margin-top: -26px; min-width: 66%; display: inline-block; color: #bbbbbb; font-size: 14px;">Your fishing boat will gain 2% extra fish per second.</p>
+      <button class="nicebutton" style="display: inline; width: calc(29% - 64px); margin-left: 9px; height: 46px; margin-top: -10px;" onclick="buyItem('chum')"> Buy</button>
+      <input id="chumbuyquantity" value="1" style="display: inline-block; position: absolute; width: 48px; height: 44px; margin-top: -10px; margin-left: 8px; text-align: center;">
+
+      <br><br>
+
+      <p style="margin-left: 8px; margin-top: 2px; min-width: 66%; display: inline-block;">Fish Bucket</p>
+      <p style="margin-left: 8px; margin-top: -26px; display: inline;" id="fishbucketcost"> Loading...</p>
+      <div class="longbarseperator" style="margin-top: 340px; max-width: 66.6%; min-width: 66.6%; margin-left: 7px;"> </div>
+      <p style="margin-left: 8px; margin-top: -26px; min-width: 66%; display: inline-block; color: #bbbbbb; font-size: 14px;">Increases your fishing boat's capacity by 1T</p>
+      <button class="nicebutton" style="display: inline; width: calc(29% - 64px); margin-left: 9px; height: 46px; margin-top: -10px;" onclick="buyItem('fishBucket')"> Buy</button>
+      <input id="fishbucketbuyquantity" value="1" style="display: inline-block; position: absolute; width: 48px; height: 44px; margin-top: -10px; margin-left: 8px; text-align: center;">
+  </div>
+</div>
+
+ <div onclick="closeFishingBoat()" id="fishingboat" class="fishingboat">
+    <div onclick="event.stopPropagation()" class="fishingboatbackground">
+      <h2 class="center" style="margin-top: 28px;">Fishing Boat</h2>
+      <div class="longbarseperator" style="margin-top: 42px;"></div>
+      <div class="fishbar" style="display: inline-block; position: relative; margin-top: 72px; min-width:75%; margin-left: 12.5%;">
+        <p class="fishtype" style="max-width: 30%; min-width: 30%; font-size: 12px;">Fishermen</p>
+        <div class="navseperator" style="max-height: 33px; top:-1px"></div>
+        <p class="fishtype" style="max-width: 30%; min-width: 30%; font-size: 12px;">Chum</p>
+        <div class="navseperator" style="max-height: 33px; top:-1px"></div>
+        <p class="fishtype" style="max-width: 30%; min-width: 30%; font-size: 12px;">Fish Buckets</p>
+
+        <div class="longbarseperator" style="position: relative; margin-top: -16px"></div>
+
+        <p class="fishdata" id="fishermancount" style="max-width: 30%; min-width: 30%; margin-top: 24px;">Loading...</p>
+        <p class="fishdata" id="chumcount" style="max-width: 30%; min-width: 30%; margin-top: 24px;">Loading...</p>
+        <p class="fishdata" id="fishbucketcount" style="max-width: 30%; min-width: 30%; margin-top: 24px;">Loading...</p>
+
+      </div>
+      <button onclick="openFishingBoatShop()" class="nicebutton" style="width: 75%; margin-left: 12.5%; margin-top: 8px;">Open Fishing Boat Shop</button>
+      <img draggable="false" class="unselectable" src="../images/fishing_boat.png" style="margin-left: 33.3%; width: 33.3%; filter: brightness(999); margin-top: 0px;">
+      <div style="width: 33%; height: 72px; outline-style: solid; outline-color: #ffffff; outline-width: 1px; margin-left: 33%;">
+        <p id="fishingboatamount" style="min-width: 100%; text-align: center; font-size: 16px;">Fish: 100k / 1M</p>
+        <div class="longbarseperator" style="position: relative; margin-top: -30px;"></div>
+        <button onclick="collectFishingBoatFish()" class="nicebutton" style="min-width: 96%; margin-left: 2%; margin-top: 20px; min-height: 34px;">Collect Fish</button>
+      </div>
     </div>
  </div>
 
   <div class="shop" onclick="closeLogsBg()" id="logsbg">
-    <div onclick="event.stopPropagation()" class="sendlogs" id="sendlogs">
-      
-    </div>
+    <div onclick="event.stopPropagation()" class="sendlogs" id="sendlogs"></div>
   </div>
  
    <br><br>
@@ -207,15 +268,15 @@
 
     <h2 class="leaderboardtext">Leaderboards:</h2>
     <select name="type" id="leaderboardtype" class="leaderboardselect">
-        <option value="fish">Fish</option>
-	<option value="alltimefish">All Time Fish</option>
-        <option value="rarefish">Rare Fish</option>
-        <option value="veryrarefish">Very Rare Fish</option> 
-	<option value="sharks">Sharks</option>
-        <option value="raresharks">Rare Sharks</option>
-        <option value="amountgambled">Fish Gambled</option>
-	<option value="specialfish">Special Fish</option>
-	<option value="whales">Whales</option>
+      <option value="fish">Fish</option>
+      <option value="alltimefish">All Time Fish</option>
+      <option value="rarefish">Rare Fish</option>
+      <option value="veryrarefish">Very Rare Fish</option> 
+      <option value="sharks">Sharks</option>
+      <option value="raresharks">Rare Sharks</option>
+      <option value="amountgambled">Fish Gambled</option>
+      <option value="specialfish">Special Fish</option>
+      <option value="whales">Whales</option>
     </select>
     <ol id="leaderboard" class="leaderboardlist">
       
@@ -283,41 +344,43 @@
 
    <br><br><br>
 
-   <button onclick="openShop()" class="shopbutton" id="shopbutton" style="max-width: 60%;">Open Shop</button>
+   <div class="shopbutton">
+    <button onclick="openShop()" class="nicebutton" id="shopbutton" style="width: 75%; height: 75%; margin-top: 6%;"><img src="../images/shop.png" style="width: 70%; height: 60%;"></button>
+    <p style="font-size: 16px; margin-top: 3px; text-align: center; margin-left: auto; margin-right: auto;">Open Shop</p>
+   </div>
+
+   
 
    <div class="sendfishbackground">
       <p class="fishtype" style="font-size: 16px; margin-top:14px; max-width: 200px;">Send fish:</p><br>
-      <input type="text" id="sendfishto" name="reciever" class="sendfish" placeholder="Reciever" style="margin-left: 4px; max-width: 43.5%;"><br>
-      <input type="text" id="sendfishamount" name="amount" class="sendfish" placeholder="Amount" style="margin-left: 4px; max-width: 43.5%; margin-top:8px;"><br>
-      <input type="password" id="sendfishpassword" name="password" class="sendfish" placeholder="Password" style="margin-left: 4px; max-width: 43.5%; margin-top:8px;">
-      <button onclick="sendFish()" class="nicebutton" style="display: inline-block; min-height: 62px; max-height: 62px; max-width: calc(70% - 70px); width: 380px; position: absolute; top:30px; margin-left: 4px;">Send Fish</button>
-      <button onclick="openSendLogs()" class="nicebutton" style="display: inline-block; min-height: 31px; max-height: 31px; max-width: calc(70% - 70px); width: 380px; position: absolute; top:95px; margin-left: 4px;">Send Logs</button>
+      <input type="text" id="sendfishto" name="reciever" class="sendfish" placeholder="Reciever" style="margin-left: 4px; width: 50%;"><br>
+      <input type="text" id="sendfishamount" name="amount" class="sendfish" placeholder="Amount" style="margin-left: 4px; width: 50%; margin-top:8px;"><br>
+      <input type="password" id="sendfishpassword" name="password" class="sendfish" placeholder="Password" style="margin-left: 4px; width: 50%; margin-top:8px;">
+      <button onclick="sendFish()" class="nicebutton" style="display: inline-block; min-height: 62px; max-height: 62px; width: calc(50% - 16px); position: absolute; top:30px; margin-left: 4px; font-size: calc(0.33vw + 10px);">Send Fish</button>
+      <button onclick="openSendLogs()" class="nicebutton" style="display: inline-block; min-height: 31px; max-height: 31px; width: calc(50% - 16px); position: absolute; top:95px; margin-left: 4px; font-size: calc(0.33vw + 10px);">Send Logs</button>
       <p id="sentstatus" style="display: absolute; position: absolute; top:114px; font-size: 16px;"></p>
    </div>
 
-   <br>
-
-   <button onclick="logout()" class="nicebutton" style="min-width: 20%; margin-top: 8px;">Logout</button>
-
-   <br><br><br>
+   <br><br>
 
    <p class="chatbox" id="chat"></p><br>
    <input placeholder="Message" style="display: inline-block; width: calc(49.75% - 100px);" id="messageinput">
    <button class="nicebutton" style="width:92px; height: 26px;" onclick="sendMessage()">Send</button>
-
    <br><br>
    
    <div class="specialfixbox" style="position: absolute; left: calc(59.7% - 16px); margin-top: calc(5vw - 98px);"> 
     <p class="unselectable" id="specialfishhoverprice" style="position: absolute; margin-top: calc(3.9vw + 42px); font-size: calc(0.45vw + 8px); text-align: center; left: 0%;">256k</p>
     <p class="center" style="position: relative; margin-bottom: 0px;">Special Fish</p><br>
     <div class="longbarseperator" style="position: relative; margin-top: -16px;"></div>
-    <p id="specialfishcost" style="display: inline-block; font-size: calc(1vw + 2px); text-align: center; transform: translate(calc(16% - 8px), 0); min-width: 1%; ">Loading...</p>
-    <div class="navseperator" style="max-height: calc(3.8vw - 7% - 22px); margin-top: 16px; position: absolute; display: inline-block; left: calc(49.8% - 2px);"></div>
-    <p id="specialfishsellcost" style="display: inline-block; font-size: calc(1vw + 2px); transform: translate(calc(65% - 40px), 0); text-align: center;  min-width: 1%;">Loading...</p>
+    <p id="specialfishcost" style="display: block; position: absolute; font-size: calc(0.9vw + 4px); text-align: center; min-width: 49%; max-width: 49%; margin-top: calc(22px - 0.4vw);">Loading...</p>
+    <br><br><br>
+    
+    <p id="specialfishsellcost" style="display: block; position: absolute;  font-size: calc(0.9vw + 4px); text-align: center;  min-width: 49%; max-width: 49%; margin-top: calc(-32px - 0.4vw); margin-left: 50%;">Loading...</p>
+    <div class="navseperator" style="max-height: calc(0.4vw + 8px); margin-top: calc(-0.2vw - 34px); position: absolute; display: inline-block; left: calc(49.8% - 2px);"></div>
     <div class="longbarseperator" style="position: relative; margin-top: -29px; margin-bottom: -18px;"></div><br><br>
     <button class="nicebutton" onclick="buyItem('specialFish')" style="position: relative; width: 48%; min-width: 45%; margin-left: 1%; margin-right: 1%; margin-top: -100px; font-size: calc(0.45vw + 8px);">Buy Special Fish</button>
     <button class="nicebutton" onclick="buyItem('sellSpecialFish')" style="position: relative; width: 48%; min-width: 45%; font-size: calc(0.45vw + 8px);">Sell Special Fish</button>
-    <canvas onmousemove="specialFishHover(event)"  onmouseleave="stopSpecialFishHover()" id="specialfishgraph" height="328"  width="1000" style=" width: 100%; margin-top: 3px; margin-bottom: -4px;"> </canvas>
+    <canvas onmousemove="specialFishHover(event)" onmouseleave="stopSpecialFishHover()" id="specialfishgraph" height="328"  width="1000" style=" width: 100%; margin-top: 3px; margin-bottom: -4px;"> </canvas>
    </div>
    <p id="specialfishstatus" style="position: absolute; margin-left: calc(50.4% - 17px); margin-top: calc(18.4vw - 42px); color: #ea7b7b;"><br></p>
 
@@ -328,7 +391,7 @@
         <p style="display: inline-block; position: absolute; margin-left: calc(5vw - 12px); margin-top: calc(-8px - 0.25vw); text-align: center; font-size: calc(1vw + 2px);">Match 3 numbers to win!</p>
         <div class="slotmachine" style="display: inline-block;" id="slotmachine">
           <div style="display: block; position: relative; max-height: calc(5vw - 8px); margin-top: 4px; overflow:hidden">
-            <img src="../images/fade.png" draggable="false" class="unselectableimg" style="display: block; position: absolute; z-index: 5; height: 100%; width: calc(100% - 8px); margin-left: 4px;">
+            <img src="../images/fade.png" draggable="false" class="unselectableimg" style="display: block; position: absolute; z-index: 2; height: 100%; width: calc(100% - 8px); margin-left: 4px;">
             <p class="unselectable" id="slot1" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
             <p class="unselectable" id="slot2" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
             <p class="unselectable" id="slot3" style="display: inline-block; position: relative; margin-left: 5%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p>
@@ -339,20 +402,31 @@
         <input id="betamount" placeholder="Bet" style="margin-top: 8px; width: calc(24% - 4px); display:inline-block">
         <p id="spininfo" style="display: inline-block; position: absolute; margin-left: calc(-22% + 4px); margin-top: 42px;"><br></p>
       </div>
+
+      <div style="width: 21.75%; max-height: 12vw; min-height: 12vw; position: absolute; background-color: #1d1a2c; margin-top: 16px; outline-style: solid; outline-width: 1px; outline-color: #ffffff;">
+        <button onclick="openFishingBoat()" class="nicebutton" style="display: inline-block; position: relative; min-width: 90%; max-width: 90%; min-height: calc(12vw - 42px); max-height: calc(12vw - 42px); margin-left: 5%; margin-top: 12px;"><img src="../images/fishing_boat.png" style="width: calc(55% - 16px); height: calc(55% - 16px); margin-top: -0.4vw;"></button>
+        <p style="width: 100%; text-align: center; margin: auto; font-size: calc(0.8vw + 4px);">Open Fishing Boat</p>
+      </div>
+      <p id="fishingboatstatus" style="display: none; position: absolute; margin-top: 248px; font-size: 14px; color:#ea7b7b">You need to be level 35 to use the fishing boat.</p>
       <br>
+
+      
       <div id="pixelcanvasdiv" onmouseup="placePixel(event, false)" onmousedown="placePixel(event, true)" onmouseover="getPixelPlacePos(event)" class="pixelfish" style="margin-top: calc(-5.6% - 112px);">
           <canvas onmouseleave="exitPixelCanvas()" onmouseover="placePixel(event, false)" onmouseleave="exitPixelCanvas()" onmousemove="getPixelPlacePos(event)" class="pixelfishcanvas" id="pixelfishcanvas" height="2560" width="2560"></canvas>
-          <img id="canvasfullscreenx" onclick="exitFullscreenCanvas()" src="../images/x.png" style="display: none; position: fixed; max-width: 48px; max-height: 48px; z-index: 100000; left: 80%; margin-top: 16px; cursor: pointer;">
+          <img id="canvasfullscreenx" onclick="exitFullscreenCanvas()" src="../images/x.png" draggable="false" class="unselectable" style="display: none; position: fixed; max-width: 48px; max-height: 48px; z-index: 100000; left: 80%; margin-top: 16px; cursor: pointer;">
           <input id="colorinputfullscreen" style="display: none; position: fixed; margin-left: 26%; width: calc(10% + 32px); margin-top: calc(40% + 3vw);" placeholder="Color (ex: #658fba)">
           <div id="fullscreencolorselectorcolor" style="display: none; position: fixed; margin-left: 26%; min-width: calc(10% + 36px); margin-top: calc(40% + 3vw - 36px); background-color: #bbbbbb; height: 32px; outline-style: solid; outline-width: 1px; outline-color: white;"></div>
       </div>
       <br>
       <input id="colorinput" style="display: inline-block; position: relative; margin-left: 25%; width: 10%; margin-top: 2px;" placeholder="Color (ex: #658fba)">
-      <img src="../images/fullscreen.png" onclick="fullscreenCanvas()" style="display: inline-block; position: absolute; margin-left: 14%; width: 32px; margin-top: -36px; cursor: pointer;">
+      
+      <div onmouseover="exitPixelCanvas()" onclick="fullscreenCanvas()" style="display: inline-block; position: absolute; margin-left: calc(14% - 64px); width: 32px; height: 32px; margin-top: -50px; cursor: pointer; background-color: #1d1a2c; outline-style: solid; outline-width: 1px; outline-color: white; opacity: 0.75;"><img src="../images/fullscreen.png" draggable="false" class="unselectable" style="width: 75%; height: 75%; margin-left: 4px; margin-top: 4px;"></div>
       <div id="colorselectorcolor" style="min-width:26px; min-height:26px; background-color: white; display: inline-block; position: absolute; margin-left: 4px; margin-top: 2px; outline-style: solid; outline-width: 1px; outline-color: white;"></div>
-      <p style="display: inline-block; position: absolute; margin-left: 36px; margin-top: 4px;">Cost: 1 special fish</p>
-      <p style="display: inline-block; position: absolute; margin-left: 36px; margin-top: 32px; font-size: 10px; color: #bbbbbb; margin-left: -9.3%;">Info: This canvas is shared by everyone. Placing 1 pixel costs 1 special fish.</p>
+      <p style="display: inline-block; position: absolute; margin-left: 36px; margin-top: 4px; font-size: 1vw;">Cost: 1 special fish</p>
+      <p style="display: inline-block; position: absolute; margin-left: 36px; margin-top: 32px; font-size: 10px; color: #bbbbbb; margin-left: -9.3%; max-width: 22.5%;">Info: This canvas is shared by everyone. Placing 1 pixel costs 1 special fish.</p>
    </div>
+
+   
 
    
    

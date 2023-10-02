@@ -87,6 +87,7 @@ select {
   white-space: nowrap;
 	margin-top: 4px;
 	margin-bottom: 4px;
+  pointer-events: none;
 }
 
 .downbarnavseperator {
@@ -175,6 +176,7 @@ select {
   min-height: 32px;
   margin-bottom: -22%;
   margin-top: 22%;
+  pointer-events: none;
 }
 
 .button1:hover * {
@@ -429,12 +431,11 @@ html,body{min-height:100%;}
 
 .shopbutton {
   font-family: Arial;
-  width: 20%;
-  height: 96px;
+  width: 128px;
+  height: 128px;
   border: none;
   cursor: pointer;
   text-align: center;
-  border-radius: 6px 6px 6px 6px;
   background-color: #1d1a2c;
   outline-width: 1px;
   outline-color: white;
@@ -443,18 +444,6 @@ html,body{min-height:100%;}
   white-space: nowrap;
   color: white;
   font-size: 16px;
-}
-
-.shopbutton:hover {
-  background-color: #d35040;
-  transition: background 0.2s ease;
-  cursor: pointer;
-}
-
-.shopbutton:active:hover {
-  background-color: #1d1a2c;
-  transition: background 0.1s ease;
-  cursor: pointer;
 }
 
 .leaderboards {
@@ -554,7 +543,7 @@ input {
   margin-top: -200.5%;
   background:rgba(29, 26, 44,0.5);
   position: fixed;
-  z-index: 3;
+  z-index: 4;
   display: none;
   overflow-y: hide;
 }
@@ -730,9 +719,8 @@ input {
 }
 
 .sendfishbackground {
-  min-width: 26.4%;
   min-height: 128px;
-  max-width: 26.4%;
+  width: calc(45% - 138px);
   margin-left: 10px;
   max-height: 128px;
   position: absolute;
@@ -1034,6 +1022,7 @@ input:checked + .slider:before {
 .nicebutton > img {
   filter: brightness(100%);
   transition: filter 0.2s ease;
+  pointer-events: none;
 }
 
 .nicebutton:hover > img {
@@ -1101,11 +1090,72 @@ input:checked + .slider:before {
   display: none;
 }
 
-.unselectableimg {
-  user-drag: none;
-  -webkit-user-drag: none;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+.fishingboat {
+  background-color: #1d1a2c;
+  min-width: 502%;
+  margin-left: -200%;
+  min-height: 500%;
+  margin-top: -200.5%;
+  background:rgba(29, 26, 44,0.5);
+  position: fixed;
+  z-index: 3;
+  display: none;
+}
+
+.fishingboat {
+  background-color: #1d1a2c;
+  min-width: 502%;
+  margin-left: -200%;
+  min-height: 500%;
+  margin-top: -200.5%;
+  background:rgba(29, 26, 44,0.5);
+  position: fixed;
+  z-index: 3;
+  display: none;
+}
+
+.fishingboatbackground {
+  background-color: #1d1a2c;
+  position: fixed;
+  display: block;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  left: calc(50% - 384px);
+  bottom: calc(50% - 256px);
+  width: 768px;
+  min-height: 512px;
+  max-width: 768px;
+  max-height: 512px;
+  z-index: 3;
+}
+
+.fishingboatshop {
+  left: calc(50% - 384px);
+  bottom: calc(50% - 256px);
+  width: 768px;
+  min-height: 512px;
+  max-width: 768px;
+  max-height: 512px;
+  position: fixed;
+  z-index: 4;
+  display: none;
+  overflow-y: hide;
+}
+
+.fishingboatshopbackground {
+  background-color: #1d1a2c;
+  position: fixed;
+  display: block;
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+  left: calc(50% - 256px);
+  bottom: calc(50% - 206px);
+  min-width: 512px;
+  min-height: 412px;
+  max-width: 512px;
+  max-height: 412px;
+  z-index: 100;
+  overflow-y: hidden;
 }
