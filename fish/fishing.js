@@ -775,8 +775,14 @@ function getFish() {
             document.getElementById("chumcount").textContent = formatNumber(json.chum)
             document.getElementById("fishbucketcount").textContent = formatNumber(json.fishBuckets)
 
-            if (json.fishingBoatFish < json.fishingBoatCapacity) document.getElementById("fishingboatamount").textContent = formatNumber(json.fishingBoatFish) + " / " + formatNumber(json.fishingBoatCapacity) + " fish"
-            else document.getElementById("fishingboatamount").textContent = formatNumber(json.fishingBoatFish) + " / " + formatNumber(json.fishingBoatCapacity) + " fish (MAX)"
+            if (json.fishingBoatFish < json.fishingBoatCapacity) {
+                document.getElementById("fishingboatamount").textContent = formatNumber(json.fishingBoatFish) + " / " + formatNumber(json.fishingBoatCapacity) + " fish"
+                document.getElementById("fishingboatnotification").style.display = "none"
+            }
+            else {
+                document.getElementById("fishingboatamount").textContent = formatNumber(json.fishingBoatFish) + " / " + formatNumber(json.fishingBoatCapacity) + " fish (MAX)"
+                document.getElementById("fishingboatnotification").style.display = "initial"
+            }
 
             //level
             level = json.level
@@ -784,6 +790,11 @@ function getFish() {
             document.getElementById("xpcolor").style.width = (json.currentLevelXp / (json.xpRequired + json.currentLevelXp)) * 100 + "%"
             document.getElementById("xpcount").innerText = "XP: " + json.currentLevelXp + " / " + (json.xpRequired + json.currentLevelXp)
             
+            //noticiactions
+            document.getElementById("sendfishnotificationcount").innerText = "" + json.notifications.sendLogs
+            if (json.notifications.sendLogs > 0) document.getElementById("sendfishnotifications").style.display = "initial"
+            else document.getElementById("sendfishnotifications").style.display = "none"
+
             //costs
             /*document.getElementById("rarefishcost").textContent = formatNumber(json.costs.rareFishCost) + " fish"
             document.getElementById("veryrarefishcost").textContent = formatNumber(json.costs.veryRareFishCost) + " fish"
@@ -1041,6 +1052,23 @@ function closeLogsBg() {
 
 function openSendLogs() {
     document.getElementById("logsbg").style.display = "initial";
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "notificationType": "sendLogs"
+    };
+    fetch('https://traoxfish.us-3.evennode.com/viewnotification', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") document.getElementById("sendfishnotifications").style.display = "none"
+    })
 }
 
 function getSendLogs() {
