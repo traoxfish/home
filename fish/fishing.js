@@ -795,6 +795,10 @@ function getFish() {
             if (json.notifications.sendLogs > 0) document.getElementById("sendfishnotifications").style.display = "initial"
             else document.getElementById("sendfishnotifications").style.display = "none"
 
+            document.getElementById("friendrequestnotificationcount").innerText = "" + json.notifications.friendRequests
+            if (json.notifications.friendRequests > 0) document.getElementById("friendrequestnotifications").style.display = "initial"
+            else document.getElementById("friendrequestnotifications").style.display = "none"
+
             //costs
             /*document.getElementById("rarefishcost").textContent = formatNumber(json.costs.rareFishCost) + " fish"
             document.getElementById("veryrarefishcost").textContent = formatNumber(json.costs.veryRareFishCost) + " fish"
@@ -803,7 +807,6 @@ function getFish() {
             document.getElementById("whalecost").textContent = formatNumber(json.costs.whaleCost) + " fish"
             document.getElementById("specialfishcost").textContent = "Buy Price: " + formatNumber(json.costs.specialFishCost) + " fish"
             document.getElementById("specialfishsellcost").textContent = "Sell Price: " + formatNumber(json.costs.specialFishSellCost) + " fish"*/
-
             
         }
     });
@@ -1561,6 +1564,23 @@ function setProfilePicture(id) {
 function openFriends() {
     document.getElementById("friendsbackground").style.display = "block"
     getFriends()
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "notificationType": "friendRequests"
+    };
+    fetch('https://traoxfish.us-3.evennode.com/viewnotification', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") document.getElementById("friendrequestnotifications").style.display = "none"
+    })
 }
 
 function closeFriends() {
