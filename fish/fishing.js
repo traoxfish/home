@@ -1622,6 +1622,11 @@ function getFriends() {
                 item.style.cursor = "pointer"
                 item.textContent = friend
 
+                console.log(json.online[friend])
+
+                if (json.online[friend] == true) item.style.color = "#84ea84"
+                else item.style.color = "#ffffff"
+
                 var button = document.createElement("button");
                 button.innerText = "x"
                 button.className = "friendcancelbutton nicebutton"
@@ -1642,6 +1647,9 @@ function getFriends() {
                 item.addEventListener('click', function() { viewProfile(this.id.split("friend-incoming-")[1]); closeFriends(); })
                 item.style.cursor = "pointer"
                 item.textContent = friend
+
+                if (json.online[friend] == true) item.style.color = "#84ea84"
+                else item.style.color = "#ffffff"
 
                 var button = document.createElement("button");
                 button.innerText = "x"
@@ -1670,6 +1678,9 @@ function getFriends() {
                 item.addEventListener('click', function() { viewProfile(this.id.split("friend-outgoing-")[1]); closeFriends(); })
                 item.style.cursor = "pointer"
                 item.textContent = friend
+
+                if (json.online[friend] == true) item.style.color = "#84ea84"
+                else item.style.color = "#ffffff"
 
                 var button = document.createElement("button");
                 button.innerText = "x"

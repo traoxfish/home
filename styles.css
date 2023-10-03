@@ -1084,6 +1084,8 @@ input:checked + .slider:before {
   display: inline-block; 
   position: absolute; 
   margin-top: 46px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .friendlist::-webkit-scrollbar {
