@@ -36,7 +36,7 @@
 	 <div class="navseperator"></div>
    </div>
 
-   <img src="../images/Info.png" class="info" style="margin-left:79%; margin-top: 20px; width:24px; height:24px; display:inline; position: absolute;" title="#1 All time fish caught on January 1st 2024 gets a 100$ visa gift card!">
+   <img src="../images/Info.png" class="info" style="margin-left:79.5%; margin-top: 26px; width:24px; height:24px; display:inline; position: absolute;" title="#1 All time fish caught on January 1st 2024 gets a 100$ visa gift card!">
 
    <div onclick="closeProfile()" id="viewprofile" class="viewprofile">
       <div onclick="event.stopPropagation()" class="profilebackground">
@@ -269,8 +269,8 @@
 
    <div class="leaderboards">
 
-    <h2 class="leaderboardtext">Leaderboards:</h2>
-    <select name="type" id="leaderboardtype" class="leaderboardselect">
+    <h2 class="leaderboardtext" style="margin-right: calc(-10px - 0.8vw);">Leaderboards:</h2>
+    <select name="type" id="leaderboardtype" class="leaderboardselect" style="transform: translate(0, -1px);">
       <option value="fish">Fish</option>
       <option value="alltimefish">All Time Fish</option>
       <option value="rarefish">Rare Fish</option>
@@ -281,6 +281,8 @@
       <option value="specialfish">Special Fish</option>
       <option value="whales">Whales</option>
     </select>
+    <p style="position: absolute; margin-top: -2vw; font-size: 0.8vw; margin-left: calc(125% - 11.5vw);">Player Count:</p>
+    <p id="playercount" style="position: absolute; margin-top: -1.8vw; font-size: 1.4vw; margin-left: calc(125% - 9vw); color: #84ea84;">0</p>
     <ol id="leaderboard" class="leaderboardlist">
       
     </ol>
