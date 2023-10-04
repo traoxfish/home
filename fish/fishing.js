@@ -1484,6 +1484,8 @@ function viewProfile(profile, self) {
             var chum = json.chum
             var fishBuckets = json.fishBuckets
             var playtime = json.playtime
+            var friends = json.friends
+
             if (playtime == "") playtime = "None"
 
             if (rank == "none") rank = ""
@@ -1537,6 +1539,7 @@ function viewProfile(profile, self) {
             document.getElementById("profile-joindate").innerText = "Join Date: " + joinDate
             document.getElementById("profile-lastonline").innerText = "Last Online: " + lastOnlineDate
             document.getElementById("profile-playtime").innerText = "Total Playtime: " + playtime
+            document.getElementById("profile-friends").innerText = "Friends: " + friends
             document.getElementById("profile-picture").src = "../images/profiles/" + picture + ".png"
 
         }
@@ -1681,8 +1684,6 @@ function getFriends() {
                 item.addEventListener('click', function() { viewProfile(this.id.split("friend-")[1]); closeFriends(); })
                 item.style.cursor = "pointer"
                 item.textContent = friend
-
-                console.log(json.online[friend])
 
                 if (json.online[friend] == true) item.style.color = "#84ea84"
                 else item.style.color = "#ffffff"
