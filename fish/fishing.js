@@ -397,6 +397,9 @@ function updateLeaderboards() {
 
         document.getElementById("playercount").innerText = json.playerCount
 
+        if (type == "alltimefish") document.getElementById("#1text").style.display = "inline"
+        else document.getElementById("#1text").style.display = "none"
+
         var i = 0;
         var leaderboard = document.getElementById("leaderboard");
         for (var fisher in json.leaderboards) {
@@ -415,6 +418,8 @@ function updateLeaderboards() {
         if (json.leaderboards.length > leaderboard.children.length) {
             for (var i = leaderboard.children.length; i < json.leaderboards.length; i++) {
 
+
+
                 var item = document.createElement("li");
                 var name = json.leaderboards[i].split(": ")[0]
                 item.id = name
@@ -430,7 +435,7 @@ function updateLeaderboards() {
                     }
                 } catch (e) { console.log(e)}
                 leaderboard.appendChild(item);
-                
+
             }
         }
     });
@@ -892,6 +897,7 @@ function instantTooltips(textFrom, delta) {
       parent, spanClone;
 
     span.classList.add('createdTooltip');
+    span.style.zIndex = 999;
 
     [].forEach.call(toTitle, function(elem) {
 
@@ -1426,6 +1432,7 @@ function closeProfile() {
     document.getElementById("profile-fishgambled").innerText = "Fish Gambled: Loading..."
     document.getElementById("profile-joindate").innerText = "Join Date: Loading..."
     document.getElementById("profile-lastonline").innerText = "Last Online: Loading..."
+    document.getElementById("profile-playtime").innerText = "Total Playtime: Loading..."
     document.getElementById("profile-picture").src = "../images/profiles/default.png"
 
     document.getElementById("selectpfpbackground").style.display = "none"
@@ -1476,6 +1483,8 @@ function viewProfile(profile, self) {
             var fishermen = json.fishermen
             var chum = json.chum
             var fishBuckets = json.fishBuckets
+            var playtime = json.playtime
+            if (playtime == "") playtime = "None"
 
             if (rank == "none") rank = ""
 
@@ -1524,9 +1533,10 @@ function viewProfile(profile, self) {
             document.getElementById("profile-fishgambled").innerText = "Fish Gambled: " + formatNumber(fishGambled)
             document.getElementById("profile-fishermen").innerText = "Fishermen: " + formatNumber(fishermen)
             document.getElementById("profile-chum").innerText = "Chum: " + formatNumber(chum)
-            document.getElementById("profile-fishboxes").innerText = "Fish Buckets: " + formatNumber(fishBuckets)
+            document.getElementById("profile-fishbuckets").innerText = "Fish Buckets: " + formatNumber(fishBuckets)
             document.getElementById("profile-joindate").innerText = "Join Date: " + joinDate
             document.getElementById("profile-lastonline").innerText = "Last Online: " + lastOnlineDate
+            document.getElementById("profile-playtime").innerText = "Total Playtime: " + playtime
             document.getElementById("profile-picture").src = "../images/profiles/" + picture + ".png"
 
         }

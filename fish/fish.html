@@ -36,7 +36,7 @@
 	 <div class="navseperator"></div>
    </div>
 
-   <img src="../images/Info.png" class="info" style="margin-left:79.5%; margin-top: 26px; width:24px; height:24px; display:inline; position: absolute;" title="#1 All time fish caught on January 1st 2024 gets a 100$ visa gift card!">
+   <img id="#1text" src="../images/Info.png" class="info" style="margin-left: calc(76% + 1.75vw); margin-top: calc(36px + 2.1vw); width: 1.2vw; height: 1.2vw; display:none; position: absolute; z-index: 2;" title="#1 All time fish caught on January 1st 2024 gets a 100$ visa gift card!">
 
    <div onclick="closeProfile()" id="viewprofile" class="viewprofile">
       <div onclick="event.stopPropagation()" class="profilebackground">
@@ -59,12 +59,13 @@
           <p id="profile-fishgambled" style="line-height: 4px;">Fish Gambled: Loading...</p>
           <p id="profile-fishermen" style="line-height: 4px;">Fishermen: Loading...</p>
           <p id="profile-chum" style="line-height: 4px;">Chum: Loading...</p>
-          <p id="profile-fishboxes" style="line-height: 4px;">Fish Buckets: Loading...</p>
+          <p id="profile-fishbuckets" style="line-height: 4px;">Fish Buckets: Loading...</p>
         </div>
         <div class="navseperator" style="height: 59.75%; margin-top: -27px; margin-left: 0px;"></div>
-        <div style="margin-left: 32px; transform: translate(0, -246px); position: relative; max-width: 42%; width: 42%; display: inline-block; align-items:start;">
+        <div style="margin-left: 32px; transform: translate(0, -222px); position: relative; max-width: 42%; width: 42%; display: inline-block; align-items:start;">
           <p id="profile-joindate" style="line-height: 6px;">Join Date: Loading...</p>
           <p id="profile-lastonline" style="line-height: 6px;">Last Online: Loading...</p>
+          <p id="profile-playtime" style="line-height: 6px;">Total Playtime: Loading...</p>
         </div>
         <div onclick="closeFriends()" id="friendsbackground" style="display: none; min-width: 100%; min-height: 100%; position: absolute; transform: translate(0, -500px);">
           <div onclick="event.stopPropagation()" style="display: block; background-color: #1d1a2c; width: 75%; height: 75%; max-width: 75%; max-height: 75%; position: absolute; outline-style: solid; outline-width: 1px; outline-color: #ffffff; margin-left: auto; margin-right: auto; transform: translate(16.6%, 16.6%); ">
@@ -269,8 +270,8 @@
 
    <div class="leaderboards">
 
-    <h2 class="leaderboardtext" style="margin-right: calc(-10px - 0.8vw);">Leaderboards:</h2>
-    <select name="type" id="leaderboardtype" class="leaderboardselect" style="transform: translate(0, -1px);">
+    <h2 class="leaderboardtext" style="margin-right: calc(-6px - 0.8vw);">Leaderboards:</h2>
+    <select name="type" id="leaderboardtype" class="leaderboardselect" style="transform: translate(0, -2px);">
       <option value="fish">Fish</option>
       <option value="alltimefish">All Time Fish</option>
       <option value="rarefish">Rare Fish</option>
@@ -281,8 +282,13 @@
       <option value="specialfish">Special Fish</option>
       <option value="whales">Whales</option>
     </select>
-    <p style="position: absolute; margin-top: -2vw; font-size: 0.8vw; margin-left: calc(125% - 11.5vw);">Player Count:</p>
-    <p id="playercount" style="position: absolute; margin-top: -1.8vw; font-size: 1.4vw; margin-left: calc(125% - 9vw); color: #84ea84;">0</p>
+
+    <div style="background-color: #1d1a2c; width: 5vw; height: calc(1.4vw + 3px); display: inline-block; transform: translate(0, 0.2vw); outline-style: solid; outline-color: #ffffff; outline-width: 1px; margin-left: 6px;">
+      <p style="position: absolute; font-size: 0.675vw; margin-top: 0px; max-width: 1vw; margin-left: 2px;">Player Count:</p>
+      <p id="playercount" style="position: absolute; font-size: 1.6vw; margin-top: -0.175vw; color: #84ea84; margin-left: calc(100% - 2.5vw); text-align: center;">0</p>
+    </div>
+
+    
     <ol id="leaderboard" class="leaderboardlist">
       
     </ol>
@@ -381,7 +387,7 @@
    <button class="nicebutton" style="width:92px; height: 26px;" onclick="sendMessage()">Send</button>
    <br><br>
    
-   <div class="specialfixbox" style="position: absolute; left: calc(59.7% - 16px); margin-top: calc(5vw - 98px);"> 
+   <div class="specialfixbox" style="position: absolute; left: calc(59.7% - 16px); margin-top: calc(4vw - 98px);"> 
     <p class="unselectable" id="specialfishhoverprice" style="position: absolute; margin-top: calc(3.9vw + 42px); font-size: calc(0.45vw + 8px); text-align: center; left: 0%;">256k</p>
     <p class="center" style="position: relative; margin-bottom: 0px;">Special Fish</p><br>
     <div class="longbarseperator" style="position: relative; margin-top: -16px;"></div>
@@ -395,7 +401,7 @@
     <button class="nicebutton" onclick="buyItem('sellSpecialFish')" style="position: relative; width: 48%; min-width: 45%; font-size: calc(0.45vw + 8px);">Sell Special Fish</button>
     <canvas onmousemove="specialFishHover(event)" onmouseleave="stopSpecialFishHover()" id="specialfishgraph" height="328"  width="1000" style=" width: 100%; margin-top: 3px; margin-bottom: -4px;"> </canvas>
    </div>
-   <p id="specialfishstatus" style="position: absolute; margin-left: calc(50.4% - 17px); margin-top: calc(18.4vw - 42px); color: #ea7b7b;"><br></p>
+   <p id="specialfishstatus" style="position: absolute; margin-left: calc(50.4% - 17px); margin-top: calc(13.75vw + 8px); color: #ea7b7b;"><br></p>
 
 
    <div>
@@ -413,7 +419,7 @@
 
         <button onclick="spin()" class="nicebutton" style="width: 24%; height: 48px; margin-top: 8px; display:inline-block"> SPIN!</button><br>
         <input id="betamount" placeholder="Bet" style="margin-top: 8px; width: calc(24% - 4px); display:inline-block">
-        <p id="spininfo" style="display: inline-block; position: absolute; margin-left: calc(-22% + 4px); margin-top: 42px;"><br></p>
+        <p id="spininfo" style="display: inline-block; position: absolute; margin-left: calc(-22% + 4px); margin-top: 37px;"><br></p>
       </div>
 
       <div style="width: 21.75%; max-height: 12vw; min-height: 12vw; position: absolute; background-color: #1d1a2c; margin-top: 30px; outline-style: solid; outline-width: 1px; outline-color: #ffffff;">
