@@ -1023,11 +1023,26 @@ input:checked + .slider:before {
   filter: brightness(100%);
   transition: filter 0.2s ease;
   pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .nicebutton:hover > img {
   filter: brightness(1000%);
   transition: filter 0.2s ease;
+}
+
+.nicebutton > p {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .viewprofile {
