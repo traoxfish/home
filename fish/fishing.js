@@ -79,65 +79,65 @@ function sendFish() {
 
 function formatNumber(value) {
     if (value >= 1010000000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000000).toFixed(2) + 'QD'
+        return (value / 1000000000000000000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'QD'
     if (value >= 1000000000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000000).toFixed(0) + 'QD'
+        return (value / 1000000000000000000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'QD'
     if (value >= 1010000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000).toFixed(2) + 'TD'
+        return (value / 1000000000000000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'TD'
     if (value >= 1000000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000).toFixed(0) + 'TD'
+        return (value / 1000000000000000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'TD'
     if (value >= 1010000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000).toFixed(2) + 'DD'
+        return (value / 1000000000000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'DD'
     if (value >= 1000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000).toFixed(0) + 'DD'
+        return (value / 1000000000000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'DD'
     if (value >= 1010000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000).toFixed(2) + 'UD'
+        return (value / 1000000000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'UD'
     if (value >= 1000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000).toFixed(0) + 'UD'
+        return (value / 1000000000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'UD'
     if (value >= 1010000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000).toFixed(2) + 'D'
+        return (value / 1000000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'D'
     if (value >= 1000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000).toFixed(0) + 'D'
+        return (value / 1000000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'D'
     if (value >= 1010000000000000000000000000000)
-        return (value / 1000000000000000000000000000000).toFixed(2) + 'N'
+        return (value / 1000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'N'
     if (value >= 1000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000).toFixed(0) + 'N'
+        return (value / 1000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'N'
     if (value >= 1010000000000000000000000000)
-        return (value / 1000000000000000000000000000).toFixed(2) + 'O'
+        return (value / 1000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'O'
     if (value >= 1000000000000000000000000000)
-        return (value / 1000000000000000000000000000).toFixed(0) + 'O'
+        return (value / 1000000000000000000000000000).slice(0, (num.indexOf("."))) + 'O'
     if (value >= 1010000000000000000000000)
-        return (value / 1000000000000000000000000).toFixed(2) + 'SS'
+        return (value / 1000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'SS'
     if (value >= 1000000000000000000000000)
-        return (value / 1000000000000000000000000).toFixed(0) + 'SS'
+        return (value / 1000000000000000000000000).slice(0, (num.indexOf("."))) + 'SS'
     if (value >= 1010000000000000000000)
-        return (value / 1000000000000000000000).toFixed(2) + 'S'
+        return (value / 1000000000000000000000).slice(0, (num.indexOf("."))+3) + 'S'
     if (value >= 1000000000000000000000)
-        return (value / 1000000000000000000000).toFixed(0) + 'S'
+        return (value / 1000000000000000000000).slice(0, (num.indexOf("."))) + 'S'
     if (value >= 1010000000000000000)
-        return (value / 1000000000000000000).toFixed(2) + 'QQ'
+        return (value / 1000000000000000000).slice(0, (num.indexOf("."))+3) + 'QQ'
     if (value >= 1000000000000000000)
-        return (value / 1000000000000000000).toFixed(0) + 'QQ'
+        return (value / 1000000000000000000).slice(0, (num.indexOf("."))) + 'QQ'
     if (value >= 1010000000000000)
-        return (value / 1000000000000000).toFixed(2) + 'Q'
+        return (value / 1000000000000000).slice(0, (num.indexOf("."))+3) + 'Q'
     if (value >= 1000000000000000)
-        return (value / 1000000000000000).toFixed(0) + 'Q'
+        return (value / 1000000000000000).slice(0, (num.indexOf("."))) + 'Q'
     if (value >= 1010000000000)
-        return (value / 1000000000000).toFixed(2) + 'T'
+        return (value / 1000000000000).slice(0, (num.indexOf("."))+3) + 'T'
     if (value >= 1000000000000)
-        return (value / 1000000000000).toFixed(0) + 'T'
+        return (value / 1000000000000).slice(0, (num.indexOf("."))) + 'T'
     if (value >= 1010000000)
-        return (value / 1000000000).toFixed(2) + 'B'
+        return (value / 1000000000).slice(0, (num.indexOf("."))+3) + 'B'
     if (value >= 1000000000)
-        return (value / 1000000000).toFixed(0) + 'B'
+        return (value / 1000000000).slice(0, (num.indexOf("."))) + 'B'
     if (value >= 1010000)
-        return (value / 1000000).toFixed(2) + 'M'
+        return (value / 1000000).slice(0, (num.indexOf("."))+3) + 'M'
     if (value >= 1000000)
-        return (value / 1000000).toFixed(0) + 'M'
+        return (value / 1000000).slice(0, (num.indexOf("."))) + 'M'
     if (value >= 1010)
-        return (value / 1000).toFixed(2) + 'K'
+        return (value / 1000).slice(0, (num.indexOf("."))+3) + 'K'
     if (value >= 1000)
-        return (value / 1000).toFixed(0) + 'K'
+        return (value / 1000).slice(0, (num.indexOf("."))) + 'K'
     return value
 }
 
@@ -1441,6 +1441,7 @@ function closeProfile() {
     document.getElementById("profile-joindate").innerText = "Join Date: Loading..."
     document.getElementById("profile-lastonline").innerText = "Last Online: Loading..."
     document.getElementById("profile-playtime").innerText = "Total Playtime: Loading..."
+    document.getElementById("profile-friends").innerText = "Friends: Loading..."
     document.getElementById("profile-picture").src = "../images/profiles/default.png"
 
     document.getElementById("selectpfpbackground").style.display = "none"
