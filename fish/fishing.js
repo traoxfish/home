@@ -79,65 +79,65 @@ function sendFish() {
 
 function formatNumber(value) {
     if (value >= 1010000000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'QD'
+        return (value / 1000000000000000000000000000000000000000000000).toString().slice(0, (num.indexOf("."))+3) + 'QD'
     if (value >= 1000000000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'QD'
+        return (value / 1000000000000000000000000000000000000000000000).toString().slice(0, (num.indexOf("."))) + 'QD'
     if (value >= 1010000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'TD'
+        return (value / 1000000000000000000000000000000000000000000).toString().slice(0, (num.indexOf("."))+3) + 'TD'
     if (value >= 1000000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'TD'
+        return (value / 1000000000000000000000000000000000000000000).toString().slice(0, (num.indexOf("."))) + 'TD'
     if (value >= 1010000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'DD'
+        return (value / 1000000000000000000000000000000000000000).toString().slice(0, (num.indexOf("."))+3) + 'DD'
     if (value >= 1000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'DD'
+        return (value / 1000000000000000000000000000000000000000).toString().slice(0, (num.indexOf("."))) + 'DD'
     if (value >= 1010000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'UD'
+        return (value / 1000000000000000000000000000000000000).toString().slice(0, (num.indexOf("."))+3) + 'UD'
     if (value >= 1000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'UD'
+        return (value / 1000000000000000000000000000000000000).toString().slice(0, (num.indexOf("."))) + 'UD'
     if (value >= 1010000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'D'
+        return (value / 1000000000000000000000000000000000).toString().slice(0, (num.indexOf("."))+3) + 'D'
     if (value >= 1000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'D'
+        return (value / 1000000000000000000000000000000000).toString().slice(0, (num.indexOf("."))) + 'D'
     if (value >= 1010000000000000000000000000000)
-        return (value / 1000000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'N'
+        return (value / 1000000000000000000000000000000).toString().slice(0, (num.indexOf("."))+3) + 'N'
     if (value >= 1000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000).slice(0, (num.indexOf("."))) + 'N'
+        return (value / 1000000000000000000000000000000).toString().slice(0, (num.indexOf("."))) + 'N'
     if (value >= 1010000000000000000000000000)
-        return (value / 1000000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'O'
+        return (value / 1000000000000000000000000000).toString().slice(0, (num.indexOf("."))+3) + 'O'
     if (value >= 1000000000000000000000000000)
-        return (value / 1000000000000000000000000000).slice(0, (num.indexOf("."))) + 'O'
+        return (value / 1000000000000000000000000000).toString().slice(0, (num.indexOf("."))) + 'O'
     if (value >= 1010000000000000000000000)
-        return (value / 1000000000000000000000000).slice(0, (num.indexOf("."))+3) + 'SS'
+        return (value / 1000000000000000000000000).toString().slice(0, (num.indexOf("."))+3) + 'SS'
     if (value >= 1000000000000000000000000)
-        return (value / 1000000000000000000000000).slice(0, (num.indexOf("."))) + 'SS'
+        return (value / 1000000000000000000000000).toString().slice(0, (num.indexOf("."))) + 'SS'
     if (value >= 1010000000000000000000)
-        return (value / 1000000000000000000000).slice(0, (num.indexOf("."))+3) + 'S'
+        return (value / 1000000000000000000000).toString().slice(0, (num.indexOf("."))+3) + 'S'
     if (value >= 1000000000000000000000)
-        return (value / 1000000000000000000000).slice(0, (num.indexOf("."))) + 'S'
+        return (value / 1000000000000000000000).toString().slice(0, (num.indexOf("."))) + 'S'
     if (value >= 1010000000000000000)
-        return (value / 1000000000000000000).slice(0, (num.indexOf("."))+3) + 'QQ'
+        return (value / 1000000000000000000).toString().slice(0, (num.indexOf("."))+3) + 'QQ'
     if (value >= 1000000000000000000)
         return (value / 1000000000000000000).slice(0, (num.indexOf("."))) + 'QQ'
     if (value >= 1010000000000000)
-        return (value / 1000000000000000).slice(0, (num.indexOf("."))+3) + 'Q'
+        return (value / 1000000000000000).toString().slice(0, (num.indexOf("."))+3) + 'Q'
     if (value >= 1000000000000000)
-        return (value / 1000000000000000).slice(0, (num.indexOf("."))) + 'Q'
+        return (value / 1000000000000000).toString().slice(0, (num.indexOf("."))) + 'Q'
     if (value >= 1010000000000)
-        return (value / 1000000000000).slice(0, (num.indexOf("."))+3) + 'T'
+        return (value / 1000000000000).toString().slice(0, (num.indexOf("."))+3) + 'T'
     if (value >= 1000000000000)
-        return (value / 1000000000000).slice(0, (num.indexOf("."))) + 'T'
+        return (value / 1000000000000).toString().slice(0, (num.indexOf("."))) + 'T'
     if (value >= 1010000000)
-        return (value / 1000000000).slice(0, (num.indexOf("."))+3) + 'B'
+        return (value / 1000000000).toString().slice(0, (num.indexOf("."))+3) + 'B'
     if (value >= 1000000000)
-        return (value / 1000000000).slice(0, (num.indexOf("."))) + 'B'
+        return (value / 1000000000).toString().slice(0, (num.indexOf("."))) + 'B'
     if (value >= 1010000)
-        return (value / 1000000).slice(0, (num.indexOf("."))+3) + 'M'
+        return (value / 1000000).toString().slice(0, (num.indexOf("."))+3) + 'M'
     if (value >= 1000000)
-        return (value / 1000000).slice(0, (num.indexOf("."))) + 'M'
+        return (value / 1000000).toString().slice(0, (num.indexOf("."))) + 'M'
     if (value >= 1010)
-        return (value / 1000).slice(0, (num.indexOf("."))+3) + 'K'
+        return (value / 1000).toString().slice(0, (num.indexOf("."))+3) + 'K'
     if (value >= 1000)
-        return (value / 1000).slice(0, (num.indexOf("."))) + 'K'
+        return (value / 1000).toString().slice(0, (num.indexOf("."))) + 'K'
     return value
 }
 
