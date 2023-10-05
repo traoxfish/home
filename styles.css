@@ -574,8 +574,9 @@ input {
 .leaderboardselect {
   margin-left: 4%;
   display: inline-block;
-  max-width: 25%;
+  max-width: 33.3%;
   font-size: 1.25vw;
+  background-color: #1d1a2c;;
 }
 
 .info {
