@@ -285,7 +285,7 @@ function sendMessage() {
                 document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
             })
         } else {
-            document.getElementById("sendmessagestatus").innerText = "Unable to send message."
+            document.getElementById("sendmessagestatus").innerText = "Unable to send message. " + json.error
             delay(2000).then(() => {
                 document.getElementById("sendmessagestatus").innerHTML = "<br>"
             })
