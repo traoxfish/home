@@ -385,9 +385,14 @@
 
    <br><br><br>
 
-   <p class="chatbox" id="chat"></p><br>
-   <input placeholder="Message" style="display: inline-block; width: calc(49.75% - 100px);" id="messageinput">
-   <button class="nicebutton" style="width:92px; height: 26px;" onclick="sendMessage()">Send</button>
+   <div style="line-height: 0px;">
+    <p class="chatbox" id="chat"></p>
+   </div>
+   <div style=" transform: translate(0, -12px);">
+    <input placeholder="Message" style="display: inline-block; width: calc(49.75% - 100px);" id="messageinput">
+    <button class="nicebutton" style="width:92px; height: 26px;" onclick="sendMessage()">Send</button><br>
+    <p id="sendmessagestatus" style="display: inline-block; position: absolute; margin-top: 6px; font-size: calc(0.66vw + 4px); color: #ea7b7b"><br></p>
+   </div>
    <br><br>
    
    <div class="specialfixbox" style="position: absolute; left: calc(59.7% - 16px); margin-top: calc(4vw - 98px);"> 

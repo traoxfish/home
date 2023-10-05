@@ -278,10 +278,18 @@ function sendMessage() {
         return response.json();
     }).then(json => {
         getMessages()
-        document.getElementById("messageinput").value = ""
-        delay(200).then(() => {
-            document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
-        })
+        if (json.status == "success") {
+            document.getElementById("sendmessagestatus").innerHTML = "<br>"
+            document.getElementById("messageinput").value = ""
+            delay(200).then(() => {
+                document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
+            })
+        } else {
+            document.getElementById("sendmessagestatus").innerText = "Unable to send message."
+            delay(2000).then(() => {
+                document.getElementById("sendmessagestatus").innerHTML = "<br>"
+            })
+        }
     });
 }
 
