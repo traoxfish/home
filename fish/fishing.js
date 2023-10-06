@@ -1440,7 +1440,7 @@ function closeProfile() {
     document.getElementById("profile-fishgambled").innerText = "Fish Gambled: Loading..."
     document.getElementById("profile-joindate").innerText = "Join Date: Loading..."
     document.getElementById("profile-lastonline").innerText = "Last Online: Loading..."
-    document.getElementById("profile-playtime").innerText = "Total Playtime: Loading..."
+    document.getElementById("profile-playtime").innerText = "Playtime: Loading..."
     document.getElementById("profile-friends").innerText = "Friends: Loading..."
     document.getElementById("profile-picture").src = "../images/profiles/default.png"
 
@@ -1547,7 +1547,7 @@ function viewProfile(profile, self) {
             document.getElementById("profile-fishbuckets").innerText = "Fish Buckets: " + formatNumber(fishBuckets)
             document.getElementById("profile-joindate").innerText = "Join Date: " + joinDate
             document.getElementById("profile-lastonline").innerText = "Last Online: " + lastOnlineDate
-            document.getElementById("profile-playtime").innerText = "Total Playtime: " + playtime
+            document.getElementById("profile-playtime").innerText = "Playtime: " + playtime
             document.getElementById("profile-friends").innerText = "Friends: " + friends
             document.getElementById("profile-picture").src = "../images/profiles/" + picture + ".png"
 
