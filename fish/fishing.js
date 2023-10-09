@@ -245,10 +245,9 @@ function buyItem(type) {
     }).then(json => {
         if (json.newCost != undefined) {
             document.getElementById(type.toLowerCase()  + "cost").textContent = formatNumber(json.newCost) + " fish"
-            if (type == "specialFish") {
-                document.getElementById(type.toLowerCase()  + "cost").textContent = "Buy Price: " + formatNumber(json.newCost) + " fish"
-            } else if (type == "sellSpecialFish") {
-                document.getElementById(type.toLowerCase()  + "cost").textContent = "Sell Price: " + formatNumber(json.newCost) + " fish"
+            if (type == "specialFish" || type == "sellSpecialFish") {
+                document.getElementById("specialfishcost").textContent = "Buy Price: " + formatNumber(json.newCost) + " fish"
+                document.getElementById("specialfishsellcost").textContent = "Sell Price: " + formatNumber(json.newSellCost) + " fish"
             }
             getFish();
         }
