@@ -142,7 +142,11 @@ function formatNumber(value) {
 }
 
 function formatedNumberToNumber(value) {
-    if (value.toUpperCase().endsWith("D"))
+    if (value.toUpperCase().endsWith("DD"))
+        return Number(value.slice(0, -1)) * 1000000000000000000000000000000000000000
+    if (value.toUpperCase().endsWith("UD"))
+        return Number(value.slice(0, -1)) * 1000000000000000000000000000000000000
+    if (value.toUpperCase().endsWith("D") && !value.endsWith("UD") && !value.endsWith("DD"))
         return Number(value.slice(0, -1)) * 1000000000000000000000000000000000
     if (value.toUpperCase().endsWith("N"))
         return Number(value.slice(0, -1)) * 1000000000000000000000000000000
