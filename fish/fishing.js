@@ -185,21 +185,27 @@ function closeShop() {
 }
 
 document.getElementById("sendfishamount").oninput = function() {
-    this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnOoNdD]/g, '').replace(/(\..*)\./g, '$1');
+    this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnOoNdDuU]/g, '').replace(/(\..*)\./g, '$1');
+    this.value = this.value.replace("u", "ud")
+    this.value = this.value.replace("U", "UD")
     if (isNaN(this.value.charAt(this.value.length-2)) && this.value.charAt(this.value.length-2) != '.' && this.value.charAt(this.value.length-2).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() != 's') this.value = this.value.substr(0, this.value.length - 1)
     else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'q' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() == 'q')) this.value = this.value.substr(0, this.value.length - 1)
     else if ((this.value.charAt(this.value.length-3).toLowerCase() == 's' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 's' && this.value.charAt(this.value.length-2).toLowerCase() == 's')) this.value = this.value.substr(0, this.value.length - 1)
-
+    else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'd' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'd' && this.value.charAt(this.value.length-2).toLowerCase() == 'd')) this.value = this.value.substr(0, this.value.length - 1)
+    
     if (isNaN(this.value.charAt(this.value.length-1)) && this.value.charAt(this.value.length-2) == '.') this.value = this.value.substr(0, this.value.length - 1)
     if (isNaN(this.value.charAt(this.value.length-1)) && this.value.length == 1) this.value = ""
 }
 
 document.getElementById("betamount").oninput = function() {
-    this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnOoNdD]/g, '').replace(/(\..*)\./g, '$1');
+    this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnOoNdDuU]/g, '').replace(/(\..*)\./g, '$1');
+    this.value = this.value.replace("u", "ud")
+    this.value = this.value.replace("U", "UD")
     if (isNaN(this.value.charAt(this.value.length-2)) && this.value.charAt(this.value.length-2) != '.' && this.value.charAt(this.value.length-2).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() != 's') this.value = this.value.substr(0, this.value.length - 1)
     else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'q' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() == 'q')) this.value = this.value.substr(0, this.value.length - 1)
     else if ((this.value.charAt(this.value.length-3).toLowerCase() == 's' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 's' && this.value.charAt(this.value.length-2).toLowerCase() == 's')) this.value = this.value.substr(0, this.value.length - 1)
-
+    else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'd' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'd' && this.value.charAt(this.value.length-2).toLowerCase() == 'd')) this.value = this.value.substr(0, this.value.length - 1)
+    
     if (isNaN(this.value.charAt(this.value.length-1)) && this.value.charAt(this.value.length-2) == '.') this.value = this.value.substr(0, this.value.length - 1)
     if (isNaN(this.value.charAt(this.value.length-1)) && this.value.length == 1) this.value = ""
 }
@@ -208,10 +214,13 @@ quantityInputs = [ "rarefishbuyquantity", "veryrarefishbuyquantity", "sharkbuyqu
 
 for (var i = 0; i < quantityInputs.length; i++) {
     document.getElementById(quantityInputs[i]).oninput = function() {
-        this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnOoNdD]/g, '').replace(/(\..*)\./g, '$1');
+        this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnOoNdDuU]/g, '').replace(/(\..*)\./g, '$1');
+        this.value = this.value.replace("u", "ud")
+        this.value = this.value.replace("U", "UD")
         if (isNaN(this.value.charAt(this.value.length-2)) && this.value.charAt(this.value.length-2) != '.' && this.value.charAt(this.value.length-2).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() != 's') this.value = this.value.substr(0, this.value.length - 1)
         else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'q' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() == 'q')) this.value = this.value.substr(0, this.value.length - 1)
         else if ((this.value.charAt(this.value.length-3).toLowerCase() == 's' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 's' && this.value.charAt(this.value.length-2).toLowerCase() == 's')) this.value = this.value.substr(0, this.value.length - 1)
+        else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'd' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'd' && this.value.charAt(this.value.length-2).toLowerCase() == 'd')) this.value = this.value.substr(0, this.value.length - 1)
     
         if (isNaN(this.value.charAt(this.value.length-1)) && this.value.charAt(this.value.length-2) == '.') this.value = this.value.substr(0, this.value.length - 1)
         if (isNaN(this.value.charAt(this.value.length-1)) && this.value.length == 1) this.value = ""
