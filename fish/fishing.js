@@ -423,9 +423,6 @@ function updateLeaderboards() {
 
         document.getElementById("playercount").innerText = json.playerCount
 
-        if (type == "alltimefish") document.getElementById("#1text").style.display = "inline"
-        else document.getElementById("#1text").style.display = "none"
-
         var i = 0;
         var leaderboard = document.getElementById("leaderboard");
         for (var fisher in json.leaderboards) {
