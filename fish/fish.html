@@ -122,13 +122,19 @@
 
         <div onclick="closeSettings()" id="profilesettingsbackground" style="display: none; position: absolute; min-width: 100%; min-height: 100%; transform: translate(0, -500px);">
           <div onclick="event.stopPropagation()" style="display: block; background-color: #1d1a2c; min-width: 75%; min-height: 75%; position: absolute; outline-style: solid; outline-width: 1px; outline-color: #ffffff; margin-left: auto; margin-right: auto; transform: translate(16.6%, 16.6%);">
-            <p style="position: absolute; display: inline-block; margin-left: 24.5%; margin-top: 86px;">Change Password:</p>
-            <input type="password" id="changepasswordold" class="center" placeholder="Old Password" style="display: inline-block; position: inital; min-width: 50%; margin-top:128px;">
-            <input type="password" id="changepasswordnew" class="center" placeholder="New Password" style="display: inline-block; position: inital;  min-width: 50%; margin-top:168px;">
-            <input type="password" id="changepasswordnewconfirm" class="center" placeholder="Confirm New Password" style="display: inline-block; position: inital; min-width: 50%; margin-top:208px;">
-            <button onclick="changePassword()" class="nicebutton center" style="min-width: 50%; margin-top: 248px;">Change Password</button>
-            <p id="changepasswordstatus" style="position: absolute; display: inline-block; margin-left: 24.5%; margin-top: 268px; font-size: 16px; max-width: 50%;"> </p>
-            <button onclick="logout()" class="nicebutton center" style="min-width: 50%; margin-top: 328px;">Logout</button>
+            <p style="position: absolute; display: inline-block; margin-left: 24.5%; margin-top: 108px;">Change Password:</p>
+            <input type="password" id="changepasswordold" class="center" placeholder="Old Password" style="display: inline-block; position: inital; min-width: 50%; margin-top:148px;">
+            <input type="password" id="changepasswordnew" class="center" placeholder="New Password" style="display: inline-block; position: inital;  min-width: 50%; margin-top:188px;">
+            <input type="password" id="changepasswordnewconfirm" class="center" placeholder="Confirm New Password" style="display: inline-block; position: inital; min-width: 50%; margin-top:228px;">
+            <button onclick="changePassword()" class="nicebutton center" style="min-width: 50%; margin-top: 268px;">Change Password</button>
+            <p id="changepasswordstatus" style="position: absolute; display: inline-block; margin-left: 24.5%; margin-top: 288px; font-size: 16px; max-width: 50%;"> </p>
+            <button onclick="logout()" class="nicebutton center" style="min-width: 50%; margin-top: 348px;">Logout</button>
+            <p style="position: absolute; display: inline-block; margin-left: 24.5%; margin-top: 28px;">Who can send you challenges:</p>
+            <select name="type" id="challengesetting" onchange="setChallengeSetting()" class="leaderboardselect" style="margin-left: 24.5%; width: 51%; min-width: 51%; max-width: 51%; height: 28px; font-size: 16px; margin-top: 60px;">
+              <option value="everyone">Everyone</option>
+              <option value="friends">Only Friends</option>
+              <option value="noone">No one</option>
+            </select>
           </div>
         </div>
         
@@ -158,9 +164,9 @@
       <p class="center" id="challengegameoponentoption" style="margin-top: 74px; font-size: 24px; text-align: center;">Waiting for Loading... to choose their option..</p>
       <div class="longbarseperator" style="min-width: 96%; margin-left: 2%; margin-top: 96px;"></div>
       <div style="margin-top: 124px; width: 100%; height: 276px;">
-        <button class="nicebutton" id="baitchoice" onclick="chooseChallengeOption('bait')" style="height: 90%; width: 30%; margin-left: 2.1%; margin-top: 4px; font-size: 28px;">Bait<br><img src="../images/bait.png" style="width: 50%; margin-top: 24px;"><p style="font-size: 10px; margin-left: 8%; transform: translate(0, 12px);">(Wins against hook) <br>(Looses against fish)</p></button>
-        <button class="nicebutton" id="fishchoice" onclick="chooseChallengeOption('fish')" style="height: 90%; width: 30%; margin-left: 2.1%; margin-top: 4px; font-size: 28px;">Fish<br><img src="../images/fish.png" style="width: 50%; margin-top: 24px;"><p style="font-size: 10px; margin-left: 8%; transform: translate(0, 12px);">(Wins against bait) <br>(Looses against hook)</p></button>
-        <button class="nicebutton" id="hookchoice" onclick="chooseChallengeOption('hook')" style="height: 90%; width: 30%; margin-left: 2.1%; margin-top: 4px; font-size: 28px;">Hook<br><img src="../images/fish_hook.png" style="width: 50%; margin-top: 24px;"><p style="font-size: 10px; margin-left: 8%; transform: translate(0, 12px);">(Wins against fish) <br>(Looses against bait)</p></button>
+        <button class="nicebutton" id="baitchoice" onclick="chooseChallengeOption('bait')" style="height: 90%; width: 30%; max-width: 30%; min-width: 30%; margin-left: 2.1%; margin-top: 4px; font-size: 28px;">Bait<br><img src="../images/bait.png" style="width: 50%; margin-top: 24px;"><p style="font-size: 10px; margin-left: 8%; transform: translate(0, 12px);">(Wins against hook) <br>(Looses against fish)</p></button>
+        <button class="nicebutton" id="fishchoice" onclick="chooseChallengeOption('fish')" style="height: 90%; width: 30%; max-width: 30%; min-width: 30%; margin-left: 2.1%; margin-top: 4px; font-size: 28px;">Fish<br><img src="../images/fish.png" style="width: 50%; margin-top: 24px;"><p style="font-size: 10px; margin-left: 8%; transform: translate(0, 12px);">(Wins against bait) <br>(Looses against hook)</p></button>
+        <button class="nicebutton" id="hookchoice" onclick="chooseChallengeOption('hook')" style="height: 90%; width: 30%; max-width: 30%; min-width: 30%; margin-left: 2.1%; margin-top: 4px; font-size: 28px;">Hook<br><img src="../images/fish_hook.png" style="width: 50%; margin-top: 24px;"><p style="font-size: 10px; margin-left: 8%; transform: translate(0, 12px);">(Wins against fish) <br>(Looses against bait)</p></button>
       </div>
     </div>
   </div>
