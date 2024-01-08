@@ -78,66 +78,30 @@ function sendFish() {
 }
 
 function formatNumber(value) {
-    if (value >= 1010000000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000000).toFixed(2) + 'QD'
-    if (value >= 1000000000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000000).toFixed(0) + 'QD'
-    if (value >= 1010000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000).toFixed(2) + 'TD'
-    if (value >= 1000000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000000).toFixed(0) + 'TD'
-    if (value >= 1010000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000).toFixed(2) + 'DD'
-    if (value >= 1000000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000000).toFixed(0) + 'DD'
-    if (value >= 1010000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000).toFixed(2) + 'UD'
-    if (value >= 1000000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000000).toFixed(0) + 'UD'
-    if (value >= 1010000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000).toFixed(2) + 'D'
-    if (value >= 1000000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000000).toFixed(0) + 'D'
-    if (value >= 1010000000000000000000000000000)
-        return (value / 1000000000000000000000000000000).toFixed(2) + 'N'
-    if (value >= 1000000000000000000000000000000)
-        return (value / 1000000000000000000000000000000).toFixed(0) + 'N'
-    if (value >= 1010000000000000000000000000)
-        return (value / 1000000000000000000000000000).toFixed(2) + 'O'
-    if (value >= 1000000000000000000000000000)
-        return (value / 1000000000000000000000000000).toFixed(0) + 'O'
-    if (value >= 1010000000000000000000000)
-        return (value / 1000000000000000000000000).toFixed(2) + 'SS'
-    if (value >= 1000000000000000000000000)
-        return (value / 1000000000000000000000000).toFixed(0) + 'SS'
-    if (value >= 1010000000000000000000)
-        return (value / 1000000000000000000000).toFixed(2) + 'S'
-    if (value >= 1000000000000000000000)
-        return (value / 1000000000000000000000).toFixed(0) + 'S'
-    if (value >= 1010000000000000000)
-        return (value / 1000000000000000000).toFixed(2) + 'QQ'
+    if (value >= 1011000000000000000)
+        return ((value / 1000000000000000000).toFixed(2) + 'QQ').replace(".00", "")
     if (value >= 1000000000000000000)
-        return (value / 1000000000000000000).toFixed(0) + 'QQ'
-    if (value >= 1010000000000000)
-        return (value / 1000000000000000).toFixed(2) + 'Q'
+        return ((value / 1000000000000000000).toFixed(0) + 'QQ').replace(".00", "")
+    if (value >= 1011000000000000)
+        return ((value / 1000000000000000).toFixed(2) + 'Q').replace(".00", "")
     if (value >= 1000000000000000)
-        return (value / 1000000000000000).toFixed(0) + 'Q'
-    if (value >= 1010000000000)
-        return (value / 1000000000000).toFixed(2) + 'T'
+        return ((value / 1000000000000000).toFixed(0) + 'Q').replace(".00", "")
+    if (value >= 1011000000000)
+        return ((value / 1000000000000).toFixed(2) + 'T').replace(".00", "")
     if (value >= 1000000000000)
-        return (value / 1000000000000).toFixed(0) + 'T'
-    if (value >= 1010000000)
-        return (value / 1000000000).toFixed(2) + 'B'
+        return ((value / 1000000000000).toFixed(0) + 'T').replace(".00", "")
+    if (value >= 1011000000)
+        return ((value / 1000000000).toFixed(2) + 'B').replace(".00", "")
     if (value >= 1000000000)
-        return (value / 1000000000).toFixed(0) + 'B'
-    if (value >= 1010000)
-        return (value / 1000000).toFixed(2) + 'M'
+        return ((value / 1000000000).toFixed(0) + 'B').replace(".00", "")
+    if (value >= 1011000)
+        return ((value / 1000000).toFixed(2) + 'M').replace(".00", "")
     if (value >= 1000000)
-        return (value / 1000000).toFixed(0) + 'M'
-    if (value >= 1010)
-        return (value / 1000).toFixed(2) + 'K'
+        return ((value / 1000000).toFixed(0) + 'M').replace(".00", "")
+    if (value >= 1011)
+        return ((value / 1000).toFixed(2) + 'K').replace(".00", "")
     if (value >= 1000)
-        return (value / 1000).toFixed(0) + 'K'
+        return ((value / 1000).toFixed(0) + 'K').replace(".00", "")
     return value
 }
 
@@ -1463,6 +1427,8 @@ function closeProfile() {
     document.getElementById("profile-whales").innerText = "Whales: Loading..."
     document.getElementById("profile-fishermen").innerText = "Fishermen: Loading..."
     document.getElementById("profile-chum").innerText = "Chum: Loading..."
+    document.getElementById("profile-fishperclick").innerText = "Fish Per Click: Loading..."
+    document.getElementById("profile-fishpersecond").innerText = "Fish Per Second: Loading..."
     document.getElementById("profile-fishbuckets").innerText = "Fish Buckets: Loading..."
     document.getElementById("profile-specialfish").innerText = "Special Fish: Loading..."
     document.getElementById("profile-alltimefish").innerText = "All Time Fish: Loading..."
@@ -1525,6 +1491,9 @@ function viewProfile(profile, self) {
             var friends = json.friends
             var challengeSetting = json.challengeSetting
 
+            var fishPerSecond = json.fishPerSecond
+            var fishPerClick = json.fishPerClick
+
             if (playtime == "") playtime = "None"
 
             if (rank == "none") rank = ""
@@ -1552,25 +1521,25 @@ function viewProfile(profile, self) {
                     document.getElementById("addfriend").innerText = "Send Friend Request"
                     document.getElementById("addfriend").addEventListener('click', function() { sendFriendRequest(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
                     document.getElementById("sendchallengerequest").style.marginLeft = "360px"
-                    document.getElementById("challengebet").style.marginLeft = "550px"
+                    document.getElementById("challengebet").style.marginLeft = "555px"
                     document.getElementById("challengeinfo").style.marginLeft = "360px"
                 } else if (friendStatus == "friends") {
                     document.getElementById("addfriend").innerText = "Remove Friend"
                     document.getElementById("addfriend").addEventListener('click', function() { cancelFriend(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
                     document.getElementById("sendchallengerequest").style.marginLeft = "320px"
-                    document.getElementById("challengebet").style.marginLeft = "510px"
+                    document.getElementById("challengebet").style.marginLeft = "515px"
                     document.getElementById("challengeinfo").style.marginLeft = "320px"
                 } else if (friendStatus == "incoming") {
                     document.getElementById("addfriend").innerText = "Accept Friend Request"
                     document.getElementById("addfriend").addEventListener('click', function() { sendFriendRequest(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
                     document.getElementById("sendchallengerequest").style.marginLeft = "370px"
-                    document.getElementById("challengebet").style.marginLeft = "560px"
+                    document.getElementById("challengebet").style.marginLeft = "565px"
                     document.getElementById("challengeinfo").style.marginLeft = "370px"
                 } else if (friendStatus == "outgoing") {
                     document.getElementById("addfriend").innerText = "Cancel Friend Request"
                     document.getElementById("addfriend").addEventListener('click', function() { cancelFriend(profile); delay(250).then(() => viewProfile(profile))  }, { once: true })
                     document.getElementById("sendchallengerequest").style.marginLeft = "370px"
-                    document.getElementById("challengebet").style.marginLeft = "560px"
+                    document.getElementById("challengebet").style.marginLeft = "565px"
                     document.getElementById("challengeinfo").style.marginLeft = "370px"
                 }
                 
@@ -1593,6 +1562,8 @@ function viewProfile(profile, self) {
             document.getElementById("profile-fishermen").innerText = "Fishermen: " + formatNumber(fishermen)
             document.getElementById("profile-chum").innerText = "Chum: " + formatNumber(chum)
             document.getElementById("profile-fishbuckets").innerText = "Fish Buckets: " + formatNumber(fishBuckets)
+            document.getElementById("profile-fishperclick").innerText = "Fish Per Click: " + formatNumber(fishPerClick)
+            document.getElementById("profile-fishpersecond").innerText = "Fish Per Second: " + formatNumber(fishPerSecond)
             document.getElementById("profile-joindate").innerText = "Join Date: " + joinDate
             document.getElementById("profile-lastonline").innerText = "Last Online: " + lastOnlineDate
             document.getElementById("profile-playtime").innerText = "Playtime: " + playtime
@@ -1925,6 +1896,11 @@ function sendChallengeRequest(user, cancel) {
     }).then(json => {
         if (json.status == "success") {
             challenger = json.challenger
+            document.getElementById("challengeinfo").innerText = "Sent challenge request!"
+            document.getElementById("challengeinfo").style.color = "#84ea84";
+            delay(2000).then(() => {
+                document.getElementById("challengeinfo").innerHTML = ""
+            })
         } else {
             document.getElementById("challengeinfo").innerText = json.error
             document.getElementById("challengeinfo").style.color = "#ea7b7b";
