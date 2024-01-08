@@ -138,7 +138,7 @@ function formatNumber(value) {
         return (value / 1000).toFixed(2) + 'K'
     if (value >= 1000)
         return (value / 1000).toFixed(0) + 'K'
-    return value.replace(".00", "")
+    return value
 }
 
 function formatedNumberToNumber(value) {
