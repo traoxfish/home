@@ -46,6 +46,9 @@
 	      <p id="profile-rank" style="display: flex; position: absolute; transform: translate(0, -90px); margin-left: 180px; font-size: 75%;"></p>
         <button id="openfriends" onclick="openFriends()" class="nicebutton" style="position: absolute; display: none; margin-left: 180px; margin-top: -58px;">Friends</button>
         <button id="addfriend" class="nicebutton" style="position: absolute; display: none; margin-left: 180px; margin-top: -58px;">Send Friend Request</button>
+        <button id="sendchallengerequest" class="nicebutton" style="position: absolute; display: none; margin-left: 360px; margin-top: -58px;">Send Challenge Request</button>
+        <input id="challengebet" type="text" autocomplete="transaction-amount" placeholder="Bet" style="position: absolute; display: none; margin-left: 520px; margin-top: -58px; height: 22px; width: 100px;">
+        <p id="challengeinfo" style="position: absolute; display: block; margin-left: 320px; margin-top: -32px; height: 22px; width: 100%; font-size: 14px;"></p>
         <div class="longbarseperator" style="display: inline-block; transform: translate(0, -24px); position: initial;"></div>
         <div style="margin-left: 32px; transform: translate(0, -12px); position: relative; max-width: 46%; width: 46%; display: inline-block;">
           <p id="profile-fish" style="line-height: 4px;">Fish: Loading...</p>
@@ -134,6 +137,35 @@
       </div>
       
    </div>
+
+   <div class="shop" id="challengenotification" onclick="declineChallenge()" style="display: none;">
+    <div onclick="event.stopPropagation()" class="sendlogs" style="overflow-y: hidden; min-height: 200px; transform: translate(0, -150px);">
+      <p class="center" style="min-width: 55%;">Bait Fish Hook Challenge From</p>
+      <div class="longbarseperator" style="min-width: 66.66%; margin-left: 15%; margin-top: 13px;"></div>
+      <p class="center" id="challengenotificationuser" style="margin-top: 44px; font-size: 24px;">Loading...</p>
+      <div class="longbarseperator" style="min-width: 60.66%; margin-left: 18%; margin-top: 44px;"></div>
+      <p class="center" id="challengenotificationbid" style="margin-top: 74px; font-size: 18px;">Bet Amount: Loading... Fish</p>
+      <div class="longbarseperator" style="min-width: 96%; margin-left: 2%; margin-top: 72px;"></div>
+      <div style="margin-top: 92px; width: 100%; height: 106px;">
+        <button class="nicebutton" onclick="acceptChallenge()" style="height: 90%; width: 46%; margin-left: 2.5%; margin-top: 4px; font-size: 28px;">Accept</button>
+        <button class="nicebutton" onclick="declineChallenge()" style="height: 90%; width: 46%; margin-left: 2.5%; margin-top: 4px; font-size: 28px;">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shop" id="challengegame">
+    <div onclick="event.stopPropagation()" class="sendlogs" style="overflow-y: hidden; min-height: 400px; transform: translate(0, -50px);">
+      <p id="ongoinggamestatus" class="center" style="font-size: 26px;">Choose an option</p>
+      <div class="longbarseperator" style="min-width: 66.66%; margin-left: 15%; margin-top: 22px;"></div>
+      <p class="center" id="challengegameoponentoption" style="margin-top: 74px; font-size: 24px; text-align: center;">Waiting for Loading... to choose their option..</p>
+      <div class="longbarseperator" style="min-width: 96%; margin-left: 2%; margin-top: 96px;"></div>
+      <div style="margin-top: 124px; width: 100%; height: 276px;">
+        <button class="nicebutton" id="baitchoice" onclick="chooseChallengeOption('bait')" style="height: 90%; width: 30%; margin-left: 2.1%; margin-top: 4px; font-size: 28px;">Bait<br><img src="../images/bait.png" style="width: 50%; margin-top: 24px;"><p style="font-size: 10px; margin-left: 8%; transform: translate(0, 12px);">(Wins against hook) <br>(Looses against fish)</p></button>
+        <button class="nicebutton" id="fishchoice" onclick="chooseChallengeOption('fish')" style="height: 90%; width: 30%; margin-left: 2.1%; margin-top: 4px; font-size: 28px;">Fish<br><img src="../images/fish.png" style="width: 50%; margin-top: 24px;"><p style="font-size: 10px; margin-left: 8%; transform: translate(0, 12px);">(Wins against bait) <br>(Looses against hook)</p></button>
+        <button class="nicebutton" id="hookchoice" onclick="chooseChallengeOption('hook')" style="height: 90%; width: 30%; margin-left: 2.1%; margin-top: 4px; font-size: 28px;">Hook<br><img src="../images/fish_hook.png" style="width: 50%; margin-top: 24px;"><p style="font-size: 10px; margin-left: 8%; transform: translate(0, 12px);">(Wins against fish) <br>(Looses against bait)</p></button>
+      </div>
+    </div>
+  </div>
 
    <div class="shop" onclick="closeShop()" id="shop">
     <div class="rarefishinfo" id="rarefishinfo">

@@ -200,6 +200,16 @@ document.getElementById("betamount").oninput = function() {
     if (isNaN(this.value.charAt(this.value.length-1)) && this.value.length == 1) this.value = ""
 }
 
+document.getElementById("challengebet").oninput = function() {
+    this.value = this.value.replace(/[^0-9.kKmMbBtTqQsSnOoNdD]/g, '').replace(/(\..*)\./g, '$1');
+    if (isNaN(this.value.charAt(this.value.length-2)) && this.value.charAt(this.value.length-2) != '.' && this.value.charAt(this.value.length-2).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() != 's') this.value = this.value.substr(0, this.value.length - 1)
+    else if ((this.value.charAt(this.value.length-3).toLowerCase() == 'q' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 'q' && this.value.charAt(this.value.length-2).toLowerCase() == 'q')) this.value = this.value.substr(0, this.value.length - 1)
+    else if ((this.value.charAt(this.value.length-3).toLowerCase() == 's' && !isNaN(this.value.charAt(this.value.length-4))) || (this.value.charAt(this.value.length-1).toLowerCase() != 's' && this.value.charAt(this.value.length-2).toLowerCase() == 's')) this.value = this.value.substr(0, this.value.length - 1)
+
+    if (isNaN(this.value.charAt(this.value.length-1)) && this.value.charAt(this.value.length-2) == '.') this.value = this.value.substr(0, this.value.length - 1)
+    if (isNaN(this.value.charAt(this.value.length-1)) && this.value.length == 1) this.value = ""
+}
+
 quantityInputs = [ "rarefishbuyquantity", "veryrarefishbuyquantity", "sharkbuyquantity", "raresharkbuyquantity", "fishermanbuyquantity", "chumbuyquantity", "fishbucketbuyquantity"]
 
 for (var i = 0; i < quantityInputs.length; i++) {
@@ -739,6 +749,8 @@ delay(5).then(() => {
     setInterval(function(){ 
         getFish();
         getMessages(false);
+        getChallengeRequest()
+        getChallengeStatus()
     }, 1000);
 
     setInterval(function(){ 
@@ -1418,6 +1430,8 @@ function closeProfile() {
     closeSettings()
     document.getElementById("openfriends").style.display = "none"
     document.getElementById("addfriend").style.display = "none"
+    document.getElementById("sendchallengerequest").style.display = "none"
+    document.getElementById("challengebet").style.display = "none"
 
     document.getElementById("profile-picture").style.pointer = "default"
     document.getElementById("profile-settings").style.display = "none"
@@ -1503,26 +1517,44 @@ function viewProfile(profile, self) {
                 document.getElementById("profile-picture").style.cursor = "pointer"
                 document.getElementById("openfriends").style.display = "block"
                 document.getElementById("addfriend").style.display = "none"
+                document.getElementById("sendchallengerequest").style.display = "none"
+                document.getElementById("challengebet").style.display = "none"
                 document.getElementById("profile-settings").style.display = "inline-block"
             } else {
                 document.getElementById("profile-picture").onclick = ""
                 document.getElementById("profile-picture").style.cursor = "default"
                 document.getElementById("openfriends").style.display = "none"
                 document.getElementById("addfriend").style.display = "block"
+                document.getElementById("sendchallengerequest").style.display = "block"
+                document.getElementById("challengebet").style.display = "block"
                 document.getElementById("profile-settings").style.display = "none"
                 document.getElementById("addfriend").parentNode.replaceChild(document.getElementById("addfriend").cloneNode(true), document.getElementById("addfriend"))
+                document.getElementById("sendchallengerequest").parentNode.replaceChild(document.getElementById("sendchallengerequest").cloneNode(true), document.getElementById("sendchallengerequest"))
+                document.getElementById("sendchallengerequest").addEventListener('click', function() { sendChallengeRequest(profile, false) }, { once: false })
                 if (friendStatus == "not friends") {
                     document.getElementById("addfriend").innerText = "Send Friend Request"
                     document.getElementById("addfriend").addEventListener('click', function() { sendFriendRequest(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
+                    document.getElementById("sendchallengerequest").style.marginLeft = "360px"
+                    document.getElementById("challengebet").style.marginLeft = "550px"
+                    document.getElementById("challengeinfo").style.marginLeft = "360px"
                 } else if (friendStatus == "friends") {
                     document.getElementById("addfriend").innerText = "Remove Friend"
                     document.getElementById("addfriend").addEventListener('click', function() { cancelFriend(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
+                    document.getElementById("sendchallengerequest").style.marginLeft = "320px"
+                    document.getElementById("challengebet").style.marginLeft = "510px"
+                    document.getElementById("challengeinfo").style.marginLeft = "320px"
                 } else if (friendStatus == "incoming") {
                     document.getElementById("addfriend").innerText = "Accept Friend Request"
                     document.getElementById("addfriend").addEventListener('click', function() { sendFriendRequest(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
+                    document.getElementById("sendchallengerequest").style.marginLeft = "370px"
+                    document.getElementById("challengebet").style.marginLeft = "560px"
+                    document.getElementById("challengeinfo").style.marginLeft = "370px"
                 } else if (friendStatus == "outgoing") {
                     document.getElementById("addfriend").innerText = "Cancel Friend Request"
                     document.getElementById("addfriend").addEventListener('click', function() { cancelFriend(profile); delay(250).then(() => viewProfile(profile))  }, { once: true })
+                    document.getElementById("sendchallengerequest").style.marginLeft = "370px"
+                    document.getElementById("challengebet").style.marginLeft = "560px"
+                    document.getElementById("challengeinfo").style.marginLeft = "370px"
                 }
                 
                 
@@ -1854,4 +1886,139 @@ function openFishingBoatShop() {
 
 function closeFishingBoatShop() {
     document.getElementById("fishingboatshop").style.display = "none";
+}
+
+function sendChallengeRequest(user, cancel) {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "user": user,
+        "bid": Math.max(formatedNumberToNumber(document.getElementById("challengebet").value), 1),
+        "cancel": cancel
+    };
+    fetch('https://traoxfish.us-3.evennode.com/sendchallengerequest', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            challenger = json.challenger
+        } else {
+            document.getElementById("challengeinfo").innerText = json.error
+            document.getElementById("challengeinfo").style.color = "#ea7b7b";
+            delay(2000).then(() => {
+                document.getElementById("challengeinfo").innerHTML = ""
+            })
+        }
+    })
+}
+
+var challenger = undefined
+
+function getChallengeRequest() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getchallegerequests', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            if (json.challenger != undefined) {
+                document.getElementById("challengenotification").style.display = "initial"
+                document.getElementById("challengenotificationuser").innerText = json.challenger
+                document.getElementById("challengenotificationbid").innerText = "Bet Amount: " + json.bid + " Fish"
+                challenger = json.challenger
+            } else {
+                document.getElementById("challengenotification").style.display = "none"
+            }
+        }
+    })
+}
+
+function getChallengeStatus() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getchallegestatus', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            if (json.gameStatus == "ongoing" || json.gameStatus == "won" || json.gameStatus == "lost" || json.gameStatus == "draw") {
+                document.getElementById("challengegame").style.display = "initial"
+                if (json.otherPlayersChoice == undefined) document.getElementById("challengegameoponentoption").innerText = "Waiting for " + json.challenger + " to choose their option..."
+                else if (json.otherPlayersChoice == "unknown") document.getElementById("challengegameoponentoption").innerText = json.challenger + " has chosen their option..."
+                else document.getElementById("challengegameoponentoption").innerText = json.challenger + " chose " + json.otherPlayersChoice
+                document.getElementById("challengenotificationbid").innerText = "Bet Amount: " + json.bid + " Fish"
+                if (json.gameStatus == "won") document.getElementById("ongoinggamestatus").innerText = "You Won " + json.bid + " fish!"
+                else if (json.gameStatus == "lost") document.getElementById("ongoinggamestatus").innerText = "You Lost " + json.bid + " fish..."
+                else if (json.gameStatus == "draw") document.getElementById("ongoinggamestatus").innerText = "Draw!"
+            } else {
+                document.getElementById("challengegame").style.display = "none"
+                document.getElementById("ongoinggamestatus").innerText = "Choose an option"
+                document.getElementById("baitchoice").disabled = false
+                document.getElementById("fishchoice").disabled = false
+                document.getElementById("hookchoice").disabled = false
+            }
+        } else {
+            document.getElementById("challengegame").style.display = "none"
+            document.getElementById("ongoinggamestatus").innerText = "Choose an option"
+            document.getElementById("baitchoice").disabled = false
+            document.getElementById("fishchoice").disabled = false
+            document.getElementById("hookchoice").disabled = false
+        }
+    })
+}
+
+function chooseChallengeOption(choice) {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "choice": choice
+    };
+    fetch('https://traoxfish.us-3.evennode.com/sendchallengechoice', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            document.getElementById("ongoinggamestatus").innerText = "..."
+            document.getElementById("baitchoice").disabled = true
+            document.getElementById("fishchoice").disabled = true
+            document.getElementById("hookchoice").disabled = true
+        }
+    })
+}
+
+function acceptChallenge() {
+    sendChallengeRequest(challenger, false)
+}
+
+function declineChallenge() {
+    sendChallengeRequest(challenger, true)
 }
