@@ -678,13 +678,14 @@ function checkIfLoggedIn() {
         return response.json();
     }).then(json => {
         if (getCookie("loginKey") == "") {
+            document.cookie = "loginKey=guest";
+            document.cookie = "username=guest";
             delay(1000).then(() => {
-                if (!firstMsg) alert("You are not logged in! Visit https://www.traox.dev/fish to log in. You wont be able to see any data untill you are logged in.")
+                if (!firstMsg) alert("You are currently using a guest account, your data will not be permanently saved.")
                 firstMsg = true
                 return  
             })
-        }
-        if (json.validKey == false) {
+        } else if (json.validKey == false) {
             window.location.replace("https://www.traox.dev/fish");
         }
     });
