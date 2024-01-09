@@ -146,7 +146,7 @@ function loginGuest() {
             document.getElementById("accountstatus").textContent = "Logged in!"
             document.getElementById("accountstatus").style.color = "#84ea84";
             document.cookie = "loginKey=" + json.key;
-            document.cookie = "username=" + username;
+            document.cookie = "username=" + "guest";
             window.location.replace("https://www.traox.dev/fish/fish");
         } else {
             document.getElementById("accountstatus").textContent = json.error;
