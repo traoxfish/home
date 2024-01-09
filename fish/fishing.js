@@ -1912,6 +1912,8 @@ function sendChallengeRequest(user, cancel) {
 }
 
 var challenger = undefined
+var challengeTimestamp = 0
+var challengeOptionChosen = false
 
 function getChallengeRequest() {
     const data = {
@@ -1958,6 +1960,9 @@ function getChallengeStatus() {
     }).then(json => {
         if (json.status == "success") {
             if (json.gameStatus == "ongoing" || json.gameStatus == "won" || json.gameStatus == "lost" || json.gameStatus == "draw") {
+                if (challengeTimestamp == 0) challengeTimestamp = Date.now()
+                if (Date.now() - challengeTimestamp > 19500 && (30 - Math.ceil((Date.now() - challengeTimestamp) / 1000) >= 1)) document.getElementById("ongoinggamestatus").innerText = ((30 - Math.ceil((Date.now() - challengeTimestamp) / 1000)).toString() + " seconds left")
+                else if (Date.now() - challengeTimestamp > 19500 && (30 - Math.ceil((Date.now() - challengeTimestamp) / 1000) < 1)) document.getElementById("ongoinggamestatus").innerText = "Ending game..."
                 document.getElementById("challengegame").style.display = "initial"
                 if (json.otherPlayersChoice == undefined) document.getElementById("challengegameoponentoption").innerText = "Waiting for " + json.challenger + " to choose their option..."
                 else if (json.otherPlayersChoice == "unknown") document.getElementById("challengegameoponentoption").innerText = json.challenger + " has chosen their option..."
@@ -1975,16 +1980,20 @@ function getChallengeStatus() {
                 document.getElementById("fishchoice").className = "nicebutton"
                 document.getElementById("hookchoice").disabled = false
                 document.getElementById("hookchoice").className = "nicebutton"
+                challengeTimestamp = 0
+                challengeOptionChosen = false
             }
         } else {
             document.getElementById("challengegame").style.display = "none"
-                document.getElementById("ongoinggamestatus").innerText = "Choose an option"
-                document.getElementById("baitchoice").disabled = false
-                document.getElementById("baitchoice").className = "nicebutton"
-                document.getElementById("fishchoice").disabled = false
-                document.getElementById("fishchoice").className = "nicebutton"
-                document.getElementById("hookchoice").disabled = false
-                document.getElementById("hookchoice").className = "nicebutton"
+            document.getElementById("ongoinggamestatus").innerText = "Choose an option"
+            document.getElementById("baitchoice").disabled = false
+            document.getElementById("baitchoice").className = "nicebutton"
+            document.getElementById("fishchoice").disabled = false
+            document.getElementById("fishchoice").className = "nicebutton"
+            document.getElementById("hookchoice").disabled = false
+            document.getElementById("hookchoice").className = "nicebutton"
+            challengeTimestamp = 0
+            challengeOptionChosen = false
         }
     })
 }
@@ -2006,14 +2015,15 @@ function chooseChallengeOption(choice) {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
+            challengeOptionChosen = true
             document.getElementById("ongoinggamestatus").innerText = "..."
             document.getElementById("baitchoice").disabled = false
-                document.getElementById("baitchoice").className = "innactivebutton"
-                
-                document.getElementById("fishchoice").disabled = true
-                document.getElementById("fishchoice").className = "innactivebutton"
-                document.getElementById("hookchoice").disabled = true
-                document.getElementById("hookchoice").className = "innactivebutton"
+            document.getElementById("baitchoice").className = "innactivebutton"
+            
+            document.getElementById("fishchoice").disabled = true
+            document.getElementById("fishchoice").className = "innactivebutton"
+            document.getElementById("hookchoice").disabled = true
+            document.getElementById("hookchoice").className = "innactivebutton"
         }
     })
 }
