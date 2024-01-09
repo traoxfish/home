@@ -125,3 +125,35 @@ function login() {
         }
     });
 }
+
+
+function loginGuest() {
+    const data = {
+        "username": "guest",
+        "password": "guest1"
+    };
+    fetch('https://traoxfish.us-3.evennode.com/login', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            document.getElementById("accountstatus").textContent = "Logged in!"
+            document.getElementById("accountstatus").style.color = "#84ea84";
+            document.cookie = "loginKey=" + json.key;
+            document.cookie = "username=" + username;
+            window.location.replace("https://www.traox.dev/fish/fish");
+        } else {
+            document.getElementById("accountstatus").textContent = json.error;
+            document.getElementById("accountstatus").style.color = "#ea7b7b";
+            delay(2000).then(() => {
+                document.getElementById("accountstatus").innerHTML = "<br>";
+            });
+        }
+    });
+}
