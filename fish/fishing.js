@@ -313,8 +313,10 @@ function getMessages(first) {
                     messageElement.style.maxWidth = "99%"
                     messageElement.style.fontSize = "calc(0.66vw + 6px)"
                     messageElement.textContent = chat[message]
-                    var username = chat[message].split("M", 2)[1].split(":", 2)[0].replaceAll(" ", "")
-                    messageElement.innerHTML = messageElement.innerHTML.replace(username, "<p onclick=\"viewProfile(\'" + username + "\')\" style=\"cursor: pointer; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\">" + username + "</p>")
+                    var username = chat[message].split("M ", 2)[1].split(": ", 2)[0].replaceAll(" ", "")
+                    console.log(username)
+                    messageElement.innerHTML = messageElement.innerHTML.replace(username.replaceAll("&", "&amp;"), "<p onclick=\"viewProfile(\'" + username + "\')\" style=\"cursor: pointer; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\">" + username + "</p>")
+                    console.log(messageElement.innerHTML)
                     document.getElementById("chat").appendChild(messageElement)
                 }
             } else {
@@ -322,8 +324,8 @@ function getMessages(first) {
                     var messageElement = document.getElementById("chat").children[message]
                     if (messageElement.textContent != chat[message]) {
                         messageElement.textContent = chat[message]
-                        var username = chat[message].split("M", 2)[1].split(":", 2)[0].replaceAll(" ", "")
-                    messageElement.innerHTML = messageElement.innerHTML.replace(username, "<p onclick=\"viewProfile(\'" + username + "\')\" style=\"cursor: pointer; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\">" + username + "</p>")
+                        var username = chat[message].split("M ", 2)[1].split(": ", 2)[0].replaceAll(" ", "")
+                        messageElement.innerHTML = messageElement.innerHTML.replace(username.replaceAll("&", "&amp;"), "<p onclick=\"viewProfile(\'" + username + "\')\" style=\"cursor: pointer; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\">" + username + "</p>")
                     }
                 }
             }
