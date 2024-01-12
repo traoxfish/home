@@ -876,6 +876,14 @@ function checkIfCaptchaed() {
     }).then(json => {
         if (json.status == "success") {
             if (json.captchaed) {
+                var offsetx = (Math.round((Math.random() * 150) - 75))
+                var offsety = -Math.round(Math.random() * 50)
+                if (document.getElementById('captcha').style.display == "none") {
+                    document.getElementById('captchabox').style.marginLeft = offsetx.toString() + "px"
+                    document.getElementById('captchasubmit').style.marginLeft = (offsetx + 2).toString() + "px"
+                    document.getElementById('captchabox').style.marginTop = offsety.toString() + "px"
+                    document.getElementById('captchasubmit').style.marginTop = ((offsety / 3) + 50).toString() + "px"
+                }
                 document.getElementById('captcha').style.display = "initial";
             }
         }
