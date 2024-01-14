@@ -413,7 +413,8 @@ function updateLeaderboards() {
                 if (json.onlineStatus[fisher]) {
                     leaderboard.children.item(i).style.color = "#84ea84";
                 } else {
-                    leaderboard.children.item(i).style.color = "#eeeeee";
+                    if (!gcTheme) leaderboard.children.item(i).style.color = "#eeeeee";
+                    else leaderboard.children.item(i).style.color = "#616161";
                 }
             } catch (e) {}
             i++
@@ -448,6 +449,7 @@ var slotI = 0
 var greenWin = false
 setInterval(function() {
     var color = "white"
+    if (gcTheme) color = "gray"
     if (greenWin) {
         slotI += 2
         if (slotI % 10 <= 5) color = "%2384EA84FF"
@@ -990,7 +992,8 @@ function drawGraph() {
     var width = document.getElementById("specialfishgraph").width
     var height = document.getElementById("specialfishgraph").height
 
-    canvas.fillStyle = "black";
+    if (!gcTheme) canvas.fillStyle = "black";
+    else canvas.fillStyle = "white";
     canvas.fillRect(0, 0, width, height);
 
     canvas.strokeStyle = 'white';
@@ -1037,7 +1040,8 @@ function drawGraph() {
 
     if (hoverIndex != -1) {
 
-        canvas.strokeStyle = 'white';
+        if (gcTheme) canvas.strokeStyle = "black";
+        else canvas.strokeStyle = "white";
         canvas.lineWidth = 1;
 
         canvas.beginPath();
@@ -1452,7 +1456,8 @@ function closeProfile() {
     document.getElementById("profile-lastonline").innerText = "Last Online: Loading..."
     document.getElementById("profile-playtime").innerText = "Playtime: Loading..."
     document.getElementById("profile-friends").innerText = "Friends: Loading..."
-    document.getElementById("profile-picture").src = "../images/profiles/default.png"
+    if (!gcTheme) document.getElementById("profile-picture").src = "../images/profiles/default.png"
+    else document.getElementById("profile-picture").src = "../images/gcprofile.png"
 
     document.getElementById("selectpfpbackground").style.display = "none"
     document.getElementById("profile-picture").onclick = function () { }
@@ -1583,7 +1588,8 @@ function viewProfile(profile, self) {
             document.getElementById("profile-lastonline").innerText = "Last Online: " + lastOnlineDate
             document.getElementById("profile-playtime").innerText = "Playtime: " + playtime
             document.getElementById("profile-friends").innerText = "Friends: " + friends
-            document.getElementById("profile-picture").src = "../images/profiles/" + picture + ".png"
+            if (!gcTheme || picture != "default") document.getElementById("profile-picture").src = "../images/profiles/" + picture + ".png"
+            else document.getElementById("profile-picture").src = "../images/gcprofile.png"
 
         }
     });
@@ -2069,4 +2075,79 @@ function acceptChallenge() {
 
 function declineChallenge() {
     sendChallengeRequest(challenger, true)
+}
+
+function standardize_color(str){
+    var ctx = document.createElement('canvas').getContext('2d');
+    ctx.fillStyle = str;
+    return ctx.fillStyle;
+}
+
+var gcTheme = false
+
+function changeFavicon(src) {
+    var link = document.createElement('link'),
+        oldLink = document.getElementById('dynamic-favicon');
+    link.id = 'dynamic-favicon';
+    link.rel = 'shortcut icon';
+    link.href = src;
+    if (oldLink) {
+     document.head.removeChild(oldLink);
+    }
+    document.head.appendChild(link);
+   }
+
+function googleClassroomTheme() {
+    gcTheme = true
+    for (var i in document.body.getElementsByTagName("*")) {
+        var element = document.body.getElementsByTagName("*")[i]
+        document.body.style.backgroundColor = "#ffffff"
+        document.getElementById("gamblefade").style.display = "none"
+        document.getElementById("footerimg").style.display = "none"
+        document.getElementById("gcbutton").style.display = "none"
+        document.getElementById("topbar").style.display = "none"
+        document.getElementById("banner").src = "../images/gcbanner.png"
+        document.getElementById("settingsimg").src = "../images/gcsettings.png"
+        document.getElementById("shopimg").src = "../images/gcshop.png"
+        document.getElementById("fishing_boatimg").src = "../images/gcfishing_boat.png"
+        document.getElementById("profileimg").src = "../images/gcprofile.png"
+        document.getElementById("profile-picture").src = "../images/gcprofile.png"
+        changeFavicon("../images/gcfav.png")
+        document.title = "Google Classroom"
+        if (standardize_color(element.style.backgroundColor) == "#ffffff" || standardize_color(getComputedStyle(element, ":before").backgroundColor) == "#ffffff") {
+            element.style.backgroundColor = "#616161"
+        }
+
+        
+        if (element.style == undefined) element.style = ""
+        if (standardize_color(element.style.backgroundColor) == "#1d1a2c" || standardize_color(getComputedStyle(element).backgroundColor) == "#1d1a2c") {
+            element.style.backgroundColor = "#ffffff"
+        }
+
+        if (standardize_color(element.style.backgroundColor) == "#1b1927" || standardize_color(getComputedStyle(element).backgroundColor) == "#1b1927") {
+            element.style.backgroundColor = "#ffffff"
+        }
+        if (standardize_color(element.style.backgroundColor) == "#29273e" || standardize_color(getComputedStyle(element).backgroundColor) == "#29273e") {
+            element.style.backgroundColor = "#ffffff"
+        }
+
+        
+        if (standardize_color(element.style.backgroundColor) == "#d35040" || standardize_color(getComputedStyle(element).backgroundColor) == "#d35040") {
+            element.style.backgroundColor = "#588dfd"
+        }
+        if (standardize_color(element.style.color) == "#d35040" || standardize_color(getComputedStyle(element).color) == "#d35040") {
+            element.style.color = "588dfd"
+        }
+        if (standardize_color(element.style.outlineColor) == "#ffffff" || standardize_color(getComputedStyle(element).outlineColor) == "#ffffff") {
+            element.style.outlineColor = "#dadce0"
+        }
+
+        if (standardize_color(element.style.color) == "#ffffff" || standardize_color(getComputedStyle(element).color) == "#ffffff") {
+            element.style.color = "#212121"
+        }
+
+        if (standardize_color(element.color) == "#eeeeee") {
+            element.color = "#313131"
+        }
+    }
 }

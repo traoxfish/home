@@ -15,30 +15,32 @@
   <body>
     <div class="pad">
 	
-	  <div>
-        <br><img src="../images/banner.png" class="banner">
+    <div>
+      <br><img id="banner" src="../images/banner.png" class="banner">
+    </div>
+      <div id="topbar" style="">
+        <div class="topnav">
+          <a href="https://www.traox.dev/" class="button1"><button class="button1"><p>Home</p><img src="../images/home.png" class="buttonlink"></button></a><div class="navseperator"></div>
+          <a href="https://www.traox.dev/projects" class="button1"><button class="button1"><p>My Projects</p><img src="../images/projects.png" class="buttonlink"></button></a><div class="navseperator"></div>
+          <a href="https://www.traox.dev/sprites" class="button1"><button class="button1"><p>Pixel Art</p><img src="../images/aseprite.png" class="buttonlink"></button></a><div class="navseperator"></div>
+          <a href="https://www.traox.dev/fish/" class="button1"><button class="button1"><p>Fishing</p><img src="../images/fish.png" class="buttonlink"></button></a>
+      <div class="downbarnavseperator"></div>
+      <div class="downbar">
+        <div class="widgets">
+        <img src="../images/downbar.png" class="downbarimg"><br>
+        <a href="https://discord.gg/SApwFdVwYA" target="_blank"><img src="../images/discord.png" class="discord"></a>
+        <br><a href="https://www.youtube.com/channel/UCmO0_H19NVYQVTN3Ox78sTw" target="_blank"><img src="../images/youtube.png" class="youtube"></a>
+        <br><a href="https://github.com/TraoX1" target="_blank"><img src="../images/github.png" class="github"></a>
+        <br><a href="https://www.spigotmc.org/resources/authors/traox.932244/" target="_blank"><img src="../images/spigot.png" class="spigot"></a>
+        </div>
       </div>
-      <div class="topnav">
-        <a href="https://www.traox.dev/" class="button1"><button class="button1"><p>Home</p><img src="../images/home.png" class="buttonlink"></button></a><div class="navseperator"></div>
-        <a href="https://www.traox.dev/projects" class="button1"><button class="button1"><p>My Projects</p><img src="../images/projects.png" class="buttonlink"></button></a><div class="navseperator"></div>
-        <a href="https://www.traox.dev/sprites" class="button1"><button class="button1"><p>Pixel Art</p><img src="../images/aseprite.png" class="buttonlink"></button></a><div class="navseperator"></div>
-        <a href="https://www.traox.dev/fish/" class="button1"><button class="button1"><p>Fishing</p><img src="../images/fish.png" class="buttonlink"></button></a>
-     <div class="downbarnavseperator"></div>
-	 <div class="downbar">
-	   <div class="widgets">
-		 <img src="../images/downbar.png" class="downbarimg"><br>
-		 <a href="https://discord.gg/SApwFdVwYA" target="_blank"><img src="../images/discord.png" class="discord"></a>
-		 <br><a href="https://www.youtube.com/channel/UCmO0_H19NVYQVTN3Ox78sTw" target="_blank"><img src="../images/youtube.png" class="youtube"></a>
-		 <br><a href="https://github.com/TraoX1" target="_blank"><img src="../images/github.png" class="github"></a>
-		 <br><a href="https://www.spigotmc.org/resources/authors/traox.932244/" target="_blank"><img src="../images/spigot.png" class="spigot"></a>
-	   </div>
-	 </div>
-	 <div class="navseperator"></div>
-   </div>
+      <div class="navseperator"></div>
+    </div>
+  </div>
 
    <div onclick="closeProfile()" id="viewprofile" class="viewprofile">
       <div onclick="event.stopPropagation()" class="profilebackground">
-        <button onclick="openSettings()" id="profile-settings" class="nicebutton" style="width: 32px; height: 32px; display: none; position: absolute; transform: translate(720px, 16px);"><img src="../images/settings.png" style="width: 100%; height: 77.5%; margin-top: 3px;"></button>
+        <button onclick="openSettings()" id="profile-settings" class="nicebutton" style="width: 32px; height: 32px; display: none; position: absolute; transform: translate(720px, 16px);"><img id="settingsimg" src="../images/settings.png" style="width: 100%; height: 77.5%; margin-top: 3px;"></button>
         <img id="profile-picture" src="../images/profile.png" draggable="false" class="unselectable" style="width: 128px; height: 128px; margin-left: 32px; margin-top: 32px; outline-style: solid; outline-width: 1px; outline-color: #ffffff; border-radius: 64px;">
         <h1 id="profile-username" style="display: inline-block; transform: translate(0, -48px); margin-left: 12px; font-size: 250%;">Loading...</h1>
 	      <p id="profile-rank" style="display: flex; position: absolute; transform: translate(0, -90px); margin-left: 180px; font-size: 75%;"></p>
@@ -349,7 +351,7 @@
    </div>
 
    <div style="display: inline-block; position: absolute; width: 80px; height: 80px; background-color: #1d1a2c; outline-style: solid; outline-width: 1px; outline-color: #ffffff; margin-left: calc(45% - 80px); margin-top: -46px;">
-    <button onclick="viewProfile()" class="nicebutton" style="position: relative; width: 66%; height: 66%; margin: auto; transform: translate(25%, 10%);"><img src="../../images/profile.png" style="position: relative; width: 100%; height: 100%;"></button>
+    <button onclick="viewProfile()" class="nicebutton" style="position: relative; width: 66%; height: 66%; margin: auto; transform: translate(25%, 10%);"><img id="profileimg" src="../../images/profile.png" style="position: relative; width: 100%; height: 100%;"></button>
     <p style="font-size: 12px; margin-left: 20px; margin-top: 6px;">Profile</p>
     <div id="friendrequestnotifications" style="display: none; position: absolute; width: 100%;">
       <img src="../images/red_dot.png" style="position: absolute; display: block; width: 20px; margin-left: calc(100% - 24px); z-index: 2; margin-top: -89px;">
@@ -402,7 +404,7 @@
    <br><br><br>
 
    <div class="shopbutton">
-    <button onclick="openShop()" class="nicebutton" id="shopbutton" style="width: 75%; height: 75%; margin-top: 6%;"><img src="../images/shop.png" style="width: 70%; height: 60%;"></button>
+    <button onclick="openShop()" class="nicebutton" id="shopbutton" style="width: 75%; height: 75%; margin-top: 6%;"><img id="shopimg" src="../images/shop.png" style="width: 70%; height: 60%;"></button>
     <p style="font-size: 16px; margin-top: 3px; text-align: center; margin-left: auto; margin-right: auto;">Open Shop</p>
    </div>
 
@@ -457,7 +459,7 @@
         <p style="display: inline-block; position: absolute; margin-left: calc(5vw - 12px); margin-top: calc(-8px - 0.25vw); text-align: center; font-size: calc(1vw + 2px);">Match 3 numbers to win!</p>
         <div class="slotmachine" style="display: inline-block;" id="slotmachine">
           <div style="display: block; position: relative; max-height: calc(5vw - 8px); margin-top: 4px; overflow:hidden">
-            <img src="../images/fade.png" draggable="false" class="unselectableimg" style="display: block; position: absolute; z-index: 2; height: 100%; width: calc(100% - 8px); margin-left: 4px;">
+            <img id="gamblefade" src="../images/fade.png" draggable="false" class="unselectableimg" style="display: block; position: absolute; z-index: 2; height: 100%; width: calc(100% - 8px); margin-left: 4px;">
             <p class="unselectable" id="slot1" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
             <p class="unselectable" id="slot2" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
             <p class="unselectable" id="slot3" style="display: inline-block; position: relative; margin-left: 5%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p>
@@ -474,7 +476,7 @@
           <img src="../images/red_dot.png" style="position: absolute; display: block; width: 20px; margin-left: 92.5%; z-index: 2; margin-top: 2px;">
           <p style="z-index: 2; display: inline-block; position: absolute; margin-left: calc(93.5% + 3px); margin-top: 1px;">!</p>
         </div>
-        <button onclick="openFishingBoat()" class="nicebutton" style="display: inline-block; position: relative; min-width: 90%; max-width: 90%; min-height: calc(12vw - 42px); max-height: calc(12vw - 42px); margin-left: 5%; margin-top: 12px;"><img src="../images/fishing_boat.png" style="width: calc(55% - 16px); height: calc(55% - 16px); margin-top: -0.4vw;"></button>
+        <button onclick="openFishingBoat()" class="nicebutton" style="display: inline-block; position: relative; min-width: 90%; max-width: 90%; min-height: calc(12vw - 42px); max-height: calc(12vw - 42px); margin-left: 5%; margin-top: 12px;"><img id="fishing_boatimg" src="../images/fishing_boat.png" style="width: calc(55% - 16px); height: calc(55% - 16px); margin-top: -0.4vw;"></button>
         <p style="width: 100%; text-align: center; margin-left: auto; margin-right: auto; margin-top: 0.15vw; font-size: calc(0.8vw + 4px);">Open Fishing Boat</p>
         
       </div>
@@ -490,10 +492,17 @@
       </div>
       <br>
       <input id="colorinput" style="display: inline-block; position: relative; margin-left: 25%; width: 10%; margin-top: 2px;" placeholder="Color (ex: #658fba)">
+
+      
+      
       
       <div onmouseover="exitPixelCanvas()" onclick="fullscreenCanvas()" style="display: inline-block; position: absolute; margin-left: calc(14% - 64px); width: 32px; height: 32px; margin-top: -50px; cursor: pointer; background-color: #1d1a2c; outline-style: solid; outline-width: 1px; outline-color: white; opacity: 0.75;"><img src="../images/fullscreen.png" draggable="false" class="unselectable" style="width: 75%; height: 75%; margin-left: 4px; margin-top: 4px;"></div>
       <div id="colorselectorcolor" style="min-width:26px; min-height:26px; background-color: white; display: inline-block; position: absolute; margin-left: 4px; margin-top: 2px; outline-style: solid; outline-width: 1px; outline-color: white;"></div>
       <p style="display: inline-block; position: absolute; margin-left: 36px; margin-top: 32px; font-size: 10px; color: #bbbbbb; margin-left: -9.3%; max-width: 22.5%;">Info: This canvas is shared by everyone. You can place 1 pixel every 10 seconds.</p>
+
+
+      <br>
+      <button onclick="googleClassroomTheme()" id="gcbutton" class="nicebutton" style="display: inline-block; position: absolute; min-height: 24px; max-height: 24px; margin-left: 0%; min-width: 80.5%; margin-top: 270px;">"Light" Theme</button>
    </div>
 
    
@@ -527,7 +536,7 @@
   
   <footer>
   
-    <div class="footer"><br><img src="../images/traox.png"></div>
+    <div class="footer"><br><img id="footerimg" src="../images/traox.png"></div>
 	
   </footer>
 </html> 
