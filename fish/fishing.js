@@ -324,8 +324,14 @@ function getMessages(first) {
                     if (messageElement.textContent != chat[message]) {
                         messageElement.textContent = chat[message]
                         var username = chat[message].split("M ", 2)[1].split(": ", 2)[0].replaceAll(" ", "")
-                        messageElement.innerHTML = messageElement.innerHTML.replace(username.replaceAll("&", "&amp;"), "<p onclick=\"viewProfile(\'" + username + "\')\" style=\"cursor: pointer; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\">" + username + "</p>")
-                        messageElement.innerHTML = messageElement.innerHTML.replace("@" + (getCookie("username").replaceAll("&", "&amp;")), "<p style=\"color: #ea7b7b; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\" >" + "@" + getCookie("username") + "</p>")
+                        var color1 = "#ffffff"
+                        var color2 = "#ea7b7b"
+                        if (gcTheme) {
+                            color1 = "#212121"
+                            color2 = "#588dfd"
+                        }
+                        messageElement.innerHTML = messageElement.innerHTML.replace(username.replaceAll("&", "&amp;"), "<p onclick=\"viewProfile(\'" + username + "\')\" style=\"color: " + color1 + "; cursor: pointer; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\">" + username + "</p>")
+                        messageElement.innerHTML = messageElement.innerHTML.replace("@" + (getCookie("username").replaceAll("&", "&amp;")), "<p style=\"color: " + color2 + "; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\" >" + "@" + getCookie("username") + "</p>")
                     }
                 }
             }
