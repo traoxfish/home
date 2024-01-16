@@ -329,6 +329,10 @@ function getMessages(first) {
                     var messageElement = document.getElementById("chat").children[message]
                     if (messageElement.textContent != chat[message]) {
                         messageElement.textContent = chat[message]
+                        if (chat[message].startsWith("%IMG% ")) {
+                        messageElement.innerHTML = messageElement.innerHTML.replace("%IMG% ", "")
+                        messageElement.innerHTML = messageElement.innerHTML.split(": ")[0] + "<img src=\"" + messageElement.innerHTML.split(": ")[1] + "\" style=\"max-width: 256px; max-height: 256px\">"
+                        }
                         var username = chat[message].split("M ", 2)[1].split(": ", 2)[0].replaceAll(" ", "")
                         var color1 = "#ffffff"
                         var color2 = "#ea7b7b"
