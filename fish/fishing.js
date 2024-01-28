@@ -1522,6 +1522,7 @@ function closeProfile() {
     document.getElementById("profile-lastonline").innerText = "Last Online: Loading..."
     document.getElementById("profile-playtime").innerText = "Playtime: Loading..."
     document.getElementById("profile-friends").innerText = "Friends: Loading..."
+    document.getElementById("profile-guild").innerText = "Guild: Loading..."
     if (!gcTheme) document.getElementById("profile-picture").src = "../images/profiles/default.png"
     else document.getElementById("profile-picture").src = "../images/gcprofile.png"
 
@@ -2339,7 +2340,7 @@ function openGuild(guild) {
 
             document.getElementById("guildname").innerText = guildName
             document.getElementById("guildowner").innerText = "Guild Owner: " + owner
-            document.getElementById("guildlevel").innerText = "Level: " + level
+            document.getElementById("guildlevel").innerText = "Level: " + level + " (+" + (Number(level) * 0.2).toFixed(1) + "% Fish)"
             document.getElementById("guildmembercount").innerText = "Members: " + members.length + " / " + memberLimit
             document.getElementById("guildjoinsetting").value = joinSetting
             document.getElementById("guildfish").innerText = "Guild Fish: " + guildFish
