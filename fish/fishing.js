@@ -767,6 +767,9 @@ setInterval(function(){
 }, 500);
 
 var level = 0
+var isOwnerOfGuild = false
+var userGuild = "none"
+
 function getFish() {
     const data = {
         "username": getCookie("username"),
@@ -783,6 +786,9 @@ function getFish() {
         return response.json();
     }).then(json => {
         if (json.status == "success") {
+
+            isOwnerOfGuild = json.isOwnerOfGuild
+            userGuild = json.guild
 
             //fish
             document.getElementById("fishcount").textContent = formatNumber(json.fish)
@@ -816,9 +822,15 @@ function getFish() {
             if (json.notifications.sendLogs > 0) document.getElementById("sendfishnotifications").style.display = "initial"
             else document.getElementById("sendfishnotifications").style.display = "none"
 
-            document.getElementById("friendrequestnotificationcount").innerText = "" + json.notifications.friendRequests
-            if (json.notifications.friendRequests > 0) document.getElementById("friendrequestnotifications").style.display = "initial"
+            document.getElementById("friendrequestnotificationcount").innerText = "" + (Number(json.notifications.friendRequests) + Number(json.notifications.guildInvites))
+            if (Number(json.notifications.friendRequests) + Number(json.notifications.guildInvites) > 0) document.getElementById("friendrequestnotifications").style.display = "initial"
             else document.getElementById("friendrequestnotifications").style.display = "none"
+
+            if (openedGuild == userGuild) {
+                document.getElementById("guildrequestnotificationcount").innerText = "" + json.notifications.guildRequests
+                if (json.notifications.guildRequests > 0) document.getElementById("guildrequestnotifications").style.display = "initial"
+                else document.getElementById("guildrequestnotifications").style.display = "none"
+            } else document.getElementById("guildrequestnotifications").style.display = "none"
 
             //costs
             /*document.getElementById("rarefishcost").textContent = formatNumber(json.costs.rareFishCost) + " fish"
@@ -828,6 +840,36 @@ function getFish() {
             document.getElementById("whalecost").textContent = formatNumber(json.costs.whaleCost) + " fish"
             document.getElementById("specialfishcost").textContent = "Buy Price: " + formatNumber(json.costs.specialFishCost) + " fish"
             document.getElementById("specialfishsellcost").textContent = "Sell Price: " + formatNumber(json.costs.specialFishSellCost) + " fish"*/
+
+            document.getElementById("guildinvites").innerHTML = ""
+
+            for (var i = 0; i < json.guildInvites.length; i++) {
+                var guild = json.guildInvites[i]
+
+                var item = document.createElement("p");
+                item.id = "guild-incoming-" + guild
+                item.className = "frienditem"
+                item.addEventListener('click', function() { openGuild(this.id.split("guild-incoming-")[1]); closeGuildInvites(); })
+                item.style.cursor = "pointer"
+                item.textContent = guild
+
+                var button = document.createElement("button");
+                button.innerText = "x"
+                button.className = "friendcancelbutton nicebutton"
+                button.addEventListener('click', function() { event.stopPropagation(); declineGuildInvite(this.parentElement.id.split("guild-incoming-")[1]) })
+
+                var button2 = document.createElement("button");
+                button2.innerText = "✓"
+                button2.className = "friendcancelbutton nicebutton"
+                button2.addEventListener('click', function() { event.stopPropagation(); joinGuild(this.parentElement.id.split("guild-incoming-")[1]); delay(400).then(() => { viewProfile(getCookie("username", true)); closeGuildInvites(); delay(100).then(() => openGuild(this.parentElement.id.split("guild-incoming-")[1])) }) })
+                button2.style.marginRight = "4px"
+
+                document.getElementById("guildinvites").appendChild(item);
+
+                document.getElementById("guild-incoming-" + guild).appendChild(button);
+                document.getElementById("guild-incoming-" + guild).appendChild(button2);
+
+            }
             
         }
     });
@@ -1431,8 +1473,13 @@ function exitFullscreenCanvas() {
 
 function closeProfile() {
     document.getElementById("viewprofile").style.display = "none";
+    closeCreateGuild()
     closeFriends()
+    closeGuild() 
     closeSettings()
+    closeGuildInvites()
+    document.getElementById("invitetoguildbutton").style.display = "none"
+    document.getElementById("openguildinvitesbutton").style.display = "none"
     document.getElementById("openfriends").style.display = "none"
     document.getElementById("addfriend").style.display = "none"
     document.getElementById("sendchallengerequest").style.display = "none"
@@ -1440,6 +1487,9 @@ function closeProfile() {
 
     document.getElementById("profile-picture").style.pointer = "default"
     document.getElementById("profile-settings").style.display = "none"
+    document.getElementById("createguildbutton").style.display = "none"
+    document.getElementById("openguild").style.display = "none"
+    document.getElementById("guildbackground").style.display = "none"
 
 
     document.getElementById("profile-username").innerText = "Loading..."
@@ -1470,6 +1520,8 @@ function closeProfile() {
 
 }
 
+var profileGuild = "none"
+
 function viewProfile(profile, self) {
     if ((profile == undefined || profile.toLowerCase() == getCookie("username").toLowerCase()) && !self) {
         viewProfile(getCookie("username"), true)
@@ -1491,9 +1543,10 @@ function viewProfile(profile, self) {
         },
         body: JSON.stringify(data),
     }).then(response => {
-        return response.json();
+        return response.json()
     }).then(json => {
         if (json.status == "success") {
+            
             var displayName = json.displayName
             var level = json.level
             var fish = json.fish
@@ -1516,6 +1569,9 @@ function viewProfile(profile, self) {
             var playtime = json.playtime
             var friends = json.friends
             var challengeSetting = json.challengeSetting
+            var guild = json.guild
+
+            profileGuild = guild
 
             var fishPerSecond = json.fishPerSecond
             var fishPerClick = json.fishPerClick
@@ -1532,11 +1588,31 @@ function viewProfile(profile, self) {
                 document.getElementById("sendchallengerequest").style.display = "none"
                 document.getElementById("challengebet").style.display = "none"
                 document.getElementById("profile-settings").style.display = "inline-block"
+                if (guild == "none") {
+                    document.getElementById("createguildbutton").style.display = "block"
+                    document.getElementById("openguild").style.display = "none"
+                    document.getElementById("openguildinvitesbutton").style.display = "block"
+                } else {
+                    document.getElementById("createguildbutton").style.display = "none"
+                    document.getElementById("openguild").style.display = "block"
+                    document.getElementById("openguildinvitesbutton").style.display = "none"
+                }
+                document.getElementById("invitetoguildbutton").style.display = "none"
             } else {
+                document.getElementById("createguildbutton").style.display = "none"
+                document.getElementById("openguild").style.display = "none"
                 document.getElementById("profile-picture").onclick = ""
                 document.getElementById("profile-picture").style.cursor = "default"
                 document.getElementById("openfriends").style.display = "none"
                 document.getElementById("addfriend").style.display = "block"
+                if (guild == "none" && isOwnerOfGuild) {
+                    document.getElementById("invitetoguildbutton").style.display = "block"
+
+                    document.getElementById("invitetoguildbutton").parentNode.replaceChild(document.getElementById("invitetoguildbutton").cloneNode(true), document.getElementById("invitetoguildbutton"))
+                    document.getElementById("invitetoguildbutton").addEventListener('click', function() { inviteToGuild(profile, false) }, { once: false })
+                } else {
+                    document.getElementById("invitetoguildbutton").style.display = "none"
+                }
                 if (challengeSetting == "everyone" || (friendStatus == "friends" && challengeSetting == "friends")) document.getElementById("sendchallengerequest").style.display = "block"
                 if (challengeSetting == "everyone" || (friendStatus == "friends" && challengeSetting == "friends")) document.getElementById("challengebet").style.display = "block"
                 document.getElementById("profile-settings").style.display = "none"
@@ -1572,6 +1648,15 @@ function viewProfile(profile, self) {
                 
             }
 
+            document.getElementById("profile-guild").parentNode.replaceChild(document.getElementById("profile-guild").cloneNode(true), document.getElementById("profile-guild"))
+
+            if (guild != "none") {
+                document.getElementById("profile-guild").style.cursor = "pointer"
+                document.getElementById("profile-guild").addEventListener('click', function() { openGuild()  }, { once: false })
+            } else {
+                document.getElementById("profile-guild").style.cursor = "auto"
+            }
+
             document.getElementById("selectpfpbackground").style.display = "none"
 
             document.getElementById("profile-username").innerText = displayName + " (Lvl. " + level + ")"
@@ -1594,6 +1679,7 @@ function viewProfile(profile, self) {
             document.getElementById("profile-lastonline").innerText = "Last Online: " + lastOnlineDate
             document.getElementById("profile-playtime").innerText = "Playtime: " + playtime
             document.getElementById("profile-friends").innerText = "Friends: " + friends
+            document.getElementById("profile-guild").innerText = "Guild: " + guild
             if (!gcTheme || picture != "default") document.getElementById("profile-picture").src = "../images/profiles/" + picture + ".png"
             else document.getElementById("profile-picture").src = "../images/gcprofile.png"
 
@@ -1649,7 +1735,7 @@ function openFriends() {
     }).then(response => {
         return response.json();
     }).then(json => {
-        if (json.status == "success") document.getElementById("friendrequestnotifications").style.display = "none"
+
     })
 }
 
@@ -2156,4 +2242,529 @@ function googleClassroomTheme() {
             element.color = "#313131"
         }
     }
+}
+
+function openCreateGuild() {
+    document.getElementById("createguildbackground").style.display = "block"
+    document.getElementById("createguildname").value = ""
+}
+
+function closeCreateGuild() {
+    document.getElementById("createguildbackground").style.display = "none"
+}
+
+function createGuild() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "guildName": document.getElementById("createguildname").value
+    };
+    fetch('https://traoxfish.us-3.evennode.com/createguild', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.error != undefined) {
+            document.getElementById("guildcreatestatus").innerText = json.error
+            document.getElementById("guildcreatestatus").style.color = "#ea7b7b";
+            delay(2000).then(() => {
+                document.getElementById("guildcreatestatus").innerText = ""
+            })
+        } else if (json.status == "success") {
+            document.getElementById("guildcreatestatus").innerText = "Successfully created guild!"
+            document.getElementById("guildcreatestatus").style.color = "#84ea84";
+            delay(1000).then(() => {
+                document.getElementById("guildcreatestatus").innerText = ""
+                viewProfile(getCookie("username"), true)
+                delay(200).then(() => {
+                    profileGuild = document.getElementById("createguildname").value
+                    closeCreateGuild()
+                    openGuild()
+                })
+            })
+        }
+    })
+}
+
+var openedGuild = "none"
+
+function openGuild(guild) {
+    document.getElementById("guildbackground").style.display = "block"
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "guild": guild || profileGuild
+    };
+    fetch('https://traoxfish.us-3.evennode.com/getguild', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+
+            var owner = json.owner
+            var members = json.members
+            var onlineMembers = json.onlineMembers
+            var level = json.level
+            var guildName = json.guildName
+            var memberLimit = json.memberLimit
+            var joinSetting = json.joinSetting
+            var membershipStatus = json.membershipStatus
+            var guildFish = json.guildFish
+            var upgradeCosts = json.upgradeCosts
+            var upgrades = json.upgrades
+            var requests = json.requests
+
+            openedGuild = guild || profileGuild
+
+            document.getElementById("guildname").innerText = guildName
+            document.getElementById("guildowner").innerText = "Guild Owner: " + owner
+            document.getElementById("guildlevel").innerText = "Level: " + level
+            document.getElementById("guildmembercount").innerText = "Members: " + members.length + " / " + memberLimit
+            document.getElementById("guildjoinsetting").value = joinSetting
+            document.getElementById("guildfish").innerText = "Guild Fish: " + guildFish
+            document.getElementById("guildmemberlimitupgrade").innerText = "Member limit: " + (5 + upgrades.memberLimit * 5)
+            document.getElementById("guildfishperclickupgrade").innerText = "Fish Per Click: +" + upgrades.fishPerClick + "%"
+            document.getElementById("guildfishpersecondupgrade").innerText = "Fish Per Second: +" + upgrades.fishPerSecond + "%"
+
+            document.getElementById("guildjoinbutton").parentNode.replaceChild(document.getElementById("guildjoinbutton").cloneNode(true), document.getElementById("guildjoinbutton"))
+            document.getElementById("guildjoinbutton").addEventListener('click', function() { event.stopPropagation(); joinGuild(openedGuild); delay(200).then(() => openGuild(openedGuild)); })
+
+            if (membershipStatus != "owner") {
+                document.getElementById("guildjoinsetting").style.display = "none"
+                document.getElementById("guildjoinsettingtext").innerText = "Join Setting: " + joinSetting
+                document.getElementById("guildjoinrequestsbutton").style.display = "none"
+            } else {
+                document.getElementById("guildjoinsetting").style.display = "block"
+                document.getElementById("guildjoinsettingtext").innerText = "Join Setting: "
+                document.getElementById("guildjoinrequestsbutton").style.display = "block"
+            }
+
+            if (joinSetting != "request only") {
+                document.getElementById("guildjoinrequestsbutton").disabled = true
+                document.getElementById("guildjoinrequestsbutton").className = "innactivebutton"
+            } else {
+                document.getElementById("guildjoinrequestsbutton").disabled = false
+                document.getElementById("guildjoinrequestsbutton").className = "nicebutton"
+            }
+
+            if (membershipStatus != "owner" && membershipStatus != "member" && members.length < memberLimit) {
+                document.getElementById("guildjoinbutton").style.display = "block"
+                document.getElementById("guildleavebutton").style.display = "none"
+                if (joinSetting == "everyone") {
+                    document.getElementById("guildjoinbutton").innerText = "Join Guild"
+                } else if (joinSetting == "request only") {
+                    if (membershipStatus == "none") {
+                        document.getElementById("guildjoinbutton").innerText = "Request to Join"
+                        document.getElementById("guildjoinbutton").disabled = false
+                        document.getElementById("guildjoinbutton").className = "nicebutton"
+                    } else if (membershipStatus == "requested") {
+                        document.getElementById("guildjoinbutton").disabled = true
+                        document.getElementById("guildjoinbutton").className = "innactivebutton"
+                        document.getElementById("guildjoinbutton").innerText = "Requested to join"
+                    }
+                }
+                if (membershipStatus == "invited") {
+                    document.getElementById("guildjoinbutton").innerText = "Accept Invite"
+                } else if (joinSetting == "invite only") {
+                    document.getElementById("guildjoinbutton").style.display = "none"
+                }
+            } else if (membershipStatus == "owner" || membershipStatus == "member") {
+                document.getElementById("guildjoinbutton").style.display = "none"
+            } else if (members.length == memberLimit && (joinSetting == "everyone" || joinSetting == "request only")) {
+                document.getElementById("guildjoinbutton").style.display = "block"
+                document.getElementById("guildjoinbutton").disabled = true
+                document.getElementById("guildjoinbutton").className = "innactivebutton"
+                document.getElementById("guildjoinbutton").innerText = "Guild is Full"
+            }
+
+            if (membershipStatus == "owner" || membershipStatus == "member") {
+                document.getElementById("guilddepositguildfish").style.display = "block"
+                document.getElementById("guildleavebutton").style.display = "block"
+                if (membershipStatus == "owner") {
+                    if (members.length > 1) {
+                        document.getElementById("guildleavebutton").innerText = "Leave Guild"
+                        document.getElementById("guildleavebutton").className = "innactivebutton"
+                        document.getElementById("guildleavebutton").disabled = true
+                    } else {
+                        document.getElementById("guildleavebutton").innerText = "Delete Guild"
+                        document.getElementById("guildleavebutton").className = "nicebutton"
+                        document.getElementById("guildleavebutton").disabled = false
+                    }
+                    document.getElementById("guildmemberlimitupgradebutton").style.display = "inline"
+                    document.getElementById("guildfishperclickupgradebutton").style.display = "inline"
+                    document.getElementById("guildfishpersecondupgradebutton").style.display = "inline"
+                    document.getElementById("guildmemberlimitupgradecost").innerText = "Upgrade (" + upgradeCosts.memberLimit + " Guild Fish)"
+                    document.getElementById("guildfishperclickupgradecost").innerText = "Upgrade (" + upgradeCosts.fishPerClick + " Guild Fish)"
+                    document.getElementById("guildfishpersecondupgradecost").innerText = "Upgrade (" + upgradeCosts.fishPerSecond + " Guild Fish)"
+
+                    document.getElementById("guildrequests").innerHTML = ""
+
+                    for (var i = 0; i < requests.length; i++) {
+                        var requestedUser = requests[i]
+        
+                        var item = document.createElement("p");
+                        item.id = "guildrequesteduser-" + requestedUser
+                        item.className = "frienditem"
+                        item.addEventListener('click', function() { viewProfile(this.id.split("guildrequesteduser-")[1]); closeGuild(); closeGuildInvites(); })
+                        item.style.cursor = "pointer"
+                        item.textContent = requestedUser
+        
+                        var button = document.createElement("button");
+                        button.innerText = "x"
+                        button.className = "friendcancelbutton nicebutton"
+                        button.addEventListener('click', function() { event.stopPropagation(); kickFromGuild(this.parentElement.id.split("guildrequesteduser-")[1], true)})
+
+                        var button2 = document.createElement("button");
+                        button2.innerText = "✓"
+                        button2.className = "friendcancelbutton nicebutton"
+                        button2.addEventListener('click', function() { event.stopPropagation(); inviteToGuild(this.parentElement.id.split("guildrequesteduser-")[1], true)})
+                        button2.style.marginRight = "4px"
+        
+                        document.getElementById("guildrequests").appendChild(item);
+        
+                        document.getElementById("guildrequesteduser-" + requestedUser).appendChild(button);
+                        document.getElementById("guildrequesteduser-" + requestedUser).appendChild(button2);
+        
+                    }
+
+                } else if (membershipStatus == "member") {
+                    document.getElementById("guildleavebutton").innerText = "Leave Guild"
+                    document.getElementById("guildleavebutton").className = "nicebutton"
+                    document.getElementById("guildleavebutton").disabled = false
+                    document.getElementById("guildmemberlimitupgradebutton").style.display = "none"
+                    document.getElementById("guildfishperclickupgradebutton").style.display = "none"
+                    document.getElementById("guildfishpersecondupgradebutton").style.display = "none"
+                }
+            } else {
+                document.getElementById("guilddepositguildfish").style.display = "none"
+                document.getElementById("guildleavebutton").innerText = "Leave Guild"
+            }
+
+            document.getElementById("guildmemberslist").innerHTML = ""
+
+            for (var i in members) {
+                var element = document.createElement("p")
+                element.style.marginLeft = "4px"
+                element.className = "frienditem"
+                element.id = "guildprofile-" + members[i]
+                element.innerText = onlineMembers[i].user
+                if (onlineMembers[i].online) {
+                    element.style.color = "#84ea84"
+                }
+                element.style.cursor = "pointer"
+                element.addEventListener('click',function (event){
+                    closeGuild()
+                    viewProfile(this.id.split("-")[1])
+                });
+
+                var button = document.createElement("button");
+                button.innerText = "Kick"
+                button.className = "friendcancelbutton nicebutton"
+                button.style.minWidth = "28px"
+                button.style.maxWidth = "28px"
+                button.style.marginRight = "6px"
+                button.addEventListener('click', function() { event.stopPropagation(); kickFromGuild(this.parentElement.id.split("guildprofile-")[1], false); delay(200).then(() => openGuild(openedGuild)); })
+
+                var button2 = document.createElement("button");
+                button2.innerText = "Transfer Ownership"
+                button2.className = "friendcancelbutton nicebutton"
+                button2.style.minWidth = "96px"
+                button2.style.maxWidth = "96px"
+                button2.addEventListener('click', function() { event.stopPropagation(); transferOwnership(this.parentElement.id.split("guildprofile-")[1]); delay(200).then(() => openGuild(openedGuild)); })
+                button2.style.marginRight = "4px"
+
+                document.getElementById("guildmemberslist").appendChild(element)
+
+                if (members[i].toLowerCase() != getCookie("username").toLowerCase() && membershipStatus == "owner") {
+                    document.getElementById("guildprofile-" + members[i]).appendChild(button)
+                    document.getElementById("guildprofile-" + members[i]).appendChild(button2)
+                }
+            }
+
+        }
+    })
+}
+
+function closeGuild() {
+    closeGuildRequests()
+    openedGuild = "none"
+    document.getElementById("guildrequestnotifications").style.display = "none"
+    document.getElementById("guildbackground").style.display = "none"
+    document.getElementById("guildmemberslist").innerHTML = "<p class=\"frienditem\" style=\"margin-left: 4px;\">Loading...</p>"
+    document.getElementById("guildrequests").innerHTML = "<p class=\"frienditem\" style=\"margin-left: 4px;\">Loading...</p>"
+    document.getElementById("guildname").innerText = "Loading..."
+    document.getElementById("guildowner").innerText = "Guild Owner: Loading..."
+    document.getElementById("guildlevel").innerText = "Level: Loading..."
+    document.getElementById("guildmembercount").innerText = "Members: Loading..."
+    document.getElementById("guildjoinsettingtext").innerText = "Join Setting: Loading..."
+    document.getElementById("guildjoinsetting").style.display = "none"
+    document.getElementById("guildjoinrequestsbutton").style.display = "none"
+    document.getElementById("guilddepositguildfish").style.display = "none"
+    document.getElementById("guildmemberlimitupgradebutton").style.display = "none"
+    document.getElementById("guildfishperclickupgradebutton").style.display = "none"
+    document.getElementById("guildfishpersecondupgradebutton").style.display = "none"
+    document.getElementById("guildmemberlimitupgrade").innerText = "Member limit: Loading..."
+    document.getElementById("guildfishperclickupgrade").innerText = "Fish Per Click: Loading..."
+    document.getElementById("guildfishpersecondupgrade").innerText = "Fish Per Second: Loading..."
+}
+
+function setGuildJoinSetting() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "setting": document.getElementById("guildjoinsetting").value
+    };
+    fetch('https://traoxfish.us-3.evennode.com/setguildsetting', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        openGuild()
+    })
+}
+
+function leaveGuild() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey")
+    };
+    fetch('https://traoxfish.us-3.evennode.com/leaveguild', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            closeGuild()
+            viewProfile(getCookie("username"), true)
+        }
+    })
+}
+
+function joinGuild(guild) {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "guild": guild
+    };
+    fetch('https://traoxfish.us-3.evennode.com/joinguild', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            openGuild()
+        }
+    })
+}
+
+function depositGuildFish() {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+    };
+    fetch('https://traoxfish.us-3.evennode.com/contributeguildfish', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            openGuild()
+        }
+    })
+}
+
+function purchaseGuildUpgrade(upgrade) {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "upgrade": upgrade
+    };
+    fetch('https://traoxfish.us-3.evennode.com/purchaseguildupgrade', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            openGuild()
+        }
+    })
+}
+
+function openGuildRequests() {
+    document.getElementById("guildrequestsbackground").style.display = "block"
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "notificationType": "guildrequests"
+    };
+    fetch('https://traoxfish.us-3.evennode.com/viewnotification', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+
+    })
+}
+
+function closeGuildRequests() {
+    document.getElementById("guildrequestsbackground").style.display = "none"
+}
+
+function inviteToGuild(user, request) {
+    console.log(user)
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "invitedUser": user
+    };
+    fetch('https://traoxfish.us-3.evennode.com/invitetoguild', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            if (request) {
+                openGuild()
+                openGuildRequests()
+            }
+        }
+    })
+}
+
+function kickFromGuild(user, request) {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "kickedUser": user
+    };
+    fetch('https://traoxfish.us-3.evennode.com/kickfromguild', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            openGuild()
+            if (request) openGuildRequests()
+        }
+    })
+}
+
+function transferOwnership(user) {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "newOwner": user
+    };
+    fetch('https://traoxfish.us-3.evennode.com/transerguildownership', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+            openGuild()
+        }
+    })
+}
+
+function declineGuildInvite(guild) {
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "guild": guild
+    };
+    fetch('https://traoxfish.us-3.evennode.com/declineguildinvite', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        if (json.status == "success") {
+
+        }
+    })
+}
+
+function openGuildInvites() {
+    document.getElementById("guildinvitesbackground").style.display = "block"
+    const data = {
+        "username": getCookie("username"),
+        "loginKey": getCookie("loginKey"),
+        "notificationType": "guildinvites"
+    };
+    fetch('https://traoxfish.us-3.evennode.com/viewnotification', {
+        method: 'POST',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+
+    })
+}
+
+function closeGuildInvites() {
+    document.getElementById("guildinvitesbackground").style.display = "none"
 }
