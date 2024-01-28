@@ -2337,9 +2337,6 @@ function openGuild(guild) {
 
             openedGuild = guild || profileGuild
 
-            if (userGuild == "none" || userGuild == "") document.getElementById("guildjoinbutton").style.display = "block"
-            else document.getElementById("guildjoinbutton").style.display = "none"
-
             document.getElementById("guildname").innerText = guildName
             document.getElementById("guildowner").innerText = "Guild Owner: " + owner
             document.getElementById("guildlevel").innerText = "Level: " + level
@@ -2463,6 +2460,9 @@ function openGuild(guild) {
                 document.getElementById("guilddepositguildfish").style.display = "none"
                 document.getElementById("guildleavebutton").innerText = "Leave Guild"
             }
+
+            if (userGuild == "none" || userGuild == "") document.getElementById("guildjoinbutton").style.display = "block"
+            else document.getElementById("guildjoinbutton").style.display = "none"
 
             document.getElementById("guildmemberslist").innerHTML = ""
 
