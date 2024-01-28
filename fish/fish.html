@@ -113,6 +113,12 @@
               <div style="width: 100%; min-height: 180px; height: 180px;">
                 <p id="guildowner" style="margin-left: 12px; line-height: 8px;">Guild Owner: Loading...</p>
                 <p id="guildlevel" style="margin-left: 12px; line-height: 8px;">Level: Loading...</p>
+                <div style="margin-bottom: 0px; line-height: 18px; margin-left: 4px;">
+                  <div class="xpbar" style="line-height: 0px; min-width: calc(50% - 24px); margin-left: 8px; margin-top: -6px;">
+                      <div id="guildxpcolor" style="display: inline-flex; position: relative; width: 0%; max-width: 100%; min-height: 24px; background-color: #d35040;"></div>
+                      <p id="guildxpcount" class="center" style="margin-top: 12px; font-size: calc(0.4vw + 5px); max-width: 400%;">XP: 0 / 0</p>
+                  </div>
+                 </div>
                 <p id="guildjoinsettingtext" style="margin-left: 12px; line-height: 8px; margin-top: 48px;">Join Setting: Loading...</p>
                 <select name="type" id="guildjoinsetting" onchange="setGuildJoinSetting()" class="leaderboardselect" style="display: none; margin-left: 6px; width: calc(100% - 10px); min-width: calc(100% - 10px); height: 28px; font-size: 16px; margin-top: 0px;">
                   <option value="everyone">Everyone</option>

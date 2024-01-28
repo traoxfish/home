@@ -2338,6 +2338,9 @@ function openGuild(guild) {
 
             openedGuild = guild || profileGuild
 
+            document.getElementById("guildxpcolor").style.width = (json.xp / (json.xpForNextLevel + json.xp)) * 100 + "%"
+            document.getElementById("guildxpcount").innerText = "XP: " + json.xp + " / " + (json.xpForNextLevel + json.xp)
+
             document.getElementById("guildname").innerText = guildName
             document.getElementById("guildowner").innerText = "Guild Owner: " + owner
             document.getElementById("guildlevel").innerText = "Level: " + level + " (+" + (Number(level) * 0.2).toFixed(1) + "% Fish)"
