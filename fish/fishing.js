@@ -313,16 +313,26 @@ function getMessages(first) {
                     messageElement.style.maxWidth = "99%"
                     messageElement.style.fontSize = "calc(0.66vw + 6px)"
                     messageElement.textContent = chat[message]
+
+                    if (chat[message].startsWith("%IMG% ")) {
+                            messageElement.innerHTML = messageElement.innerHTML.replace("%IMG% ", "")
+                            messageElement.innerHTML = messageElement.innerHTML.split(": ")[0] + ": " + "<img src=\"" + chat[message].split(": ")[1] + "\" style=\"max-width: 256px; max-height: 256px\">"
+                    }
                     var username = chat[message].split("M ", 2)[1].split(": ", 2)[0].replaceAll(" ", "")
                     messageElement.innerHTML = messageElement.innerHTML.replace(username.replaceAll("&", "&amp;"), "<p onclick=\"viewProfile(\'" + username + "\')\" style=\"cursor: pointer; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\">" + username + "</p>")
                     messageElement.innerHTML = messageElement.innerHTML.replace("@" + (getCookie("username").replaceAll("&", "&amp;")), "<p style=\"color: #ea7b7b; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\" >" + "@" + getCookie("username") + "</p>")
                     document.getElementById("chat").appendChild(messageElement)
+                    
                 }
             } else {
                 for (var message in chat.reverse()) {
                     var messageElement = document.getElementById("chat").children[message]
                     if (messageElement.textContent != chat[message]) {
                         messageElement.textContent = chat[message]
+                        if (chat[message].startsWith("%IMG% ")) {
+                            messageElement.innerHTML = messageElement.innerHTML.replace("%IMG% ", "")
+                            messageElement.innerHTML = messageElement.innerHTML.split(": ")[0] + ": " + "<img src=\"" + chat[message].split(": ")[1] + "\" style=\"max-width: 256px; max-height: 256px\">"
+                        }
                         var username = chat[message].split("M ", 2)[1].split(": ", 2)[0].replaceAll(" ", "")
                         var color1 = "#ffffff"
                         var color2 = "#ea7b7b"

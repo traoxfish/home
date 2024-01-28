@@ -98,7 +98,8 @@ function login() {
 
     const data = {
         "username": username,
-        "password": password
+        "password": password,
+        "browserKey": getCookie("browserKey")
     };
     fetch('https://traoxfish.us-3.evennode.com/login', {
         method: 'POST',
