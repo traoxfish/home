@@ -2339,7 +2339,7 @@ function openGuild(guild) {
 
             openedGuild = guild || profileGuild
 
-            document.getElementById("guildxpcolor").style.width = (json.xp / (json.xpForNextLevel)) * 100 + "%"
+            document.getElementById("guildxpcolor").style.width = (json.xp / (json.xpForNextLevel + json.xp)) * 100 + "%"
             document.getElementById("guildxpcount").innerText = "XP: " + json.xp + " / " + (json.xpForNextLevel + json.xp)
 
             document.getElementById("guildname").innerText = guildName
