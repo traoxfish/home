@@ -351,6 +351,7 @@ function getMessages(first) {
         }
         if (first) {
             delay(250).then(() => { document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight) } ) 
+            delay(500).then(() => { document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight) } ) 
         }
     });
 }
