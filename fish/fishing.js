@@ -346,7 +346,7 @@ function getMessages(first) {
                 }
             }
         }
-        if (!same) {
+        if (!same && (document.getElementById("chat").scrollTop / (document.getElementById("chat").scrollHeight - 256) > 0.994)) {
             document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
         }
         if (first) {
