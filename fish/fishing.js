@@ -253,11 +253,14 @@ function buyItem(type) {
     });
 }
 
+var channel = "public"
+
 function sendMessage() {
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
-        "message": document.getElementById("messageinput").value
+        "message": document.getElementById("messageinput").value,
+        "channel": channel
     };
     fetch('https://traoxfish.us-3.evennode.com/sendchatmessage', {
         method: 'POST',
@@ -286,10 +289,13 @@ function sendMessage() {
 }
 
 var chat = []
+
+
 function getMessages(first) {
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
+        "channel": channel
     };
     fetch('https://traoxfish.us-3.evennode.com/getchat', {
         method: 'POST',
@@ -311,7 +317,7 @@ function getMessages(first) {
                     messageElement.style.marginBottom = "0px"
                     messageElement.style.marginTop = "0px"
                     messageElement.style.maxWidth = "99%"
-                    messageElement.style.fontSize = "calc(0.66vw + 6px)"
+                    messageElement.style.fontSize = "calc(0.66vw + 5px)"
                     messageElement.textContent = chat[message]
 
                     if (chat[message].startsWith("%IMG% ")) {
@@ -842,14 +848,13 @@ function getFish() {
                 else document.getElementById("guildrequestnotifications").style.display = "none"
             } else document.getElementById("guildrequestnotifications").style.display = "none"
 
-            //costs
-            /*document.getElementById("rarefishcost").textContent = formatNumber(json.costs.rareFishCost) + " fish"
-            document.getElementById("veryrarefishcost").textContent = formatNumber(json.costs.veryRareFishCost) + " fish"
-            document.getElementById("sharkcost").textContent = formatNumber(json.costs.sharkCost) + " fish"
-            document.getElementById("raresharkcost").textContent = formatNumber(json.costs.rareSharkCost) + " fish"
-            document.getElementById("whalecost").textContent = formatNumber(json.costs.whaleCost) + " fish"
-            document.getElementById("specialfishcost").textContent = "Buy Price: " + formatNumber(json.costs.specialFishCost) + " fish"
-            document.getElementById("specialfishsellcost").textContent = "Sell Price: " + formatNumber(json.costs.specialFishSellCost) + " fish"*/
+            if (json.isMod == true) {
+                document.getElementById("staffchatbutton").style.display = "inline-block"
+            }
+
+            if (json.guild != "" && json.guild != "none") {
+                document.getElementById("guildchatbutton").style.display = "inline-block"
+            }
 
             document.getElementById("guildinvites").innerHTML = ""
 
@@ -2784,4 +2789,40 @@ function openGuildInvites() {
 
 function closeGuildInvites() {
     document.getElementById("guildinvitesbackground").style.display = "none"
+}
+
+function setChannel(channel1) {
+    if (channel1 == "public") {
+        channel = "public"
+
+        document.getElementById("publicchattext").style.color = "#ffffff"
+        document.getElementById("publicchatbar").style.display = "block"
+
+        document.getElementById("guildchattext").style.color = "#cccccc"
+        document.getElementById("guildchatbar").style.display = "none"
+        document.getElementById("staffchattext").style.color = "#cccccc"
+        document.getElementById("staffchatbar").style.display = "none"
+    } else if (channel1 == "guild") {
+        channel = "guild"
+
+        document.getElementById("guildchattext").style.color = "#ffffff"
+        document.getElementById("guildchatbar").style.display = "block"
+
+        document.getElementById("publicchattext").style.color = "#cccccc"
+        document.getElementById("publicchatbar").style.display = "none"
+        document.getElementById("staffchattext").style.color = "#cccccc"
+        document.getElementById("staffchatbar").style.display = "none"
+    } else if (channel1 == "staff") {
+        channel = "staff"
+
+        document.getElementById("staffchattext").style.color = "#ffffff"
+        document.getElementById("staffchatbar").style.display = "block"
+
+        document.getElementById("publicchattext").style.color = "#cccccc"
+        document.getElementById("publicchatbar").style.display = "none"
+        document.getElementById("guildchattext").style.color = "#cccccc"
+        document.getElementById("guildchatbar").style.display = "none"
+    }
+    chat = []
+    document.getElementById("chat").innerHTML = ""
 }
