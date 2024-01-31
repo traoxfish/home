@@ -288,8 +288,8 @@ function sendMessage() {
     });
 }
 
-var chat = []
-
+var chat = { "public": [], "guild": [], "staff": [] }
+var changedChannel = false
 
 function getMessages(first) {
     const data = {
@@ -309,37 +309,39 @@ function getMessages(first) {
     }).then(json => {
         var same = true
         if (json.status == "success") {
-            if (chat[chat.length-1] != json.messages[0]) same = false
-            chat = json.messages
-            if (first || document.getElementById("chat").children.length < 1) {
-                for (var message in chat.reverse()) {
+            if (chat[channel][chat[channel].length-1] != json.messages[0]) same = false
+            chat[channel] = json.messages
+            if (first || document.getElementById("chat").children.length < 1 || changedChannel || document.getElementById("chat").children.length != chat[channel].length) {
+                document.getElementById("chat").innerHTML = ""
+                changedChannel = false
+                for (var message in chat[channel].reverse()) {
                     var messageElement = document.createElement("p")
                     messageElement.style.marginBottom = "0px"
                     messageElement.style.marginTop = "0px"
                     messageElement.style.maxWidth = "99%"
                     messageElement.style.fontSize = "calc(0.66vw + 5px)"
-                    messageElement.textContent = chat[message]
+                    messageElement.textContent = chat[channel][message]
 
-                    if (chat[message].startsWith("%IMG% ")) {
+                    if (chat[channel][message].startsWith("%IMG% ")) {
                             messageElement.innerHTML = messageElement.innerHTML.replace("%IMG% ", "")
-                            messageElement.innerHTML = messageElement.innerHTML.split(": ")[0] + ": " + "<img src=\"" + chat[message].split(": ")[1] + "\" style=\"max-width: 256px; max-height: 256px\">"
+                            messageElement.innerHTML = messageElement.innerHTML.split(": ")[0] + ": " + "<img src=\"" + chat[channel][message].split(": ")[1] + "\" style=\"max-width: 256px; max-height: 256px\">"
                     }
-                    var username = chat[message].split("M ", 2)[1].split(": ", 2)[0].replaceAll(" ", "")
+                    var username = chat[channel][message].split("M ", 2)[1].split(": ", 2)[0].replaceAll(" ", "")
                     messageElement.innerHTML = messageElement.innerHTML.replace(username.replaceAll("&", "&amp;"), "<p onclick=\"viewProfile(\'" + username + "\')\" style=\"cursor: pointer; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\">" + username + "</p>")
                     messageElement.innerHTML = messageElement.innerHTML.replace("@" + (getCookie("username").replaceAll("&", "&amp;")), "<p style=\"color: #ea7b7b; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\" >" + "@" + getCookie("username") + "</p>")
                     document.getElementById("chat").appendChild(messageElement)
                     
                 }
             } else {
-                for (var message in chat.reverse()) {
+                for (var message in chat[channel].reverse()) {
                     var messageElement = document.getElementById("chat").children[message]
-                    if (messageElement.textContent != chat[message]) {
-                        messageElement.textContent = chat[message]
-                        if (chat[message].startsWith("%IMG% ")) {
+                    if (messageElement.textContent != chat[channel][message]) {
+                        messageElement.textContent = chat[channel][message]
+                        if (chat[channel][message].startsWith("%IMG% ")) {
                             messageElement.innerHTML = messageElement.innerHTML.replace("%IMG% ", "")
-                            messageElement.innerHTML = messageElement.innerHTML.split(": ")[0] + ": " + "<img src=\"" + chat[message].split(": ")[1] + "\" style=\"max-width: 256px; max-height: 256px\">"
+                            messageElement.innerHTML = messageElement.innerHTML.split(": ")[0] + ": " + "<img src=\"" + chat[channel][message].split(": ")[1] + "\" style=\"max-width: 256px; max-height: 256px\">"
                         }
-                        var username = chat[message].split("M ", 2)[1].split(": ", 2)[0].replaceAll(" ", "")
+                        var username = chat[channel][message].split("M ", 2)[1].split(": ", 2)[0].replaceAll(" ", "")
                         var color1 = "#ffffff"
                         var color2 = "#ea7b7b"
                         if (gcTheme) {
@@ -352,7 +354,7 @@ function getMessages(first) {
                 }
             }
         }
-        if (!same && (document.getElementById("chat").scrollTop / (document.getElementById("chat").scrollHeight - 256) > 0.994)) {
+        if (!same && (document.getElementById("chat").scrollTop / (document.getElementById("chat").scrollHeight - 256) > 0.994) || ((document.getElementById("chat").scrollTop / (document.getElementById("chat").scrollHeight - 256) == 0))) {
             document.getElementById("chat").scrollTo(0, document.getElementById("chat").scrollHeight)
         }
         if (first) {
@@ -2824,6 +2826,7 @@ function setChannel(channel1) {
         document.getElementById("guildchattext").style.color = "#cccccc"
         document.getElementById("guildchatbar").style.display = "none"
     }
-    chat = []
     document.getElementById("chat").innerHTML = ""
+    changedChannel = true
+    getMessages(true)
 }
