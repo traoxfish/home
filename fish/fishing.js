@@ -2795,6 +2795,7 @@ function closeGuildInvites() {
 }
 
 function setChannel(channel1) {
+    if (channel1 == channel) return
     if (channel1 == "public") {
         channel = "public"
 
