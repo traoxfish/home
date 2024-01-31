@@ -28,7 +28,7 @@ function getData() {
     }).then(response => {
         return response.json();
     }).then(json => {
-        document.getElementById("data").innerHTML = JSON.stringify(json.data, null, 4)
+        document.getElementById("data").innerText = JSON.stringify(json.data, null, 4)
     });
 }
 
