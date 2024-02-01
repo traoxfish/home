@@ -719,7 +719,7 @@ function checkIfLoggedIn() {
                 return  
             })
         } else if (json.validKey == false) {
-            window.location.replace("/fish");
+            window.location.replace("/home/fish");
         }
     });
 
