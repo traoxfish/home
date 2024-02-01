@@ -719,7 +719,7 @@ function checkIfLoggedIn() {
                 return  
             })
         } else if (json.validKey == false) {
-            window.location.replace("https://www.traox.dev/fish");
+            window.location.replace("/fish");
         }
     });
 

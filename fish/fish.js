@@ -148,7 +148,7 @@ function loginGuest() {
             document.getElementById("accountstatus").style.color = "#84ea84";
             document.cookie = "loginKey=" + json.key;
             document.cookie = "username=" + "guest";
-            window.location.replace("https://www.traox.dev/fish/fish");
+            window.location.replace("/fish/fish.html");
         } else {
             document.getElementById("accountstatus").textContent = json.error;
             document.getElementById("accountstatus").style.color = "#ea7b7b";
