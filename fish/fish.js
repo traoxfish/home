@@ -29,30 +29,6 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-function checkIfLoggedIn() {
-    const data = {
-        "username": getCookie("username"),
-        "loginKey": getCookie("loginKey")
-    };
-    fetch('https://traoxfish.us-3.evennode.com/checkkey', {
-        method: 'POST',
-        credentials: "same-origin",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    }).then(response => {
-        return response.json();
-    }).then(json => {
-        if (json.validKey == "true") {
-            window.location.replace("/fish/fish");
-        }
-    });
-
-}
-
-checkIfLoggedIn()
-
 function createAccount() {
 
     var username = document.getElementById("username").value
@@ -116,7 +92,7 @@ function login() {
             document.getElementById("accountstatus").style.color = "#84ea84";
             document.cookie = "loginKey=" + json.key;
             document.cookie = "username=" + username;
-            window.location.replace("/fish/fish.html");
+            window.location.replace("/home/fish/fish.html");
         } else {
             document.getElementById("accountstatus").textContent = json.error;
             document.getElementById("accountstatus").style.color = "#ea7b7b";
@@ -148,7 +124,7 @@ function loginGuest() {
             document.getElementById("accountstatus").style.color = "#84ea84";
             document.cookie = "loginKey=" + json.key;
             document.cookie = "username=" + "guest";
-            window.location.replace("/fish/fish.html");
+            window.location.replace("/home/fish/fish.html");
         } else {
             document.getElementById("accountstatus").textContent = json.error;
             document.getElementById("accountstatus").style.color = "#ea7b7b";
