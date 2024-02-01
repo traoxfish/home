@@ -526,18 +526,18 @@ function spin() {
         
             int1 = setInterval(function(){
                 i += 0.5
-                document.getElementById("slot1").style.top = "calc(" + -(i % 11.25) + "vw - 8px)"
+                document.getElementById("slot1").style.top = "calc(" + -(i % 13.5) + "vw - 8px)"
             }, 10)
             delay(200).then(() => {
                 int2 = setInterval(function(){
                     i2 += 0.5
-                    document.getElementById("slot2").style.top = "calc(" + -(i2 % 11.25) + "vw - 8px)"
+                    document.getElementById("slot2").style.top = "calc(" + -(i2 % 13.5) + "vw - 8px)"
                 }, 10)
             })
             delay(400).then(() => {
                 int3 = setInterval(function(){
                     i3 += 0.5
-                    document.getElementById("slot3").style.top = "calc(" + -(i3 % 11.25) + "vw - 8px)"
+                    document.getElementById("slot3").style.top = "calc(" + -(i3 % 13.5) + "vw - 8px)"
                 }, 10)
             })
         
@@ -599,9 +599,10 @@ function spin() {
                     var valueToPx = {
                         2: "calc(-2.25vw - 8px)",
                         5: "calc(-4.5vw - 8px)",
-                        25: "calc(-11.05vw - 8px)",
+                        25: "calc(-13.4vw - 8px)",
                         100: "calc(-6.7vw - 8px)",
-                        1000: "calc(-8.9vw - 8px)"
+                        1000: "calc(-8.9vw - 8px)",
+                        "jackpot": "calc(-11.35vw - 8px)",
                     }
 
                     delay(25).then(() => {
@@ -613,6 +614,7 @@ function spin() {
                             if (slot1value == slot2value && slot2value >= 25) extraWait1 += 250
                             if (slot1value == slot2value && slot2value >= 100) extraWait1 += 500
                             if (slot1value == slot2value && slot2value == 1000) extraWait1 += 500
+                            if (slot1value == slot2value && slot2value == "jackpot") extraWait1 += 1500
                             delay(250 + extraWait1).then(() => {
                                 clearInterval(int2)
                                 document.getElementById("slot2").style.top = valueToPx[slot2value];
@@ -889,6 +891,9 @@ function getFish() {
 
             }
             
+            document.getElementById("jackpotamount").innerText = "Jackpot: " + formatNumber(json.currentJackpot)
+            document.getElementById("minjackpotbid").innerText = "Min bid for Jackpot: " + formatNumber(json.minimumBidForJackpot)
+
         }
     });
 }

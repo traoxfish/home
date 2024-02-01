@@ -559,13 +559,18 @@
    <div>
 
       <div style="display: block;">
-        <p style="display: inline-block; position: absolute; margin-left: calc(5vw - 12px); margin-top: calc(-8px - 0.25vw); text-align: center; font-size: calc(1vw + 2px);">Match 3 numbers to win!</p>
-        <div class="slotmachine" style="display: inline-block;" id="slotmachine">
+        <p style="display: inline-block; position: absolute; margin-left: calc(5vw - 12px); margin-top: calc(-26px - 0.25vw); text-align: center; font-size: calc(1vw + 2px);">Match 3 numbers to win!</p>
+        <div style="display: block; position: absolute; width: 21.8%; height: 46px; background-color: #1d1a2c; outline-color: #ffffff; outline-style: solid; outline-width: 1px; margin-top: -5px;">
+          <p id="jackpotamount" class="center" style="display: block; position: absolute; margin-top: 10px; font-size: calc(0.8vw + 4px);">Jackpot: Loading...</p>
+          <div class="longbarseperator" style="margin-top: 6px;"></div>
+          <p id="minjackpotbid" class="center" style="display: block; position: absolute; margin-top: 34px; font-size: calc(0.5vw + 4px);">Min bid for Jackpot: Loading...</p>
+        </div>
+        <div class="slotmachine" style="display: inline-block; z-index: 2; margin-top: 48px;" id="slotmachine">
           <div style="display: block; position: relative; max-height: calc(5vw - 8px); margin-top: 4px; overflow:hidden">
             <img id="gamblefade" src="../images/fade.png" draggable="false" class="unselectableimg" style="display: block; position: absolute; z-index: 2; height: 100%; width: calc(100% - 8px); margin-left: 4px;">
-            <p class="unselectable" id="slot1" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
-            <p class="unselectable" id="slot2" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
-            <p class="unselectable" id="slot3" style="display: inline-block; position: relative; margin-left: 5%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br>25x<br>2x</p>
+            <p class="unselectable" id="slot1" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br><img src="../images/jackpot.gif"><br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
+            <p class="unselectable" id="slot2" style="display: inline-block; position: relative; margin-left: 4%; margin-right: 4%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br><img src="../images/jackpot.gif"><br>25x<br>2x</p> <div class="navseperator" style="margin-top: 5px; height: calc(5vw - 16px);"> </div> 
+            <p class="unselectable" id="slot3" style="display: inline-block; position: relative; margin-left: 5%; text-align: center; font-size: 1.85vw; top: calc(-2.25vw - 8px)">25x<br>2x<br>5x<br>100x<br>1000x<br><img src="../images/jackpot.gif"><br>25x<br>2x</p>
           </div>
         </div><br>
 
