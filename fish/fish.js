@@ -45,7 +45,7 @@ function checkIfLoggedIn() {
         return response.json();
     }).then(json => {
         if (json.validKey == "true") {
-            window.location.replace("https://www.traox.dev/fish/fish");
+            window.location.replace("/fish/fish");
         }
     });
 
@@ -116,7 +116,7 @@ function login() {
             document.getElementById("accountstatus").style.color = "#84ea84";
             document.cookie = "loginKey=" + json.key;
             document.cookie = "username=" + username;
-            window.location.replace("https://www.traox.dev/fish/fish");
+            window.location.replace("/fish/fish.html");
         } else {
             document.getElementById("accountstatus").textContent = json.error;
             document.getElementById("accountstatus").style.color = "#ea7b7b";
