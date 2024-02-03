@@ -606,7 +606,9 @@ function spin() {
                     }
 
                     delay(25).then(() => {
-                        delay(250).then(() => {
+                        var extraWait = 0
+                        if (slot1value == "jackpot") extraWait = 500
+                        delay(250 + extraWait).then(() => {
                             clearInterval(int1)
                             document.getElementById("slot1").style.top = valueToPx[slot1value];
                             var extraWait1 = 0
@@ -614,7 +616,7 @@ function spin() {
                             if (slot1value == slot2value && slot2value >= 25) extraWait1 += 250
                             if (slot1value == slot2value && slot2value >= 100) extraWait1 += 500
                             if (slot1value == slot2value && slot2value == 1000) extraWait1 += 500
-                            if (slot1value == slot2value && slot2value == "jackpot") extraWait1 += 1500
+                            if (slot1value == slot2value && slot2value == "jackpot") extraWait1 += 2500
                             delay(250 + extraWait1).then(() => {
                                 clearInterval(int2)
                                 document.getElementById("slot2").style.top = valueToPx[slot2value];
@@ -624,6 +626,7 @@ function spin() {
                                 if (slot1value == 100 && Number(json.winnings) > 0) extraWait2 += 750
                                 if (slot1value == 1000 && Number(json.winnings) > 0) extraWait2 += 1000
                                 if (slot1value == slot2value && slot2value != slot3value && slot1value >= 25) extraWait2 += 250
+                                if (slot1value == slot2value && slot1value == slot3value && slot1value == "jackpot") extraWait2 += 2500
                                 delay(250 + extraWait2 + extraWait1).then(() => {
                                     clearInterval(int3)
                                     document.getElementById("slot3").style.top = valueToPx[slot3value];
@@ -639,7 +642,9 @@ function spin() {
                                         document.getElementById("spininfo").style.color = "#ea7b7b";
                                         greenWin = false
                                     }
-                                    delay(2000).then(() => {
+                                    var extraDelay = 0
+                                    if (slot1value == slot2value && slot1value == slot3value && slot1value == "jackpot") extraDelay = 8000
+                                    delay(2000 + extraDelay).then(() => {
                                         document.getElementById("spininfo").innerHTML = "<br>"
                                         greenWin = false
                                     })
