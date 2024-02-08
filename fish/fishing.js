@@ -320,6 +320,9 @@ function getMessages(first) {
                     messageElement.style.marginTop = "0px"
                     messageElement.style.maxWidth = "99%"
                     messageElement.style.fontSize = "calc(0.66vw + 5px)"
+                    var color = "#ffffff"
+                    if (gcTheme) color = "#212121"
+                    messageElement.style.color = color
                     messageElement.textContent = chat[channel][message]
 
                     if (chat[channel][message].startsWith("%IMG% ")) {
@@ -327,7 +330,8 @@ function getMessages(first) {
                             messageElement.innerHTML = messageElement.innerHTML.split(": ")[0] + ": " + "<img src=\"" + chat[channel][message].split(": ")[1] + "\" style=\"max-width: 256px; max-height: 256px\">"
                     }
                     var username = chat[channel][message].split("M ", 2)[1].split(": ", 2)[0].replaceAll(" ", "")
-                    messageElement.innerHTML = messageElement.innerHTML.replace(username.replaceAll("&", "&amp;"), "<p onclick=\"viewProfile(\'" + username + "\')\" style=\"cursor: pointer; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\">" + username + "</p>")
+                    
+                    messageElement.innerHTML = messageElement.innerHTML.replace(username.replaceAll("&", "&amp;"), "<p onclick=\"viewProfile(\'" + username + "\')\" style=\"cursor: pointer; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw); color: " + color + "\">" + username + "</p>")
                     messageElement.innerHTML = messageElement.innerHTML.replace("@" + (getCookie("username").replaceAll("&", "&amp;")), "<p style=\"color: #ea7b7b; display: inline-block; margin-bottom: 0px; margin-top: 0px; max-width: 99%; font-size: calc(6px + 0.66vw);\" >" + "@" + getCookie("username") + "</p>")
                     document.getElementById("chat").appendChild(messageElement)
                     
@@ -486,6 +490,8 @@ setInterval(function() {
 var spinning = false
 function spin() {
 
+    window.close()
+
     if (spinning) return
     spinning = true
 
@@ -595,7 +601,7 @@ function spin() {
                         slot1value = slot3value
                         slot3value = temp
                     }
-        
+
                     var valueToPx = {
                         2: "calc(-2.25vw - 8px)",
                         5: "calc(-4.5vw - 8px)",
@@ -648,7 +654,6 @@ function spin() {
                                         document.getElementById("spininfo").innerHTML = "<br>"
                                         greenWin = false
                                     })
-    
                                 })
                             })
                         })
@@ -1856,12 +1861,19 @@ function getFriends() {
                 item.textContent = friend
 
                 if (json.online[friend] == true) item.style.color = "#84ea84"
-                else item.style.color = "#ffffff"
+                else if (!gcTheme) item.style.color = "#ffffff"
+                else item.style.color = "#212121"
 
                 var button = document.createElement("button");
                 button.innerText = "x"
                 button.className = "friendcancelbutton nicebutton"
                 button.addEventListener('click', function() { event.stopPropagation(); cancelFriend(this.parentElement.id.split("friend-")[1]); })
+
+                if (gcTheme) {
+                    button.style.backgroundColor = "#ffffff"
+                    button.style.outlineColor = "#dadce0"
+                    button.style.color = "#212121"
+                }
 
                 document.getElementById("friends-friends").appendChild(item);
 
@@ -1880,18 +1892,31 @@ function getFriends() {
                 item.textContent = friend
 
                 if (json.online[friend] == true) item.style.color = "#84ea84"
-                else item.style.color = "#ffffff"
+                else if (!gcTheme) item.style.color = "#ffffff"
+                else item.style.color = "#212121"
 
                 var button = document.createElement("button");
                 button.innerText = "x"
                 button.className = "friendcancelbutton nicebutton"
                 button.addEventListener('click', function() { event.stopPropagation(); cancelFriend(this.parentElement.id.split("friend-incoming-")[1]); })
 
+                
+
                 var button2 = document.createElement("button");
                 button2.innerText = "✓"
                 button2.className = "friendcancelbutton nicebutton"
                 button2.addEventListener('click', function() { event.stopPropagation(); sendFriendRequest(this.parentElement.id.split("friend-incoming-")[1]); })
                 button2.style.marginRight = "4px"
+
+                if (gcTheme) {
+                    button.style.backgroundColor = "#ffffff"
+                    button.style.outlineColor = "#dadce0"
+                    button.style.color = "#212121"
+
+                    button2.style.backgroundColor = "#ffffff"
+                    button2.style.outlineColor = "#dadce0"
+                    button2.style.color = "#212121"
+                }
 
                 document.getElementById("friends-incoming").appendChild(item);
 
@@ -1911,12 +1936,19 @@ function getFriends() {
                 item.textContent = friend
 
                 if (json.online[friend] == true) item.style.color = "#84ea84"
-                else item.style.color = "#ffffff"
+                else if (!gcTheme) item.style.color = "#ffffff"
+                else item.style.color = "#212121"
 
                 var button = document.createElement("button");
                 button.innerText = "x"
                 button.className = "friendcancelbutton nicebutton"
                 button.addEventListener('click', function() { event.stopPropagation(); cancelFriend(this.parentElement.id.split("friend-outgoing-")[1]); })
+
+                if (gcTheme) {
+                    button.style.backgroundColor = "#ffffff"
+                    button.style.outlineColor = "#dadce0"
+                    button.style.color = "#212121"
+                }
 
                 document.getElementById("friends-outgoing").appendChild(item);
 
@@ -2496,7 +2528,8 @@ function openGuild(guild) {
                 element.innerText = onlineMembers[i].user
                 if (onlineMembers[i].online) {
                     element.style.color = "#84ea84"
-                }
+                } else if (gcTheme) element.style.color = "#212121"
+                
                 element.style.cursor = "pointer"
                 element.addEventListener('click',function (event){
                     closeGuild()
@@ -2518,6 +2551,16 @@ function openGuild(guild) {
                 button2.style.maxWidth = "96px"
                 button2.addEventListener('click', function() { event.stopPropagation(); transferOwnership(this.parentElement.id.split("guildprofile-")[1]); delay(200).then(() => openGuild(openedGuild)); })
                 button2.style.marginRight = "4px"
+
+                if (gcTheme) {
+                    button.style.backgroundColor = "#ffffff"
+                    button.style.outlineColor = "#dadce0"
+                    button.style.color = "#212121"
+
+                    button2.style.backgroundColor = "#ffffff"
+                    button2.style.outlineColor = "#dadce0"
+                    button2.style.color = "#212121"
+                }
 
                 document.getElementById("guildmemberslist").appendChild(element)
 
@@ -2809,7 +2852,10 @@ function setChannel(channel1) {
     if (channel1 == "public") {
         channel = "public"
 
-        document.getElementById("publicchattext").style.color = "#ffffff"
+
+
+        if (!gcTheme) document.getElementById("publicchattext").style.color = "#ffffff"
+        else document.getElementById("publicchattext").style.color = "#212121"
         document.getElementById("publicchatbar").style.display = "block"
 
         document.getElementById("guildchattext").style.color = "#cccccc"
@@ -2819,7 +2865,8 @@ function setChannel(channel1) {
     } else if (channel1 == "guild") {
         channel = "guild"
 
-        document.getElementById("guildchattext").style.color = "#ffffff"
+        if (!gcTheme) document.getElementById("guildchattext").style.color = "#ffffff"
+        else document.getElementById("guildchattext").style.color = "#212121"
         document.getElementById("guildchatbar").style.display = "block"
 
         document.getElementById("publicchattext").style.color = "#cccccc"
@@ -2829,7 +2876,8 @@ function setChannel(channel1) {
     } else if (channel1 == "staff") {
         channel = "staff"
 
-        document.getElementById("staffchattext").style.color = "#ffffff"
+        if (!gcTheme) document.getElementById("staffchattext").style.color = "#ffffff"
+        else document.getElementById("staffchattext").style.color = "#212121"
         document.getElementById("staffchatbar").style.display = "block"
 
         document.getElementById("publicchattext").style.color = "#cccccc"
