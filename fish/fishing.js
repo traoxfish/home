@@ -45,7 +45,7 @@ function sendFish() {
     }
 
     if (validInfo) {
-        fetch('https://traoxfish.us-3.evennode.com/sendfish', {
+        fetch('https://traoxfish.eu-4.evennode.com/sendfish', {
             method: 'POST',
             credentials: "same-origin",
             headers: {
@@ -226,7 +226,7 @@ function buyItem(type) {
         "purchaseType": type,
         "quantity": quantity
     };
-    fetch('https://traoxfish.us-3.evennode.com/makepurchase', {
+    fetch('https://traoxfish.eu-4.evennode.com/makepurchase', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -262,7 +262,7 @@ function sendMessage() {
         "message": document.getElementById("messageinput").value,
         "channel": channel
     };
-    fetch('https://traoxfish.us-3.evennode.com/sendchatmessage', {
+    fetch('https://traoxfish.eu-4.evennode.com/sendchatmessage', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -297,7 +297,7 @@ function getMessages(first) {
         "loginKey": getCookie("loginKey"),
         "channel": channel
     };
-    fetch('https://traoxfish.us-3.evennode.com/getchat', {
+    fetch('https://traoxfish.eu-4.evennode.com/getchat', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -380,7 +380,7 @@ function getItemCosts(type) {
         "chumAmount": formatedNumberToNumber(document.getElementById("chumbuyquantity").value),
         "fishBucketAmount": formatedNumberToNumber(document.getElementById("fishbucketbuyquantity").value),
     };
-    fetch('https://traoxfish.us-3.evennode.com/getcosts', {
+    fetch('https://traoxfish.eu-4.evennode.com/getcosts', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -417,7 +417,7 @@ function updateLeaderboards() {
         "loginKey": getCookie("loginKey"),
         "leaderboardType": type
     };
-    fetch("https://traoxfish.us-3.evennode.com/getleaderboards", {
+    fetch("https://traoxfish.eu-4.evennode.com/getleaderboards", {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -501,7 +501,7 @@ function spin() {
         "bet": formatedNumberToNumber(document.getElementById("betamount").value),
         "check": true
     };
-    fetch("https://traoxfish.us-3.evennode.com/gamble", {
+    fetch("https://traoxfish.eu-4.evennode.com/gamble", {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -554,7 +554,7 @@ function spin() {
                     "loginKey": getCookie("loginKey"),
                     "bet": formatedNumberToNumber(document.getElementById("betamount").value)
                 };
-                fetch("https://traoxfish.us-3.evennode.com/gamble", {
+                fetch("https://traoxfish.eu-4.evennode.com/gamble", {
                     method: 'POST',
                     credentials: "same-origin",
                     headers: {
@@ -672,7 +672,7 @@ function getLeaderboards() {
         "loginKey": getCookie("loginKey"),
         "leaderboardType": type
     };
-    fetch("https://traoxfish.us-3.evennode.com/getleaderboards", {
+    fetch("https://traoxfish.eu-4.evennode.com/getleaderboards", {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -712,7 +712,7 @@ function checkIfLoggedIn() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/checkkey', {
+    fetch('https://traoxfish.eu-4.evennode.com/checkkey', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -742,7 +742,7 @@ function keepOnline() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/online', {
+    fetch('https://traoxfish.eu-4.evennode.com/online', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -806,7 +806,7 @@ function getFish() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/getdata', {
+    fetch('https://traoxfish.eu-4.evennode.com/getdata', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -922,7 +922,7 @@ form.addEventListener('submit', (event) => {
         "g-recaptcha-response": cap
     };
     event.preventDefault();
-    fetch('https://traoxfish.us-3.evennode.com/submitcaptcha', {
+    fetch('https://traoxfish.eu-4.evennode.com/submitcaptcha', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -948,7 +948,7 @@ document.getElementById("messageinput").addEventListener('keypress', function (e
 
 
 function checkIfCaptchaed() {
-    fetch('https://traoxfish.us-3.evennode.com/checkcaptchaed', {
+    fetch('https://traoxfish.eu-4.evennode.com/checkcaptchaed', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1025,7 +1025,7 @@ function goFishing(force) {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/fish', {
+    fetch('https://traoxfish.eu-4.evennode.com/fish', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1049,7 +1049,7 @@ function getSpecialFishGraph() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/getspecialfishgraph', {
+    fetch('https://traoxfish.eu-4.evennode.com/getspecialfishgraph', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1167,7 +1167,7 @@ function openSendLogs() {
         "loginKey": getCookie("loginKey"),
         "notificationType": "sendLogs"
     };
-    fetch('https://traoxfish.us-3.evennode.com/viewnotification', {
+    fetch('https://traoxfish.eu-4.evennode.com/viewnotification', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1187,7 +1187,7 @@ function getSendLogs() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/getsendlogs', {
+    fetch('https://traoxfish.eu-4.evennode.com/getsendlogs', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1391,7 +1391,7 @@ function getFishPixels() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/getpixelart', {
+    fetch('https://traoxfish.eu-4.evennode.com/getpixelart', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1428,7 +1428,7 @@ function placePixel(event, down1) {
             "index": index1,
             "color": color
         };
-        fetch('https://traoxfish.us-3.evennode.com/placepixel', {
+        fetch('https://traoxfish.eu-4.evennode.com/placepixel', {
             method: 'POST',
             credentials: "same-origin",
             headers: {
@@ -1459,7 +1459,7 @@ function placePixel(event, down1) {
             "index": index1,
             "color": color
         };
-        fetch('https://traoxfish.us-3.evennode.com/placepixel', {
+        fetch('https://traoxfish.eu-4.evennode.com/placepixel', {
             method: 'POST',
             credentials: "same-origin",
             headers: {
@@ -1569,7 +1569,7 @@ function viewProfile(profile, self) {
         "loginKey": getCookie("loginKey"),
         "profile": profile
     };
-    fetch('https://traoxfish.us-3.evennode.com/getprofile', {
+    fetch('https://traoxfish.eu-4.evennode.com/getprofile', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1737,7 +1737,7 @@ function setProfilePicture(id) {
         "loginKey": getCookie("loginKey"),
         "profilePicture": id
     };
-    fetch('https://traoxfish.us-3.evennode.com/setprofilepicture', {
+    fetch('https://traoxfish.eu-4.evennode.com/setprofilepicture', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1759,7 +1759,7 @@ function openFriends() {
         "loginKey": getCookie("loginKey"),
         "notificationType": "friendRequests"
     };
-    fetch('https://traoxfish.us-3.evennode.com/viewnotification', {
+    fetch('https://traoxfish.eu-4.evennode.com/viewnotification', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1793,7 +1793,7 @@ function cancelFriend(friend) {
         "cancel": true,
         "profile": friend
     };
-    fetch('https://traoxfish.us-3.evennode.com/sendfriendrequest', {
+    fetch('https://traoxfish.eu-4.evennode.com/sendfriendrequest', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1815,7 +1815,7 @@ function sendFriendRequest(friend) {
         "cancel": false,
         "profile": friend
     };
-    fetch('https://traoxfish.us-3.evennode.com/sendfriendrequest', {
+    fetch('https://traoxfish.eu-4.evennode.com/sendfriendrequest', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1834,7 +1834,7 @@ function getFriends() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/getfriends', {
+    fetch('https://traoxfish.eu-4.evennode.com/getfriends', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -1979,7 +1979,7 @@ function changePassword() {
         "oldPassword": oldPassword,
         "newPassword": newPassword,
     };
-    fetch('https://traoxfish.us-3.evennode.com/changepassword', {
+    fetch('https://traoxfish.eu-4.evennode.com/changepassword', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2026,7 +2026,7 @@ function collectFishingBoatFish() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/collectfishingboat', {
+    fetch('https://traoxfish.eu-4.evennode.com/collectfishingboat', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2058,7 +2058,7 @@ function sendChallengeRequest(user, cancel) {
         "bid": Math.max(formatedNumberToNumber(document.getElementById("challengebet").value), 1),
         "cancel": cancel
     };
-    fetch('https://traoxfish.us-3.evennode.com/sendchallengerequest', {
+    fetch('https://traoxfish.eu-4.evennode.com/sendchallengerequest', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2094,7 +2094,7 @@ function getChallengeRequest() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/getchallegerequests', {
+    fetch('https://traoxfish.eu-4.evennode.com/getchallegerequests', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2122,7 +2122,7 @@ function getChallengeStatus() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/getchallegestatus', {
+    fetch('https://traoxfish.eu-4.evennode.com/getchallegestatus', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2178,7 +2178,7 @@ function chooseChallengeOption(choice) {
         "loginKey": getCookie("loginKey"),
         "choice": choice
     };
-    fetch('https://traoxfish.us-3.evennode.com/sendchallengechoice', {
+    fetch('https://traoxfish.eu-4.evennode.com/sendchallengechoice', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2208,7 +2208,7 @@ function setChallengeSetting() {
         "loginKey": getCookie("loginKey"),
         "setting": document.getElementById("challengesetting").value
     };
-    fetch('https://traoxfish.us-3.evennode.com/setchallengesetting', {
+    fetch('https://traoxfish.eu-4.evennode.com/setchallengesetting', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2320,7 +2320,7 @@ function createGuild() {
         "loginKey": getCookie("loginKey"),
         "guildName": document.getElementById("createguildname").value
     };
-    fetch('https://traoxfish.us-3.evennode.com/createguild', {
+    fetch('https://traoxfish.eu-4.evennode.com/createguild', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2361,7 +2361,7 @@ function openGuild(guild) {
         "loginKey": getCookie("loginKey"),
         "guild": guild || profileGuild
     };
-    fetch('https://traoxfish.us-3.evennode.com/getguild', {
+    fetch('https://traoxfish.eu-4.evennode.com/getguild', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2603,7 +2603,7 @@ function setGuildJoinSetting() {
         "loginKey": getCookie("loginKey"),
         "setting": document.getElementById("guildjoinsetting").value
     };
-    fetch('https://traoxfish.us-3.evennode.com/setguildsetting', {
+    fetch('https://traoxfish.eu-4.evennode.com/setguildsetting', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2622,7 +2622,7 @@ function leaveGuild() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/leaveguild', {
+    fetch('https://traoxfish.eu-4.evennode.com/leaveguild', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2645,7 +2645,7 @@ function joinGuild(guild) {
         "loginKey": getCookie("loginKey"),
         "guild": guild
     };
-    fetch('https://traoxfish.us-3.evennode.com/joinguild', {
+    fetch('https://traoxfish.eu-4.evennode.com/joinguild', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2666,7 +2666,7 @@ function depositGuildFish() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey"),
     };
-    fetch('https://traoxfish.us-3.evennode.com/contributeguildfish', {
+    fetch('https://traoxfish.eu-4.evennode.com/contributeguildfish', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2688,7 +2688,7 @@ function purchaseGuildUpgrade(upgrade) {
         "loginKey": getCookie("loginKey"),
         "upgrade": upgrade
     };
-    fetch('https://traoxfish.us-3.evennode.com/purchaseguildupgrade', {
+    fetch('https://traoxfish.eu-4.evennode.com/purchaseguildupgrade', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2711,7 +2711,7 @@ function openGuildRequests() {
         "loginKey": getCookie("loginKey"),
         "notificationType": "guildrequests"
     };
-    fetch('https://traoxfish.us-3.evennode.com/viewnotification', {
+    fetch('https://traoxfish.eu-4.evennode.com/viewnotification', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2736,7 +2736,7 @@ function inviteToGuild(user, request) {
         "loginKey": getCookie("loginKey"),
         "invitedUser": user
     };
-    fetch('https://traoxfish.us-3.evennode.com/invitetoguild', {
+    fetch('https://traoxfish.eu-4.evennode.com/invitetoguild', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2761,7 +2761,7 @@ function kickFromGuild(user, request) {
         "loginKey": getCookie("loginKey"),
         "kickedUser": user
     };
-    fetch('https://traoxfish.us-3.evennode.com/kickfromguild', {
+    fetch('https://traoxfish.eu-4.evennode.com/kickfromguild', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2784,7 +2784,7 @@ function transferOwnership(user) {
         "loginKey": getCookie("loginKey"),
         "newOwner": user
     };
-    fetch('https://traoxfish.us-3.evennode.com/transerguildownership', {
+    fetch('https://traoxfish.eu-4.evennode.com/transerguildownership', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2806,7 +2806,7 @@ function declineGuildInvite(guild) {
         "loginKey": getCookie("loginKey"),
         "guild": guild
     };
-    fetch('https://traoxfish.us-3.evennode.com/declineguildinvite', {
+    fetch('https://traoxfish.eu-4.evennode.com/declineguildinvite', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -2829,7 +2829,7 @@ function openGuildInvites() {
         "loginKey": getCookie("loginKey"),
         "notificationType": "guildinvites"
     };
-    fetch('https://traoxfish.us-3.evennode.com/viewnotification', {
+    fetch('https://traoxfish.eu-4.evennode.com/viewnotification', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
