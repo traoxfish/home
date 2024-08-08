@@ -34,7 +34,7 @@ function checkIfLoggedIn() {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/checkkey', {
+    fetch('https://traoxfish.eu-4.evennode.com/checkkey', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -63,7 +63,7 @@ function createAccount() {
         "password": password,
         "browserKey": getCookie("browserKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/register', {
+    fetch('https://traoxfish.eu-4.evennode.com/register', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -101,7 +101,7 @@ function login() {
         "password": password,
         "browserKey": getCookie("browserKey")
     };
-    fetch('https://traoxfish.us-3.evennode.com/login', {
+    fetch('https://traoxfish.eu-4.evennode.com/login', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
@@ -133,7 +133,7 @@ function loginGuest() {
         "username": "guest",
         "password": "guest1"
     };
-    fetch('https://traoxfish.us-3.evennode.com/login', {
+    fetch('https://traoxfish.eu-4.evennode.com/login', {
         method: 'POST',
         credentials: "same-origin",
         headers: {
