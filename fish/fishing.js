@@ -134,7 +134,7 @@ function sendMessage() {
     });
 }
 
-var chat = { "public": [], "guild": [], "staff": [] }
+var chat = { "public": [], "staff": [] }
 var changedChannel = false
 
 function getMessages(first) {
@@ -585,7 +585,6 @@ delay(5).then(() => {
 
     setInterval(function(){ 
         checkIfCaptchaed()
-        getSendLogs()
         checkIfLoggedIn()
     }, 2500);
 });
@@ -607,29 +606,8 @@ function getFish() {
     }).then(json => {
         if (json.status == "success") {
 
-            isOwnerOfGuild = json.isOwnerOfGuild
-            userGuild = json.guild
-
             //fish
             document.getElementById("fishcount").textContent = formatNumber(json.fish)
-            document.getElementById("rarefishcount").textContent = formatNumber(json.rareFish)
-            document.getElementById("veryrarefishcount").textContent = formatNumber(json.veryRareFish)
-            document.getElementById("sharkcount").textContent = formatNumber(json.sharks)
-            document.getElementById("raresharkcount").textContent = formatNumber(json.rareSharks)
-            document.getElementById("specialfishcount").textContent = formatNumber(json.specialFish)
-            document.getElementById("whalecount").textContent = formatNumber(json.whales)
-            document.getElementById("fishermancount").textContent = formatNumber(json.fishermen)
-            document.getElementById("chumcount").textContent = formatNumber(json.chum)
-            document.getElementById("fishbucketcount").textContent = formatNumber(json.fishBuckets)
-
-            if (json.fishingBoatFish < json.fishingBoatCapacity) {
-                document.getElementById("fishingboatamount").textContent = formatNumber(json.fishingBoatFish) + " / " + formatNumber(json.fishingBoatCapacity) + " fish"
-                document.getElementById("fishingboatnotification").style.display = "none"
-            }
-            else {
-                document.getElementById("fishingboatamount").textContent = formatNumber(json.fishingBoatFish) + " / " + formatNumber(json.fishingBoatCapacity) + " fish (MAX)"
-                document.getElementById("fishingboatnotification").style.display = "initial"
-            }
 
             //level
             level = json.level
@@ -638,58 +616,14 @@ function getFish() {
             document.getElementById("xpcount").innerText = "XP: " + json.currentLevelXp + " / " + (json.xpRequired + json.currentLevelXp)
             
             //noticiactions
-            document.getElementById("sendfishnotificationcount").innerText = "" + json.notifications.sendLogs
-            if (json.notifications.sendLogs > 0) document.getElementById("sendfishnotifications").style.display = "initial"
-            else document.getElementById("sendfishnotifications").style.display = "none"
-
-            document.getElementById("friendrequestnotificationcount").innerText = "" + (Number(json.notifications.friendRequests) + Number(json.notifications.guildInvites))
-            if (Number(json.notifications.friendRequests) + Number(json.notifications.guildInvites) > 0) document.getElementById("friendrequestnotifications").style.display = "initial"
+            document.getElementById("friendrequestnotificationcount").innerText = "" + (Number(json.notifications.friendRequests))
+            if (Number(json.notifications.friendRequests) > 0) document.getElementById("friendrequestnotifications").style.display = "initial"
             else document.getElementById("friendrequestnotifications").style.display = "none"
-
-            if (openedGuild == userGuild) {
-                document.getElementById("guildrequestnotificationcount").innerText = "" + json.notifications.guildRequests
-                if (json.notifications.guildRequests > 0) document.getElementById("guildrequestnotifications").style.display = "initial"
-                else document.getElementById("guildrequestnotifications").style.display = "none"
-            } else document.getElementById("guildrequestnotifications").style.display = "none"
 
             if (json.isMod == true) {
                 document.getElementById("staffchatbutton").style.display = "inline-block"
             }
 
-            if (json.guild != "" && json.guild != "none") {
-                document.getElementById("guildchatbutton").style.display = "inline-block"
-            }
-
-            document.getElementById("guildinvites").innerHTML = ""
-
-            for (var i = 0; i < json.guildInvites.length; i++) {
-                var guild = json.guildInvites[i]
-
-                var item = document.createElement("p");
-                item.id = "guild-incoming-" + guild
-                item.className = "frienditem"
-                item.addEventListener('click', function() { openGuild(this.id.split("guild-incoming-")[1]); closeGuildInvites(); })
-                item.style.cursor = "pointer"
-                item.textContent = guild
-
-                var button = document.createElement("button");
-                button.innerText = "x"
-                button.className = "friendcancelbutton nicebutton"
-                button.addEventListener('click', function() { event.stopPropagation(); declineGuildInvite(this.parentElement.id.split("guild-incoming-")[1]) })
-
-                var button2 = document.createElement("button");
-                button2.innerText = "✓"
-                button2.className = "friendcancelbutton nicebutton"
-                button2.addEventListener('click', function() { event.stopPropagation(); joinGuild(this.parentElement.id.split("guild-incoming-")[1]); delay(400).then(() => { viewProfile(getCookie("username", true)); closeGuildInvites(); delay(100).then(() => openGuild(this.parentElement.id.split("guild-incoming-")[1])) }) })
-                button2.style.marginRight = "4px"
-
-                document.getElementById("guildinvites").appendChild(item);
-
-                document.getElementById("guild-incoming-" + guild).appendChild(button);
-                document.getElementById("guild-incoming-" + guild).appendChild(button2);
-
-            }
-            
             document.getElementById("jackpotamount").innerText = "Jackpot: " + formatNumber(json.currentJackpot)
             document.getElementById("minjackpotbid").innerText = "Min bid for Jackpot: " + formatNumber(json.minimumBidForJackpot)
 
@@ -806,8 +740,7 @@ instantTooltips('title', 15);
 
 
 function goFishing(force) {
-    if (!force && document.getElementById("autofish").checked) return;
-
+    
     const data = {
         "username": getCookie("username"),
         "loginKey": getCookie("loginKey")
@@ -830,46 +763,21 @@ function goFishing(force) {
 
 function closeProfile() {
     document.getElementById("viewprofile").style.display = "none";
-    closeCreateGuild()
     closeFriends()
-    closeGuild() 
     closeSettings()
-    closeGuildInvites()
-    document.getElementById("invitetoguildbutton").style.display = "none"
-    document.getElementById("openguildinvitesbutton").style.display = "none"
     document.getElementById("openfriends").style.display = "none"
     document.getElementById("addfriend").style.display = "none"
-    document.getElementById("sendchallengerequest").style.display = "none"
-    document.getElementById("challengebet").style.display = "none"
-
-    document.getElementById("profile-picture").style.pointer = "default"
-    document.getElementById("profile-settings").style.display = "none"
-    document.getElementById("createguildbutton").style.display = "none"
-    document.getElementById("openguild").style.display = "none"
-    document.getElementById("guildbackground").style.display = "none"
-
 
     document.getElementById("profile-username").innerText = "Loading..."
     document.getElementById("profile-rank").innerText = ""
     document.getElementById("profile-fish").innerText = "Fish: Loading..."
-    document.getElementById("profile-rarefish").innerText = "Rare Fish: Loading..."
-    document.getElementById("profile-veryrarefish").innerText = "Very Rare Fish: Loading..."
-    document.getElementById("profile-sharks").innerText = "Sharks: Loading..."
-    document.getElementById("profile-raresharks").innerText = "Rare Sharks: Loading..."
-    document.getElementById("profile-whales").innerText = "Whales: Loading..."
-    document.getElementById("profile-fishermen").innerText = "Fishermen: Loading..."
-    document.getElementById("profile-chum").innerText = "Chum: Loading..."
     document.getElementById("profile-fishperclick").innerText = "Fish Per Click: Loading..."
-    document.getElementById("profile-fishpersecond").innerText = "Fish Per Second: Loading..."
-    document.getElementById("profile-fishbuckets").innerText = "Fish Buckets: Loading..."
-    document.getElementById("profile-specialfish").innerText = "Special Fish: Loading..."
     document.getElementById("profile-alltimefish").innerText = "All Time Fish: Loading..."
     document.getElementById("profile-fishgambled").innerText = "Fish Gambled: Loading..."
     document.getElementById("profile-joindate").innerText = "Join Date: Loading..."
     document.getElementById("profile-lastonline").innerText = "Last Online: Loading..."
     document.getElementById("profile-playtime").innerText = "Playtime: Loading..."
     document.getElementById("profile-friends").innerText = "Friends: Loading..."
-    document.getElementById("profile-guild").innerText = "Guild: Loading..."
     if (!gcTheme) document.getElementById("profile-picture").src = "../images/profiles/default.png"
     else document.getElementById("profile-picture").src = "../images/gcprofile.png"
 
@@ -877,8 +785,6 @@ function closeProfile() {
     document.getElementById("profile-picture").onclick = function () { }
 
 }
-
-var profileGuild = "none"
 
 function viewProfile(profile, self) {
     if ((profile == undefined || profile.toLowerCase() == getCookie("username").toLowerCase()) && !self) {
@@ -908,12 +814,6 @@ function viewProfile(profile, self) {
             var displayName = json.displayName
             var level = json.level
             var fish = json.fish
-            var rareFish = json.rareFish
-            var veryRareFish = json.veryRareFish
-            var sharks = json.sharks
-            var rareSharks = json.rareSharks
-            var whales = json.whales
-            var specialFish = json.specialFish
             var allTimeFish = json.allTimeFish
             var fishGambled = json.fishGambled
             var joinDate = json.joinDate
@@ -921,17 +821,9 @@ function viewProfile(profile, self) {
             var picture = json.profilePicture
             var friendStatus = json.friendStatus
             var rank = json.rank
-            var fishermen = json.fishermen
-            var chum = json.chum
-            var fishBuckets = json.fishBuckets
             var playtime = json.playtime
             var friends = json.friends
-            var challengeSetting = json.challengeSetting
-            var guild = json.guild
 
-            profileGuild = guild
-
-            var fishPerSecond = json.fishPerSecond
             var fishPerClick = json.fishPerClick
 
             if (playtime == "") playtime = "None"
@@ -943,76 +835,29 @@ function viewProfile(profile, self) {
                 document.getElementById("profile-picture").style.cursor = "pointer"
                 document.getElementById("openfriends").style.display = "block"
                 document.getElementById("addfriend").style.display = "none"
-                document.getElementById("sendchallengerequest").style.display = "none"
-                document.getElementById("challengebet").style.display = "none"
                 document.getElementById("profile-settings").style.display = "inline-block"
-                if (guild == "none") {
-                    document.getElementById("createguildbutton").style.display = "block"
-                    document.getElementById("openguild").style.display = "none"
-                    document.getElementById("openguildinvitesbutton").style.display = "block"
-                } else {
-                    document.getElementById("createguildbutton").style.display = "none"
-                    document.getElementById("openguild").style.display = "block"
-                    document.getElementById("openguildinvitesbutton").style.display = "none"
-                }
-                document.getElementById("invitetoguildbutton").style.display = "none"
             } else {
-                document.getElementById("createguildbutton").style.display = "none"
-                document.getElementById("openguild").style.display = "none"
                 document.getElementById("profile-picture").onclick = ""
                 document.getElementById("profile-picture").style.cursor = "default"
                 document.getElementById("openfriends").style.display = "none"
                 document.getElementById("addfriend").style.display = "block"
-                if (guild == "none" && isOwnerOfGuild) {
-                    document.getElementById("invitetoguildbutton").style.display = "block"
-
-                    document.getElementById("invitetoguildbutton").parentNode.replaceChild(document.getElementById("invitetoguildbutton").cloneNode(true), document.getElementById("invitetoguildbutton"))
-                    document.getElementById("invitetoguildbutton").addEventListener('click', function() { inviteToGuild(profile, false) }, { once: false })
-                } else {
-                    document.getElementById("invitetoguildbutton").style.display = "none"
-                }
-                if (challengeSetting == "everyone" || (friendStatus == "friends" && challengeSetting == "friends")) document.getElementById("sendchallengerequest").style.display = "block"
-                if (challengeSetting == "everyone" || (friendStatus == "friends" && challengeSetting == "friends")) document.getElementById("challengebet").style.display = "block"
                 document.getElementById("profile-settings").style.display = "none"
                 document.getElementById("addfriend").parentNode.replaceChild(document.getElementById("addfriend").cloneNode(true), document.getElementById("addfriend"))
-                document.getElementById("sendchallengerequest").parentNode.replaceChild(document.getElementById("sendchallengerequest").cloneNode(true), document.getElementById("sendchallengerequest"))
-                document.getElementById("sendchallengerequest").addEventListener('click', function() { sendChallengeRequest(profile, false) }, { once: false })
                 if (friendStatus == "not friends") {
                     document.getElementById("addfriend").innerText = "Send Friend Request"
                     document.getElementById("addfriend").addEventListener('click', function() { sendFriendRequest(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
-                    document.getElementById("sendchallengerequest").style.marginLeft = "360px"
-                    document.getElementById("challengebet").style.marginLeft = "555px"
-                    document.getElementById("challengeinfo").style.marginLeft = "360px"
                 } else if (friendStatus == "friends") {
                     document.getElementById("addfriend").innerText = "Remove Friend"
                     document.getElementById("addfriend").addEventListener('click', function() { cancelFriend(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
-                    document.getElementById("sendchallengerequest").style.marginLeft = "320px"
-                    document.getElementById("challengebet").style.marginLeft = "515px"
-                    document.getElementById("challengeinfo").style.marginLeft = "320px"
                 } else if (friendStatus == "incoming") {
                     document.getElementById("addfriend").innerText = "Accept Friend Request"
                     document.getElementById("addfriend").addEventListener('click', function() { sendFriendRequest(profile); delay(250).then(() => viewProfile(profile)) }, { once: true })
-                    document.getElementById("sendchallengerequest").style.marginLeft = "370px"
-                    document.getElementById("challengebet").style.marginLeft = "565px"
-                    document.getElementById("challengeinfo").style.marginLeft = "370px"
                 } else if (friendStatus == "outgoing") {
                     document.getElementById("addfriend").innerText = "Cancel Friend Request"
                     document.getElementById("addfriend").addEventListener('click', function() { cancelFriend(profile); delay(250).then(() => viewProfile(profile))  }, { once: true })
-                    document.getElementById("sendchallengerequest").style.marginLeft = "370px"
-                    document.getElementById("challengebet").style.marginLeft = "565px"
-                    document.getElementById("challengeinfo").style.marginLeft = "370px"
                 }
                 
                 
-            }
-
-            document.getElementById("profile-guild").parentNode.replaceChild(document.getElementById("profile-guild").cloneNode(true), document.getElementById("profile-guild"))
-
-            if (guild != "none") {
-                document.getElementById("profile-guild").style.cursor = "pointer"
-                document.getElementById("profile-guild").addEventListener('click', function() { openGuild()  }, { once: false })
-            } else {
-                document.getElementById("profile-guild").style.cursor = "auto"
             }
 
             document.getElementById("selectpfpbackground").style.display = "none"
@@ -1020,24 +865,13 @@ function viewProfile(profile, self) {
             document.getElementById("profile-username").innerText = displayName + " (Lvl. " + level + ")"
             document.getElementById("profile-rank").innerText = rank
             document.getElementById("profile-fish").innerText = "Fish: " + formatNumber(fish)
-            document.getElementById("profile-rarefish").innerText = "Rare Fish: " + formatNumber(rareFish)
-            document.getElementById("profile-veryrarefish").innerText = "Very Rare Fish: " + formatNumber(veryRareFish)
-            document.getElementById("profile-sharks").innerText = "Sharks: " + formatNumber(sharks)
-            document.getElementById("profile-raresharks").innerText = "Rare Sharks: " + formatNumber(rareSharks)
-            document.getElementById("profile-whales").innerText = "Whales: " + formatNumber(whales)
-            document.getElementById("profile-specialfish").innerText = "Special Fish: " + formatNumber(specialFish)
             document.getElementById("profile-alltimefish").innerText = "All Time Fish: " + formatNumber(allTimeFish)
             document.getElementById("profile-fishgambled").innerText = "Fish Gambled: " + formatNumber(fishGambled)
-            document.getElementById("profile-fishermen").innerText = "Fishermen: " + formatNumber(fishermen)
-            document.getElementById("profile-chum").innerText = "Chum: " + formatNumber(chum)
-            document.getElementById("profile-fishbuckets").innerText = "Fish Buckets: " + formatNumber(fishBuckets)
             document.getElementById("profile-fishperclick").innerText = "Fish Per Click: " + formatNumber(fishPerClick)
-            document.getElementById("profile-fishpersecond").innerText = "Fish Per Second: " + formatNumber(fishPerSecond)
             document.getElementById("profile-joindate").innerText = "Join Date: " + joinDate
             document.getElementById("profile-lastonline").innerText = "Last Online: " + lastOnlineDate
             document.getElementById("profile-playtime").innerText = "Playtime: " + playtime
             document.getElementById("profile-friends").innerText = "Friends: " + friends
-            document.getElementById("profile-guild").innerText = "Guild: " + guild
             if (!gcTheme || picture != "default") document.getElementById("profile-picture").src = "../images/profiles/" + picture + ".png"
             else document.getElementById("profile-picture").src = "../images/gcprofile.png"
 
@@ -1414,19 +1248,6 @@ function setChannel(channel1) {
         else document.getElementById("publicchattext").style.color = "#212121"
         document.getElementById("publicchatbar").style.display = "block"
 
-        document.getElementById("guildchattext").style.color = "#cccccc"
-        document.getElementById("guildchatbar").style.display = "none"
-        document.getElementById("staffchattext").style.color = "#cccccc"
-        document.getElementById("staffchatbar").style.display = "none"
-    } else if (channel1 == "guild") {
-        channel = "guild"
-
-        if (!gcTheme) document.getElementById("guildchattext").style.color = "#ffffff"
-        else document.getElementById("guildchattext").style.color = "#212121"
-        document.getElementById("guildchatbar").style.display = "block"
-
-        document.getElementById("publicchattext").style.color = "#cccccc"
-        document.getElementById("publicchatbar").style.display = "none"
         document.getElementById("staffchattext").style.color = "#cccccc"
         document.getElementById("staffchatbar").style.display = "none"
     } else if (channel1 == "staff") {
@@ -1438,8 +1259,6 @@ function setChannel(channel1) {
 
         document.getElementById("publicchattext").style.color = "#cccccc"
         document.getElementById("publicchatbar").style.display = "none"
-        document.getElementById("guildchattext").style.color = "#cccccc"
-        document.getElementById("guildchatbar").style.display = "none"
     }
     document.getElementById("chat").innerHTML = ""
     changedChannel = true

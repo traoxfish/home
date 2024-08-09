@@ -539,7 +539,7 @@ ol {
 li {
   font-family: Arial;
   color: white;
-  font-size: calc(1.33vw + 4px);
+  font-size: calc(1vw + 2px);
   margin-left: -30px;
 }
 
@@ -1159,4 +1159,28 @@ input:checked + .slider:before {
   max-height: 412px;
   z-index: 100;
   overflow-y: hidden;
+}
+
+.unblocked {
+  font-size: 16px; 
+  color:white; 
+  text-decoration: none; 
+  background-color: #1d1a2c; 
+  outline-width: 1px; 
+  outline-style: solid; 
+  outline-color: white; 
+  outline-offset: 2px; 
+  border-radius: 1px;
+  transition: outline 0.1s ease, color 0.1s ease;
+  font-weight: 240;
+  color: white;
+  font-family: Arial;
+  line-height: 120%;
+  max-width: 85%;
+}
+
+.unblocked:hover {
+  transition: outline 0.25s ease, color 0.25s ease;
+  outline-color: #fd9183; 
+  color: #fd9183; 
 }
