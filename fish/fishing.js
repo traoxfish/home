@@ -943,7 +943,7 @@ function viewProfile(profile, self) {
             var playtime = json.playtime
             var friends = json.friends
 
-            var fishPerClick = json.fishPerClick
+            var fishingRodStats = json.fishingRodStats
 
             if (playtime == "") playtime = "None"
 
@@ -986,7 +986,10 @@ function viewProfile(profile, self) {
             document.getElementById("profile-fish").innerText = "Fish: " + formatNumber(fish)
             document.getElementById("profile-alltimefish").innerText = "All Time Fish: " + formatNumber(allTimeFish)
             document.getElementById("profile-fishgambled").innerText = "Fish Gambled: " + formatNumber(fishGambled)
-            document.getElementById("profile-fishperclick").innerText = "Fish Per Click: " + formatNumber(fishPerClick)
+            document.getElementById("profile-fishingrodstats").innerHTML = "Fishing Rod Stats:<br>"
+            for (var i = 0; i < json.fishingRodStats.length; i++) {
+                document.getElementById("profile-fishingrodstats").innerHTML += json.fishingRodStats[i] + "<br>"
+            }
             document.getElementById("profile-joindate").innerText = "Join Date: " + joinDate
             document.getElementById("profile-lastonline").innerText = "Last Online: " + lastOnlineDate
             document.getElementById("profile-playtime").innerText = "Playtime: " + playtime
