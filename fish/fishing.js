@@ -671,7 +671,22 @@ function getFish() {
             document.getElementById("fishingrodupgradeslotunlock").innerText = "Unlock Cost: " + formatNumber(json.nextRodSlotCost) + " Fish"
 
             if (json.lastAutoFish != undefined) {
-                fishGainedEffect(json.lastAutoFish)
+
+                fishedAmounts.push(Number(json.lastAutoFish))
+                if (fishedAmounts.length > 20) fishedAmounts = fishedAmounts.slice(1).slice(-20)
+                
+                if (fishedAmounts.length > 10) {
+                    var differenceFromAverage = json.lastAutoFish / getAverageFishedAmount()
+                }
+        
+                var size = 0
+
+                if (differenceFromAverage > 2) size = 1
+                if (differenceFromAverage > 4) size = 3
+                if (differenceFromAverage > 8) size = 5
+                if (differenceFromAverage > 16) size = 7
+
+                fishGainedEffect(json.lastAutoFish, size)
             }
 
         }
@@ -873,7 +888,15 @@ function instantTooltips(textFrom, delta) {
 
 instantTooltips('title', 15);
 
+var fishedAmounts = []
 
+function getAverageFishedAmount() {
+    var total = 0
+    for (i in fishedAmounts) {
+        total += fishedAmounts[i]
+    }
+    return total / fishedAmounts.length
+}
 
 function goFishing(force) {
 
@@ -893,16 +916,31 @@ function goFishing(force) {
     }).then(json => {
         if (json.status == "success") {
             document.getElementById("fishcount").textContent = formatNumber(json.fish)
-            fishGainedEffect(json.fishGained)
+            
+            fishedAmounts.push(Number(json.fishGained))
+            if (fishedAmounts.length > 20) fishedAmounts = fishedAmounts.slice(1).slice(-20)
+            
+            if (fishedAmounts.length > 10) {
+                var differenceFromAverage = json.fishGained / getAverageFishedAmount()
+            }
+        
+            var size = 0
+
+            if (differenceFromAverage > 2) size = 1
+            if (differenceFromAverage > 4) size = 3
+            if (differenceFromAverage > 8) size = 5
+            if (differenceFromAverage > 16) size = 7
+
+            fishGainedEffect(json.fishGained, size)
         }
     });
 }
 
-function fishGainedEffect(amount) {
+function fishGainedEffect(amount, size) {
     
     var element = document.createElement("p")
     element.innerText = "+ " + formatNumber(amount) + " Fish"
-    element.style.fontSize = "12px"
+    element.style.fontSize = 12 + size + "px"
     element.style.maxWidth = "100%"
     element.style.textAlign = "center"
     element.style.position = "absolute"
@@ -912,7 +950,7 @@ function fishGainedEffect(amount) {
     var yVelocity = 2
     var xPos = 0
     var yPos = 0
-    var opacity = 1
+    var opacity = 1 + (size / 2)
 
     document.getElementById("fishGainedAnchor").appendChild(element)
 
@@ -924,7 +962,7 @@ function fishGainedEffect(amount) {
         element.style.color = "rgba(255, 255, 255, " + opacity + ")"
 
         opacity -= 0.02
-        yVelocity -= 0.2
+        yVelocity -= (0.2 - (Math.sqrt(size) / 20))
         if (opacity <= 0 || yPos < -300) {
             clearInterval(interval)
             element.remove()
@@ -932,7 +970,7 @@ function fishGainedEffect(amount) {
 
     }, 10)
 
-    delay(1000).then(() => {
+    delay(1000 + (size * 100)).then(() => {
         clearInterval(interval)
         element.remove()
     })
