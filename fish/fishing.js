@@ -948,7 +948,7 @@ function closeProfile() {
     document.getElementById("profile-username").innerText = "Loading..."
     document.getElementById("profile-rank").innerText = ""
     document.getElementById("profile-fish").innerText = "Fish: Loading..."
-    document.getElementById("profile-fishperclick").innerText = "Fish Per Click: Loading..."
+    document.getElementById("profile-fishingrodstats").innerText = "Fishing Rod Stats: Loading..."
     document.getElementById("profile-alltimefish").innerText = "All Time Fish: Loading..."
     document.getElementById("profile-fishgambled").innerText = "Fish Gambled: Loading..."
     document.getElementById("profile-joindate").innerText = "Join Date: Loading..."
