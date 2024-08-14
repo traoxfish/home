@@ -50,11 +50,11 @@ function sendCommand() {
     }).then(response => {
         return response.json();
     }).then(json => {
-        getData()
+        //getData()
     });
 }
 
-getData()
+//getData()
 
 setInterval(function() {
     keepOnline()
